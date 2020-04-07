@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:inherited_widget/app_state_container.dart';
 
-class CitySelection extends StatefulWidget {
-  final Function _fetchWeather;
-
-  CitySelection(this._fetchWeather);
-  @override
-  State<CitySelection> createState() => _CitySelectionState();
-}
-
-class _CitySelectionState extends State<CitySelection> {
+class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final AppStateContainerState container = AppStateContainer.of(context);
+
     return Form(
       child: Row(
         children: [
@@ -31,7 +26,7 @@ class _CitySelectionState extends State<CitySelection> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              widget._fetchWeather(_textController.text);
+              container.fetchWeather(_textController.text);
               Navigator.pop(context);
             },
           )

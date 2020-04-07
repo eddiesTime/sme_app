@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:inherited_widget/app_state.dart';
+import 'package:inherited_widget/app_state_container.dart';
 import 'package:inherited_widget/model/models.dart';
 
-class Settings extends StatefulWidget {
-  Settings(this._temperatureUnit, this._toggleTemperatureUnit);
-  final TemperatureUnit _temperatureUnit;
-  final Function _toggleTemperatureUnit;
-  @override
-  _SettingsState createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
+class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final AppStateContainerState container = AppStateContainer.of(context);
+    final AppState appState = container.appState;
+
     return ListView(
       children: <Widget>[
         ListTile(
@@ -22,8 +19,8 @@ class _SettingsState extends State<Settings> {
           subtitle:
               Text('Use metric measurements (celsius) for temperature units.'),
           trailing: Switch(
-              value: widget._temperatureUnit == TemperatureUnit.celsius,
-              onChanged: (value) => widget._toggleTemperatureUnit(value)),
+              value: appState.temperatureUnit == TemperatureUnit.celsius,
+              onChanged: (value) => container.toggleTemperatureUnit(value)),
         )
       ],
     );

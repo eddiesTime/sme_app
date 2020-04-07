@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:inherited_widget/app_state_container.dart';
 
-import 'package:inherited_widget/model/models.dart' as model;
 import 'package:inherited_widget/pages/pages.dart';
 import 'package:inherited_widget/widgets/widgets.dart';
+import 'package:inherited_widget/app_state.dart';
 
 class WeatherPage extends StatelessWidget {
-  final model.AppState _appState;
-  final Function _toggleTemperatureUnit;
-  final Function _fetchWeather;
-  final Future<void> Function() _refreshWeather;
-
-  WeatherPage(this._appState, this._toggleTemperatureUnit, this._fetchWeather,
-      this._refreshWeather);
-
   @override
   Widget build(BuildContext context) {
+    final AppStateContainerState container = AppStateContainer.of(context);
+    final AppState appState = container.appState;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Vanilla Weather'),
@@ -25,22 +21,21 @@ class WeatherPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SettingsPage(
-                      _appState.temperatureUnit, _toggleTemperatureUnit),
+                  builder: (context) => SettingsPage(),
                 ),
               );
             },
           ),
         ],
       ),
-      body: Weather(_appState, _refreshWeather),
+      body: Weather(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _appState.theme.primaryColor,
+        backgroundColor: appState.theme.primaryColor,
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => SearchPage(_fetchWeather),
+              builder: (context) => SearchPage(),
             ),
           );
         },
