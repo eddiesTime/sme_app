@@ -22,7 +22,7 @@ class WeatherPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Vanilla Weather'),
+          title: Text('CNP Weather'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.settings),

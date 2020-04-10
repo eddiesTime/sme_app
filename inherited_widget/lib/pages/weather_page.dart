@@ -13,7 +13,7 @@ class WeatherPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vanilla Weather'),
+        title: Text('Inherited Weather'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
