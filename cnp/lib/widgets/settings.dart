@@ -16,8 +16,7 @@ class Settings extends StatelessWidget {
           subtitle:
               Text('Use metric measurements (celsius) for temperature units.'),
           trailing: Switch(
-              value: Provider.of<TemperatureModel>(context, listen: false)
-                      .temperatureUnit ==
+              value: Provider.of<TemperatureModel>(context).temperatureUnit ==
                   TemperatureUnit.celsius,
               onChanged: (value) =>
                   Provider.of<TemperatureModel>(context, listen: false)

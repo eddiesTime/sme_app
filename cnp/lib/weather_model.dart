@@ -62,8 +62,10 @@ class WeatherModel extends ChangeNotifier {
       final model.WeatherResponse _wr =
           await _weatherRepository.getWeatherFor(city: _city);
       _weatherResponse = _wr;
+      _setLastUpdated();
       _hasError = false;
       notifyListeners();
+      weatherChanged();
     } catch (err) {
       _hasError = true;
       notifyListeners();
@@ -80,9 +82,11 @@ class WeatherModel extends ChangeNotifier {
       final model.WeatherResponse _wr =
           await _weatherRepository.getWeatherFor(city: _city);
       _weatherResponse = _wr;
+      _setLastUpdated();
       _hasError = false;
       _isLoading = false;
       notifyListeners();
+      weatherChanged();
     } catch (err) {
       _isLoading = false;
       _hasError = true;
