@@ -1,58 +1,64 @@
-import 'package:cnp/temperature_model.dart';
-import 'package:cnp/theme_model.dart';
-import 'package:cnp/weather_model.dart';
-import 'package:cnp/weather_repository.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cnp/pages/pages.dart';
-import 'package:cnp/widgets/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc_example/pages/pages.dart';
+import 'package:flutter_bloc_example/widgets/widgets.dart';
 
-class WeatherPage extends StatelessWidget {
+class WeatherPage extends StatefulWidget {
+  @override
+  _WeatherPageState createState() => _WeatherPageState();
+}
+
+class _WeatherPageState extends State<WeatherPage> {
+  // WeatherBloc _weatherBloc;
+  // TemperatureBloc _temperatureBloc;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _temperatureBloc = TemperatureBloc();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<WeatherModel>(
-            create: (_) => WeatherModel(
-                Provider.of<ThemeModel>(context), WeatherRepository())),
-        ChangeNotifierProvider(
-          create: (_) => TemperatureModel(),
-        )
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Vanilla Weather'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingsPage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        body: Weather(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Provider.of<ThemeModel>(context).theme.primaryColor,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SearchPage(),
-              ),
-            );
-          },
-          child: Icon(
-            Icons.search,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Vanilla_Bloc Weather'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
           ),
+        ],
+      ),
+      body: Weather(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchPage(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.search,
         ),
       ),
     );
   }
+
+  // @override
+  // void dispose() {
+  //   _temperatureBloc.dispose();
+  //   _weatherBloc.dispose();
+  //   super.dispose();
+  // }
 }

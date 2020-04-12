@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cnp/widgets/widgets.dart';
+import 'package:flutter_bloc_example/widgets/widgets.dart';
 
 class SearchPage extends StatelessWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:cnp/model/models.dart';
+import 'package:flutter_bloc_example/model/models.dart';
 
 class WeatherConditions extends StatelessWidget {
   final WeatherCondition condition;

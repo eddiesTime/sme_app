@@ -1,4 +1,4 @@
-import 'package:cnp/model/enums/enum_weather_conditions.dart';
+import 'package:flutter_bloc_example/model/enums/enum_weather_conditions.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:cnp/theme_model.dart';
-import 'package:cnp/weather_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_example/blocs/theme_bloc/bloc/theme_bloc.dart';
+import 'package:flutter_bloc_example/blocs/weather_bloc/bloc/weather_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:cnp/widgets/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc_example/widgets/widgets.dart';
+import 'package:flutter_bloc_example/model/models.dart' as model;
 
 class Weather extends StatefulWidget {
   @override
@@ -26,50 +27,63 @@ class _WeatherState extends State<Weather> {
   }
 
   Widget _buildUI(BuildContext context) {
-    return Consumer<WeatherModel>(builder: (context, weatherModel, child) {
-      if (weatherModel.isLoading) {
-        return _buildLoading();
-      } else if (weatherModel.weather != null) {
-        return _buildWeather(context);
-      } else if (weatherModel.hasError) {
+    return BlocConsumer<WeatherBloc, WeatherState>(listener: (context, state) {
+      if (state is WeatherLoaded) {
+        final model.Weather _weather =
+            state.weatherResponse.weatherCollection.first;
+        BlocProvider.of<ThemeBloc>(context).add(WeatherChanged(
+            condition:
+                _weather.mapConditionToWeatherCondition(_weather.condition)));
+        _refreshCompleter?.complete();
+        _refreshCompleter = Completer();
+      }
+    }, builder: (context, state) {
+      if (state is WeatherLoadingFailure) {
         return _buildError();
+      }
+      if (state is WeatherLoading) {
+        return _buildLoading();
+      }
+      if (state is WeatherLoaded) {
+        return _buildWeather(context, state);
       }
       return _buildIdle();
     });
   }
 
-  Widget _buildWeather(BuildContext context) {
-    return GradientContainer(
-      color: Provider.of<ThemeModel>(context).color,
-      child: RefreshIndicator(
-        onRefresh:
-            Provider.of<WeatherModel>(context, listen: false).refreshWeather,
-        child: ListView(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 100.0),
-              child: Center(
-                child: Location(
-                    location: Provider.of<WeatherModel>(context, listen: false)
-                        .weather
-                        .title),
+  Widget _buildWeather(BuildContext context, WeatherLoaded state) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return GradientContainer(
+        color: themeState.color,
+        child: RefreshIndicator(
+          onRefresh: () {
+            BlocProvider.of<WeatherBloc>(context).add(RefreshWeather());
+            return _refreshCompleter.future;
+          },
+          child: ListView(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 100.0),
+                child: Center(
+                  child: Location(location: state.weatherResponse.title),
+                ),
               ),
-            ),
-            Center(
-              child: LastUpdated(
-                  dateTime: Provider.of<WeatherModel>(context, listen: false)
-                      .lastUpdated),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 50.0),
-              child: Center(
-                child: CombinedWeatherTemperature(),
+              Center(
+                child: LastUpdated(dateTime: state.lastUpdated),
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 50.0),
+                child: Center(
+                  child: CombinedWeatherTemperature(
+                    weatherResponse: state.weatherResponse,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildError() {

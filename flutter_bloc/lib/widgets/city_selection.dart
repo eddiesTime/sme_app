@@ -1,6 +1,6 @@
-import 'package:cnp/weather_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_example/blocs/weather_bloc/bloc/weather_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
@@ -25,8 +25,8 @@ class CitySelection extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              Provider.of<WeatherModel>(context, listen: false)
-                  .fetchWeather(_textController.text);
+              BlocProvider.of<WeatherBloc>(context)
+                  .add(FetchWeather(city: _textController.text));
               Navigator.pop(context);
             },
           )

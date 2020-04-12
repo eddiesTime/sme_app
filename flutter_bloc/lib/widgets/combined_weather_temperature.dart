@@ -1,43 +1,44 @@
-import 'package:cnp/weather_model.dart';
+import 'package:flutter_bloc_example/model/models.dart' as model;
+import 'package:flutter_bloc_example/model/weather_response/weather_response.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cnp/widgets/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc_example/widgets/widgets.dart';
 
 class CombinedWeatherTemperature extends StatelessWidget {
+  CombinedWeatherTemperature({@required WeatherResponse this.weatherResponse});
+
+  final WeatherResponse weatherResponse;
+
   @override
   Widget build(BuildContext context) {
+    final model.Weather _weather = weatherResponse.weatherCollection.first;
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(20.0),
-              child: WeatherConditions(
-                  condition: Provider.of<WeatherModel>(context, listen: false)
-                      .getWeatherCondition()),
-            ),
+                padding: EdgeInsets.all(20.0),
+                child: WeatherConditions(
+                  condition: _weather
+                      .mapConditionToWeatherCondition(_weather.condition),
+                )),
             Padding(
               padding: EdgeInsets.all(20.0),
-              child: Temperature(),
+              child: Temperature(
+                  _weather.temp, _weather.minTemp, _weather.maxTemp),
             ),
           ],
         ),
         Center(
-          child: Text(
-            Provider.of<WeatherModel>(context, listen: false)
-                .weather
-                .weatherCollection
-                .first
-                .formattedCondition,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w200,
-              color: Colors.white,
-            ),
+            child: Text(
+          weatherResponse.weatherCollection.first.formattedCondition,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w200,
+            color: Colors.white,
           ),
-        ),
+        )),
       ],
     );
   }
