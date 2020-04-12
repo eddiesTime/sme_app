@@ -28,13 +28,17 @@ class _WeatherState extends State<Weather> {
   }
 
   Widget _buildUI(AppStateContainerState container, AppState state) {
+    print(state.city);
     if (state.isLoading) {
+      print('loading');
       return _buildLoading();
     } else if (state.weatherResponse != null) {
+      print('weather');
       return _buildWeather(container, state);
     } else if (state.hasError) {
       return _buildError();
     }
+    print('idle');
     return _buildIdle();
   }
 

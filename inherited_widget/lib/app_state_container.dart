@@ -27,12 +27,12 @@ class AppStateContainerState extends State<AppStateContainer> {
 
   @override
   void initState() {
-    super.initState();
     if (widget.appState != null) {
       appState = widget.appState;
     } else {
       appState = AppState();
     }
+    super.initState();
   }
 
   @override
@@ -59,6 +59,7 @@ class AppStateContainerState extends State<AppStateContainer> {
   }
 
   void fetchWeather(String city) async {
+    print("fetchWeather");
     setState(() {
       appState.markIsLoadingFlagAs(true);
       appState.weatherResponse = null;

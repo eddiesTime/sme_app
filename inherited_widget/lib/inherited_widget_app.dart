@@ -3,13 +3,7 @@ import 'package:inherited_widget/app_state.dart';
 import 'package:inherited_widget/app_state_container.dart';
 import 'package:inherited_widget/pages/pages.dart';
 
-class InheritedWidgetApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _InheritedWidgetAppState createState() => _InheritedWidgetAppState();
-}
-
-class _InheritedWidgetAppState extends State<InheritedWidgetApp> {
+class InheritedWidgetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStateContainerState appStateContainer =
