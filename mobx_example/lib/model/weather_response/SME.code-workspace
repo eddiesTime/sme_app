@@ -8,18 +8,6 @@
     },
     {
       "path": "/Users/eddie/Development/state management evaluation/sme_app/cnp"
-    },
-    {
-      "path": "/Users/eddie/Development/state management evaluation/sme_app/bloc_vanilla"
-    },
-    {
-      "path": "/Users/eddie/Development/state management evaluation/sme_app/flutter_bloc"
-    },
-    {
-      "path": "../../../../states_rebuilder_example"
-    },
-    {
-      "path": "../../../../mobx_example"
     }
   ],
   "settings": {}
