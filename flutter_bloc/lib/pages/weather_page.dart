@@ -22,7 +22,7 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vanilla_Bloc Weather'),
+        title: Text('Flutter_Bloc Weather'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),

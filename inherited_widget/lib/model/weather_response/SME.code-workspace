@@ -20,6 +20,9 @@
     },
     {
       "path": "../../../../mobx_example"
+    },
+    {
+      "path": "../../../../redux_example"
     }
   ],
   "settings": {}
