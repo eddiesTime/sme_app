@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mobx_example/model/models.dart';
+import 'package:redux_example/model/models.dart';
 
 part 'weather_source.freezed.dart';
 part 'weather_source.g.dart';
