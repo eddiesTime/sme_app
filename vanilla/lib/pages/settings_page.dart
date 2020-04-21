@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vanilla/model/models.dart';
 import 'package:vanilla/widgets/widgets.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class SettingsPage extends StatelessWidget {
   SettingsPage(this._temperatureUnit, this._toggleTemperatureUnit);

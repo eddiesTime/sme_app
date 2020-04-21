@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vanilla/app_state.dart';
 
-import 'package:vanilla/model/models.dart' as model;
 import 'package:vanilla/pages/pages.dart';
 import 'package:vanilla/widgets/widgets.dart';
 
 class WeatherPage extends StatelessWidget {
-  final model.AppState _appState;
+  final AppState _appState;
   final Function _toggleTemperatureUnit;
   final Function _fetchWeather;
   final Future<void> Function() _refreshWeather;

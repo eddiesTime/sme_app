@@ -22,7 +22,7 @@ class _$WeatherTearOff {
       DateTime created,
       DateTime applicableDate,
       double minTemp,
-      double temp,
+      @JsonKey(name: 'the_temp') double temp,
       double maxTemp,
       double windSpeed,
       double windDirection,
@@ -61,6 +61,7 @@ mixin _$Weather {
   DateTime get created;
   DateTime get applicableDate;
   double get minTemp;
+  @JsonKey(name: 'the_temp')
   double get temp;
   double get maxTemp;
   double get windSpeed;
@@ -84,7 +85,7 @@ abstract class $WeatherCopyWith<$Res> {
       DateTime created,
       DateTime applicableDate,
       double minTemp,
-      double temp,
+      @JsonKey(name: 'the_temp') double temp,
       double maxTemp,
       double windSpeed,
       double windDirection,
@@ -160,7 +161,7 @@ abstract class _$WeatherCopyWith<$Res> implements $WeatherCopyWith<$Res> {
       DateTime created,
       DateTime applicableDate,
       double minTemp,
-      double temp,
+      @JsonKey(name: 'the_temp') double temp,
       double maxTemp,
       double windSpeed,
       double windDirection,
@@ -235,7 +236,7 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
       this.created,
       this.applicableDate,
       this.minTemp,
-      this.temp,
+      @JsonKey(name: 'the_temp') this.temp,
       this.maxTemp,
       this.windSpeed,
       this.windDirection,
@@ -263,6 +264,7 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
   @override
   final double minTemp;
   @override
+  @JsonKey(name: 'the_temp')
   final double temp;
   @override
   final double maxTemp;
@@ -389,7 +391,7 @@ abstract class _Weather extends Weather {
       DateTime created,
       DateTime applicableDate,
       double minTemp,
-      double temp,
+      @JsonKey(name: 'the_temp') double temp,
       double maxTemp,
       double windSpeed,
       double windDirection,
@@ -415,6 +417,7 @@ abstract class _Weather extends Weather {
   @override
   double get minTemp;
   @override
+  @JsonKey(name: 'the_temp')
   double get temp;
   @override
   double get maxTemp;

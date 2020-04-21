@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:vanilla/model/app_state.dart';
+import 'package:vanilla/app_state.dart';
 
 import 'package:vanilla/widgets/widgets.dart';
-import 'package:vanilla/model/models.dart' as model;
 
 class Weather extends StatefulWidget {
   // appstate

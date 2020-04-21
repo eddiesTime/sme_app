@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vanilla/model/models.dart' as model;
+import 'package:vanilla/app_state.dart';
 import 'package:vanilla/weather_repository.dart';
 import 'package:vanilla/pages/pages.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class VanillaApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -12,7 +13,7 @@ class VanillaApp extends StatefulWidget {
 }
 
 class _VanillaAppState extends State<VanillaApp> {
-  model.AppState appState = model.AppState();
+  AppState appState = AppState();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class _VanillaAppState extends State<VanillaApp> {
 
   Future<void> refreshWeather() async {
     try {
-      final model.WeatherResponse _weatherResponse =
+      final WeatherResponse _weatherResponse =
           await widget.weatherRepository.getWeatherFor(city: appState.city);
       setState(() {
         appState.saveWeatherResponseInAppState(_weatherResponse);
@@ -45,7 +46,7 @@ class _VanillaAppState extends State<VanillaApp> {
     });
     try {
       appState.saveCityInAppState(city);
-      final model.WeatherResponse _weatherResponse =
+      final WeatherResponse _weatherResponse =
           await widget.weatherRepository.getWeatherFor(city: appState.city);
       setState(() {
         appState.saveWeatherResponseInAppState(_weatherResponse);

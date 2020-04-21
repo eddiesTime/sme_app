@@ -16,7 +16,7 @@ abstract class Weather implements _$Weather {
       DateTime created,
       DateTime applicableDate,
       double minTemp,
-      double temp,
+      @JsonKey(name: 'the_temp') double temp,
       double maxTemp,
       double windSpeed,
       double windDirection,

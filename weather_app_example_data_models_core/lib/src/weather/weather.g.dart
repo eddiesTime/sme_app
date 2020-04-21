@@ -18,7 +18,7 @@ _$_Weather _$_$_WeatherFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['applicable_date'] as String),
     minTemp: (json['min_temp'] as num)?.toDouble(),
-    temp: (json['temp'] as num)?.toDouble(),
+    temp: (json['the_temp'] as num)?.toDouble(),
     maxTemp: (json['max_temp'] as num)?.toDouble(),
     windSpeed: (json['wind_speed'] as num)?.toDouble(),
     windDirection: (json['wind_direction'] as num)?.toDouble(),
@@ -37,7 +37,7 @@ Map<String, dynamic> _$_$_WeatherToJson(_$_Weather instance) =>
       'created': instance.created?.toIso8601String(),
       'applicable_date': instance.applicableDate?.toIso8601String(),
       'min_temp': instance.minTemp,
-      'temp': instance.temp,
+      'the_temp': instance.temp,
       'max_temp': instance.maxTemp,
       'wind_speed': instance.windSpeed,
       'wind_direction': instance.windDirection,
