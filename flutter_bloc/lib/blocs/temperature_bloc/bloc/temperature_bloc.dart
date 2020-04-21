@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc_example/model/enums/enum_temperature_units.dart';
 import 'package:meta/meta.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 part 'temperature_event.dart';
 part 'temperature_state.dart';

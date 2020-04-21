@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_example/blocs/temperature_bloc/bloc/temperature_bloc.dart';
-import 'package:flutter_bloc_example/model/enums/enum_temperature_units.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_example/model/models.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Settings extends StatelessWidget {
   @override

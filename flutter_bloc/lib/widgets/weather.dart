@@ -5,7 +5,8 @@ import 'package:flutter_bloc_example/blocs/theme_bloc/bloc/theme_bloc.dart';
 import 'package:flutter_bloc_example/blocs/weather_bloc/bloc/weather_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_example/widgets/widgets.dart';
-import 'package:flutter_bloc_example/model/models.dart' as model;
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
+    as model;
 
 class Weather extends StatefulWidget {
   @override

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc_example/model/weather_response/weather_response.dart';
 import 'package:flutter_bloc_example/weather_repository.dart';
 import 'package:meta/meta.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
