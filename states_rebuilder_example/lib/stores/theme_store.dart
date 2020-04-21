@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:states_rebuilder_example/model/enums/enum_weather_conditions.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class ThemeStore {
   ThemeStore() {

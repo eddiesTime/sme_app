@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
-import 'package:states_rebuilder_example/model/enums/enum_weather_conditions.dart';
-import 'package:states_rebuilder_example/model/weather/weather.dart';
-import 'package:states_rebuilder_example/model/weather_response/weather_response.dart';
 import 'package:states_rebuilder_example/stores/theme_store.dart';
 import 'package:states_rebuilder_example/weather_repository.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class WeatherStore {
   final WeatherRepository weatherRepo;

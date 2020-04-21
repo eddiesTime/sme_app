@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
-import 'package:states_rebuilder_example/model/enums/enum_temperature_units.dart';
 import 'package:states_rebuilder_example/stores/temperature_store.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Settings extends StatelessWidget {
   @override

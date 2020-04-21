@@ -1,4 +1,4 @@
-import 'package:states_rebuilder_example/model/enums/enum_temperature_units.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class TemperatureStore {
   TemperatureStore() {
