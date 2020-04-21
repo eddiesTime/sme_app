@@ -1,9 +1,8 @@
-import 'package:cnp/model/enums/enum_temperature_units.dart';
-import 'package:cnp/model/weather/weather.dart';
 import 'package:cnp/temperature_model.dart';
 import 'package:cnp/weather_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Temperature extends StatelessWidget {
   double temperature;

@@ -1,13 +1,13 @@
 import 'package:cnp/theme_model.dart';
 import 'package:cnp/weather_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:cnp/model/models.dart' as model;
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class WeatherModel extends ChangeNotifier {
   final ThemeModel _themeModel;
   final WeatherRepository _weatherRepository;
 
-  model.WeatherResponse _weatherResponse;
+  WeatherResponse _weatherResponse;
   bool _isLoading = false;
   String _city = '';
   bool _hasError = false;
@@ -15,13 +15,13 @@ class WeatherModel extends ChangeNotifier {
 
   WeatherModel(this._themeModel, this._weatherRepository);
 
-  set weather(model.WeatherResponse wr) {
+  set weather(WeatherResponse wr) {
     _weatherResponse = wr;
     _setLastUpdated();
     weatherChanged();
   }
 
-  model.WeatherResponse get weather => _weatherResponse;
+  WeatherResponse get weather => _weatherResponse;
 
   set isLoading(bool value) {
     _isLoading = value;
@@ -48,18 +48,18 @@ class WeatherModel extends ChangeNotifier {
   DateTime get lastUpdated => _lastUpdated;
 
   void weatherChanged() {
-    final model.WeatherCondition condition = getWeatherCondition();
+    final WeatherCondition condition = getWeatherCondition();
     _themeModel.mapWeatherCondition(condition);
   }
 
-  model.WeatherCondition getWeatherCondition() {
-    final model.Weather _weather = _weatherResponse.weatherCollection.first;
+  WeatherCondition getWeatherCondition() {
+    final Weather _weather = _weatherResponse.weatherCollection.first;
     return _weather.mapConditionToWeatherCondition(_weather.condition);
   }
 
   Future<void> refreshWeather() async {
     try {
-      final model.WeatherResponse _wr =
+      final WeatherResponse _wr =
           await _weatherRepository.getWeatherFor(city: _city);
       _weatherResponse = _wr;
       _setLastUpdated();
@@ -79,7 +79,7 @@ class WeatherModel extends ChangeNotifier {
 
     try {
       _city = city;
-      final model.WeatherResponse _wr =
+      final WeatherResponse _wr =
           await _weatherRepository.getWeatherFor(city: _city);
       _weatherResponse = _wr;
       _setLastUpdated();

@@ -1,7 +1,7 @@
 import 'package:cnp/temperature_model.dart';
 import 'package:flutter/material.dart';
-import 'package:cnp/model/models.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Settings extends StatelessWidget {
   @override
