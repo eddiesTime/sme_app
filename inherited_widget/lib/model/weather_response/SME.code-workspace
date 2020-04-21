@@ -23,6 +23,9 @@
     },
     {
       "path": "../../../../redux_example"
+    },
+    {
+      "path": "../../../../weather_app_example_data_models_core"
     }
   ],
   "settings": {}
