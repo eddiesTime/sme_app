@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inherited_widget/app_state.dart';
 import 'package:inherited_widget/inherited_app_state_container.dart';
-import 'package:inherited_widget/model/models.dart' as model;
 import 'package:inherited_widget/weather_repository.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class AppStateContainer extends StatefulWidget {
   final AppState appState;
@@ -45,7 +45,7 @@ class AppStateContainerState extends State<AppStateContainer> {
 
   Future<void> refreshWeather() async {
     try {
-      final model.WeatherResponse _weatherResponse =
+      final WeatherResponse _weatherResponse =
           await widget.weatherRepository.getWeatherFor(city: appState.city);
       setState(() {
         appState.saveWeatherResponseInAppState(_weatherResponse);
@@ -66,7 +66,7 @@ class AppStateContainerState extends State<AppStateContainer> {
     });
     try {
       appState.saveCityInAppState(city);
-      final model.WeatherResponse _weatherResponse =
+      final WeatherResponse _weatherResponse =
           await widget.weatherRepository.getWeatherFor(city: appState.city);
       setState(() {
         appState.saveWeatherResponseInAppState(_weatherResponse);

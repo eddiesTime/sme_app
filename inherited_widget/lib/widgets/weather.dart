@@ -28,7 +28,6 @@ class _WeatherState extends State<Weather> {
   }
 
   Widget _buildUI(AppStateContainerState container, AppState state) {
-    print(state.city);
     if (state.isLoading) {
       print('loading');
       return _buildLoading();
