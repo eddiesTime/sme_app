@@ -1,5 +1,5 @@
-import 'package:bloc_vanilla/model/enums/enum_weather_conditions.dart';
 import 'package:meta/meta.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 abstract class ThemeEvent {}
 

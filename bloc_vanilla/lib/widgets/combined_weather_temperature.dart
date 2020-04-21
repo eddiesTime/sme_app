@@ -1,15 +1,16 @@
-import 'package:bloc_vanilla/model/models.dart' as model;
-import 'package:bloc_vanilla/model/weather_response/weather_response.dart';
 import 'package:bloc_vanilla/blocs/bloc_provider.dart';
 import 'package:bloc_vanilla/blocs/weather_bloc/weather_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bloc_vanilla/widgets/widgets.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
+    as model;
 
 class CombinedWeatherTemperature extends StatelessWidget {
-  CombinedWeatherTemperature({@required WeatherResponse this.weatherResponse});
+  CombinedWeatherTemperature(
+      {@required model.WeatherResponse this.weatherResponse});
 
-  final WeatherResponse weatherResponse;
+  final model.WeatherResponse weatherResponse;
 
   @override
   Widget build(BuildContext context) {

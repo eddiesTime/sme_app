@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'model/enums/enum_weather_conditions.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class ThemeModel extends ChangeNotifier {
   ThemeData _theme = ThemeData.light();

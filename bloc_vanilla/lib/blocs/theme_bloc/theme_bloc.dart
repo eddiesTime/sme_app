@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:bloc_vanilla/blocs/bloc.dart';
-import 'package:bloc_vanilla/model/enums/enum_weather_conditions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bloc_vanilla/blocs/theme_bloc/theme_event.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class ThemeBloc implements Bloc {
   ThemeData _theme = ThemeData.light();

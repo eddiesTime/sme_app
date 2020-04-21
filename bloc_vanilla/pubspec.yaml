@@ -28,6 +28,8 @@ dependencies:
   freezed_annotation: ^0.7.1
   http: ^0.12.0+4
   rxdart: ^0.23.1
+  weather_app_example_data_models_core:
+    path: ../weather_app_example_data_models_core
 
 dev_dependencies:
   flutter_test:

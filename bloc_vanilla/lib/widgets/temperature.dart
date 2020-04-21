@@ -1,7 +1,7 @@
 import 'package:bloc_vanilla/blocs/bloc_provider.dart';
 import 'package:bloc_vanilla/blocs/temperature_bloc/temperature_bloc.dart';
-import 'package:bloc_vanilla/model/enums/enum_temperature_units.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Temperature extends StatelessWidget {
   double temperature;

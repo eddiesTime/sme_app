@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc_vanilla/blocs/theme_bloc/theme_event.dart';
-import 'package:bloc_vanilla/model/models.dart';
 import 'package:bloc_vanilla/blocs/theme_bloc/theme_bloc.dart';
-import 'package:bloc_vanilla/model/weather_response/weather_response.dart';
 import 'package:bloc_vanilla/blocs/weather_bloc/weather_event.dart';
 import 'package:bloc_vanilla/weather_repository.dart';
 import 'package:bloc_vanilla/blocs/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class WeatherBloc implements Bloc {
   WeatherBloc({

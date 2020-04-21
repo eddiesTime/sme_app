@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:bloc_vanilla/model/weather_response/weather_response.dart';
 import 'package:bloc_vanilla/blocs/bloc_provider.dart';
 import 'package:bloc_vanilla/blocs/theme_bloc/theme_bloc.dart';
 import 'package:bloc_vanilla/blocs/weather_bloc/weather_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_vanilla/widgets/widgets.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
+    as model;
 
 class Weather extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _WeatherState extends State<Weather> {
 
   Widget _buildUI(BuildContext context) {
     WeatherBloc _weatherBloc = BlocProvider.of<WeatherBloc>(context);
-    return StreamBuilder<WeatherResponse>(
+    return StreamBuilder<model.WeatherResponse>(
         stream: _weatherBloc.weatherResponse,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -46,7 +47,7 @@ class _WeatherState extends State<Weather> {
         });
   }
 
-  Widget _buildWeather(BuildContext context, WeatherResponse data) {
+  Widget _buildWeather(BuildContext context, model.WeatherResponse data) {
     return GradientContainer(
       color: BlocProvider.of<ThemeBloc>(context).color,
       child: RefreshIndicator(
