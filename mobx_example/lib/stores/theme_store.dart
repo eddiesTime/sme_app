@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_example/model/enums/enum_weather_conditions.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 part 'theme_store.g.dart';
 

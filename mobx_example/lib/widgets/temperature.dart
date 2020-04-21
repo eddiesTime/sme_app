@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx_example/model/enums/enum_temperature_units.dart';
 import 'package:mobx_example/stores/temperature_store.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Temperature extends StatelessWidget {
   double temperature;

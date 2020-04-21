@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx_example/model/enums/enum_temperature_units.dart';
-import 'package:mobx_example/model/enums/enum_temperature_units.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 part 'temperature_store.g.dart';
 

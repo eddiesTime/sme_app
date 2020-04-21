@@ -30,6 +30,8 @@ dependencies:
   provider: ^4.0.5
   mobx: ^1.1.1
   flutter_mobx: ^1.1.0
+  weather_app_example_data_models_core:
+    path: ../weather_app_example_data_models_core
 
 dev_dependencies:
   flutter_test:

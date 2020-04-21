@@ -506,6 +506,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7+14"
+  weather_app_example_data_models_core:
+    dependency: "direct main"
+    description:
+      path: "../weather_app_example_data_models_core"
+      relative: true
+    source: path
+    version: "0.0.1"
   web_socket_channel:
     dependency: transitive
     description:
