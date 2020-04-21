@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:redux_example/model/enums/enum_temperature_units.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class SettingsState {
   const SettingsState({@required this.temperatureUnit});

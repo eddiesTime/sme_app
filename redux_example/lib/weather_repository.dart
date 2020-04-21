@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:meta/meta.dart';
 
-import 'model/models.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class WeatherRepository {
   static const baseUrl = 'https://www.metaweather.com';

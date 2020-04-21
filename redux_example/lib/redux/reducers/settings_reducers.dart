@@ -1,7 +1,7 @@
 import 'package:redux/redux.dart';
-import 'package:redux_example/model/enums/enum_temperature_units.dart';
 import 'package:redux_example/redux/actions/settings_actions.dart';
 import 'package:redux_example/redux/model/settings_state.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 final settingsReducer = combineReducers<SettingsState>([
   TypedReducer<SettingsState, ToggleTemperatureUnitAction>(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_example/model/models.dart';
-import 'package:redux_example/redux/actions/theme_actions.dart';
 import 'package:redux_example/redux/actions/weather_actions.dart';
 import 'package:redux_example/redux/model/models.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 final themeReducer = combineReducers<ThemeState>(
     [TypedReducer<ThemeState, WeatherLoadedAction>(_setTheme)]);

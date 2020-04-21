@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux_example/model/enums/enum_temperature_units.dart';
 import 'package:redux_example/redux/model/models.dart';
 import 'package:redux_example/redux/selectors/selectors.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Temperature extends StatelessWidget {
   double temperature;

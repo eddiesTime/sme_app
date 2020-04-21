@@ -29,6 +29,8 @@ dependencies:
   http: ^0.12.0+4
   redux: ^4.0.0
   flutter_redux: ^0.6.0
+  weather_app_example_data_models_core:
+    path: ../weather_app_example_data_models_core
 
 dev_dependencies:
   flutter_test:

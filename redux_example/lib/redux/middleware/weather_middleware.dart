@@ -1,10 +1,10 @@
 import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux_example/model/models.dart' as model;
 import 'package:redux_example/redux/actions/actions.dart';
 import 'package:redux_example/redux/model/models.dart';
 import 'package:redux_example/redux/selectors/selectors.dart';
 import 'package:redux_example/weather_repository.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
+    as model;
 
 List<Middleware<AppState>> createWeatherMiddleware(
   WeatherRepository weatherRepository,

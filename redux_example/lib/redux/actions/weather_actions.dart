@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:redux_example/model/models.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class FetchWeatherAction {
   FetchWeatherAction({@required this.city});

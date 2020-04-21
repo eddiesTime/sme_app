@@ -1,6 +1,6 @@
-import 'package:redux_example/model/weather_response/weather_response.dart';
 import 'package:redux_example/redux/model/app_state.dart';
 import 'package:redux_example/redux/model/models.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 WeatherResponse weatherResponseSelector(AppState state) =>
     state.weatherState.weatherResponse;

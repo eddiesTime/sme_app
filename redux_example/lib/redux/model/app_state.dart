@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:redux_example/model/enums/enum_temperature_units.dart';
 import 'package:redux_example/redux/model/models.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 @immutable
 class AppState {

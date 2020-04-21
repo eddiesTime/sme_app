@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:meta/meta.dart';
-import 'package:redux_example/model/weather_response/weather_response.dart';
+import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 @immutable
 class WeatherState {
