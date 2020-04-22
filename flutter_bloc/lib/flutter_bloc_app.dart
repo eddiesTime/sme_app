@@ -4,7 +4,7 @@ import 'package:flutter_bloc_example/blocs/theme_bloc/bloc/theme_bloc.dart';
 import 'package:flutter_bloc_example/blocs/weather_bloc/bloc/weather_bloc.dart';
 import 'package:flutter_bloc_example/pages/pages.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_example/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 
 class FlutterBlocApp extends StatelessWidget {
   final WeatherRepository weatherRepo;
