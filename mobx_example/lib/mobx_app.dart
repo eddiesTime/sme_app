@@ -3,10 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_example/stores/theme_store.dart';
 import 'package:mobx_example/pages/weather_page.dart';
 import 'package:mobx_example/stores/temperature_store.dart';
-import 'package:mobx_example/stores/theme_store.dart';
 import 'package:mobx_example/stores/weather_store.dart';
-import 'package:mobx_example/stores/weather_store.dart';
-import 'package:mobx_example/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 import 'package:provider/provider.dart';
 
 class MobxApp extends StatelessWidget {
