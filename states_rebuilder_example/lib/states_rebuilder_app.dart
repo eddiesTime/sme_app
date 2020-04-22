@@ -4,7 +4,7 @@ import 'package:states_rebuilder_example/pages/pages.dart';
 import 'package:states_rebuilder_example/stores/temperature_store.dart';
 import 'package:states_rebuilder_example/stores/theme_store.dart';
 import 'package:states_rebuilder_example/stores/weather_store.dart';
-import 'package:states_rebuilder_example/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 
 class StatesRebuilderApp extends StatelessWidget {
   final WeatherRepository weatherRepo;

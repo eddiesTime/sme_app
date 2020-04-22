@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:states_rebuilder_example/stores/theme_store.dart';
-import 'package:states_rebuilder_example/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class WeatherStore {
