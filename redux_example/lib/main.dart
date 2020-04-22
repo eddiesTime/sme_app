@@ -5,7 +5,7 @@ import 'package:redux_example/redux/middleware/middleware.dart';
 import 'package:redux_example/redux/model/models.dart';
 import 'package:redux_example/redux/reducers/app_state_reducer.dart';
 import 'package:redux_example/redux_app.dart';
-import 'package:redux_example/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 
 void main() {
   final store = Store<AppState>(appReducer,
