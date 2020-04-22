@@ -1,4 +1,4 @@
-# core_weather_model
+# weather_repository_core
 
 A new Flutter package project.
 
