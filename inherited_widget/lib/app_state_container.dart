@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inherited_widget/app_state.dart';
 import 'package:inherited_widget/inherited_app_state_container.dart';
-import 'package:inherited_widget/weather_repository.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class AppStateContainer extends StatefulWidget {
