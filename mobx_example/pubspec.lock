@@ -186,15 +186,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  freezed:
-    dependency: "direct dev"
-    description:
-      name: freezed
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.5"
   freezed_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
@@ -222,7 +215,7 @@ packages:
     source: hosted
     version: "0.14.0+3"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -264,19 +257,12 @@ packages:
     source: hosted
     version: "0.6.1+1"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  json_serializable:
-    dependency: "direct dev"
-    description:
-      name: json_serializable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.3.0"
   logging:
     dependency: transitive
     description:
@@ -510,6 +496,13 @@ packages:
     dependency: "direct main"
     description:
       path: "../weather_app_example_data_models_core"
+      relative: true
+    source: path
+    version: "0.0.1"
+  weather_repository_core:
+    dependency: "direct main"
+    description:
+      path: "../weather_repository_core"
       relative: true
     source: path
     version: "0.0.1"

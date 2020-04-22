@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vanilla/app_state.dart';
-import 'package:vanilla/weather_repository.dart';
 import 'package:vanilla/pages/pages.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 
 class VanillaApp extends StatefulWidget {
   // This widget is the root of your application.
