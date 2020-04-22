@@ -1,6 +1,6 @@
-import 'package:bloc_vanilla/weather_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
+import 'package:weather_repository_core/weather_repository_core.dart';
 
 class WeatherModel extends ChangeNotifier {
   final WeatherRepository _weatherRepository;

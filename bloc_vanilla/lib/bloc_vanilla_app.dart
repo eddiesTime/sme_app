@@ -1,9 +1,10 @@
-import 'package:bloc_vanilla/weather_repository.dart';
+import 'package:flutter/material.dart';
+
+import 'package:weather_repository_core/weather_repository_core.dart';
+
 import 'package:bloc_vanilla/blocs/bloc_provider.dart';
 import 'package:bloc_vanilla/blocs/theme_bloc/theme_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:bloc_vanilla/pages/pages.dart';
-
 import 'blocs/temperature_bloc/temperature_bloc.dart';
 import 'blocs/weather_bloc/weather_bloc.dart';
 
