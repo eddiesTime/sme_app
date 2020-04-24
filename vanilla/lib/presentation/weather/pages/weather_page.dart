@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:vanilla/app_state.dart';
-
-import 'package:vanilla/pages/pages.dart';
-import 'package:vanilla/widgets/widgets.dart';
+import 'package:vanilla/application/app_state.dart';
+import 'package:vanilla/presentation/location_search/pages/search_page.dart';
+import 'package:vanilla/presentation/settings/pages/settings_page.dart';
+import 'package:vanilla/presentation/weather/widgets/weather.dart';
 
 class WeatherPage extends StatelessWidget {
   final AppState _appState;
   final Function _toggleTemperatureUnit;
   final Function _fetchWeather;
-  final Future<void> Function() _refreshWeather;
+  final Future<void> Function({@required String location}) _refreshWeather;
 
-  WeatherPage(this._appState, this._toggleTemperatureUnit, this._fetchWeather,
-      this._refreshWeather);
+  const WeatherPage(this._appState, this._toggleTemperatureUnit,
+      this._fetchWeather, this._refreshWeather);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vanilla Weather'),
+        title: const Text('Vanilla Weather'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -26,7 +26,8 @@ class WeatherPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => SettingsPage(
-                      _appState.temperatureUnit, _toggleTemperatureUnit),
+                      _appState.settingsEntity.temperatureUnit,
+                      _toggleTemperatureUnit),
                 ),
               );
             },
@@ -35,7 +36,7 @@ class WeatherPage extends StatelessWidget {
       ),
       body: Weather(_appState, _refreshWeather),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _appState.theme.primaryColor,
+        backgroundColor: _appState.themeEntity.themeData.primaryColor,
         onPressed: () {
           Navigator.push(
             context,

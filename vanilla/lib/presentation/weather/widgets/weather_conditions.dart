@@ -4,7 +4,7 @@ import 'package:weather_app_example_data_models_core/weather_app_example_data_mo
 class WeatherConditions extends StatelessWidget {
   final WeatherCondition condition;
 
-  WeatherConditions({Key key, @required this.condition})
+  const WeatherConditions({Key key, @required this.condition})
       : assert(condition != null),
         super(key: key);
 

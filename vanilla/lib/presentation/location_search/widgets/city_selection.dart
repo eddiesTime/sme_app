@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CitySelection extends StatefulWidget {
   final Function _fetchWeather;
 
-  CitySelection(this._fetchWeather);
+  const CitySelection(this._fetchWeather);
   @override
   State<CitySelection> createState() => _CitySelectionState();
 }
@@ -18,10 +18,10 @@ class _CitySelectionState extends State<CitySelection> {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: TextFormField(
                 controller: _textController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'City',
                   hintText: 'Chicago',
                 ),
@@ -31,7 +31,7 @@ class _CitySelectionState extends State<CitySelection> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              widget._fetchWeather(_textController.text);
+              widget._fetchWeather(location: _textController.text);
               Navigator.pop(context);
             },
           )

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vanilla/vanilla_app.dart';
-import 'package:weather_repository_core/weather_repository_core.dart';
+import 'package:injectable/injectable.dart';
+import 'package:vanilla/injection.dart';
+import 'package:vanilla/presentation/app_state_container.dart';
 
-void main() => runApp(VanillaApp(
-      weatherRepository: WeatherRepository(),
-    ));
+void main() {
+  configureInjection(Environment.prod);
+  runApp(AppStateContainer());
+}

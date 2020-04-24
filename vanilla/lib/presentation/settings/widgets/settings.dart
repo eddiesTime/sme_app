@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Settings extends StatefulWidget {
-  Settings(this._temperatureUnit, this._toggleTemperatureUnit);
+  const Settings(this._temperatureUnit, this._toggleTemperatureUnit);
   final TemperatureUnit _temperatureUnit;
   final Function _toggleTemperatureUnit;
   @override
@@ -15,15 +15,16 @@ class _SettingsState extends State<Settings> {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text(
+          title: const Text(
             'Temperature Units',
           ),
           isThreeLine: true,
-          subtitle:
-              Text('Use metric measurements (celsius) for temperature units.'),
+          subtitle: const Text(
+              'Use metric measurements (celsius) for temperature units.'),
           trailing: Switch(
-              value: widget._temperatureUnit == TemperatureUnit.celsius,
-              onChanged: (value) => widget._toggleTemperatureUnit(value)),
+            value: widget._temperatureUnit == TemperatureUnit.celsius,
+            onChanged: (_) => widget._toggleTemperatureUnit(),
+          ),
         )
       ],
     );
