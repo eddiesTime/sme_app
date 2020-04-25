@@ -24,6 +24,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   meta: ^1.1.8
+  freezed_annotation: ^0.7.1
+  injectable: ^0.3.0
+  get_it: ^4.0.1
+  dartz: ^0.8.9
   states_rebuilder: ^1.14.3
   weather_app_example_data_models_core:
     path: ../weather_app_example_data_models_core
@@ -33,7 +37,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  lint: ^1.1.1
+  build_runner:
+  freezed: ^0.10.4
+  injectable_generator: ^0.3.4
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
