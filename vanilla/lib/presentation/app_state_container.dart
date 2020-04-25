@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vanilla/application/app_state.dart';
+import 'package:vanilla/injection.dart';
 import 'package:vanilla/presentation/vanilla_app.dart';
-import 'package:get_it/get_it.dart';
 
 class AppStateContainer extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class AppStateContainer extends StatefulWidget {
 }
 
 class _AppStateContainerState extends State<AppStateContainer> {
-  AppState appState = GetIt.instance<AppState>();
+  AppState appState = getIt<AppState>();
 
   @override
   Widget build(BuildContext context) {

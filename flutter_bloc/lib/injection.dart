@@ -1,6 +1,6 @@
+import 'package:flutter_bloc_example/injection.iconfig.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:vanilla/injection.iconfig.dart';
 
 final GetIt getIt = GetIt.instance;
 
