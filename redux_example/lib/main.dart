@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:injectable/injectable.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_example/redux/middleware/middleware.dart';
-import 'package:redux_example/redux/model/models.dart';
-import 'package:redux_example/redux/reducers/app_state_reducer.dart';
-import 'package:redux_example/redux_app.dart';
-import 'package:weather_repository_core/weather_repository_core.dart';
+import 'package:redux_example/application/redux/middleware/weather_middleware.dart';
+import 'package:redux_example/application/redux/reducers/app_state_reducer.dart';
+import 'package:redux_example/domain/weather/i_weather_facade.dart';
+import 'package:redux_example/injection.dart';
+import 'package:redux_example/presentation/redux_app.dart';
+
+import 'application/redux/model/app_state.dart';
 
 void main() {
-  final store = Store<AppState>(appReducer,
-      initialState: AppState.initial(),
-      middleware: createWeatherMiddleware(WeatherRepository()));
+  configureInjection(Environment.prod);
+  final store = Store<AppState>(
+    appReducer,
+    initialState: getIt<AppState>(),
+    middleware: createWeatherMiddleware(
+      getIt<IWeatherFacade>(),
+    ),
+  );
 
-  runApp(StoreProvider(store: store, child: ReduxApp()));
+  runApp(
+    StoreProvider(
+      store: store,
+      child: ReduxApp(),
+    ),
+  );
 }
