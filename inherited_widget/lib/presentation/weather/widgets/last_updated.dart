@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LastUpdated extends StatelessWidget {
   final DateTime dateTime;
 
-  LastUpdated({Key key, @required this.dateTime})
+  const LastUpdated({Key key, @required this.dateTime})
       : assert(dateTime != null),
         super(key: key);
 

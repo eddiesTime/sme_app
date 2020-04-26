@@ -7,7 +7,7 @@ class Temperature extends StatelessWidget {
   final double high;
   final TemperatureUnit unit;
 
-  Temperature({Key key, this.temperature, this.low, this.high, this.unit})
+  const Temperature({Key key, this.temperature, this.low, this.high, this.unit})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class Temperature extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 20.0),
+          padding: const EdgeInsets.only(right: 20.0),
           child: Text(
             unit == TemperatureUnit.celsius
                 ? '${_formattedTemperature(temperature)}°C'
