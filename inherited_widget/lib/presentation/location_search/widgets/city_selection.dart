@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inherited_widget/app_state_container.dart';
+import 'package:inherited_widget/presentation/app_state_container.dart';
 
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
@@ -13,10 +13,10 @@ class CitySelection extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: TextFormField(
                 controller: _textController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'City',
                   hintText: 'Chicago',
                 ),
@@ -26,7 +26,7 @@ class CitySelection extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              container.fetchWeather(_textController.text);
+              container.fetchWeatherForLocation(location: _textController.text);
               Navigator.pop(context);
             },
           )

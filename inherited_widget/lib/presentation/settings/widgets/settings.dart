@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inherited_widget/app_state.dart';
-import 'package:inherited_widget/app_state_container.dart';
+import 'package:inherited_widget/application/app_state.dart';
+import 'package:inherited_widget/presentation/app_state_container.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 class Settings extends StatelessWidget {
@@ -12,15 +12,17 @@ class Settings extends StatelessWidget {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text(
+          title: const Text(
             'Temperature Units',
           ),
           isThreeLine: true,
-          subtitle:
-              Text('Use metric measurements (celsius) for temperature units.'),
+          subtitle: const Text(
+              'Use metric measurements (celsius) for temperature units.'),
           trailing: Switch(
-              value: appState.temperatureUnit == TemperatureUnit.celsius,
-              onChanged: (value) => container.toggleTemperatureUnit(value)),
+            value: appState.settingsEntity.temperatureUnit ==
+                TemperatureUnit.celsius,
+            onChanged: (_) => container.toggleTemperatureUnit(),
+          ),
         )
       ],
     );

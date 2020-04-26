@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:inherited_widget/app_state_container.dart';
-
-import 'package:inherited_widget/pages/pages.dart';
-import 'package:inherited_widget/widgets/widgets.dart';
-import 'package:inherited_widget/app_state.dart';
+import 'package:inherited_widget/application/app_state.dart';
+import 'package:inherited_widget/presentation/app_state_container.dart';
+import 'package:inherited_widget/presentation/location_search/pages/search_page.dart';
+import 'package:inherited_widget/presentation/settings/pages/settings_page.dart';
+import 'package:inherited_widget/presentation/weather/widgets/weather.dart';
 
 class WeatherPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class WeatherPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inherited Weather'),
+        title: const Text('Inherited Weather'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -30,7 +30,7 @@ class WeatherPage extends StatelessWidget {
       ),
       body: Weather(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: appState.theme.primaryColor,
+        backgroundColor: appState.themeEntity.themeData.primaryColor,
         onPressed: () {
           Navigator.push(
             context,

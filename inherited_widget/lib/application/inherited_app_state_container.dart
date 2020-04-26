@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:inherited_widget/app_state_container.dart';
+import 'package:inherited_widget/presentation/app_state_container.dart';
 
 class InheritedAppStateContainer extends InheritedWidget {
-  InheritedAppStateContainer(
+  const InheritedAppStateContainer(
       {Key key, @required Widget child, @required this.data})
       : super(key: key, child: child);
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:inherited_widget/presentation/weather/widgets/temperature.dart';
+import 'package:inherited_widget/presentation/weather/widgets/weather_conditions.dart';
 
-import 'package:inherited_widget/widgets/widgets.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
     as model;
 
@@ -8,7 +9,7 @@ class CombinedWeatherTemperature extends StatelessWidget {
   final model.Weather weather;
   final model.TemperatureUnit temperatureUnit;
 
-  CombinedWeatherTemperature(
+  const CombinedWeatherTemperature(
       {Key key, @required this.weather, @required this.temperatureUnit})
       : assert(weather != null),
         assert(temperatureUnit != null),
@@ -22,13 +23,14 @@ class CombinedWeatherTemperature extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: WeatherConditions(
-                  condition: weather
-                      .mapConditionToWeatherCondition(weather.condition)),
+                condition:
+                    weather.mapConditionToWeatherCondition(weather.condition),
+              ),
             ),
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Temperature(
                 temperature: weather.temp,
                 high: weather.maxTemp,

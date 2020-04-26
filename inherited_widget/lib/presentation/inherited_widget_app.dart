@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inherited_widget/app_state.dart';
-import 'package:inherited_widget/app_state_container.dart';
-import 'package:inherited_widget/pages/pages.dart';
+import 'package:inherited_widget/application/app_state.dart';
+import 'package:inherited_widget/presentation/app_state_container.dart';
+import 'package:inherited_widget/presentation/weather/pages/weather_page.dart';
 
 class InheritedWidgetApp extends StatelessWidget {
   @override
@@ -11,7 +11,7 @@ class InheritedWidgetApp extends StatelessWidget {
     final AppState appState = appStateContainer.appState;
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: appState.theme,
+      theme: appState.themeEntity.themeData,
       home: WeatherPage(),
     );
   }
