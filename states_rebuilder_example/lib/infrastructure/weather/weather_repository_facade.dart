@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:states_rebuilder_example/domain/weather/i_weather_facade.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 import 'package:weather_repository_core/weather_repository_core.dart';

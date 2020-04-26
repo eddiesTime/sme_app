@@ -5,7 +5,7 @@ import 'package:flutter_bloc_example/domain/weather/i_weather_facade.dart';
 import 'package:flutter_bloc_example/domain/weather/weather_entity.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:dartz/dartz.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 

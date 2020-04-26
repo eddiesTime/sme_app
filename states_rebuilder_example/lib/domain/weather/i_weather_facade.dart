@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
 abstract class IWeatherFacade {

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
