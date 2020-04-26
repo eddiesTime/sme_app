@@ -1,8 +1,8 @@
-import 'package:cnp/theme_model.dart';
+import 'package:cnp/application/theme/theme_notifier.dart';
+import 'package:cnp/presentation/location_search/pages/search_page.dart';
+import 'package:cnp/presentation/settings/pages/settings_page.dart';
+import 'package:cnp/presentation/weather/widgets/weather.dart';
 import 'package:flutter/material.dart';
-
-import 'package:cnp/pages/pages.dart';
-import 'package:cnp/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CNP Weather'),
+        title: const Text('CNP Weather'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -27,7 +27,7 @@ class WeatherPage extends StatelessWidget {
       ),
       body: Weather(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Provider.of<ThemeModel>(context).theme.primaryColor,
+        backgroundColor: Provider.of<ThemeNotifier>(context).theme.primaryColor,
         onPressed: () {
           Navigator.push(
             context,

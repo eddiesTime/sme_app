@@ -1,4 +1,4 @@
-import 'package:cnp/weather_model.dart';
+import 'package:cnp/application/weather/weather_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +12,10 @@ class CitySelection extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: TextFormField(
                 controller: _textController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'City',
                   hintText: 'Chicago',
                 ),
@@ -25,8 +25,8 @@ class CitySelection extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              Provider.of<WeatherModel>(context, listen: false)
-                  .fetchWeather(_textController.text);
+              Provider.of<WeatherNotifier>(context, listen: false)
+                  .fetchWeatherForLocation(location: _textController.text);
               Navigator.pop(context);
             },
           )
