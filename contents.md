@@ -1,4 +1,4 @@
-# Contents
+# Contents of documentation
 ## 0. Meta Information
 
 ### 0.1 Motivation and relevance of the work
