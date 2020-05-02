@@ -4,14 +4,13 @@
 ### 0.1 Motivation and relevance of the work
 ### 0.2 Target Audience
 
-___
 ## 1. Introduction
 
-### 1.1 What is Flutter?
+### 1.1 Flutter under the hood?
 
 #### 1.1.1 UI Framework
 
-#### 1.1.2 It's all widgets
+#### 1.1.2 It's all widgets (widget tree)
 
 #### 1.1.3 Types of Widgets (stateless, stateful, inherited)
 
@@ -29,7 +28,6 @@ ___
 
 #### 1.4.1 principle of lifting state up
 
-___
 
 ## 2. Methodology (sets boundaries for part 3: Results)
 
@@ -40,8 +38,6 @@ ___
 ### 2.3 Architecture (DDD)
 
 ### 2.4 State Management Solution in Application Layer
-
-___
 
 ## 3. Results
 
@@ -78,7 +74,6 @@ Each example consist of 5 paragraphs:
 
 #### 3.2.8 States_rebuilder
 
-___
 
 ## 4. Discussion (depends on part 3: Results)
 
@@ -92,7 +87,6 @@ ___
 
 * how many lines of code in application and presentation layer
 
-___
 
 ## 5. Conclusion (summary of part 4: Discussion)
 
@@ -100,11 +94,9 @@ ___
 
 * which solution is suited to help with state management in example, small-scale, middle-scale, large-scale applications
 
-___
 
 ## 6. References
 
-___
 
 ## 7. Bibliography
 
