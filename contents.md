@@ -29,13 +29,13 @@
 
 ## 2. Methodology (sets boundaries for part 3: Results)
 
-### 2.1 Weather App Example
+### 2.1 Architecture (DDD)
 
-### 2.2 Weather App Widget Tree
+### 2.2 State Management Solution in Application Layer
 
-### 2.3 Architecture (DDD)
+### 2.3 Weather App Example
 
-### 2.4 State Management Solution in Application Layer
+### 2.4 Weather App Widget Tree
 
 ## 3. Results
 
