@@ -8,11 +8,9 @@
 
 ### 1.1 Flutter under the hood?
 
-#### 1.1.1 UI Framework
+#### 1.1.1 It's all widgets (widget tree)
 
-#### 1.1.2 It's all widgets (widget tree)
-
-#### 1.1.3 Types of Widgets (stateless, stateful, inherited)
+#### 1.1.2 Types of Widgets (stateless, stateful, inherited)
 
 ### 1.2 What is state?
 
