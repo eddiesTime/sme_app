@@ -8,7 +8,7 @@
 
 ### 1.1 Flutter under the hood?
 
-#### 1.1.1 It's all widgets (widget tree)
+#### 1.1.1 It's all widgets (widget tree, element tree, renderObject tree)
 
 #### 1.1.2 Types of Widgets (stateless, stateful, inherited)
 
@@ -20,7 +20,7 @@
 
 ### 1.3 How does flutter react to state changes?
 
-#### 1.3.1 widget tree & element tree
+#### 1.3.1 widget tree & element tree & renderObject tree
 
 ### 1.4 state management
 
