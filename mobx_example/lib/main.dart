@@ -6,6 +6,7 @@ import 'package:mobx_example/presentation/mobx_app.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  // Initialises the code generation for [get_it].
   configureInjection(Environment.prod);
   runApp(
     Provider<ThemeStore>(

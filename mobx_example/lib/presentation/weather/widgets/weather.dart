@@ -9,6 +9,7 @@ import 'package:mobx_example/presentation/weather/widgets/last_updated.dart';
 import 'package:mobx_example/presentation/weather/widgets/location.dart';
 import 'package:provider/provider.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatefulWidget {
   @override
   State<Weather> createState() => _WeatherState();
