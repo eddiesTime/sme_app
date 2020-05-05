@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:states_rebuilder_example/application/weather/weather_store.dart';
 
+/// This widget build the input field which allows the user to search
+/// for a location to receive its weather data.
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 

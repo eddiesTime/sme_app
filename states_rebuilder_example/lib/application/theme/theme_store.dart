@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:states_rebuilder_example/domain/theme/theme_entity.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Holds a reference to `ThemeEntity`.
+///
+/// It is used by the reative model in by states_provider.
 class ThemeStore {
   ThemeStore(this._themeEntity);
 
   ThemeEntity _themeEntity;
   ThemeEntity get themeEntity => _themeEntity;
 
+  /// Sets the `ThemeEntity` to match the given `WeatherCondition`.
+  ///
+  /// For example: `condition == WeatherCondition.clear` returns a themeEntity
+  /// which gives the theme a warm sunny touch.
   void mapWeatherConditionToTheme(WeatherCondition condition) {
     switch (condition) {
       case WeatherCondition.clear:

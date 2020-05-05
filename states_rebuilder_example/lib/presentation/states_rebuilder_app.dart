@@ -9,6 +9,8 @@ import 'package:states_rebuilder_example/domain/weather/weather_entity.dart';
 import 'package:states_rebuilder_example/injection.dart';
 import 'package:states_rebuilder_example/presentation/weather/pages/weather_page.dart';
 
+/// Injects the widget tree with a `ReactiveModel` to manage
+/// the `weather` state and `settings` state.
 class StatesRebuilderApp extends StatelessWidget {
   final _themeStore = Injector.getAsReactive<ThemeStore>();
   @override

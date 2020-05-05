@@ -3,6 +3,10 @@ import 'package:states_rebuilder_example/presentation/location_search/pages/sear
 import 'package:states_rebuilder_example/presentation/settings/pages/settings_page.dart';
 import 'package:states_rebuilder_example/presentation/weather/widgets/weather.dart';
 
+/// This widget functions as a container for the weather screen.
+///
+/// It is the initial screen which builds a scaffold and contains
+/// the weather content.
 class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:states_rebuilder_example/injection.dart';
 import 'package:states_rebuilder_example/presentation/states_rebuilder_app.dart';
 
 void main() {
+  // Initialises the code generation for [get_it].
   configureInjection(Environment.prod);
   runApp(
     Injector(
