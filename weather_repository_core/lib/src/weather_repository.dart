@@ -30,7 +30,7 @@ class WeatherRepository {
     return Location.fromJson(locationJson.first);
   }
 
-  /// Returns a `WeatherResponse` for a [Location].
+  /// Returns a `WeatherResponse` for a [Location] by using [location.woeId].
   ///
   /// Throws an [Exception] when the server response code is **not** 200.
   Future<WeatherResponse> fetchWeatherResponseForLocation(
