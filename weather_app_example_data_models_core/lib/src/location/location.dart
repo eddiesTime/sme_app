@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 part 'location.freezed.dart';
 part 'location.g.dart';
 
+/// [Location] is a mapper class for the response of [MetaWeather](https://www.metaweather.com/).
 @freezed
 abstract class Location with _$Location {
   const factory Location(

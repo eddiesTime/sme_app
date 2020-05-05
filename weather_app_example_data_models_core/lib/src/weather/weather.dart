@@ -6,6 +6,8 @@ import '../enum_weather_conditions.dart';
 part 'weather.freezed.dart';
 part 'weather.g.dart';
 
+/// Is a mapper for the weather object inside a weather response from
+/// [MetaWeather](https://www.metaweather.com/).
 @freezed
 abstract class Weather implements _$Weather {
   const Weather._();

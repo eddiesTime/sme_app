@@ -7,6 +7,7 @@ import 'package:weather_app_example_data_models_core/src/weather_source/weather_
 part 'weather_response.freezed.dart';
 part 'weather_response.g.dart';
 
+/// Is a mapper for the response of [MetaWeather](https://www.metaweather.com/).
 @freezed
 abstract class WeatherResponse with _$WeatherResponse {
   const factory WeatherResponse(

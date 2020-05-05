@@ -1,3 +1,4 @@
+/// This library hold the data models the weather app.
 library weather_app_example_data_models_core;
 
 export 'src/enum_temperature_units.dart';
