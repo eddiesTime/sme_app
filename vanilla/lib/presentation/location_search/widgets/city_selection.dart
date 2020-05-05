@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CitySelection extends StatefulWidget {
-  final Function _fetchWeather;
+  final Future<void> Function({@required String location}) _fetchWeather;
 
   const CitySelection(this._fetchWeather);
   @override

@@ -7,7 +7,7 @@ import 'package:vanilla/presentation/weather/widgets/weather.dart';
 class WeatherPage extends StatelessWidget {
   final AppState _appState;
   final Function _toggleTemperatureUnit;
-  final Function _fetchWeather;
+  final Future<void> Function({@required String location}) _fetchWeather;
   final Future<void> Function({@required String location}) _refreshWeather;
 
   const WeatherPage(this._appState, this._toggleTemperatureUnit,
