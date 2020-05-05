@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// This widget build the input field which allows the user to search
+/// for a location to receive its weather data.
 class CitySelection extends StatefulWidget {
   final Future<void> Function({@required String location}) _fetchWeather;
 

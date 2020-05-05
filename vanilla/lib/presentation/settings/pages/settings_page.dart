@@ -3,6 +3,9 @@ import 'package:vanilla/presentation/settings/widgets/settings.dart';
 
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// This widget functions as a container for the settings screen.
+///
+/// It builds a scaffold and contains the settings content.
 class SettingsPage extends StatelessWidget {
   const SettingsPage(this._temperatureUnit, this._toggleTemperatureUnit);
   final TemperatureUnit _temperatureUnit;

@@ -8,9 +8,13 @@ import 'package:vanilla/domain/weather/i_weather_facade.dart';
 import 'package:vanilla/domain/weather/weather_entity.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Is a container class that holds the state of different `app states` used in multiple part of the app.
 @lazySingleton
 class AppState {
+  /// Holds a reference to `WeatherRepositoryFacade` in the infrastructure layer where the
+  /// interface `IWeatherFacade` is implemented.
   final IWeatherFacade _weatherFacade;
+
   WeatherEntity weatherEntity;
   ThemeEntity themeEntity;
   SettingsEntity settingsEntity;
@@ -22,24 +26,15 @@ class AppState {
     @required this.settingsEntity,
   });
 
+  /// Sets the app state of weather data to [WeatherEntity.loading()]
   void indicateLoading() {
     weatherEntity = WeatherEntity.loading();
   }
 
-  // Future<void> getWeatherForLocation({@required String location}) async {
-  //   try {
-  //     final WeatherResponse _wr =
-  //         await _weatherFacade.getWeatherForLocation(location: location);
-  //     weatherEntity = weatherEntity.copyWith(
-  //       weatherResponse: some(_wr),
-  //       lastUpdated: some(DateTime.now()),
-  //       isLoading: false,
-  //     );
-  //   } catch (e) {
-  //     weatherEntity = WeatherEntity.loadingFailure();
-  //   }
-  // }
-
+  /// Returns an app state with loaded weather data that indicates
+  /// that the weather has been loaded successfully.
+  ///
+  /// Otherwise it returns an app state that indicates a loading failure.
   Future<void> fetchWeather({@required String location}) async {
     try {
       final WeatherResponse _wr =
@@ -56,6 +51,8 @@ class AppState {
     }
   }
 
+  /// It triggers the process to update the theme related to the `WeatherCondition`
+  /// which is provided by the `WeatherEntity`.
   void updateThemeToMatchWeatherCondition(
       {@required WeatherResponse weatherResponse}) {
     final Weather _weather = weatherResponse.weatherCollection.first;
@@ -65,47 +62,10 @@ class AppState {
         condition: weatherCondition);
   }
 
+  /// Toggles the temperature unit between `celsius` and `fahrenheit`.
   void toggleTemperatureUnit() {
     settingsEntity = settingsEntity.temperatureUnit == TemperatureUnit.celsius
         ? SettingsEntity.fahrenheit()
         : SettingsEntity.celsius();
   }
-
-  // void saveWeatherResponseInAppState(WeatherResponse wr) {
-  //   weatherResponse = wr;
-  //   _setLastUpdated();
-  //   weatherChanged();
-  // }
-
-  // void _setLastUpdated() {
-  //   lastUpdated = DateTime.now();
-  // }
-
-  // void weatherChanged() {
-  //   _mapWeatherConditionToThemeAndColor(getWeatherCondition());
-  // }
-
-  // void markIsLoadingFlagAs(bool value) {
-  //   isLoading = value;
-  // }
-
-  // void markHasErrorFlagAs(bool value) {
-  //   hasError = value;
-  // }
-
-  // void saveCityInAppState(String requestedCity) {
-  //   city = requestedCity;
-  // }
-
-  // WeatherCondition getWeatherCondition() {
-  //   final Weather _weather = weatherResponse.weatherCollection.first;
-  //   return _weather.mapConditionToWeatherCondition(_weather.condition);
-  // }
-
-  // void switchTemperatureUnit() {
-  //   temperatureUnit == TemperatureUnit.celsius
-  //       ? temperatureUnit = TemperatureUnit.fahrenheit
-  //       : temperatureUnit = TemperatureUnit.celsius;
-  // }
-
 }

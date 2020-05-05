@@ -7,6 +7,7 @@ import 'package:vanilla/presentation/weather/widgets/gradient_container.dart';
 import 'package:vanilla/presentation/weather/widgets/last_updated.dart';
 import 'package:vanilla/presentation/weather/widgets/location.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatelessWidget {
   final AppState _appState;
   final Future<void> Function({@required String location}) _onRefresh;

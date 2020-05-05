@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// This widget contains a [Switch] to switch between
+/// the measurement unit used in the weather screen.
 class Settings extends StatefulWidget {
   const Settings(this._temperatureUnit, this._toggleTemperatureUnit);
   final TemperatureUnit _temperatureUnit;

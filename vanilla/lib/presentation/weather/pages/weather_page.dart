@@ -4,6 +4,10 @@ import 'package:vanilla/presentation/location_search/pages/search_page.dart';
 import 'package:vanilla/presentation/settings/pages/settings_page.dart';
 import 'package:vanilla/presentation/weather/widgets/weather.dart';
 
+/// This widget functions as a container for the weather screen.
+///
+/// It is the initial screen which builds a scaffold and contains
+/// the weather content.
 class WeatherPage extends StatelessWidget {
   final AppState _appState;
   final Function _toggleTemperatureUnit;
