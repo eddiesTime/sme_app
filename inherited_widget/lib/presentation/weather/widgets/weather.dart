@@ -7,6 +7,7 @@ import 'package:inherited_widget/presentation/weather/widgets/gradient_container
 import 'package:inherited_widget/presentation/weather/widgets/last_updated.dart';
 import 'package:inherited_widget/presentation/weather/widgets/location.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatefulWidget {
   @override
   State<Weather> createState() => _WeatherState();

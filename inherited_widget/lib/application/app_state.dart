@@ -6,8 +6,11 @@ import 'package:inherited_widget/domain/weather/i_weather_facade.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Is a container class that holds the state of different `app states` used in multiple part of the app.
 @lazySingleton
 class AppState {
+  /// Holds a reference to `WeatherRepositoryFacade` in the infrastructure layer where the
+  /// interface `IWeatherFacade` is implemented.
   final IWeatherFacade _weatherFacade;
   WeatherEntity weatherEntity;
   ThemeEntity themeEntity;
@@ -20,10 +23,15 @@ class AppState {
     @required this.settingsEntity,
   });
 
+  /// Sets the app state of weather data to [WeatherEntity.loading()]
   void indicateLoading() {
     weatherEntity = WeatherEntity.loading();
   }
 
+  /// Returns an app state with loaded weather data that indicates
+  /// that the weather has been loaded successfully.
+  ///
+  /// Otherwise it returns an app state that indicates a loading failure.
   Future<void> getWeatherForLocation({@required String location}) async {
     try {
       final WeatherResponse _wr =
@@ -40,6 +48,8 @@ class AppState {
     }
   }
 
+  /// Triggers the process to update the theme related to the `WeatherCondition`
+  /// which is provided by the `WeatherEntity`.
   void updateThemeToMatchWeatherCondition(
       {@required WeatherResponse weatherResponse}) {
     final Weather _weather = weatherResponse.weatherCollection.first;
@@ -49,6 +59,7 @@ class AppState {
         condition: weatherCondition);
   }
 
+  /// Toggles the temperature unit between `celsius` and `fahrenheit`.
   void toggleTemperatureUnit() {
     settingsEntity = settingsEntity.temperatureUnit == TemperatureUnit.celsius
         ? SettingsEntity.fahrenheit()

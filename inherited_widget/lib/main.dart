@@ -6,6 +6,7 @@ import 'package:inherited_widget/presentation/inherited_widget_app.dart';
 import 'package:injectable/injectable.dart';
 
 void main() {
+  // Initialises the code generation for [get_it].
   configureInjection(Environment.prod);
   runApp(
     AppStateContainer(

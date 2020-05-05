@@ -3,6 +3,8 @@ import 'package:inherited_widget/application/app_state.dart';
 import 'package:inherited_widget/presentation/app_state_container.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// This widget contains a [Switch] to switch between
+/// the measurement unit used in the weather screen.
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

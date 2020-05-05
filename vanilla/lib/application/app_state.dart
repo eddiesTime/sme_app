@@ -31,10 +31,10 @@ class AppState {
     weatherEntity = WeatherEntity.loading();
   }
 
-  /// Returns an app state with loaded weather data that indicates
+  /// Updates the app state with loaded weather data that indicates
   /// that the weather has been loaded successfully.
   ///
-  /// Otherwise it returns an app state that indicates a loading failure.
+  /// Otherwise it updates the app state that indicates a loading failure.
   Future<void> fetchWeather({@required String location}) async {
     try {
       final WeatherResponse _wr =
@@ -51,7 +51,7 @@ class AppState {
     }
   }
 
-  /// It triggers the process to update the theme related to the `WeatherCondition`
+  /// Triggers the process to update the theme related to the `WeatherCondition`
   /// which is provided by the `WeatherEntity`.
   void updateThemeToMatchWeatherCondition(
       {@required WeatherResponse weatherResponse}) {
