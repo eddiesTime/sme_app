@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 
 part 'theme_state.freezed.dart';
 
+/// Represents the state of the weather data.
 @freezed
 @lazySingleton
 abstract class ThemeState with _$ThemeState {

@@ -3,6 +3,10 @@ import 'package:redux_example/presentation/location_search/pages/search_page.dar
 import 'package:redux_example/presentation/settings/pages/settings_page.dart';
 import 'package:redux_example/presentation/weather/widgets/weather.dart';
 
+/// This widget functions as a container for the weather screen.
+///
+/// It is the initial screen which builds a scaffold and contains
+/// the weather content.
 class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

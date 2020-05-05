@@ -5,6 +5,8 @@ import 'package:redux_example/application/redux/model/models.dart';
 import 'package:redux_example/application/redux/selectors/settings_selector.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// This widget contains a [Switch] to switch between
+/// the measurement unit used in the weather screen.
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

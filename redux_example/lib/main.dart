@@ -11,7 +11,9 @@ import 'package:redux_example/presentation/redux_app.dart';
 import 'application/redux/model/app_state.dart';
 
 void main() {
+  // Initialises the code generation for [get_it].
   configureInjection(Environment.prod);
+  // Initialise the Redux store.
   final store = Store<AppState>(
     appReducer,
     initialState: getIt<AppState>(),

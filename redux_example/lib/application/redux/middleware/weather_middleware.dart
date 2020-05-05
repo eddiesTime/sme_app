@@ -6,6 +6,8 @@ import 'package:redux_example/domain/weather/i_weather_facade.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart'
     as model;
 
+/// This middleware takes care of the asynchronous portion of
+/// weather reducers.
 List<Middleware<AppState>> createWeatherMiddleware(
   IWeatherFacade _weatherFacade,
 ) {

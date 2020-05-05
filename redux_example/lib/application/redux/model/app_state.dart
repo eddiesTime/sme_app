@@ -6,6 +6,7 @@ import 'package:redux_example/application/redux/model/models.dart';
 
 part 'app_state.freezed.dart';
 
+/// Represents the state of the app.
 @freezed
 @lazySingleton
 abstract class AppState with _$AppState {
@@ -15,6 +16,7 @@ abstract class AppState with _$AppState {
       @required SettingsState settingsState,
       @required bool isLoading}) = _AppState;
 
+  /// Represents the initial state of the app.
   @factoryMethod
   factory AppState.initial({
     @required WeatherState weatherState,

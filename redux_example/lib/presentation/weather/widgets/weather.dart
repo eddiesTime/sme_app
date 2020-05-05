@@ -11,6 +11,7 @@ import 'package:redux_example/presentation/weather/widgets/gradient_container.da
 import 'package:redux_example/presentation/weather/widgets/last_updated.dart';
 import 'package:redux_example/presentation/weather/widgets/location.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatefulWidget {
   @override
   State<Weather> createState() => _WeatherState();

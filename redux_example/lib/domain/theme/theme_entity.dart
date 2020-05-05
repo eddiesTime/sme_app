@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 part 'theme_entity.freezed.dart';
 
+/// Is a domain specific model which holds the apps theme relevant data.
 @injectable
 @freezed
 abstract class ThemeEntity with _$ThemeEntity {
@@ -12,6 +13,7 @@ abstract class ThemeEntity with _$ThemeEntity {
       {@required ThemeData themeData,
       @required MaterialColor materialColor}) = _ThemeEntity;
 
+  /// Is a `ThemeEntity` which represents the inital state.
   @factoryMethod
   factory ThemeEntity.initial() => ThemeEntity(
         themeData: ThemeData.light(),

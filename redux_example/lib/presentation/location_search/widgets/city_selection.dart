@@ -3,6 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_example/application/redux/actions/weather_actions.dart';
 import 'package:redux_example/application/redux/model/app_state.dart';
 
+/// This widget build the input field which allows the user to search
+/// for a location to receive its weather data.
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 

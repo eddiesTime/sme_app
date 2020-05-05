@@ -5,9 +5,12 @@ import 'package:redux_example/application/redux/model/theme_state.dart';
 import 'package:redux_example/domain/theme/theme_entity.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Is a collection of theme related reducers.
 final Reducer<ThemeState> themeReducer = combineReducers<ThemeState>(
     [TypedReducer<ThemeState, WeatherLoadedAction>(_setTheme)]);
 
+/// Returns a `ThemeState` after `WeatherLoadedAction` has been called and
+/// the theme has been adapted in response to the weather update.
 ThemeState _setTheme(ThemeState themeState, WeatherLoadedAction action) {
   final WeatherCondition _weatherCondition = action
       .weatherResponse.weatherCollection.first
