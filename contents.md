@@ -29,7 +29,7 @@
 
 ## 2. Methodology (sets boundaries for part 3: Results)
 
-### 2.1 Architecture (DDD)
+### 2.1 Architecture (DDD principles)
 
 ### 2.2 State Management Solution in Application Layer
 
