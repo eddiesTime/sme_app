@@ -17,6 +17,7 @@ class AppStateContainer extends StatefulWidget {
     this.appState,
   });
 
+  /// Returns `AppStateContainer` object as [data].
   static AppStateContainerState of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<InheritedAppStateContainer>()
@@ -40,6 +41,7 @@ class AppStateContainerState extends State<AppStateContainer> {
     super.initState();
   }
 
+  /// Wrap `AppStateContainer` with `InheritedWidgetAppStateContainer`.
   @override
   Widget build(BuildContext context) {
     return InheritedAppStateContainer(
