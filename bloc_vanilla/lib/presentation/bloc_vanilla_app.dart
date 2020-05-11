@@ -9,6 +9,7 @@ class BlocVanillaApp extends StatelessWidget {
   final ThemeBloc _themeBloc = getIt<ThemeBloc>();
   @override
   Widget build(BuildContext context) {
+    /// Rebuilds the app whenever an event is emitted which signals that the weather has changed.
     return StreamBuilder<ThemeEntity>(
         stream: _themeBloc.themeEntity,
         builder: (context, snapshot) {

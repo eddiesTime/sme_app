@@ -11,6 +11,7 @@ import 'package:bloc_vanilla/presentation/weather/widgets/last_updated.dart';
 import 'package:bloc_vanilla/presentation/weather/widgets/location.dart';
 import 'package:flutter/material.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatefulWidget {
   @override
   State<Weather> createState() => _WeatherState();
@@ -18,6 +19,7 @@ class Weather extends StatefulWidget {
 
 class _WeatherState extends State<Weather> {
   Completer<void> _refreshCompleter;
+  // A reference to allow use without context locally.
   WeatherBloc _weatherBloc;
 
   @override
@@ -32,7 +34,9 @@ class _WeatherState extends State<Weather> {
   }
 
   Widget _buildUI(BuildContext context) {
+    // Gets the reference to the WeatherBloc instance.
     _weatherBloc = getIt<WeatherBloc>();
+    // Rebuilds the weather content whenever a new WeatherEntity is received in the stream.
     return StreamBuilder<WeatherEntity>(
       stream: _weatherBloc.weatherEntity,
       builder: (context, snapshot) {
@@ -54,7 +58,9 @@ class _WeatherState extends State<Weather> {
   }
 
   Widget _buildWeather(WeatherEntity weatherEntity) {
+    // Gets the reference to the ThemeBloc instance.
     final ThemeBloc _themeBloc = getIt<ThemeBloc>();
+    // Rebuilds the GradientContainer whenever a new ThemeEntity is added to the stream to match weather condition.
     return StreamBuilder<ThemeEntity>(
         stream: _themeBloc.themeEntity,
         builder: (context, snapshot) {
