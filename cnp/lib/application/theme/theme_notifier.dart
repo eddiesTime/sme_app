@@ -3,14 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Extends [ChangeNotifier] to be used by [ChangeNotifierProvider].
+///
+/// Handles theme data related logic.
 @lazySingleton
 class ThemeNotifier extends ChangeNotifier {
   ThemeNotifier(this._themeEntity);
   ThemeEntity _themeEntity;
 
+  /// Returns the [ThemeData] of the [ThemeEntity].
   ThemeData get theme => _themeEntity.themeData;
+
+  /// Returns the [MaterialColor] of the [ThemeEntity].
   MaterialColor get color => _themeEntity.materialColor;
 
+  /// Updates the local [ThemeEntity] to match the given [WeatherContition].
+  ///
+  /// Notifies its listeners after the [ThemeEntity] has been updated.
   void mapWeatherCondition({WeatherCondition condition}) {
     switch (condition) {
       case WeatherCondition.clear:

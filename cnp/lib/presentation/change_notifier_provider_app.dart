@@ -16,6 +16,8 @@ class ChangeNotifierProviderApp extends StatelessWidget {
           create: (_) => getIt<SettingsNotifier>(),
         ),
       ],
+
+      /// Consumes the [ThemeNotifier] and rebuilds the MaterialApp whenever it receive a `change notification`.
       child: Consumer<ThemeNotifier>(
         builder: (context, data, child) => MaterialApp(
           title: 'Flutter Demo',

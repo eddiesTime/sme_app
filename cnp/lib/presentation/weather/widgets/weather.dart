@@ -8,6 +8,7 @@ import 'package:cnp/presentation/weather/widgets/location.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// This widget builds the content of the weather screen.
 class Weather extends StatefulWidget {
   @override
   State<Weather> createState() => _WeatherState();
@@ -25,11 +26,13 @@ class _WeatherState extends State<Weather> {
 
   @override
   Widget build(BuildContext context) {
+    // Gets the weather ChangeNotifier.
     _weatherNotifier = Provider.of<WeatherNotifier>(context, listen: false);
     return Center(child: _buildUI(context));
   }
 
   Widget _buildUI(BuildContext context) {
+    /// Consumes the [WeatherNotifier] and rebuilds the weather content whenever it receives a `change notification`.
     return Consumer<WeatherNotifier>(
         builder: (context, weatherNotifier, child) {
       if (weatherNotifier.weatherEntity.isLoading) {

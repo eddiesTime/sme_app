@@ -7,6 +7,7 @@ import 'package:weather_app_example_data_models_core/weather_app_example_data_mo
 
 part 'weather_entity.freezed.dart';
 
+/// Is a domain specific model which holds the apps weather relevant data.
 @injectable
 @freezed
 abstract class WeatherEntity with _$WeatherEntity {
@@ -18,6 +19,7 @@ abstract class WeatherEntity with _$WeatherEntity {
     @required bool isLoading,
   }) = _WeatherEntity;
 
+  /// Is a `WeatherEntity` which represents the initial state of the entity.
   @factoryMethod
   factory WeatherEntity.initial() => WeatherEntity(
         weatherResponse: none(),
@@ -26,6 +28,8 @@ abstract class WeatherEntity with _$WeatherEntity {
         lastUpdated: none(),
         isLoading: false,
       );
+
+  /// Is a `WeatherEntity` which represents a loading state of this entity.
   factory WeatherEntity.loading() => WeatherEntity(
         weatherResponse: none(),
         city: '',
@@ -33,6 +37,8 @@ abstract class WeatherEntity with _$WeatherEntity {
         lastUpdated: none(),
         isLoading: true,
       );
+
+  /// Is a `WeatherEntity` which represents the state when an loading failure occured.
   factory WeatherEntity.loadingFailure() => WeatherEntity(
         weatherResponse: none(),
         city: '',

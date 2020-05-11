@@ -2,6 +2,8 @@ import 'package:cnp/application/weather/weather_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// This widget build the input field which allows the user to search
+/// for a location to receive its weather data.
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 

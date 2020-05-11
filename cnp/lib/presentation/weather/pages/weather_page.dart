@@ -5,6 +5,10 @@ import 'package:cnp/presentation/weather/widgets/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// This widget functions as a container for the weather screen.
+///
+/// It is the initial screen which builds a scaffold and contains
+/// the weather content.
 class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

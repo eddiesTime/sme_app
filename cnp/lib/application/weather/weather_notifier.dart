@@ -6,6 +6,9 @@ import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 
+/// Extends [ChangeNotifier] to be used by [ChangeNotifierProvider].
+///
+/// Handles weather data related logic.
 @lazySingleton
 class WeatherNotifier extends ChangeNotifier {
   WeatherNotifier(
@@ -15,11 +18,13 @@ class WeatherNotifier extends ChangeNotifier {
   WeatherEntity _weatherEntity;
   WeatherEntity get weatherEntity => _weatherEntity;
 
+  /// Calls the [ThemeNotifier]'s method [mapWeatherCondition()] for a given [WeatherCondition].
   void weatherChanged() {
     final WeatherCondition condition = getWeatherCondition();
     _themeNotifier.mapWeatherCondition(condition: condition);
   }
 
+  /// Returns a [WeatherCondition] with the help of the local [WeatherEntity].
   WeatherCondition getWeatherCondition() {
     final Weather _weather = _weatherEntity.weatherResponse
         .getOrElse(() => null)
@@ -28,6 +33,13 @@ class WeatherNotifier extends ChangeNotifier {
     return _weatherFacade.getWeatherConditionForWeather(weather: _weather);
   }
 
+  /// Updates our local [WeatherEntity] with a new [WeatherEntity] when the weather data for a given [location] has been refreshed successfully.
+  ///
+  /// Updates our local [WeatherEntity] with a [WeatherEntity.loadingFailure()] when an error occured while refreshing the weather data for a given [location].
+  ///
+  /// Calls [weatherChanged()] to delegate the updating of the theme.
+  ///
+  /// Notifies the listeners of [WeatherNotifier] after the local [WeatherEntity] has been updated.
   Future<void> refreshWeatherForLocation({String location}) async {
     try {
       final WeatherResponse _wr =
@@ -44,6 +56,13 @@ class WeatherNotifier extends ChangeNotifier {
     }
   }
 
+  /// Updates our local [WeatherEntity] with a new [WeatherEntity] when the weather data for a given [location] has been fetched successfully.
+  ///
+  /// Updates our local [WeatherEntity] with a [WeatherEntity.loadingFailure()] when an error occured while fetching the weather data for a given [location].
+  ///
+  /// Calls [weatherChanged()] to delegate the updating of the theme.
+  ///
+  /// Notifies the listeners of [WeatherNotifier] after the local [WeatherEntity] has been updated.
   Future<void> fetchWeatherForLocation({String location}) async {
     _weatherEntity = WeatherEntity.loading();
     notifyListeners();
