@@ -13,6 +13,7 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 part 'weather_bloc.freezed.dart';
 
+/// A business logic component to handle weather related logic in the application.
 @injectable
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final IWeatherFacade _weatherFacade;
@@ -34,6 +35,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     }
   }
 
+  /// Yields [WeatherState.loaded(weatherEntity)] with a newly created [WeatherEntity] when the weather data has been fetched successfully.
+  ///
+  /// Yields [WeatherState.loadingFailure()] when an error occured while fetchibg the weather data.
   Stream<WeatherState> _mapFetchWeatherToState(FetchWeather event) async* {
     yield const WeatherState.loading();
     try {
@@ -48,6 +52,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     }
   }
 
+  /// Yields [WeatherState.loaded(weatherEntity)] with a newly created [WeatherEntity] when the weather data has been refreshed successfully.
+  ///
+  /// Yields [WeatherState.loadingFailure()] when an error occured while refreshing the weather data.
   Stream<WeatherState> _mapRefreshWeatherToState(RefreshWeather event) async* {
     try {
       final WeatherResponse _weatherResponse =

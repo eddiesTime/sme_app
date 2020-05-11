@@ -7,6 +7,7 @@ import 'package:weather_app_example_data_models_core/weather_app_example_data_mo
 
 part 'weather_entity.freezed.dart';
 
+/// Is a domain specific model which holds the apps weather relevant data.
 @injectable
 @freezed
 abstract class WeatherEntity with _$WeatherEntity {
@@ -16,6 +17,7 @@ abstract class WeatherEntity with _$WeatherEntity {
     @required Option<DateTime> lastUpdated,
   }) = _WeatherEntity;
 
+  /// Is a `WeatherEntity` which represents the initial state of the entity.
   @factoryMethod
   factory WeatherEntity.initial() => WeatherEntity(
         weatherResponse: none(),

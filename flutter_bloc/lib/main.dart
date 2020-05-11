@@ -6,6 +6,7 @@ import 'package:flutter_bloc_example/application/theme/theme_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 void main() {
+  // Initialises the code generation for [get_it].
   configureInjection(Environment.prod);
   runApp(
     BlocProvider<ThemeBloc>(

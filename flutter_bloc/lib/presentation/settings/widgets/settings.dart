@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
 import 'package:flutter_bloc_example/application/settings/settings_bloc.dart';
 
+/// This widget contains a [Switch] to switch between
+/// the measurement unit used in the weather screen.
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

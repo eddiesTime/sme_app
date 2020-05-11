@@ -26,7 +26,7 @@ class Settings extends StatelessWidget {
                       'Use metric measurements (celsius) for temperature units.'),
                   trailing: Switch(
                     value: snapshot.data == TemperatureUnit.celsius,
-                    // Addsan event to the settings event sink.
+                    // Adds an event to the settings event sink.
                     onChanged: (value) => _settingsBloc.settingsEventSink.add(
                       ToggleTemperatureUnit(value),
                     ),

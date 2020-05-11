@@ -10,6 +10,7 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 part 'settings_bloc.freezed.dart';
 
+/// A business logic component to handle settings related logic in the application.
 @injectable
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override

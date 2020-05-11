@@ -7,6 +7,7 @@ import 'package:flutter_bloc_example/presentation/weather/pages/weather_page.dar
 class FlutterBlocApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Rebuilds the MaterialApp whenever the ThemeState changes.
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
         return MultiBlocProvider(

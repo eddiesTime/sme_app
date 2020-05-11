@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_example/application/weather/weather_bloc.dart';
 
+/// This widget build the input field which allows the user to search
+/// for a location to receive its weather data.
 class CitySelection extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 

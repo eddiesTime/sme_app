@@ -12,6 +12,7 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 part 'theme_bloc.freezed.dart';
 
+/// A business logic component to handle theme related logic in the application.
 @injectable
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   @override
@@ -28,6 +29,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     }
   }
 
+  /// Yields the [ThemeState] after the [WeatherCondition] has been matched to a [ThemeEntity].
   Stream<ThemeState> _mapWeatherConditionToState(
       WeatherCondition condition) async* {
     ThemeEntity themeEntity;
