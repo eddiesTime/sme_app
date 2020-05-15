@@ -20,7 +20,6 @@ class StatesRebuilderApp extends StatelessWidget {
         Inject<WeatherStore>(
           () => WeatherStore(
             getIt<IWeatherFacade>(),
-            _themeStore,
             getIt<WeatherEntity>(),
           ),
         ),

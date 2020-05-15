@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
-import 'package:states_rebuilder_example/application/theme/theme_store.dart';
 import 'package:states_rebuilder_example/domain/weather/i_weather_facade.dart';
 import 'package:states_rebuilder_example/domain/weather/weather_entity.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
@@ -10,8 +8,7 @@ class WeatherStore {
   /// Holds a reference to `WeatherRepositoryFacade` in the infrastructure layer where the
   /// interface `IWeatherFacade` is implemented.
   final IWeatherFacade _weatherFacade;
-  final ReactiveModel<ThemeStore> _themeStore;
-  WeatherStore(this._weatherFacade, this._themeStore, this._weatherEntity);
+  WeatherStore(this._weatherFacade, this._weatherEntity);
 
   WeatherEntity _weatherEntity;
   WeatherEntity get weatherEntity => _weatherEntity;
@@ -28,7 +25,6 @@ class WeatherStore {
       city: location,
       lastUpdated: some(DateTime.now()),
     );
-    _weatherChanged();
   }
 
   /// Refreshes the weather for given [location]. It handles the
@@ -42,7 +38,6 @@ class WeatherStore {
       city: location,
       lastUpdated: some(DateTime.now()),
     );
-    _weatherChanged();
   }
 
   /// Returns the `WeatherCondition` for the current weather.
@@ -52,11 +47,5 @@ class WeatherStore {
         .weatherCollection
         .first;
     return _weather.mapConditionToWeatherCondition(_weather.condition);
-  }
-
-  /// Notifies the `ReactiveModel<ThemeStore>` to update the theme because the weather changed.
-  void _weatherChanged() {
-    _themeStore.setState(
-        (store) => store.mapWeatherConditionToTheme(getWeatherCondition()));
   }
 }

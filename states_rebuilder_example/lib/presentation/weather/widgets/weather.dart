@@ -30,7 +30,16 @@ class _WeatherState extends State<Weather> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: _buildUI(context));
+    return OnSetStateListener<WeatherStore>(
+        models: [_reactiveWeatherStoreModel],
+        onData: (context, _) {
+          _refreshCompleter?.complete();
+          _refreshCompleter = Completer();
+          return _reactiveThemeStoreModel.setState((store) =>
+              store.mapWeatherConditionToTheme(
+                  _reactiveWeatherStoreModel.state.getWeatherCondition()));
+        },
+        child: Center(child: _buildUI(context)));
   }
 
   Widget _buildUI(BuildContext context) {
@@ -46,8 +55,6 @@ class _WeatherState extends State<Weather> {
                     : _buildLoading();
               },
               onData: (store) {
-                _refreshCompleter?.complete();
-                _refreshCompleter = Completer();
                 return _buildWeather();
               },
               onError: (_) => _buildError());
