@@ -1,5 +1,4 @@
-
-# Contents of documentation
+# Raw documentation
 ## Meta information
 ### What is the purpose of this guide?
 
@@ -10,15 +9,21 @@ This guide helps Flutter developers and Flutter development teams that have to d
 It should provide a reference about which state management solution is likely the right one to choose to build an example, small-scale, middle-scale, or large-scale application.
 Or at least show the advantages and disadvantages of each solution so that you can make an educated decision yourself.
 
-### 0.1 Who is this guide for?
+### Who is this guide for?
 
 This guide is for Flutter developers and Flutter development teams that are planning their next Flutter project. 
 
 It is for people who are overwhelmed by the amount of state management solutions provided by the community. For people who are searching for information about which SMS is in line with their requirements and why they should think about choosing it.
 
-### 0.2 Target Audience
+### How is this guide written?
 
-## 1. Introduction
+This guide has been written for developers. So I want to keep it informal - from developer to developers. Throughout the guide, I will use the pronoun "we" and "you" to keep it that way.
+
+### What resources were used to create this guide?
+
+For the creation of this guide a collection of books, blog posts, journal article, official documentations and youtube videos has been used.
+
+## 1. Basic knowledge
 
 This chapter will cover the fundamental knowledge we will need to understand how Flutter works internally. It will include what state is in Flutter and how Flutter manages state in general.
 
@@ -45,11 +50,22 @@ Code snippet 1 shows an example of Flutter declarative nature. As you can see, a
 
 I have mentioned Widgets a couple of times in the previous paragraph. So let's take a look at what widgets are in the next section.
 
-#### 1.1.1 It's all widgets (widget tree, element tree, renderObject tree)
+#### 1.1.1 It's all widgets
 
+To explain what widgets are and their role in Flutter I will reference the official Flutter documentation. [@TechnicalOverview]
+
+In Flutter everything's a widget. 
 
 | :closed_book:      | Widget |  A widget is an immutable description of part of a user interface. [@WidgetClassWidgets]     |
 |--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+Widgets are the basic building blocks of an application's user interface (UI). Custom widgets can be composed of smaller widgets and the overall composition of all widgets represents the UI. The following image visualises this concept:
+
+|![equation](https://i.imgur.com/DoY8u5y.png)|
+|:--:| 
+|_How Flutter builds its UI_ [@StartThinkingDeclaratively]|
+
+Since widgets are the building blocks of the UI we can assume that they equal the right side of the equation.
 
 #### 1.1.2 Types of Widgets (stateless, stateful, inherited)
 
