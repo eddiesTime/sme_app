@@ -169,7 +169,7 @@ The createState method creates a state object which contains mutable configurati
 
 The StatefulElement marks itself as dirty in two cases: (1) its method `setState()` has been called, or (2) the widget is has been referencing has been removed.
 
-Let's take a look at the following code walk through the example used in the video to explain how a Stateful Widget works:
+Let's take a look at the following used to explain Stateful Widgets in the video:
 
 ```dart
 class ItemCounter extends StatefulWidget {
@@ -201,6 +201,98 @@ _Code snippet 05: Stateful Widget ItemCounter_
 
 The ItemCounter is a Stateful Widget which contains the immutable state `name` and a `createState()` method. `_ItemCounterState` is the State Object created by ItemCounter which contains the mutable state `count` and a `build()` method.
 
+Now let's walk through what happens, when ItemCounter gets created:
+
+```dart
+	return ItemCounter(name: 'Tom');
+```
+_Code snippet 06: ItemCounter with String "Tom" is set as parameter name gets build_
+
+The first thing Flutter does when it is told to build the widget ItemCounter is to mount it to the widget tree.
+
+|![Statelful Widget example](https://i.imgur.com/eqGJ23O.png)|
+|:--:| 
+|_Figure 06: ItemCounter gets mounted to the widget tree_|
+
+Then the widgets createElement() method is being called which creates an StatefulElement that gets mounted to the element tree.
+
+|![Statelful Widget example](https://i.imgur.com/sohHp40.png)|
+|:--:| 
+|_Figure 07: StatefulElement gets mounted to element tree_|
+
+Then the created Element tells the Stateful Widget to create a State Object for the element.
+
+|![Statelful Widget example](https://i.imgur.com/VGSe2EJ.png)|
+|:--:| 
+|_Figure 08: State Object created for Stateful Element_|
+
+Finally, the element uses the state object to build the children of the widget.
+
+|![Statelful Widget example](https://i.imgur.com/Rs3S2lw.png)|
+|:--:| 
+|_Figure 08: Finished widget and element tree_|
+
+As you have noticed the steps to add a widget to the widget & element tree are the same as for a Stateless Widget. Only the state object is an additional step.
+
+Now let's take a look at how the widget and element tree react to the screen being tapped which calls the `setState()` method as seen in code snippet 05.
+
+When the `setState()` method is called the callback inside the method increases the value of `count` from 0 to 1. 
+
+|![Statelful Widget example](https://i.imgur.com/2QpvHsW.png)|
+|:--:| 
+|_Figure 09: Count value increased_|
+
+The call of the `setState()` method triggers the Stateful Widget to mark itself as dirty. When an element is marked as dirty it signals Flutter to rebuild the widget it is referencing. Since the widget itself (ItemCounter) is still the same Flutter can reuse this widget to increase performance. Then Flutter continues the rebuild with the widgets children. A new text widget is being created with the count value of 1.
+
+|![Statelful Widget example](https://i.imgur.com/1ge3XR2.png)|
+|:--:| 
+|_Figure 10: New child widget gets build_|
+
+Now since the newly created text widget and the old widget are not the same, Flutter removes the old text widget and mounts the new text widget in its place.
+
+|![Statelful Widget example](https://i.imgur.com/v1NV0V1.png)|
+|:--:| 
+|_Figure 11: Child widget gets exchanged_|
+
+Since the new child widget is of the same widget type as the old child widget (widget type Text) the Stateless Element of the old widget can be reused.
+
+|![Statelful Widget example](https://i.imgur.com/LkfidRC.png)|
+|:--:| 
+|_Figure 12: Widget & element tree have been rebuild_|
+
+This sums up what happens with the widget and element tree when the element is marked as dirty via the state objects `setState()` method. Now let us take a look at what happens with the trees when the `ItemCounter` widget gets exchanged.
+
+In this example the old ItemCounter widget gets removed and a new ItemCounter widget with the name attribute "Dan" has been created to take its place.
+
+|![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png)|
+|:--:| 
+|_Figure 13: Old ItemCounter Widget gets removed_|
+
+After the new ItemCounter has been mounted to the widget tree Flutter walks through the same steps as before. First it checks the widget type to decide if it can reuse parts of its elememt tree. Since it is also of type ItemCounter the Stateful Element can be reused.
+
+|![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png)|
+|:--:| 
+|_Figure 14: New ItemCounter Widget has been mounted and Stateful Element gets reused._|
+
+(Note that the state object is also being reused!)
+
+Then the children are being rebuild.
+
+|![Statelful Widget example](https://i.imgur.com/LV0Kul8.png)|
+|:--:| 
+|_Figure 15: New ItemCounter Widget children gets build._|
+
+The newly build child takes the place of the old child in the widget tree and since they are of the same widget type the Stateless Element can be reused.
+
+|![Statelful Widget example](https://i.imgur.com/y15vpxH.png)|
+|:--:| 
+|_Figure 16: Widget & element tree has been updated with new ItemCounter Widget._|
+
+This sums up how the widget and element tree react to the ItemCounter Widget getting exchanged.
+
+In this part I have explained what a Stateful Widget is and how it is used to update the UI. The next part is about Inherited Widgets the last type of widgets used in Flutter and the last part of this section.
+
+##### Inherited Widget
 
 ### 1.2 What is state?
 
