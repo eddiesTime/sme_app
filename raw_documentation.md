@@ -527,28 +527,26 @@ Evans answers this question as follows:
 He recommends that the best way to do this is to make software a reflection of the domain which creates an ubiquitous language that the domain experts and developers can use.
 
 #### Domain-Driven-Design principles
+
 In this part I will reduce the DDD principles to the ones used in our application.
 
-Domain
+##### Domain
 
 A domain is an abstract area that defines a problem that needs to be solved. It can be compose of smaller subdomain. 
 
-Layered Architecture
+##### Layered Architecture
 
-DDD recommends to use a four-layered architecture where the domain logic is focused on one layer and not dependent on another layer.
+DDD recommends to use a four-layered architecture where the domain logic is focused on one layer and not dependent on another layer. The other layers are the infrastructure layer, the application layer and the presentation layer.
 
-Ubiquitous Language
+##### Ubiquitous Language
 
 DDD refers to the Ubiquitous language as a must. The idea is that the developer and the user need to speak the same language, and the developers use this language when coming up with class names, modules, variables etc. This way, the code reads as if a user is speaking.
 
-Entities
+##### Entities
 
 Entities are domain objects that are uniquely defined by a unique identifier, and not by their attributes. They are commonly described as identities and the building blocks of the domain modelling. To put it in simpler words: Entities emphasise on the who or they are rather than the what they are.
 
-- are commonly described as identities. Two objects can have the same attributes but how can you separate them? The have to be unique in a way.
-- emphasised on the who or which they are
-
-Factories
+##### Factories
 
 They are used to create complex objects and ensure that the client has no knowledge of the internal details and functionality of that object manipulation. As advised by Evans, factories provide encapsulation.They also ensure standardisation of object instantiation and ensure the objects do not care about the creation themselves. This helps at keeping the domain clean and ensures boundaries are kept.
 
@@ -593,10 +591,12 @@ The infrastructure layer contains repositories. It is the layer that communicate
 
 ### 2.3 Weather App Example
 
-In order to evaluate multiple state management solutions you have to find a way to compare them. For this purpose I choose to build an app with predefined functionalities. This sets a goal to achieve and requirements which the SMSs had to fulfill. By having an app with predefined functionalities/requirements we can directly compare the state management solutions in a specified scenario.
-Since I want to focus on the SMS part I don’t want to spend a lot of time in planning an application. So I’ve chosen to use the Weather App build in the tutorial by Felix Angelov as my foundation. [@WeatherBloc]
-The reason for this example app is that I have with previous knowledge with the Flutter_bloc [@FlutterBlocFlutter] package which was also created by Felix. And furthermore, because I like the app’s UI.
-Take a look at the .gif of the weather app at bloclibrary [@Bloc]:
+In order to evaluate multiple state management solutions I had to find a way to compare them. For this purpose I choose to build an app with predefined functionalities. This sets a goal to achieve and requirements which the SMSs had to fulfill. By having an app with predefined functionalities/requirements the state management solutions can directly be compared in a specified scenario.
+
+Since I want to focus on the SMS part I don’t want to spend a lot of time in planning an application. So I have chosen to use the Weather App build in the tutorial by Felix Angelov as my foundation. [@WeatherBloc]
+The reason for this example app is that I have started the project with previous knowledge about the flutter_bloc [@FlutterBlocFlutter] package which was also created by Felix. And furthermore, because I like the app’s UI.
+
+Take a look at the .gif of the weather app at bloclibrary [@Bloc] to get a first glimps at what will be build:
 
 |![weather app](https://i.imgur.com/cgB1wse.gif)|
 |:--:| 
@@ -643,8 +643,126 @@ The use of these packages is influence by Reso Coder's DDD example and provide o
 This covers the methodology chapter. The next chapter covers the results of the implementation.
 
 ## 3. Results
+This chapter will show the results I have collected after the implementation of each state management solution in the example app. The chapter is structure as follows:
+
+* The first section will present the two different patterns each state management solution is build upon
+* The second section contains the implemented state management solutions and how they are implemented in the architecture
+* The third and last section will cover the evaluation of the SMS. This section will cover the criteria that we chosen to evaluate the SMS, the result of the SMS and my personal recommendation on which state management solution is useful when it comes to developing large-scale applications, etc.
 
 ### 3.1 Patterns in state management solutions (mutable/immutable)
+
+As you’ve noticed by now state management is a hot topic in the Flutter community. Therefore it is not surprising that a lot of people try to provide valid information about state management.
+In his article “State Management Explained” Reso Coder did a great job in explaining the core principles of state management approaches.
+In the following part I am going to summarise his article:
+
+State management solutions can be divided into one out of two principles:
+(1) mutable state and (2) immutable state.
+
+Mutability is specified by its characteristic that object values can change over time.[@Mutable] 
+Immutability on the contrary is defined by its characteristic that object values cannot be changed after its initialising. [@JavaConcurrencyInPractice]
+
+Mutable state management solutions are categorised by their lack of separation of concerns and the loose of beneficial immutable state management concepts for state history to achieve an easy undo/redo.
+The lack of separation of concerns can be seen in the following code snippet of the mobs example:
+ 
+```dart 
+...
+class SettingsStore extends _SettingsStore with _$SettingsStore {
+  SettingsStore({@required SettingsEntity settingsEntity})
+      : super(settingsEntity);
+}
+
+abstract class _SettingsStore with Store {
+  _SettingsStore(this.settingsEntity);
+
+  @observable
+  SettingsEntity settingsEntity;
+
+  @computed
+  bool get value {
+    return settingsEntity == SettingsEntity.celsius();
+  }
+
+  @action
+  void toggleTemperatureUnit() {
+    settingsEntity == SettingsEntity.celsius()
+        ? settingsEntity = SettingsEntity.fahrenheit()
+        : settingsEntity = SettingsEntity.celsius();
+  }
+}
+...
+```
+_Code snippet 10: SettingsStore in MobX example._
+
+The code snippet illustrates the collection of state data and state mutating methods in a single file. This use of a file can get bloated pretty quickly the more complex the subdomain is. To approach this problem with a solution you can split the file into multiple files and annotate them as “parts”. But a problem with this approach is the non present best practice which could leave you with confusion. 
+Mutable state management also requires to find a solution to handle initial or empty state which is in most cases a decision between null checks in the UI or creating a state enum to handle the states.  This approach comes closer to she clean separation in immutable solutions like bloc.
+They last disadvantage is the difficult challenge to manage the states history. If we would have a store with more data than settingsEntity we would find correlating methods to mutate each data property. Since we then have different data that can change over time without the change of other data properties it gets much more difficult to track these changes.
+On the other hand mutable state management solutions shine with their lack of boilerplate code and ease to learn and implement.
+
+Immutable state management solutions in contrary to mutable solutions tackle each the three disadvantages. 
+
+The following code snippets show how the immutable state management solution Bloc addresses each disadvantage.
+
+```dart
+...
+@freezed
+abstract class SettingsEvent with _$SettingsEvent {
+  const factory SettingsEvent.toggleTemperatureUnit(
+		bool value) = ToggleTemperatureUnit;
+}
+...
+```
+_Code snippet 11: SettingsEvent in flutter_bloc example._
+
+```dart
+@freezed
+abstract class SettingsState with _$SettingsState {
+  const factory SettingsState(
+{@required TemperatureUnit temperatureUnit}
+	) = _SettingsState;
+  factory SettingsState.celcius() =>
+		const SettingsState(
+			temperatureUnit:TemperatureUnit.celsius
+		);
+  factory SettingsState.fahrenheit() =>
+      const SettingsState(
+			temperatureUnit:TemperatureUnit.fahrenheit
+		);
+}
+...
+```
+_Code snippet 12: SettingsState in flutter_bloc example._
+
+
+```dart
+...
+class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
+  @override
+  SettingsState get initialState => SettingsState.celcius();
+
+  @override
+  Stream<SettingsState> mapEventToState(
+    SettingsEvent event,
+  ) async* {
+    if (event is ToggleTemperatureUnit) {
+      yield event.value ? 
+		SettingsState.celcius() : 
+		SettingsState.fahrenheit();
+    }
+  }
+}
+...
+```
+_Code snippet 13: SettingsBloc in flutter_bloc example._
+
+The separation of concerns is achieve by the three concepts of bloc: (1) events, (2) states and (3) Bloc.
+Each concept has its own concern. Events are triggered when the user interacts with the UI and signals the bloc that the UI needs to update. States are representations of the UI. Blocs are the glue in the middle between events and states where the business logic of a bloc lives. The concern of the bloc is to map each event to its counterpart state.
+As you can see in snippet X of the bloc class, the disadvantage of the initial state is addressed by providing an initial state out of the box.
+
+The last disadvantage can be addressed by another class of the bloc package Transition[@BlocLibraryDart]. This class consist of the currentState, the event which was added, and the next state. A transition occurred whenever an event is added and after it has been handled by mapEventToState but before the states gets updated.
+Another advantage is that with the clear separation of concerns the testability of these components is easier.
+
+Even though immutable state solutions address the disadvantages of mutable state solutions they come with the drawback of boilerplate. Even the simplest function implemented in Bloc requires quite a lot of overhead.
+
 
 Each example consist of 5 paragraphs: 
 
@@ -661,35 +779,189 @@ Each example consist of 5 paragraphs:
 
 ### 3.2 Examples
 
-#### 3.2.1 Stateful Widget
+## 4. Evaluation (depends on part 3: Results)
 
-#### 3.2.2 Inherited Widget
+The first thing I want to do is remove the state management solutions InheritedWidget and bloc_vanilla from the following evaluation. The reason for this decision is that with Provider a solution has been developed which wraps the Inherited Widget and provides a simplified API. The same advantages come with flutter bloc which provides the bloc pattern with a simplified API and less overhead to worry about.
 
-#### 3.2.3 ChangenotifierProvider
+The state management solutions will be rated from a scale from 1-3. The rating value is defined as follows:
 
-#### 3.2.4 BLoC (Vanilla) Rxdart
+* 1 represents a rating where the criteria is somehow matched or not matched at all
+* 2 represents a rating where the criteria is matched but does not “feel” good
+* 3 represents a rating where the criteria is matched better than normal
 
-#### 3.2.5 Flutter_bloc
+Furthermore I will add a comment to ratings of 1 and 3 to add more information to the result.
 
-#### 3.2.6 Redux
+### Criteria
 
-#### 3.2.7 MobX
+The criteria that were chosen to evaluate the different state management solutions  are a mixture of quality attributes and personally chosen criteria which I will further explain in the upcoming section.
 
-#### 3.2.8 States_rebuilder
+The quality attributes are taken from “Characterizing Architecturally Significant Requirements” by Chen et al.:[@chenCharacterizingArchitecturallySignificant2013]
+
+* Maintainability
+* Extendability
+* Modularity
+* Reusability
+* Testability
+
+The personally chosen criteria are:
+
+* Synergy
+* Time to learn
+* Ressources
+* Amount of Boilerplate
+* Side-effect handling
+* Debugging
+
+Maintainability is defined as “the ease with which a software system or component can be modified to correct faults, improve performance or other attributes, or adapt to a changed environment.” [@159342]
+To put it in simpler terms: The state management solution implementation is evaluated based on changes to improve the application and their affect on other components. 
+
+Extendibility is defined as “the ease with which a system or component can be modified to increase its storage or functional capacity.” [@159342]
+For our evaluation the focus is on the functional capacity part. How easy is it to add more feature with the state management solution?
+
+Modularity is defined as “the degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.” [@159342]
+This criteria will be similar rated as maintainability since they modularity impacts the other quality attribute criteria.
+
+Reusability is defined as “the degree to which a software module or other work product can be used in more than one computer program or software system”  [@159342]
+For the evaluation reusability will be evaluated by the reusability of the state management solution in non-Flutter applications.
+
+Testability is defined as “the degree to which a system or component facilitates the establishment of test criteria and the performance of tests to determine whether those criteria have been met.” [@159342]
+This criteria will be evaluated based on the simplicity to write unit tests.
+
+---
+Synergy in the context of the evaluation is defined as how well the state management solution fits into the architecture and how well it interacts with the other packages used to develop the application.
+
+Time-to-learn in the context of the evaluation is defined as the time it takes the developer to learn the concepts of the state management solution and implement them successfully in an example application. This criteria is based on my own time it took me to learn enough about the state management solution to implement it.
+ 
+Resources in the context of the evaluation is defined as the amount of resources you will find when you search the Internet for an examples and tutorials for the state management solution. Furthermore if the SMS has a documentation and how well the documentation is written.
+
+Amount of Boilerplate in the context of the evaluation is defined as how much boilerplate is being used by the SMS.
+
+Side-effect-handling in the context of the evaluation is defined as how well the SMS handles side-effects. To be more precise does the SMS provide a recommendation or guideline how to handle side-effects, how easy can it be implemented and how well it works.
+
+Debugging in the context of the evaluation is defined as how easy can bugs be debug with the SMS. To be more precise how difficult is it to track the bug inside the implementation of the SMS.
 
 
-## 4. Discussion (depends on part 3: Results)
+### Results
 
-* how well did it work out to implement the solution into the architecture?
+Quality Attributes:
+* Maintainability
+	* Stateful Widget: 1
+		* State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
+	* ChangeNotifierProvider: 2
+	* Bloc: 2
+	* MobX: 2
+	* States Rebuilder: 2
+	* Redux: 2
+* Extendability
+	* Stateful Widget: 1
+		* The extendability of the application with this SMS is provided but for the same reason as in maintainability the need the pass down the state through all widgets in between makes it worse.
+	* ChangeNotifierProvider: 2
+	* Bloc: 2
+	* MobX: 2
+	* States Rebuilder: 2
+	* Redux: 2
+* Modularity
+	* Stateful Widget: 1
+		* State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
+	* ChangeNotifierProvider: 2
+	* Bloc: 2
+	* MobX: 2
+	* States Rebuilder: 2
+	* Redux: 2
+* Reusability
+	* Stateful Widget: 1
+		* Flutter specific.
+	* ChangeNotifierProvider: 1
+		* Flutter specific.
+	* Bloc: 2
+	* MobX: 2
+	* States Rebuilder: 1
+		* Flutter specific.
+	* Redux: 2
+* Testability
+	* Stateful Widget: 2
+	* ChangeNotifierProvider: 2
+	* Bloc: 3
+		* Has the package bloc_test [@BlocTestDart] which makes it easier to write tests for blocs.
+	* MobX: 2
+	* States Rebuilder: 2
+	* Redux: 3
+		* Since most of the components in Redux are pure functions, they are easy to test without mocking.
 
-* how many guides and/or tutorials for the solution can be found?
 
-* how easy is it to learn?
 
-* how much boilerplate needs to be implemented?
+The personally chosen criteria are:
+* Synergy
+	* Stateful Widget: 1
+		* Breaks the principle of decoupling by having logic in the UI.
+	* ChangeNotifierProvider: 2
+	* Bloc: 2
+	* MobX: 2
+	* States Rebuilder: 1
+		* States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via Injector is provided. In our architecture the package combination of getIt and injector has been chosen to handle D.I. and State Rebuilder’s own dependency injection does not play well with the architecture’s D.I. solution.
+	* Redux: 2
+* Time to learn
+	* Stateful Widget: 3
+		* One of Flutters three types of widgets which everyone using Flutter had to learn.
+	* ChangeNotifierProvider: 3
+		* Endorsed by the Flutter Team and is easy to learn because of it’s popularity and tutorials
+	* Bloc: 1
+		* Even though the concept of Bloc is well documented it took me one day to understand the concepts and implemented it in my first application.
+	* MobX: 3
+		* Easy to learn since MobX encapsulates most logic and handles the updates of the UI and notifications about state manipulations internally. The developer only has to implement the three mentioned packages in the MobX example and add decorators to the business logic.
+	* States Rebuilder: 2
+	* Redux: 1
+		* Without previous knowledge about Redux and it not being a popular solution for state management in Flutter it took me between 2 and 3 days to implement it in the example application. Furthermore, I stopped the implementation of the example without fully following the concepts of Redux. As you may have noticed in the middleware to handle asynchronous calls the reducers are dispatching more than one action. At that time I knew that Redux is powerful and to understand how to implement the notification to display a ProgressLoadingIndicator it would take me even more time.
+* Ressources
+	* Stateful Widget: 3
+		* Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutters three widget types and the simplest state management solution.
+	* ChangeNotifierProvider: 3
+		* Provider is a very popular package in Flutter and therefore there are a lot of examples of how to use its ChangeNotifierProvider in an application.
+	* Bloc: 3
+		* Bloclibrary [@Bloc] is one of the best documentations I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore there are tons of examples and tutorials of how to implement the bloc pattern.
+	* MobX: 2
+	* States Rebuilder: 2
+	* Redux: 2
+* Amount of Boilerplate
+	* Stateful Widget: 2
+	* ChangeNotifierProvider: 2
+	* Bloc: 1
+		* To add a feature at least one event, one state and the bloc itself has to be added.
+	* MobX: 2
+	* States Rebuilder: 3
+		* ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g. idle state handling.
+	* Redux: 1
+		* The strict combination of concepts includes at least one action, one reducer and one state to add a feature.
+* Side-effect handling
+	* Stateful Widget: 1
+		* No recommendation about how to handle side-effects.
+	* ChangeNotifierProvider: 1
+		* No recommendation about how to handle side-effects.
+	* Bloc: 3
+		* Emphasises a specific widget (BlocListener) to handle side-effects.
+	* MobX: 2
+		* I have to make an exception to add a comment for MobX for this criteria. Even though MobX uses reactions to handle side-effects I was not able to add the completion of the RefreshIndicator or the notification of the ThemeStore that the weather has changed as reactions and make it work.
+	* States Rebuilder: 3
+		* Emphasises a specific Observer Widget to handle side-effects.
+	* Redux: 2
+* Debugging
+	* Stateful Widget: 2
+	* ChangeNotifierProvider: 2
+	* Bloc: 3
+		* The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific  class in the bloc package.
+	* MobX: 1
+		* Since MobX is handling a lot of logic internally it is difficult to track down a bug.
+	* States Rebuilder: 2
+	* Redux: 2
 
-* how many lines of code in application and presentation layer
+### Overall
 
+### Recommendations
+
+Example: Stateful widget
+Small: ChangeNotifierProvider, MobX
+Medium: Bloc, MobX, States Rebuilder, Redux
+Large: Bloc, Redux, States Rebuilder
 
 ## 5. Conclusion (summary of part 4: Discussion)
 
