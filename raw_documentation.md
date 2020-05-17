@@ -330,13 +330,46 @@ An example of an Inherited Widget you should be familiar with is Theme. Theme as
 ```
 _Code snippet 07: Example how Theme can be accessed._
 
-With this the section about types of widgets in Flutter is finished. The next section will cover what state in Flutter is.
+With this part the section about types of widgets in Flutter is finished. The next section will cover what state in Flutter is.
 
 ### 1.2 What is state?
 
-#### 1.2.1 Definition of state in flutter
+This section will cover what state in Flutter is. All the information in this section is taken from the official Flutter documenation.
 
-#### 1.2.2 ephemeral state & app state
+So, to start this section let's take a look at the official definition of state in Flutter.
+
+#### Definition
+
+| :closed_book:      | State |  Whatever data you need in order to rebuild your UI at any moment in time. [@DifferentiateEphemeralState]     |
+|--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+To remind you about its impact on Flutter I want to remind you about how Flutter builds its UI with Figure 01:
+
+|![equation](https://i.imgur.com/DoY8u5y.png)|
+|:--:| 
+|_Figure 01: How Flutter builds its UI_ [@StartThinkingDeclaratively]|
+
+Now let's dive deeper into state in Flutter. It can be divided into ephemeral state and application state.
+
+#### Ephemeral state
+
+Ephemeral stae is specified as mutable data which is only relevant to the widget holding this configuration. It is also called local state and can be implemented using a state object of a Stateful Widget as seen in Section 1.1 It's all widgets.
+
+#### Application State
+
+Application state in constrast to ephemeral state is data that is shared by mutliple widgets, e.g. user data.
+
+#### Decision help
+
+When working with state in Flutter there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to decide which type of state you should use which is shown in Figure 19:
+
+|![decision helo](https://i.imgur.com/5ifKgCM.png)|
+|:--:| 
+|_Figure 19: Decision help_|
+
+Don't worry to much about what kind of state to use since it most definitely will change over time and you can simply change it afterwards.
+
+This part is the finish of the section about state in Flutter. The next section will cover how Flutter reacts to state changes internally.
 
 ### 1.3 How does flutter react to state changes?
 
