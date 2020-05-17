@@ -294,6 +294,44 @@ In this part I have explained what a Stateful Widget is and how it is used to up
 
 ##### Inherited Widget
 
+The Inherited Widget is the third and last type of Widgets I will talk about.
+
+To explain what an Inherited Widget is and how it works I will summarise the youtube video "Inherited Widgets Explained - Flutter Widgets 101 Ep. 3". [@InheritedWidgetsExplained] It is the third video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
+
+When working with widgets in Flutter it can get cumbersome pretty quickly when a deeply nested child widget needs to access data from an ancestor. The more widgets are in between the ancestor with the data and the child that needs to access the data the more cumbersome it gets as seen in Figure 17.
+
+|![Inherited Widget example](https://i.imgur.com/wFAt9A7.png)|
+|:--:| 
+|_Figure 17: Widget tree where child that needs data from ancestor and data are highlighted._|
+
+To provide the highlighted child widget with the data of an ancestor the data has to be passed down through the widgets in between even though they may not need access to the data. 
+
+This is where Inherited Widgets can help. They are widgets that can be accessed from any descendant in the widget tree as highlighted in Figure 18.
+
+|![Inherited Widget example](https://i.imgur.com/GaoNGIW.png)|
+|:--:| 
+|_Figure 18: Widget tree with Inherited Widget._|
+
+To access the Inherited Widget the BuildContext is used.
+
+| :closed_book:      | BuildContext |  The build context handles the location of the widget in the tree. [@BuildContextClassWidgets]     |
+|--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+An example of an Inherited Widget you should be familiar with is Theme. Theme as all Inherited Widgets can be accessed with its static method `of(context)` as seen in code snippet 07:
+
+```dart
+...
+	@override
+	Widget build(BuildContext context){
+	...
+		final ThemeData _theme = Theme.of(context);
+	...
+}
+```
+_Code snippet 07: Example how Theme can be accessed._
+
+With this the section about types of widgets in Flutter is finished. The next section will cover what state in Flutter is.
+
 ### 1.2 What is state?
 
 #### 1.2.1 Definition of state in flutter
