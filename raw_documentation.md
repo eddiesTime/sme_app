@@ -472,14 +472,141 @@ And this principle is being used in any state management solution you will find.
 
 
 ## 2. Methodology (sets boundaries for part 3: Results)
+In this chapter I walk you through the steps I made to be able to make an educated evaluation about state manamgement solutions.
 
-### 2.1 Architecture (DDD principles)
+### Challenge How can we manage to compare state management solutions to evaluate them?
 
-### 2.2 State Management Solution in Application Layer
+To be able to compare the different state management solutions, we have to find a scenario in which they can be compared. For this purpose I’ve decided to implement each pattern in the same example application.
+But this leads us to another problem: We don’t want to write the application every time from scratch or to be more precise rewrite big chunks of the application only to fit in a different SMS. 
+
+This is where the principle of orthogonality [@hunt2000pragmatic] is useful. This principle emphasises on the benefits of ~independence or decoupling~ of components.  One of the benefits is that changes in one component do not affect any of the other. So in our case, if we change the state management solution it does not affect the other parts of our application.
+
+Now I have shown how the amount of refactoring can be reduced with the principle of orthogonality. The next challenge is to find an architecture which follows this principle.
+
+### Architectural Decision process
+
+The first architecture I looked at is Clean Architecture by Uncle Bob.[@Martin17]
+
+In Uncle Bob’s clean architecture he shows the benefits of a clean architecture where the focus is on use cases, the central business goals of the application.
+
+He applied the principle of decoupling with two concepts: (1) the dependency rule and (2) the principle of dependency inversion.
+The first concept states that source code dependencies are only allowed from outer layers to inner layers. The concept of dependency inversion introduces the use of interfaces on each layer to allow cross layer communication with the principle of contracts. [@hunt2000pragmatic]
+
+A contract in programming is a definition of methods and attributes that everyone who wants to use mentioned methods and attributes has to follow. A contract does not more or less than what is written in it. In software development an example for a contract is an interface.
+
+An image Uncle Bob's Clean architecture can be seen in Figure 26:
+
+|![clean architecture](https://i.imgur.com/moPHCbt.png)|
+|:--:| 
+|_Figure 26: Clean architecture._|
+
+With this onion architecture he highlights the importance of the separation of concerns. [@SeparationConcernsSoftware2020]
+
+The business logic represents the core of the onion and the outer layer represents details. Following the separation of the business logic in your system allows you to be flexible when it comes to adding details. He describes IO-Devices, databases, etc. as details which are not relevant for the business rules. Furthermore, Frameworks are tools that can help you with the development of your application and are therefore also details.
+
+Uncle Bob points out a problem in the creational context of a software application. The problem is that when it comes to developing an application the tools we use, like Ruby, take away the focus of the most important thing in software development, the business rules and therefore how we architect our software.
+
+If we take a look at state management in Flutter, we can assume that state management solutions, e.g. Redux, are only details added on top of the core business logic.
+
+This problem is also addressed by Domain-Driven-Design (DDD). “The developers are too wrapped up with technology and trying to solve problems using technology rather than careful though and design. This leads developers to constantly chase after new ‘shiny objects’, which are the latest fads in technology”. [@10.5555/3055897]
+
+Recognizing the same problem when it comes to state management in Flutter I’ve decided to take a look into DDD.
+
+DDD is the second approach I took to plan my software example. It led me to the Flutter Europe 2020 conference talk about Strategic Domain-Driven-Design by Majid Hajian.[@StrategicDomainDrivenDesign] He proposes an architecture based on the principles of DDD. In his talk he emphasises on the advantages of Domain-Driven-Design and how it can be used to build scalable and maintainable software. During the presentation of his architecture he pointed out that at the layer where BLoC was used as a state management solution any other state can be used instead and how easily refactoring the aftermath will be.
+This ease of changability is exaclty what I was looking for.
+
+### Domain-Driven-Design principles
+
+
+
+### Architecture
+
+When looking into how to use the principles of DDD to plan my example application's architecture I’ve found the DDD series by Matt Rešetár a.k.a. Reso Coder.[@FlutterFirebaseDDD2020] His series has been a big influence to me and how I've planned my architecture. In the next section I will present my adaptation of his architecture proposal for my domain.
+
+But before getting into more detail about my architecture I want to emphasise on a common mistake made by the community when it comes to architecture.
+
+### Architecture vs. state management vs. folder structure
+
+A common mistake made by the community is the use of architecture, state management and folder structure interchangeably. Most Flutter developers should be familiar with the Flutter Architecture Samples repository [@FlutterArchitectureSamples] by Brian Egan and contributors. As the name suggests this repository is supposed to contain different architecture samples of a Todo App. Unfortunately, this is not the case. It contains samples of how different patterns, e.g. Redux, can be implemented. The same misunderstanding comes with the folder structure of the project where it is mistaken for architecture. Folder structure helps to separate your files but not automatically includes an architecture.
+
+Architecture is the topic of a top-level decision when it comes to the planning of the system. It specifies how the system will be implemented, what type of modules it has and how their relationship is. [@hgracaArchitecturalStylesVs2017]
+Examples for architecture are:
+
+* layered
+* service-oriented
+* client-server
+* etc.
+
+To summarise, an architecture should set the outer boundaries of your application.
+
+## My architecture
+
+As you can see in Figure 27 the architecture is closely related to Reso Coders architecture proposal. 
+
+|![application architecture](https://i.imgur.com/JeebkGs.jpg)|
+|:--:| 
+|_Figure 27: Application architecture._|
+
+The main difference is my lack of a value object and the focus on the entities. 
+
+The presentation layer represents the dumb UI which is used to interact with the user. Depending on the state management solution some sort of ViewModel is used in the layer, e.g. events and states in flutter_bloc.
+
+The application layer contains the state management solution. It is the only layer communicating with the presentation layer. It depends on entities to represent the domain's relevant data models and interfaces which are a common contract to communicate with the infrastructure layer.
+
+The domain layer contains the core logic of the business. It is intended to be a standalone layer. Due to the simplicity of this example and the focus on the state management part in the application layer, I’ve decided to leave out ValueObjects. 
+
+The infrastructure layer contains repositories. It is the layer that communicates with APIs and other services, e.g. databases. To specify how to manage API calls, the repositories implement the provided interface of the domain layer and thereby fulfills its contract. The dependency to the models is used to specify data transfer objects [@BlikiLocalDTO] which are used to transfer the raw data from the API/database into objects.
 
 ### 2.3 Weather App Example
 
-### 2.4 Weather App Widget Tree
+In order to evaluate multiple state management solutions you have to find a way to compare them. For this purpose I choose to build an app with predefined functionalities. This sets a goal to achieve and requirements which the SMSs had to fulfill. By having an app with predefined functionalities/requirements we can directly compare the state management solutions in a specified scenario.
+Since I want to focus on the SMS part I don’t want to spend a lot of time in planning an application. So I’ve chosen to use the Weather App build in the tutorial by Felix Angelov as my foundation. [@WeatherBloc]
+The reason for this example app is that I have with previous knowledge with the Flutter_bloc [@FlutterBlocFlutter] package which was also created by Felix. And furthermore, because I like the app’s UI.
+Take a look at the .gif of the weather app at bloclibrary [@Bloc]:
+
+|![weather app](https://i.imgur.com/cgB1wse.gif)|
+|:--:| 
+|_Figure 28: Weather app .gif._|
+
+From the .gif we can take the four key features our application offers:
+
+1. Fetch weather from an API on the search page
+2. Update the app theme to match the weather condition
+3. Toggle the temperature measurement unit on settings page
+4. Refresh the weather by using a pull down gesture on the weather page
+
+These four features have to be implemented by each state management solution including their side effects [@ProgrammingLanguagesWhat] like the loading indicator when weather data is being fetched.
+
+Since I already knew how to implement the BLoC pattern with the help of flutter_bloc I’ve decided to start the evaluation process by rewriting the example app to use Flutter’s own state management solution - stateful widgets. From that point forward the rewritten example app, in this context vanilla app, has been used as a foundation to rewrite the application using a different state management solution.
+
+A simplified version of our example apps widget tree can be seen in Figure 29:
+
+|![weather app widget tree](https://i.imgur.com/uM2ab31.jpg)|
+|:--:| 
+|_Figure 29: Weather app widget tree._|
+
+The application consists of three screens: (1) WeatherPage, (2) LocationSearchPage and (3) SettingsPage. 
+
+### Additional packages that will be used
+
+Before I finish this chapter I want to mention some additional packages that were used to create the examples. These packages are:
+
+* Freezed [@FreezedDartPackage]
+  * Generates code to help to deal with immutable classes and provides a simple API to use.
+* Injectable [@InjectableDartPackage]
+  * a convenient code generator for the get_it package
+* GetIt [GetItDart]
+  * "Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App"
+* Dartz [@DartzDartPackage]
+  * adds functinonal programming principles to dart
+* build_runner [@BuildRunnerDart]
+  * a build system to generate dart files
+* injectable_generator [@InjectableGeneratorDart]
+  * a generator to create code for injectable related annotations
+
+The use of these packages is influence by Reso Coder's DDD example and provide our application with a criteria to evaluate with: "How does the state management solution work with the other packages used by the application".
+
+This covers the methodology chapter. The next chapter covers the results of the implementation.
 
 ## 3. Results
 
