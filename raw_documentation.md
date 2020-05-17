@@ -1,4 +1,3 @@
-# Raw documentation
 ## Meta information
 ### What is the purpose of this guide?
 
@@ -515,8 +514,43 @@ Recognizing the same problem when it comes to state management in Flutter I’ve
 DDD is the second approach I took to plan my software example. It led me to the Flutter Europe 2020 conference talk about Strategic Domain-Driven-Design by Majid Hajian.[@StrategicDomainDrivenDesign] He proposes an architecture based on the principles of DDD. In his talk he emphasises on the advantages of Domain-Driven-Design and how it can be used to build scalable and maintainable software. During the presentation of his architecture he pointed out that at the layer where BLoC was used as a state management solution any other state can be used instead and how easily refactoring the aftermath will be.
 This ease of changability is exaclty what I was looking for.
 
-### Domain-Driven-Design principles
+### Domain-Driven-Design
 
+Domain-Driven-Design (DDD) is a software development approach introduced by Eric Evans in his book "Domain-Driven-Design: Tackling Complexity in the Heart of Software".[@evans2004domaindriven] DDD is based on the idea that to solve a problem defining the core domain is from utmost importance. The users of the software are the people who are familiar with the domain and the software is developed to solve a problem they face.
+
+#### Why DDD?
+
+Evans answers this question as follows:
+
+> Every software program relates to some activity or interest of its user. The heart of software is its ability to solve domain-related problems for its user. All other features, vital though they may be, support this basic purpose. When the domain is complex, this is a difficult task, calling for the concentrated effort of talented and skilled people.Developers have to steep themselves in the domain to build up knowledge of the business.
+
+He recommends that the best way to do this is to make software a reflection of the domain which creates an ubiquitous language that the domain experts and developers can use.
+
+#### Domain-Driven-Design principles
+In this part I will reduce the DDD principles to the ones used in our application.
+
+Domain
+
+A domain is an abstract area that defines a problem that needs to be solved. It can be compose of smaller subdomain. 
+
+Layered Architecture
+
+DDD recommends to use a four-layered architecture where the domain logic is focused on one layer and not dependent on another layer.
+
+Ubiquitous Language
+
+DDD refers to the Ubiquitous language as a must. The idea is that the developer and the user need to speak the same language, and the developers use this language when coming up with class names, modules, variables etc. This way, the code reads as if a user is speaking.
+
+Entities
+
+Entities are domain objects that are uniquely defined by a unique identifier, and not by their attributes. They are commonly described as identities and the building blocks of the domain modelling. To put it in simpler words: Entities emphasise on the who or they are rather than the what they are.
+
+- are commonly described as identities. Two objects can have the same attributes but how can you separate them? The have to be unique in a way.
+- emphasised on the who or which they are
+
+Factories
+
+They are used to create complex objects and ensure that the client has no knowledge of the internal details and functionality of that object manipulation. As advised by Evans, factories provide encapsulation.They also ensure standardisation of object instantiation and ensure the objects do not care about the creation themselves. This helps at keeping the domain clean and ensures boundaries are kept.
 
 
 ### Architecture
