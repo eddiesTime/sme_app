@@ -44,7 +44,7 @@ Therefore we can assume that Flutter follows the declarative programming paradig
 ```dart
 void main() => Center(child: Text('Hello World'));
 ```
-_Code snippet 1: declarative programming example_
+_Code snippet 01: declarative programming example_
 
 Code snippet 1 shows an example of Flutter declarative nature. As you can see, a `main()` method is declared, which returns a `Center` Widget, which holds a `Text` Widget. These declarations are all we need to tell Flutter to build a text in the center of the screen. No specification of what it needs to do to get the text to the screen had to be written.
 
@@ -56,18 +56,151 @@ To explain what widgets are and their role in Flutter I will reference the offic
 
 In Flutter everything's a widget. 
 
-| :closed_book:      | Widget |  A widget is an immutable description of part of a user interface. [@WidgetClassWidgets]     |
-|--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-Widgets are the basic building blocks of an application's user interface (UI). Custom widgets can be composed of smaller widgets and the overall composition of all widgets represents the UI. The following image visualises this concept:
+Widgets are the basic building blocks of an application's user interface (UI). Custom widgets can be composed of smaller widgets and the overall composition of all widgets represents the UI. The relationship of widgets is handled by the widget tree. The concept of the widget tree helps Flutter to layout the UI. Figure 01 is a visualization of how the user interface is build:
 
 |![equation](https://i.imgur.com/DoY8u5y.png)|
 |:--:| 
-|_How Flutter builds its UI_ [@StartThinkingDeclaratively]|
+|_Figure 01: How Flutter builds its UI_ [@StartThinkingDeclaratively]|
 
 Since widgets are the building blocks of the UI we can assume that they equal the right side of the equation.
 
-#### 1.1.2 Types of Widgets (stateless, stateful, inherited)
+They are blueprints for parts of the UI that hold a configuration for a specific state. [@HowCreateStateless]
+
+Let's take a look at how Flutter defines widgets:
+
+| :closed_book:      | Widget |  A widget is an immutable description of part of a user interface. [@WidgetClassWidgets]     |
+|--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+Typically a UI is mutable to reflect changes via for example user interaction. But how can Flutter reflecht changes in the user interface, when a widget is by definition immutable? The answer is simple. Flutter uses different types of widgets with different behaviour. Let's take a look at the different types of widgets.
+
+#### 1.1.2 Types of Widgets
+
+This section will cover the three different types of widget in Flutter. I will start with the Stateless Widget, then move on to the Stateful Widget and finish the section with the Inherited Widget.
+
+##### Stateless widgets
+
+To explain what a Stateless Widget is and how it works I will summarise the youtube video "How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1". [@HowCreateStateless] It is the first video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
+
+A Stateless Widget is specified by two concepts: (1) it has no mutable state it need to keep track of and (2) it is composed of children.
+
+Let's take a look at the concepts in an example:
+
+```dart
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget(this._title);
+  final String _title;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Text(_title);
+  }
+}
+```
+_Code snippet 02: MyStatelessWidget example_
+
+The first concept is reflected by the data `_title` that is hold by the widget. It is defined as `final` which means that the attribute can not be changed after it has been initialised.
+
+The second concept is reflected by the `build()` method. This method has to return at least one widget which in this example is a Text Widget.
+
+If we want Flutter to use this widget we have to declare it either as root of the widget tree or as part of a composition. The following code snippet shows the later:
+
+```dart
+...
+	return Center(child: MyStatelessWidget('Hello World'));
+...
+```
+_Code snippet 03: MyStatelessWidget as part of a composition_
+
+When Flutter executes code snippet 03 it mounts the Center Widget to the widget tree. Then it call its `createElement()` method.
+
+```dart
+...
+  @override
+  StatelessElement createElement() => StatelessElement(this); 
+...
+```
+_Code snippet 04: createElement method [@CreateElementMethodStatelessWidget]_
+
+In reaction to the createElement method the StatelessElement gets mounted on the Element tree. I will explain what the Element tree is later in section 1.3 "How does Flutter react to state changes?" so bear with me.
+
+After the StatelessElement has been mounted it tells its referenced Stateless Widget, in this case the Center Widget, to execute its build method to build its children. The children in this case is only one child - MyStatelessWidget.
+
+So to summarise these steps:
+
+1. Stateless Widget gets called and mounted to the widget tree
+2. The widget calls its createElement method
+3. The created element gets mounted to the element tree
+4. The created element tells its referenced widget to build its children via its build method.
+
+Let's take a look at how this visualises for the example in code snippet 03:
+
+First the Stateless widget Center gets build and therefore mounted to the widget tree (Figure 02).
+
+|![Stateless Widget example](https://i.imgur.com/TtDS96i.jpg)|
+|:--:| 
+|_Figure 02: Stateless widget Center gets mounted_|
+
+Then the createElement method of Center is called and a StatelessElement is created and mounted to the Element tree (Figure 03).
+
+|![Stateless Widget example](https://i.imgur.com/PjUWwuq.jpg)|
+|:--:| 
+|_Figure 03: StatelessElement gets mounted_|
+
+Then StatelessElement tells Center to build its children. In this case MyStatelessWidget which then gets created and mounted to the widget tree and every step gets repeated.
+
+|![Stateless Widget example](https://i.imgur.com/H1zNKQ2.jpg)|
+|:--:| 
+|_Figure 04: Stateless widget MyStatelessWidget gets mounted_|
+
+Figure 05 shows the final widget and element tree for the example.
+
+|![Stateless Widget example](https://i.imgur.com/EkS1VuT.jpg)|
+|:--:| 
+|_Figure 05: Final widget & element tree_|
+
+With Figure 05 this part about the widget type Stateless Widget is finished. But what if we want to tell Flutter to display a different text than "Hello World"? This question will be answered in the next part which introduces the next widget type - Stateful Widget.
+
+##### Stateful Widget
+
+To explain what a Statelful Widget is and how it works I will summarise the youtube video "How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2". [@HowStatefulWidgets] It is the second video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
+
+A Stateful Widget by itself is, as all widgets are, immutable. It holds immutable configurations and a createState() method.
+The createState method creates a state object which contains mutable configurations and a `build()` method to build the children of the Stateful Widget. The State object is hold by the StatefulElement. It is responsible to to mutate its state and notify the UI to update to reflect changes. Whenever the state of the state object changes, the element holding the state object marks itself as dirty which triggers Flutter to update the UI by rebuilding its children. 
+
+The StatefulElement marks itself as dirty in two cases: (1) its method `setState()` has been called, or (2) the widget is has been referencing has been removed.
+
+Let's take a look at the following code walk through the example used in the video to explain how a Stateful Widget works:
+
+```dart
+class ItemCounter extends StatefulWidget {
+	final String name;
+	
+	ItemCounter({this.name});
+
+	@override
+	_ItemCounterState createState() => _ItemCounterState();
+}
+
+class _ItemCounterState extends State<ItemCounter> {
+	int count = 0;
+
+	@override
+	Widget build(BuildContext context) {
+		return GestureDetector(
+			onTap: () {
+				setState(() {
+					count++;
+				});
+			},
+			child: Text('${widget.name}: $count'),
+		);
+	}
+}
+```
+_Code snippet 05: Stateful Widget ItemCounter_
+
+The ItemCounter is a Stateful Widget which contains the immutable state `name` and a `createState()` method. `_ItemCounterState` is the State Object created by ItemCounter which contains the mutable state `count` and a `build()` method.
+
 
 ### 1.2 What is state?
 
