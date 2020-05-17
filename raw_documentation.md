@@ -363,7 +363,7 @@ Application state in constrast to ephemeral state is data that is shared by mutl
 
 When working with state in Flutter there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to decide which type of state you should use which is shown in Figure 19:
 
-|![decision helo](https://i.imgur.com/5ifKgCM.png)|
+|![decision help](https://i.imgur.com/5ifKgCM.png)|
 |:--:| 
 |_Figure 19: Decision help_|
 
@@ -373,7 +373,84 @@ This part is the finish of the section about state in Flutter. The next section 
 
 ### 1.3 How does flutter react to state changes?
 
-#### 1.3.1 widget tree & element tree & renderObject tree
+In the previous section about widgets I have covered the widget types Stateless widget and Stateful widgets and how Flutter handles them with the use of the widget tree and the element tree. This has been the way Flutter has been working internally in 2018, when the youtube video series "Widget 101" has been uploaded by the Flutter team. Since then Flutter has evolved and so has the way Flutter handles widgets internally. In 2019 during the Google Developer Days China the Flutter team gave a talk about how Flutter renders widgets and uploaded the talk to youtube.
+
+So to answer the question "How does Flutter react to state changes" I will use the content provided by the video "How Flutter renders Widgets" from the talk by the Flutter team. [@HowFlutterRenders]
+
+Since 2018 the way Flutter works internally has evolved. Additionally to the widget and element tree Flutter now uses a tree of RenderObjects. These trees are the three core concepts of Flutter.
+
+They are deeply connected and all have different responsibilities as seen in Figure 20:
+
+|![the three trees](https://i.imgur.com/gzZ6cVw.png)|
+|:--:| 
+|_Figure 20: The three concept of trees in Flutter_|
+
+You will notice a clear separation of concerns where each tree has its own job in Flutter.
+
+The Widget tree contains widgets that as mentioned earlier hold the configuration for a piece of the UI. Furthermore, a widget "describes the configuration for an Element." [@WidgetClassWidget]
+
+The Element tree contains elements that represent an actual piece of the UI. In Flutter widgets are the blueprint for an element, thus,“an instantiation of a Widget at a particular location in the tree.”[@ElementClassWidgets] and what the user actually can see on the UI. Furthermore, the element is the manager of the UI by holding a reference to its widget in the widget tree and render object in the element tree and managing the communication with Flutter to rebuild the UI if needed.
+
+The RenderObject tree contains Render Objects which "handle sizes, layout and painting" [@RenderObjectElementClass] of the element on the UI.
+
+If you remember the section about Stateful widget, I have covered how the widget and element tree react to changes. Now lets take the example Widget `Foo` from Figure 21 and extend our knowledge to include the RenderObject tree.
+
+|![Foo example](https://i.imgur.com/gzZ6cVw.png)|
+|:--:| 
+|_Figure 21: The three trees with example Widget Foo_|
+
+The first action Flutter takes when the `Foo` widget gets called is the same. It creates an element, to be more precise a RenderObjectElement [@RenderObjectElementClassWidgets], in this case the FooElement which the Framework mounts to the element tree. When an element is mounted to the element tree the element asks the widget to create a Render Object, in this case RenderFoo. After RenderFoo has been created the Render Object gets mounted by the framework onto the RenderObject tree.
+
+Now we have covered how Flutter reacts when it is told to build a part of the UI with a widget. Let's take a look at how the three trees react to changes with the next example:
+
+In this example we have a RichText widget which has been mounted to the widget tree by the Framework and the corresponding element and Render Object as seen in Figure 22.
+
+|![text example](https://i.imgur.com/iG7r4El.png)|
+|:--:| 
+|_Figure 22: The three trees when state changes._|
+
+The first action that takes place is that a new RichText widget gets created which is supposed to replace the old RichText widget.
+
+|![text example](https://i.imgur.com/JaVvq9w.png)|
+|:--:| 
+|_Figure 23: New RichText widget gets created._|
+
+At this point Flutter asks itself if it can reuse parts of the element and RenderObject tree. Therefore it uses the widgets `canUpdate()` method to check if it can reuse these parts.
+
+```dart
+static bool canUpdate(Widget oldWidget, Widget newWidget) {
+  return oldWidget.runtimeType == newWidget.runtimeType
+      && oldWidget.key == newWidget.key;
+}
+```
+_Code snippet 08: canUpdate() method. [@CanUpdateMethodWidget]_
+
+Since the old widgets and new widgets `runtimeType` are the same, the framework can reuse the element and Render Object and replaces the old widget with the new one.
+
+|![text example](https://i.imgur.com/HyvRcIJ.png)|
+|:--:| 
+|_Figure 24: New RichText widget replaces the old widget._|
+
+As you've learned in the section about Stateful Widget the element now marks itself as dirty because the widget it references has been exchanged.
+
+In response to the change the element calls the widgets `updateRenderObject()` method.
+
+```dart
+@protected
+void updateRenderObject(BuildContext context, covariant RenderObject renderObject) { }
+```
+_Code snippet 09: updateRenderObject method. [@UpdateRenderObjectMethodRenderObjectWidget]_
+
+The Render Object gets updated and the result can be seen in Figure 25:
+
+|![text example](https://i.imgur.com/VmTyHT6.png)|
+|:--:| 
+|_Figure 25: RenderObject gets updated._|
+
+This example covered the process of a single widget handled by Flutter with the widget, element and RenderObject tree. But don't worry, child widgets it is the same principle.
+
+This covers the section about "How Flutter renders Widgets" and you should hopefully have an understanding of how Flutter works under the hood. To finish up the next and last section of this chapter will cover what state management is and talk about the basic principle that is used in Flutter to manage state.
+
 
 ### 1.4 state management
 
