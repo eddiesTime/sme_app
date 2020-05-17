@@ -454,7 +454,21 @@ This covers the section about "How Flutter renders Widgets" and you should hopef
 
 ### 1.4 state management
 
+This section will cover what state management is and introduce the basic principle that is used to manage state in Flutter.
+
+What is state management
+
+State management in Flutter is the management of application state changes and making it accessable. This state is used by multiple widgets and has to be consistent throughout the application so that no error as a result of deferred state can occur. Furthermore, since Flutter has an unidirectional data flow from the root of the widget tree down to its children, how does the ancestor widget holding the application state get notified about state changes inside a child widget?
+
+So how do we access application state from inside our widgets? 
+
+To access the app state it can be accessed through handing it down the widget tree. But the problem is, how do we pass data the other way around to an ancestor? And furthermore, how do different widgets from different subtrees access the same data? This is where the principle of lifting state up comes into play.
+
 #### 1.4.1 principle of lifting state up
+
+This principle of lifting state up describes that we have to find the lowest common ancestor of two widgets that need access to the state and pass the state down from this ancestor.
+
+And this principle is being used in any state management solution you will find.
 
 
 ## 2. Methodology (sets boundaries for part 3: Results)
