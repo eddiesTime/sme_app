@@ -394,7 +394,7 @@ The RenderObject tree contains Render Objects which "handle sizes, layout and pa
 
 If you remember the section about Stateful widget, I have covered how the widget and element tree react to changes. Now lets take the example Widget `Foo` from Figure 21 and extend our knowledge to include the RenderObject tree.
 
-|![Foo example](https://i.imgur.com/gzZ6cVw.png)|
+|![Foo example](https://i.imgur.com/LfP2EBW.png)|
 |:--:| 
 |_Figure 21: The three trees with example Widget Foo_|
 
