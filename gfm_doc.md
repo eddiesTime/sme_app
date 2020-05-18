@@ -50,9 +50,8 @@ acquainted with some definitions.
 
 So, what is Flutter?
 
-| :closed_book: | Flutter | Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.[\[1\]](https://flutter.dev/) |
-| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
+| :closed\_book: | Flutter | Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.[\[1\]](https://flutter.dev/) |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 From the official Flutter documentation we learn that Flutter is
 declarative.
@@ -67,11 +66,11 @@ operation rather than the computational processes it has to do to
 achieve the desired result. \[3\] Let’s take a look at the theory of
 declarative programming in practice.
 
-```dart
+``` dart
 void main() => Center(child: Text('Hello World'));
 ```
 
-_Code snippet 01: declarative programming example_
+*Code snippet 01: declarative programming example*
 
 Code snippet 1 shows an example of Flutter declarative nature. As you
 can see, a `main()` method is declared, which returns a `Center` Widget,
@@ -99,7 +98,7 @@ user interface is build:
 
 |                                         ![equation](https://i.imgur.com/DoY8u5y.png)                                         |
 | :--------------------------------------------------------------------------------------------------------------------------: |
-| _Figure 01: How Flutter builds its UI_ [\[2\]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative) |
+| *Figure 01: How Flutter builds its UI* [\[2\]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative) |
 
 Since widgets are the building blocks of the UI we can assume that they
 equal the right side of the equation.
@@ -109,9 +108,8 @@ specific state. [\[5\]](https://www.youtube.com/watch?v=wE7khGHVkYY)
 
 Let’s take a look at how Flutter defines widgets:
 
-| :closed_book: | Widget | A widget is an immutable description of part of a user interface.[\[6\]](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-
+| :closed\_book: | Widget | A widget is an immutable description of part of a user interface.[\[6\](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 
 Typically a UI is mutable to reflect changes via for example user
 interaction. But how can Flutter reflecht changes in the user interface,
@@ -138,7 +136,7 @@ state it need to keep track of and (2) it is composed of children.
 
 Let’s take a look at the concepts in an example:
 
-```dart
+``` dart
 class MyStatelessWidget extends StatelessWidget {
   const MyStatelessWidget(this._title);
   final String _title;
@@ -150,7 +148,7 @@ class MyStatelessWidget extends StatelessWidget {
 }
 ```
 
-_Code snippet 02: MyStatelessWidget example_
+*Code snippet 02: MyStatelessWidget example*
 
 The first concept is reflected by the data `_title` that is hold by the
 widget. It is defined as `final` which means that the attribute can not
@@ -163,26 +161,26 @@ If we want Flutter to use this widget we have to declare it either as
 root of the widget tree or as part of a composition. The following code
 snippet shows the later:
 
-```dart
+``` dart
 ...
     return Center(child: MyStatelessWidget('Hello World'));
 ...
 ```
 
-_Code snippet 03: MyStatelessWidget as part of a composition_
+*Code snippet 03: MyStatelessWidget as part of a composition*
 
 When Flutter executes code snippet 03 it mounts the Center Widget to the
 widget tree. Then it call its `createElement()` method.
 
-```dart
+``` dart
 ...
   @override
   StatelessElement createElement() => StatelessElement(this);
 ...
 ```
 
-_Code snippet 04: createElement method
-[\[7\]](https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html)_
+*Code snippet 04: createElement method
+[\[7\]](https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html)*
 
 In reaction to the createElement method the StatelessElement gets
 mounted on the Element tree. I will explain what the Element tree is
@@ -210,14 +208,14 @@ the widget tree (Figure 02).
 
 | ![Stateless Widget example](https://i.imgur.com/TtDS96i.jpg) |
 | :----------------------------------------------------------: |
-|      _Figure 02: Stateless widget Center gets mounted_       |
+|      *Figure 02: Stateless widget Center gets mounted*       |
 
 Then the createElement method of Center is called and a StatelessElement
 is created and mounted to the Element tree (Figure 03).
 
 | ![Stateless Widget example](https://i.imgur.com/PjUWwuq.jpg) |
 | :----------------------------------------------------------: |
-|          _Figure 03: StatelessElement gets mounted_          |
+|          *Figure 03: StatelessElement gets mounted*          |
 
 Then StatelessElement tells Center to build its children. In this case
 MyStatelessWidget which then gets created and mounted to the widget tree
@@ -225,13 +223,13 @@ and every step gets repeated.
 
 | ![Stateless Widget example](https://i.imgur.com/H1zNKQ2.jpg) |
 | :----------------------------------------------------------: |
-| _Figure 04: Stateless widget MyStatelessWidget gets mounted_ |
+| *Figure 04: Stateless widget MyStatelessWidget gets mounted* |
 
 Figure 05 shows the final widget and element tree for the example.
 
 | ![Stateless Widget example](https://i.imgur.com/EkS1VuT.jpg) |
 | :----------------------------------------------------------: |
-|           _Figure 05: Final widget & element tree_           |
+|           *Figure 05: Final widget & element tree*           |
 
 With Figure 05 this part about the widget type Stateless Widget is
 finished. But what if we want to tell Flutter to display a different
@@ -263,7 +261,7 @@ has been removed.
 Let’s take a look at the following used to explain Stateful Widgets in
 the video:
 
-```dart
+``` dart
 class ItemCounter extends StatefulWidget {
     final String name;
 
@@ -290,7 +288,7 @@ class _ItemCounterState extends State<ItemCounter> {
 }
 ```
 
-_Code snippet 05: Stateful Widget ItemCounter_
+*Code snippet 05: Stateful Widget ItemCounter*
 
 The ItemCounter is a Stateful Widget which contains the immutable state
 `name` and a `createState()` method. `_ItemCounterState` is the State
@@ -299,40 +297,40 @@ and a `build()` method.
 
 Now let’s walk through what happens, when ItemCounter gets created:
 
-```dart
+``` dart
     return ItemCounter(name: 'Tom');
 ```
 
-_Code snippet 06: ItemCounter with String “Tom” is set as parameter name
-gets build_
+*Code snippet 06: ItemCounter with String “Tom” is set as parameter name
+gets build*
 
 The first thing Flutter does when it is told to build the widget
 ItemCounter is to mount it to the widget tree.
 
 | ![Statelful Widget example](https://i.imgur.com/eqGJ23O.png) |
 | :----------------------------------------------------------: |
-|   _Figure 06: ItemCounter gets mounted to the widget tree_   |
+|   *Figure 06: ItemCounter gets mounted to the widget tree*   |
 
 Then the widgets createElement() method is being called which creates an
 StatefulElement that gets mounted to the element tree.
 
 | ![Statelful Widget example](https://i.imgur.com/sohHp40.png) |
 | :----------------------------------------------------------: |
-|  _Figure 07: StatefulElement gets mounted to element tree_   |
+|  *Figure 07: StatefulElement gets mounted to element tree*   |
 
 Then the created Element tells the Stateful Widget to create a State
 Object for the element.
 
 | ![Statelful Widget example](https://i.imgur.com/VGSe2EJ.png) |
 | :----------------------------------------------------------: |
-|    _Figure 08: State Object created for Stateful Element_    |
+|    *Figure 08: State Object created for Stateful Element*    |
 
 Finally, the element uses the state object to build the children of the
 widget.
 
 | ![Statelful Widget example](https://i.imgur.com/Rs3S2lw.png) |
 | :----------------------------------------------------------: |
-|        _Figure 08: Finished widget and element tree_         |
+|        *Figure 08: Finished widget and element tree*         |
 
 As you have noticed the steps to add a widget to the widget & element
 tree are the same as for a Stateless Widget. Only the state object is an
@@ -347,7 +345,7 @@ increases the value of `count` from 0 to 1.
 
 | ![Statelful Widget example](https://i.imgur.com/2QpvHsW.png) |
 | :----------------------------------------------------------: |
-|              _Figure 09: Count value increased_              |
+|              *Figure 09: Count value increased*              |
 
 The call of the `setState()` method triggers the Stateful Widget to mark
 itself as dirty. When an element is marked as dirty it signals Flutter
@@ -359,7 +357,7 @@ value of 1.
 
 | ![Statelful Widget example](https://i.imgur.com/1ge3XR2.png) |
 | :----------------------------------------------------------: |
-|           _Figure 10: New child widget gets build_           |
+|           *Figure 10: New child widget gets build*           |
 
 Now since the newly created text widget and the old widget are not the
 same, Flutter removes the old text widget and mounts the new text widget
@@ -367,7 +365,7 @@ in its place.
 
 | ![Statelful Widget example](https://i.imgur.com/v1NV0V1.png) |
 | :----------------------------------------------------------: |
-|           _Figure 11: Child widget gets exchanged_           |
+|           *Figure 11: Child widget gets exchanged*           |
 
 Since the new child widget is of the same widget type as the old child
 widget (widget type Text) the Stateless Element of the old widget can be
@@ -375,7 +373,7 @@ reused.
 
 | ![Statelful Widget example](https://i.imgur.com/LkfidRC.png) |
 | :----------------------------------------------------------: |
-|     _Figure 12: Widget & element tree have been rebuild_     |
+|     *Figure 12: Widget & element tree have been rebuild*     |
 
 This sums up what happens with the widget and element tree when the
 element is marked as dirty via the state objects `setState()` method.
@@ -388,7 +386,7 @@ take its place.
 
 | ![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png) |
 | :----------------------------------------------------------: |
-|       _Figure 13: Old ItemCounter Widget gets removed_       |
+|       *Figure 13: Old ItemCounter Widget gets removed*       |
 
 After the new ItemCounter has been mounted to the widget tree Flutter
 walks through the same steps as before. First it checks the widget type
@@ -397,7 +395,7 @@ type ItemCounter the Stateful Element can be reused.
 
 |              ![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png)              |
 | :------------------------------------------------------------------------------------: |
-| _Figure 14: New ItemCounter Widget has been mounted and Stateful Element gets reused._ |
+| *Figure 14: New ItemCounter Widget has been mounted and Stateful Element gets reused.* |
 
 (Note that the state object is also being reused\!)
 
@@ -405,7 +403,7 @@ Then the children are being rebuild.
 
 | ![Statelful Widget example](https://i.imgur.com/LV0Kul8.png) |
 | :----------------------------------------------------------: |
-|   _Figure 15: New ItemCounter Widget children gets build._   |
+|   *Figure 15: New ItemCounter Widget children gets build.*   |
 
 The newly build child takes the place of the old child in the widget
 tree and since they are of the same widget type the Stateless Element
@@ -413,7 +411,7 @@ can be reused.
 
 |           ![Statelful Widget example](https://i.imgur.com/y15vpxH.png)           |
 | :------------------------------------------------------------------------------: |
-| _Figure 16: Widget & element tree has been updated with new ItemCounter Widget._ |
+| *Figure 16: Widget & element tree has been updated with new ItemCounter Widget.* |
 
 This sums up how the widget and element tree react to the ItemCounter
 Widget getting exchanged.
@@ -442,30 +440,30 @@ seen in Figure 17.
 
 |                 ![Inherited Widget example](https://i.imgur.com/wFAt9A7.png)                 |
 | :------------------------------------------------------------------------------------------: |
-| _Figure 17: Widget tree where child that needs data from ancestor and data are highlighted._ |
+| *Figure 17: Widget tree where child that needs data from ancestor and data are highlighted.* |
 
 To provide the highlighted child widget with the data of an ancestor the
 data has to be passed down through the widgets in between even though
 they may not need access to the data.
 
 This is where Inherited Widgets can help. They are widgets that can be
-accessed from any descendant in the widget tree as highlighted in Figure 18.
+accessed from any descendant in the widget tree as highlighted in Figure
+18.
 
 | ![Inherited Widget example](https://i.imgur.com/GaoNGIW.png) |
 | :----------------------------------------------------------: |
-|       _Figure 18: Widget tree with Inherited Widget._        |
+|       *Figure 18: Widget tree with Inherited Widget.*        |
 
 To access the Inherited Widget the BuildContext is used.
 
-| :closed_book: | BuildContext | The build context handles the location of the widget in the tree. \[10\] |
-| ------------- | ------------ | ------------------------------------------------------------------------ |
-
+| :closed\_book: | BuildContext | The build context handles the location of the widget in the tree. \[10\] |
+| -------------- | ------------ | ------------------------------------------------------------------------ |
 
 An example of an Inherited Widget you should be familiar with is Theme.
 Theme as all Inherited Widgets can be accessed with its static method
 `of(context)` as seen in code snippet 07:
 
-```dart
+``` dart
 ...
     @override
     Widget build(BuildContext context){
@@ -475,7 +473,7 @@ Theme as all Inherited Widgets can be accessed with its static method
 }
 ```
 
-_Code snippet 07: Example how Theme can be accessed._
+*Code snippet 07: Example how Theme can be accessed.*
 
 With this part the section about types of widgets in Flutter is
 finished. The next section will cover what state in Flutter is.
@@ -490,16 +488,15 @@ of state in Flutter.
 
 ### Definition
 
-| :closed_book: | State | Whatever data you need in order to rebuild your UI at any moment in time. \[11\] |
-| ------------- | ----- | -------------------------------------------------------------------------------- |
-
+| :closed\_book: | State | Whatever data you need in order to rebuild your UI at any moment in time. \[11\] |
+| -------------- | ----- | -------------------------------------------------------------------------------- |
 
 To remind you about its impact on Flutter I want to remind you about how
 Flutter builds its UI with Figure 01:
 
 |                                         ![equation](https://i.imgur.com/DoY8u5y.png)                                         |
 | :--------------------------------------------------------------------------------------------------------------------------: |
-| _Figure 01: How Flutter builds its UI_ [\[2\]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative) |
+| *Figure 01: How Flutter builds its UI* [\[2\]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative) |
 
 Now let’s dive deeper into state in Flutter. It can be divided into
 ephemeral state and application state.
@@ -525,7 +522,7 @@ which is shown in Figure 19:
 
 | ![decision help](https://i.imgur.com/5ifKgCM.png) |
 | :-----------------------------------------------: |
-|            _Figure 19: Decision help_             |
+|            *Figure 19: Decision help*             |
 
 Don’t worry to much about what kind of state to use since it most
 definitely will change over time and you can simply change it
@@ -560,7 +557,7 @@ seen in Figure 20:
 
 | ![the three trees](https://i.imgur.com/gzZ6cVw.png) |
 | :-------------------------------------------------: |
-| _Figure 20: The three concept of trees in Flutter_  |
+| *Figure 20: The three concept of trees in Flutter*  |
 
 You will notice a clear separation of concerns where each tree has its
 own job in Flutter.
@@ -591,7 +588,7 @@ RenderObject tree.
 
 |   ![Foo example](https://i.imgur.com/LfP2EBW.png)    |
 | :--------------------------------------------------: |
-| _Figure 21: The three trees with example Widget Foo_ |
+| *Figure 21: The three trees with example Widget Foo* |
 
 The first action Flutter takes when the `Foo` widget gets called is the
 same. It creates an element, to be more precise a RenderObjectElement
@@ -612,28 +609,28 @@ Object as seen in Figure 22.
 
 | ![text example](https://i.imgur.com/iG7r4El.png) |
 | :----------------------------------------------: |
-| _Figure 22: The three trees when state changes._ |
+| *Figure 22: The three trees when state changes.* |
 
 The first action that takes place is that a new RichText widget gets
 created which is supposed to replace the old RichText widget.
 
 | ![text example](https://i.imgur.com/JaVvq9w.png) |
 | :----------------------------------------------: |
-|  _Figure 23: New RichText widget gets created._  |
+|  *Figure 23: New RichText widget gets created.*  |
 
 At this point Flutter asks itself if it can reuse parts of the element
 and RenderObject tree. Therefore it uses the widgets `canUpdate()`
 method to check if it can reuse these parts.
 
-```dart
+``` dart
 static bool canUpdate(Widget oldWidget, Widget newWidget) {
   return oldWidget.runtimeType == newWidget.runtimeType
       && oldWidget.key == newWidget.key;
 }
 ```
 
-_Code snippet 08: canUpdate() method.
-[\[15\]](https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html)_
+*Code snippet 08: canUpdate() method.
+[\[15\]](https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html)*
 
 Since the old widgets and new widgets `runtimeType` are the same, the
 framework can reuse the element and Render Object and replaces the old
@@ -641,7 +638,7 @@ widget with the new one.
 
 |     ![text example](https://i.imgur.com/HyvRcIJ.png)      |
 | :-------------------------------------------------------: |
-| _Figure 24: New RichText widget replaces the old widget._ |
+| *Figure 24: New RichText widget replaces the old widget.* |
 
 As you’ve learned in the section about Stateful Widget the element now
 marks itself as dirty because the widget it references has been
@@ -650,19 +647,19 @@ exchanged.
 In response to the change the element calls the widgets
 `updateRenderObject()` method.
 
-```dart
+``` dart
 @protected
 void updateRenderObject(BuildContext context, covariant RenderObject renderObject) { }
 ```
 
-_Code snippet 09: updateRenderObject method.
-[\[16\]](https://api.flutter.dev/flutter/widgets/RenderObjectWidget/updateRenderObject.html)_
+*Code snippet 09: updateRenderObject method.
+[\[16\]](https://api.flutter.dev/flutter/widgets/RenderObjectWidget/updateRenderObject.html)*
 
 The Render Object gets updated and the result can be seen in Figure 25:
 
 | ![text example](https://i.imgur.com/VmTyHT6.png) |
 | :----------------------------------------------: |
-|     _Figure 25: RenderObject gets updated._      |
+|     *Figure 25: RenderObject gets updated.*      |
 
 This example covered the process of a single widget handled by Flutter
 with the widget, element and RenderObject tree. But don’t worry, child
@@ -756,7 +753,7 @@ An image Uncle Bob’s Clean architecture can be seen in Figure 26:
 
 | ![clean architecture](https://i.imgur.com/moPHCbt.png) |
 | :----------------------------------------------------: |
-|            _Figure 26: Clean architecture._            |
+|            *Figure 26: Clean architecture.*            |
 
 With this onion architecture he highlights the importance of the
 separation of concerns.
@@ -901,10 +898,10 @@ what type of modules it has and how their relationship is.
 [\[25\]](https://herbertograca.com/2017/07/28/architectural-styles-vs-architectural-patterns-vs-design-patterns/)
 Examples for architecture are:
 
-- layered
-- service-oriented
-- client-server
-- etc.
+  - layered
+  - service-oriented
+  - client-server
+  - etc.
 
 To summarise, an architecture should set the outer boundaries of your
 application.
@@ -916,14 +913,14 @@ Coders architecture proposal.
 
 | ![application architecture](https://i.imgur.com/JeebkGs.jpg) |
 | :----------------------------------------------------------: |
-|            _Figure 27: Application architecture._            |
+|            *Figure 27: Application architecture.*            |
 
 The main difference is my lack of a value object and the focus on the
 entities.
 
 The presentation layer represents the dumb UI which is used to interact
 with the user. Depending on the state management solution some sort of
-ViewModel is used in the layer, e.g. events and states in flutter_bloc.
+ViewModel is used in the layer, e.g. events and states in flutter\_bloc.
 
 The application layer contains the state management solution. It is the
 only layer communicating with the presentation layer. It depends on
@@ -958,7 +955,7 @@ time in planning an application. So I have chosen to use the Weather App
 build in the tutorial by Felix Angelov as my foundation.
 [\[27\]](https://bloclibrary.dev/#/flutterweathertutorial) The reason
 for this example app is that I have started the project with previous
-knowledge about the flutter_bloc
+knowledge about the flutter\_bloc
 [\[28\]](https://pub.dev/packages/flutter_bloc) package which was also
 created by Felix. And furthermore, because I like the app’s UI.
 
@@ -968,7 +965,7 @@ be build:
 
 | ![weather app](https://i.imgur.com/cgB1wse.gif) |
 | :---------------------------------------------: |
-|         _Figure 28: Weather app .gif._          |
+|         *Figure 28: Weather app .gif.*          |
 
 From the .gif we can take the four key features our application offers:
 
@@ -983,7 +980,7 @@ solution including their side effects
 like the loading indicator when weather data is being fetched.
 
 Since I already knew how to implement the BLoC pattern with the help of
-flutter_bloc I’ve decided to start the evaluation process by rewriting
+flutter\_bloc I’ve decided to start the evaluation process by rewriting
 the example app to use Flutter’s own state management solution -
 stateful widgets. From that point forward the rewritten example app, in
 this context vanilla app, has been used as a foundation to rewrite the
@@ -994,7 +991,7 @@ Figure 29:
 
 | ![weather app widget tree](https://i.imgur.com/uM2ab31.jpg) |
 | :---------------------------------------------------------: |
-|            _Figure 29: Weather app widget tree._            |
+|            *Figure 29: Weather app widget tree.*            |
 
 The application consists of three screens: (1) WeatherPage, (2)
 LocationSearchPage and (3) SettingsPage.
@@ -1004,22 +1001,22 @@ LocationSearchPage and (3) SettingsPage.
 Before I finish this chapter I want to mention some additional packages
 that were used to create the examples. These packages are:
 
-- Freezed [\[31\]](https://pub.dev/packages/freezed)
-  - Generates code to help to deal with immutable classes and
-    provides a simple API to use.
-- Injectable [\[32\]](https://pub.dev/packages/injectable)
-  - a convenient code generator for the get_it package
-- GetIt [\[33\]](https://pub.dev/packages/get_it)
-  - “Simple direct Service Locator that allows to decouple the
-    interface from a concrete implementation and to access the
-    concrete implementation from everywhere in your App”
-- Dartz [\[34\]](https://pub.dev/packages/dartz)
-  - adds functinonal programming principles to dart
-- build_runner [\[35\]](https://pub.dev/packages/build_runner)
-  - a build system to generate dart files
-- injectable_generator
-  [\[36\]](https://pub.dev/packages/injectable_generator)
-  - a generator to create code for injectable related annotations
+  - Freezed [\[31\]](https://pub.dev/packages/freezed)
+      - Generates code to help to deal with immutable classes and
+        provides a simple API to use.
+  - Injectable [\[32\]](https://pub.dev/packages/injectable)
+      - a convenient code generator for the get\_it package
+  - GetIt [\[33\]](https://pub.dev/packages/get_it)
+      - “Simple direct Service Locator that allows to decouple the
+        interface from a concrete implementation and to access the
+        concrete implementation from everywhere in your App”
+  - Dartz [\[34\]](https://pub.dev/packages/dartz)
+      - adds functinonal programming principles to dart
+  - build\_runner [\[35\]](https://pub.dev/packages/build_runner)
+      - a build system to generate dart files
+  - injectable\_generator
+    [\[36\]](https://pub.dev/packages/injectable_generator)
+      - a generator to create code for injectable related annotations
 
 The use of these packages is influence by Reso Coder’s DDD example and
 provide our application with a criteria to evaluate with: “How does the
@@ -1035,15 +1032,15 @@ This chapter will show the results I have collected after the
 implementation of each state management solution in the example app. The
 chapter is structure as follows:
 
-- The first section will present the two different patterns each state
-  management solution is build upon
-- The second section contains the implemented state management
-  solutions and how they are implemented in the architecture
-- The third and last section will cover the evaluation of the SMS.
-  This section will cover the criteria that we chosen to evaluate the
-  SMS, the result of the SMS and my personal recommendation on which
-  state management solution is useful when it comes to developing
-  large-scale applications, etc.
+  - The first section will present the two different patterns each state
+    management solution is build upon
+  - The second section contains the implemented state management
+    solutions and how they are implemented in the architecture
+  - The third and last section will cover the evaluation of the SMS.
+    This section will cover the criteria that we chosen to evaluate the
+    SMS, the result of the SMS and my personal recommendation on which
+    state management solution is useful when it comes to developing
+    large-scale applications, etc.
 
 ## Patterns in state management solutions (mutable/immutable)
 
@@ -1069,7 +1066,7 @@ management concepts for state history to achieve an easy undo/redo. The
 lack of separation of concerns can be seen in the following code snippet
 of the mobs example:
 
-```dart
+``` dart
 ...
 class SettingsStore extends _SettingsStore with _$SettingsStore {
   SettingsStore({@required SettingsEntity settingsEntity})
@@ -1097,7 +1094,7 @@ abstract class _SettingsStore with Store {
 ...
 ```
 
-_Code snippet 10: SettingsStore in MobX example._
+*Code snippet 10: SettingsStore in MobX example.*
 
 The code snippet illustrates the collection of state data and state
 mutating methods in a single file. This use of a file can get bloated
@@ -1123,7 +1120,7 @@ tackle each the three disadvantages.
 The following code snippets show how the immutable state management
 solution Bloc addresses each disadvantage.
 
-```dart
+``` dart
 ...
 @freezed
 abstract class SettingsEvent with _$SettingsEvent {
@@ -1132,9 +1129,9 @@ abstract class SettingsEvent with _$SettingsEvent {
 ...
 ```
 
-_Code snippet 11: SettingsEvent in flutter_bloc example._
+*Code snippet 11: SettingsEvent in flutter\_bloc example.*
 
-```dart
+``` dart
 @freezed
 abstract class SettingsState with _$SettingsState {
   const factory SettingsState({@required TemperatureUnit temperatureUnit}) = _SettingsState;
@@ -1144,9 +1141,9 @@ abstract class SettingsState with _$SettingsState {
 ...
 ```
 
-_Code snippet 12: SettingsState in flutter_bloc example._
+*Code snippet 12: SettingsState in flutter\_bloc example.*
 
-```dart
+``` dart
 ...
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override
@@ -1164,7 +1161,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 ...
 ```
 
-_Code snippet 13: SettingsBloc in flutter_bloc example._
+*Code snippet 13: SettingsBloc in flutter\_bloc example.*
 
 The separation of concerns is achieve by the three concepts of bloc: (1)
 events, (2) states and (3) Bloc.
@@ -1193,15 +1190,15 @@ overhead.
 
 Each example consist of 5 paragraphs:
 
-- 1.  Introduction,
+  - 1)  Introduction,
 
-- 2.  mutable/immutable,
+  - 2)  mutable/immutable,
 
-- 3.  pattern/concept,
+  - 3)  pattern/concept,
 
-- 4.  code implementation in app,
+  - 4)  code implementation in app,
 
-- 5.  benefits/challenges/outcomes
+  - 5)  benefits/challenges/outcomes
 
 ## Examples
 
@@ -1232,17 +1229,18 @@ Do you remember the principles of lifting state up? It is the key
 principle to manage app state with stateful widgets in Flutter. The
 common lowest ancestor in this example is the WeatherApp itself because
 we have to update the theme set in MaterialApp to display weather
-changes. You can see how this looks like in our widget tree in Figure 30.
+changes. You can see how this looks like in our widget tree in Figure
+30.
 
 | ![Stateful example widget tree](https://i.imgur.com/E0CQYoz.jpg) |
 | :--------------------------------------------------------------: |
-|   _Figure 30: Simplified Stateful widget example widget tree._   |
+|   *Figure 30: Simplified Stateful widget example widget tree.*   |
 
 To keep the code as lean as possible in the UI I have create the
 AppState class which handles the state changes. This class finds its
 place in the application layer.
 
-```dart
+``` dart
 ...
 class AppState {
   final IWeatherFacade _weatherFacade;
@@ -1291,7 +1289,7 @@ class AppState {
 }
 ```
 
-_Code snippet 14: AppState class in application layer._
+*Code snippet 14: AppState class in application layer.*
 
 To connect our state management solution to the UI in a lean way, we are
 using the AppStateContainer. It can be described as a ViewModel which
@@ -1300,7 +1298,7 @@ data and call the state’s setState method. These functions trigger the
 stateful widget to rebuild its children and are a reference is passed
 down the widget tree.
 
-```dart
+``` dart
 ...
 class AppStateContainer extends StatefulWidget {
   @override
@@ -1340,13 +1338,13 @@ class _AppStateContainerState extends State<AppStateContainer> {
 }
 ```
 
-_Code snippet 15: AppStateContainer_
+*Code snippet 15: AppStateContainer*
 
 So if we need to access the state and a method to change the state we
 have to pass both down the widget tree. The following code snippet that
 shows the content of our weather page:
 
-```dart
+``` dart
 ...
 class Weather extends StatelessWidget {
   final AppState _appState;
@@ -1380,7 +1378,7 @@ class Weather extends StatelessWidget {
     ...
 ```
 
-_Code snippet 16: Weather widget in presentation layer_
+*Code snippet 16: Weather widget in presentation layer*
 
 As you can see in the code snippet we have passed our app state and our
 refresh method down the widget tree into the Weather widget. In the
@@ -1390,18 +1388,18 @@ RefreshIndicator widget you’ll find our refresh method getting assigned.
 
 Advantages:
 
-- very easy to understand and implement
-- tightly coupled to the widget \* good for ephemeral state
+  - very easy to understand and implement
+  - tightly coupled to the widget \* good for ephemeral state
 
 Disadvantages:
 
-- has to be passed down each widget in the widget tree from ancestor
-  to child
-- difficult to maintain due to previous point
-- tightly coupled to widget \* mixes logic with UI and therefore
-  breaks clean code principles
-  [\[40\]](https://blog.codemagic.io/flutter-tutorial-pros-and-cons-of-state-management-approaches/)
-- full tree is getting rebuild when data changes
+  - has to be passed down each widget in the widget tree from ancestor
+    to child
+  - difficult to maintain due to previous point
+  - tightly coupled to widget \* mixes logic with UI and therefore
+    breaks clean code principles
+    [\[40\]](https://blog.codemagic.io/flutter-tutorial-pros-and-cons-of-state-management-approaches/)
+  - full tree is getting rebuild when data changes
 
 ### Inherited Widget
 
@@ -1440,9 +1438,9 @@ but don’t worry. We will walk through it together.
 
 | ![Inherited widget example widget tree](https://i.imgur.com/LVUHn7C.jpg) |
 | :----------------------------------------------------------------------: |
-|      _Figure 31: Simplified Inherited widget example widget tree._       |
+|      *Figure 31: Simplified Inherited widget example widget tree.*       |
 
-```dart
+``` dart
 ...
 /// This widget is a wrapper for an `Inherited Widget` in this case [InheritedAppStateContainer].
 ///
@@ -1520,7 +1518,7 @@ class AppStateContainerState extends State<AppStateContainer> {
 }
 ```
 
-_Code snippet 16: AppStateContainer_
+*Code snippet 16: AppStateContainer*
 
 The code snippet above show the ViewModel - AppStateContainer. It has
 the same relevance as in the previous examples with some minor changes.
@@ -1529,7 +1527,7 @@ InheritedAppStateContainer - our Inherited Widget - and passes itself
 down as data. So, whenever our ViewModel changes due to state
 manipulation, the Inherited Widget is rebuild.
 
-```dart
+``` dart
 ...
 /// The Inherited Widget used in this example.
 class InheritedAppStateContainer extends InheritedWidget {
@@ -1549,7 +1547,7 @@ class InheritedAppStateContainer extends InheritedWidget {
 }
 ```
 
-_Code snippet 17: InheritedAppStateContainer_
+*Code snippet 17: InheritedAppStateContainer*
 
 The code snippet above shows the implementation of our
 InheritedAppStateContainer. It is the Inherited Widget in this example
@@ -1558,7 +1556,7 @@ The method `updateShouldNotify()` notifies widget that inherit data from
 this widget to
 rebuild.[\[42\]](https://api.flutter.dev/flutter/widgets/InheritedWidget/updateShouldNotify.html)
 
-```dart
+``` dart
 ...
 /// Is a container class that holds the state of different `app states` used in multiple part of the app.
 @lazySingleton
@@ -1622,14 +1620,14 @@ class AppState {
 }
 ```
 
-_Code snippet 18: AppState class_
+*Code snippet 18: AppState class*
 
 The code snippet above shows our implementation of the AppState class.
 
 The Inherited widget allows us to access its data with its static
 `of(context)` method as seen in the following code snippet.
 
-```dart
+``` dart
 ...
 @override
   Widget build(BuildContext context) {
@@ -1651,24 +1649,24 @@ The Inherited widget allows us to access its data with its static
 ...
 ```
 
-_Code snippet 19: Weather widget_
+*Code snippet 19: Weather widget*
 
 Advantages
 
-- does not rely on third party libraries
-- the amount of rebuild can be reduced by specifying conditions in the
-  updateShouldNotify() method. For example, that only widgets related
-  to the settings entity should rebuild.
-- allows descendants to access data and methods without the need to
-  pass it down
+  - does not rely on third party libraries
+  - the amount of rebuild can be reduced by specifying conditions in the
+    updateShouldNotify() method. For example, that only widgets related
+    to the settings entity should rebuild.
+  - allows descendants to access data and methods without the need to
+    pass it down
 
 Disadvantages
 
-- has been overly complicated during the first implementation
-- tightly coupled to widget \* mixes logic with UI and therefore
-  breaks clean code principles
-- unnecessary complicated to implement
-- full tree rebuilds when data changes
+  - has been overly complicated during the first implementation
+  - tightly coupled to widget \* mixes logic with UI and therefore
+    breaks clean code principles
+  - unnecessary complicated to implement
+  - full tree rebuilds when data changes
 
 ### ChangeNotifierProvider
 
@@ -1683,7 +1681,7 @@ package in combination with ChangeNotifier.
 
 The provider package by itself is no state management solution. Provider
 is a tool for dependency injection. It is a wrapper around the
-_Inherited Widget_.
+*Inherited Widget*.
 
 Provider’s ChangeNotifierProvider
 [\[47\]](https://pub.dev/documentation/provider/latest/provider/ChangeNotifierProvider-class.html)
@@ -1736,7 +1734,7 @@ application. It contains WeatherEntity which is our weather data.
 Furthermore it contains a reference to ThemeNotifier and the
 WeatherFacade interface.
 
-```dart
+``` dart
 ...
 /// Extends [ChangeNotifier] to be used by [ChangeNotifierProvider].
 ///
@@ -1819,7 +1817,7 @@ class WeatherNotifier extends ChangeNotifier {
 }
 ```
 
-_Code snippet 20: WeatherNofitifer inside application layer._
+*Code snippet 20: WeatherNofitifer inside application layer.*
 
 Whenever WeatherEntity changes due to the methods
 `fetchWeatherForLocation()` or `refreshWeatherForLocation()` the method
@@ -1833,7 +1831,7 @@ To access WeatherNotifier inside our presentation layer it needs to be
 injected with the help of ChangeNotifierProvider inside the lowest
 common ancestor.
 
-```dart
+``` dart
 ...
 class ChangeNotifierProviderApp extends StatelessWidget {
   @override
@@ -1861,13 +1859,13 @@ class ChangeNotifierProviderApp extends StatelessWidget {
 }
 ```
 
-_Code snippet 21: ChangeNotifierProviderApp widget in presentation
-layer._
+*Code snippet 21: ChangeNotifierProviderApp widget in presentation
+layer.*
 
 After WeatherNotifier has been injected into the widget tree inside
 ChangeNotifierProvider, it can be accessed inside the weather Widget.
 
-```dart
+``` dart
 ...
   WeatherNotifier _weatherNotifier;
 
@@ -1901,7 +1899,7 @@ ChangeNotifierProvider, it can be accessed inside the weather Widget.
 ...
 ```
 
-_Code snippet 22: Weather widget in presentation layer._
+*Code snippet 22: Weather widget in presentation layer.*
 
 It is important to set the `listen` parameter inside
 `Provider.of<WeatherNotifier>` to false. Otherwise it tries to reassign
@@ -1909,21 +1907,22 @@ WeatherNotifier whenever `notifyListeners` is being emitted.
 
 Advantages:
 
-- easy to implement
-- almost no boilerplate
-- simple
+  - easy to implement
+  - almost no boilerplate
+  - simple
 
 Disadvantages:
 
-- difficult to keep track of state history
-- no state that represents the current status of the notifier \* an
-  enum has to be created and maintained
-- you need to keep track when not to listen for `notifyListeners`
+  - difficult to keep track of state history
+  - no state that represents the current status of the notifier \* an
+    enum has to be created and maintained
+  - you need to keep track when not to listen for `notifyListeners`
 
 ### Vanilla Bloc
 
 The Bloc (**B**usiness **Lo**gic **C**omponent) pattern was first
-introduced at the Google I/O 2018.[\[50\]](https://www.youtube.com/watch?v=RS36gBEp8OI) So to explain
+introduced at the Google I/O
+2018.[\[50\]](https://www.youtube.com/watch?v=RS36gBEp8OI) So to explain
 this pattern I am going to keep it close to the information provided in
 the talk. The Bloc pattern provides a reactive approach to handle state
 changes in Flutter. It is based on Streams
@@ -1944,34 +1943,33 @@ concept of streams in Dart.
 
 | ![Stream concept](https://i.imgur.com/J4ohiiR.jpg) |
 | :------------------------------------------------: |
-|          _Figure 32: Concept of stream._           |
+|          *Figure 32: Concept of stream.*           |
 
 Think about water running through a rain pipe which you want to use to
 flush down toy soldiers from the roof. On your roof the at the on side
-of the pipe you have your _sink_. The sink is the location where your
+of the pipe you have your *sink*. The sink is the location where your
 comrade puts in the little soldiers. At the other end of your rain pipe
-you want to _react_ to the toy soldiers that are being flushed down the
+you want to *react* to the toy soldiers that are being flushed down the
 pipe. To be able to react to the toy soldiers being flushed down, you
 use a strainer. But without clear communication you don’t know when a
 toy soldier is being flushed down the pipe. And you don’t want to stand
-there all day and waste your time. So you start to _listen_ to your
+there all day and waste your time. So you start to *listen* to your
 comrade and start to place the strain as soon as he gives you a signal.
 
 This example includes all the core principles of streams in Dart.
 
-- StreamSink
-  [\[53\]](https://api.dart.dev/stable/2.8.2/dart-async/StreamSink-class.html)
-  which is for event input
-- Stream
-  [\[51\]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html)
-  which is used for the data output
+  - StreamSink
+    [\[53\]](https://api.dart.dev/stable/2.8.2/dart-async/StreamSink-class.html)
+    which is for event input
+  - Stream
+    [\[51\]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html)
+    which is used for the data output
 
 To put these concepts together you’ll need one more thing - the
 StreamController
 [\[54\]](https://api.dart.dev/stable/2.8.1/dart-async/StreamController-class.html)
-
 - which handles the input, output and more. The StreamController in our
-  example is the rain pipe itself.
+example is the rain pipe itself.
 
 By default the StreamController only supports a single-subscription
 stream. To allow multiple listeners to subscribe you can use the
@@ -1979,14 +1977,14 @@ StreamController.broadcast constructor.
 
 | ![StreamController concept](https://i.imgur.com/w6cYnYQ.jpg) |
 | :----------------------------------------------------------: |
-|            _Figure 33: StreamController concept._            |
+|            *Figure 33: StreamController concept.*            |
 
 When the concepts of reactive programming are combined the result is the
 Bloc. Figure shows a widget tree and how a bloc works:
 
 |                             ![Bloc concept](https://i.imgur.com/Uter9X7.png)                             |
 | :------------------------------------------------------------------------------------------------------: |
-| _Figure 34: Image taken from the Google I/O 2018 [\[50\]](https://www.youtube.com/watch?v=RS36gBEp8OI)._ |
+| *Figure 34: Image taken from the Google I/O 2018 [\[50\]](https://www.youtube.com/watch?v=RS36gBEp8OI).* |
 
 The light blue arrows indicate events that have been added by a widget
 to the StreamSink. These events are handled inside the bloc. The output
@@ -2023,11 +2021,11 @@ Let’s take a look at how the weather data logic is implemented with the
 WeatherBloc.
 
 To specify the types of events that can be added to the weather bloc
-sink, an interface - weather_event.dart - has been created. We
+sink, an interface - weather\_event.dart - has been created. We
 specified `WeatherEvent.fetchWeatherForLocation` and
 `WeatherEvent.refreshWeatherForLocation` as events.
 
-```dart
+``` dart
 part of 'weather_bloc.dart';
 
 /// An interface to specify weather events.
@@ -2043,31 +2041,31 @@ abstract class WeatherEvent with _$WeatherEvent {
 }
 ```
 
-_Code snippet 23: WeatherEvent class._
+*Code snippet 23: WeatherEvent class.*
 
 Inside the WeatherBloc class the interface Bloc has been implemented.
 This interface specifies that the method `dispose()` has to be added for
 each bloc. This has to be done to prevent memory leaks in the future.
 
-```dart
+``` dart
 /// An interface to implement a dispose contract for blocs to prevent memory leaks.
 abstract class Bloc {
   void dispose();
 }
 ```
 
-_Code snippet 24: Bloc interface._
+*Code snippet 24: Bloc interface.*
 
 The WeatherBloc can be separated into two part:
 
 1.  StreamController, Streams, Sinks
 2.  Logic related methods
 
-In the first part the _BehaviourSubject_ `_weatherEntityStateController`
-of type WeatherEntity is declared as well as getters for its _sink_
-`_inWeatherEntity` and _stream_ `weatherEntity`. Additionally a the
+In the first part the *BehaviourSubject* `_weatherEntityStateController`
+of type WeatherEntity is declared as well as getters for its *sink*
+`_inWeatherEntity` and *stream* `weatherEntity`. Additionally a the
 StreamController `_weatherEventController` for WeatherEvents is
-declared. As soon as the Bloc is created it starts to _listen_ to the
+declared. As soon as the Bloc is created it starts to *listen* to the
 stream inside `_weatherEventController`.
 
 The second part contains the method `mapEventToState()`, which is used
@@ -2080,7 +2078,7 @@ event as parameter.
 The method `dispose()` has been overwritten and closes the
 StreamController inside weather bloc whenever the bloc is disposed of.
 
-```dart
+``` dart
 ...
 class WeatherBloc implements Bloc {
   WeatherBloc(
@@ -2130,7 +2128,7 @@ class WeatherBloc implements Bloc {
 }
 ```
 
-_Code snippet 25: WeatherBloc class._
+*Code snippet 25: WeatherBloc class.*
 
 In the UI the weather bloc is implemented inside the weather widget. We
 get a reference to the Bloc by using getIt. For the representation of
@@ -2143,7 +2141,7 @@ AsyncSnapshot.[\[61\]](https://api.flutter.dev/flutter/widgets/AsyncSnapshot-cla
 An AsyncSnapshot is a representation of the current state of the
 asynchronous data. Depending on the asynchronous data the UI is build.
 
-```dart
+``` dart
 ...
   @override
   Widget build(BuildContext context) {
@@ -2176,31 +2174,31 @@ asynchronous data. Depending on the asynchronous data the UI is build.
 ...
 ```
 
-_Code snippet 26: Weather widget in presentation layer._
+*Code snippet 26: Weather widget in presentation layer.*
 
 Advantages:
 
-- clear separation of concerns \_ no business logic inside UI \_
-  easier to test
-- can be accessed from anywhere in the tree
-- plays well with Flutters reactivity
-- reduces the amount of builds compared to setState()
+  - clear separation of concerns \_ no business logic inside UI \_
+    easier to test
+  - can be accessed from anywhere in the tree
+  - plays well with Flutters reactivity
+  - reduces the amount of builds compared to setState()
 
 Disadvantages:
 
-- reactive programming is not straightforward \* people have it
-  difficult to understand reactive programming
-- a lot of boilerplate
-- the concepts take some time to get the head around
+  - reactive programming is not straightforward \* people have it
+    difficult to understand reactive programming
+  - a lot of boilerplate
+  - the concepts take some time to get the head around
 
-### Bloc with flutter_bloc
+### Bloc with flutter\_bloc
 
 Bloc [\[62\]](https://pub.dev/packages/bloc) is a package developed by
 Felix Angelov. It extends the core principles of bloc and provides a
 simple API which reduces the amount of boilerplate code to work with
 Streams.
 
-Additionally the package flutter_bloc
+Additionally the package flutter\_bloc
 [\[28\]](https://pub.dev/packages/flutter_bloc) is used which provides a
 collection of widgets for Flutter to handle blocs.
 
@@ -2208,14 +2206,14 @@ It has been developed with three core values in mind:
 [\[63\]](https://bloclibrary.dev/#/whybloc)
 
 1.  Simple
-    - easy to understand and can be used by developers with varying
-      skill levels
+      - easy to understand and can be used by developers with varying
+        skill levels
 2.  Powerful
-    - help make amazing, complex applications by composing them of
-      smaller components
+      - help make amazing, complex applications by composing them of
+        smaller components
 3.  Testable
-    - easily test every aspect of an application so that we can
-      iterate with confidence
+      - easily test every aspect of an application so that we can
+        iterate with confidence
 
 Bloc is an immutable state management solution.
 
@@ -2228,38 +2226,38 @@ have to take a look at the two principles in this package.
 
 | ![Concept of bloc](https://i.imgur.com/cOtE6aE.jpg) |
 | :-------------------------------------------------: |
-|            _Figure 35: Concept of Bloc._            |
+|            *Figure 35: Concept of Bloc.*            |
 
-- Events \* Events are the input to a Bloc provided via interaction
-  with the user interface.
-- States \* States are the output of a bloc and represent a part of
-  the application’s state. They are used inside the UI to build the
-  representative UI state and redraw it when the state changes.
-- Streams \* As previously explained in the vanilla bloc example,
-  streams are a continuous flow of asynchronous data.
-- Blocs \* Are the essential part of the pattern. They convert a
-  stream of incoming event into a stream of outgoing states.
+  - Events \* Events are the input to a Bloc provided via interaction
+    with the user interface.
+  - States \* States are the output of a bloc and represent a part of
+    the application’s state. They are used inside the UI to build the
+    representative UI state and redraw it when the state changes.
+  - Streams \* As previously explained in the vanilla bloc example,
+    streams are a continuous flow of asynchronous data.
+  - Blocs \* Are the essential part of the pattern. They convert a
+    stream of incoming event into a stream of outgoing states.
 
 For more concepts likeTransitions and BlocDelegate visit bloclibrary.
 
-##### Concepts of flutter_bloc [\[65\]](https://bloclibrary.dev/#/flutterbloccoreconcepts)
+##### Concepts of flutter\_bloc [\[65\]](https://bloclibrary.dev/#/flutterbloccoreconcepts)
 
-- BlocBuilder \* Is a widget which requires a bloc and a builder
-  function. It is very similar to a StreamBuilder but with a simpler
-  API and less amount of boilerplate needed. The builder functions
-  needs to return a widget in response to the state. The builder
-  function can be called multiple times.
-- BlocProvider \* Is a widget that yses the provider
-  [\[45\]](https://pub.dev/packages/provider) package by Rémi
-  Rousselet for its dependency injection to inject a bloc inside the
-  widget tree and provide it to descendants.
-- BlocListener \* Is a widget that is used to handle logic that should
-  only happen once when the state changes. Such logic can be
-  navigation. Its listener method is only called once for each state
-  change in comparison to the BlocBuilder’s builder method which is
-  called multiple times.
-- BlocConsumer \* Is a widget which combines a BlocListener and a
-  BlocBuilder with less amount of boilerplate.
+  - BlocBuilder \* Is a widget which requires a bloc and a builder
+    function. It is very similar to a StreamBuilder but with a simpler
+    API and less amount of boilerplate needed. The builder functions
+    needs to return a widget in response to the state. The builder
+    function can be called multiple times.
+  - BlocProvider \* Is a widget that yses the provider
+    [\[45\]](https://pub.dev/packages/provider) package by Rémi
+    Rousselet for its dependency injection to inject a bloc inside the
+    widget tree and provide it to descendants.
+  - BlocListener \* Is a widget that is used to handle logic that should
+    only happen once when the state changes. Such logic can be
+    navigation. Its listener method is only called once for each state
+    change in comparison to the BlocBuilder’s builder method which is
+    called multiple times.
+  - BlocConsumer \* Is a widget which combines a BlocListener and a
+    BlocBuilder with less amount of boilerplate.
 
 For more concepts like MultiBlocProvider, MultiBlocListener,
 RepositoryProvider and MultiRepositoryProvider visit bloclibrary.
@@ -2281,7 +2279,7 @@ Weather Event is an interface to specify two events:
 
 <!-- end list -->
 
-```dart
+``` dart
 ...
 abstract class WeatherEvent with _$WeatherEvent {
   /// Specifies a weather event to fetch weather data for a given [location].
@@ -2294,7 +2292,7 @@ abstract class WeatherEvent with _$WeatherEvent {
 }
 ```
 
-_Code snippet 27: WeatherEvent class._
+*Code snippet 27: WeatherEvent class.*
 
 Weather State is an interface to specify the states our bloc can output
 which our UI can use to represent its state. It contains four states:
@@ -2306,7 +2304,7 @@ which our UI can use to represent its state. It contains four states:
 
 <!-- end list -->
 
-```dart
+``` dart
 ...
 abstract class WeatherState with _$WeatherState {
   /// Specifies a weather state that indicates the initial state.
@@ -2323,7 +2321,7 @@ abstract class WeatherState with _$WeatherState {
 }
 ```
 
-_Code snippet 28: WeatherState class._
+*Code snippet 28: WeatherState class.*
 
 Inside our weather bloc class resides the logic of our weather
 functionality. Each bloc contains a getter for the initial state which
@@ -2339,7 +2337,7 @@ asynchronous call is made and depending on the result either
 the WeatherState `WeatherState.loading()` is yielded to indicate that an
 asynchronous call is taking place.
 
-```dart
+``` dart
 ...
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final IWeatherFacade _weatherFacade;
@@ -2380,7 +2378,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 ...
 ```
 
-_Code snippet 29: WeatherBloc class._
+*Code snippet 29: WeatherBloc class.*
 
 Not let’s take a look at how the bloc can be accessed in the UI.
 
@@ -2392,7 +2390,7 @@ injected at this level of the widget tree a MultiBlocProvider has to be
 used. The injection happens inside the weather app widget which in this
 example is named FlutterBlocApp.
 
-```dart
+``` dart
 ...
 class FlutterBlocApp extends StatelessWidget {
   @override
@@ -2420,7 +2418,7 @@ class FlutterBlocApp extends StatelessWidget {
 }
 ```
 
-_Code snippet 30: FlutterBlocApp widget._
+*Code snippet 30: FlutterBlocApp widget.*
 
 Inside the weather widget the bloc is accessed by using the widget
 `BlocConsumer`. BlocConsumer is a simplified version of a BlocListener
@@ -2429,9 +2427,10 @@ adapt the theme when the weather changes is being handled. When the
 weather changes which is represented by the WeatherState `Loaded` an
 event is added to the `ThemeBloc` which is accessed via
 `context.bloc<ThemeBloc>()`. Inside the builder callback the
-corresponding UI representation for the states `LoadingFailure, Loading, Loaded` is specified.
+corresponding UI representation for the states `LoadingFailure, Loading,
+Loaded` is specified.
 
-```dart
+``` dart
 ...
  @override
   Widget build(BuildContext context) {
@@ -2471,26 +2470,26 @@ corresponding UI representation for the states `LoadingFailure, Loading, Loaded`
 ...
 ```
 
-_Code snippet 31: Weather widget in presentation layer._
+*Code snippet 31: Weather widget in presentation layer.*
 
-- Advantages:
+  - Advantages:
+    
+    ``` 
+      * unidirectional data flow
+      * simple API
+      * separation of concerns
+      * reusable
+      * implementation of initial state
+      * side effects handled by listeners
+    ```
 
-  ```
-    * unidirectional data flow
-    * simple API
-    * separation of concerns
-    * reusable
-    * implementation of initial state
-    * side effects handled by listeners
-  ```
-
-- Disadvantages:
-
-  ```
-    * still a lot of boilerplate
-    * too much overhead for small examples
-    * takes time to understand
-  ```
+  - Disadvantages:
+    
+    ``` 
+      * still a lot of boilerplate
+      * too much overhead for small examples
+      * takes time to understand
+    ```
 
 ### Redux
 
@@ -2498,19 +2497,19 @@ For this example I’ve used the redux example of Brian Egan at flutter
 samples as a reference.
 [\[24\]](https://github.com/brianegan/flutter_architecture_samples) The
 example uses the packages redux [\[66\]](https://pub.dev/packages/redux)
-and flutter_redux.[\[67\]](https://pub.dev/packages/flutter_redux)
+and flutter\_redux.[\[67\]](https://pub.dev/packages/flutter_redux)
 Redux is based upon three principles
 [\[68\]](https://redux.js.org/introduction/three-principles):
 
 1.  Single source of truth
-    - The global state of the application is stored in an object tree
-      within a single store.
+      - The global state of the application is stored in an object tree
+        within a single store.
 2.  State is read-only
-    - the only way to change state is to emit an action, an object
-      describing what happened.
+      - the only way to change state is to emit an action, an object
+        describing what happened.
 3.  Changes are made with pure functions
-    - To specify how the state is transformed by actions, you write
-      pure reducers.
+      - To specify how the state is transformed by actions, you write
+        pure reducers.
 
 Redux is one of the immutable state management solutions. The state
 object is read-only and can only be changed by returning a new state
@@ -2559,7 +2558,7 @@ Let’s take a look at Figure to see Redux in action.
 
 | ![Concept of Redux](https://i.imgur.com/YWH4pOa.jpg) |
 | :--------------------------------------------------: |
-|            _Figure 36: Concept of Redux._            |
+|            *Figure 36: Concept of Redux.*            |
 
 The UI is a representation of the current state. The UI listens to
 events from the user and dispatches an action corresponding to the
@@ -2572,7 +2571,7 @@ processed by a reducer. The reducer returns a new state object with the
 data provided by the action. With the new state object the UI rebuilds
 to represent that state.
 
-##### Concepts of flutter_redux
+##### Concepts of flutter\_redux
 
 ###### StoreProvider
 
@@ -2597,13 +2596,13 @@ as well as the implementation inside the application layer.
 
 ##### Application Layer
 
-To keep it _lean_ only the weather relevant redux components are shown.
+To keep it *lean* only the weather relevant redux components are shown.
 
 ##### State
 
 ###### App State
 
-```dart
+``` dart
 ...
 abstract class AppState with _$AppState {
   const factory AppState(
@@ -2628,7 +2627,7 @@ abstract class AppState with _$AppState {
 }
 ```
 
-_Code snippet 32: AppState class._
+*Code snippet 32: AppState class.*
 
 To have a separation in concern inside the store, the app state consist
 multiple smaller state objects. For example WeatherState. This makes it
@@ -2636,7 +2635,7 @@ easier to read.
 
 ###### Weather State
 
-```dart
+``` dart
 ...
 abstract class WeatherState with _$WeatherState {
   const factory WeatherState({
@@ -2655,7 +2654,7 @@ abstract class WeatherState with _$WeatherState {
 }
 ```
 
-_Code snippet 33: WeatherState class._
+*Code snippet 33: WeatherState class.*
 
 WeatherState is an interface that consists of two attributes: (1)
 WeatherEntity and (2) isRefreshing. The WeatherEntity contains data
@@ -2664,7 +2663,7 @@ weather data is being fetched or refreshed.
 
 ##### Actions
 
-```dart
+``` dart
 ...
 abstract class WeatherActions with _$WeatherActions {
   /// A `WeatherAction` that signals Redux to fetch weather.
@@ -2687,7 +2686,7 @@ abstract class WeatherActions with _$WeatherActions {
 }
 ```
 
-_Code snippet 34: WeatherActions class._
+*Code snippet 34: WeatherActions class.*
 
 The interface WeatherActions specifies which types of actions can be
 dispatched to start a process to update the state. Since the state is
@@ -2696,7 +2695,7 @@ need to be specified here.
 
 ##### Middleware
 
-```dart
+``` dart
 /// This middleware takes care of the asynchronous portion of
 /// weather reducers.
 List<Middleware<AppState>> createWeatherMiddleware(
@@ -2764,7 +2763,7 @@ void Function(
 }
 ```
 
-_Code snippet 35: Weather middleware._
+*Code snippet 35: Weather middleware.*
 
 Since the functionalities to fetch the weather and refresh the weather
 require an API call they are asynchronous. Due to Redux concept that
@@ -2778,7 +2777,7 @@ processed by its responding reducer.
 
 ###### AppReducer
 
-```dart
+``` dart
 ...
 /// Returns the `AppState` which has all reducers combined into one.
 AppState appReducer(AppState state, dynamic action) {
@@ -2791,7 +2790,7 @@ AppState appReducer(AppState state, dynamic action) {
 }
 ```
 
-_Code snippet 36: App reducer function._
+*Code snippet 36: App reducer function.*
 
 Reducers return a new state that represents the updated UI. Since we can
 have multiple app states the app state is represented by the result of a
@@ -2801,7 +2800,7 @@ weatherState.
 
 ###### Weather reducer
 
-```dart
+``` dart
 ...
 /// Is a collection of weather related reducers.
 final Reducer<WeatherState> weatherReducer = combineReducers<WeatherState>([
@@ -2840,13 +2839,13 @@ WeatherState _setNoWeatherState(
 }
 ```
 
-_Code snippet 37: Weather reducer functions._
+*Code snippet 37: Weather reducer functions.*
 
 `weatherReducer` is a collection of reducers related to weather.
 
 ##### Selectors
 
-```dart
+``` dart
 ...
 /// Returns the `WeatherResponse` of the current weather state or null
 /// if none is present.
@@ -2864,7 +2863,7 @@ String citySelector(AppState state) => state.weatherState.weatherEntity.city;
 WeatherState weatherStateSelector(AppState state) => state.weatherState;
 ```
 
-_Code snippet 38: Weather state related selectors._
+*Code snippet 38: Weather state related selectors.*
 
 Sometimes it is necessary to access only single attributes from a state.
 This is where Selectors come into play. Selectors are pure functions
@@ -2876,7 +2875,7 @@ To implement Redux to a Flutter application it needs to be initialised
 at the beginning of your application - the main. This is the result of
 its principle as single source of truth.
 
-```dart
+``` dart
 ...
 void main() {
   // Initialises the code generation for [get_it].
@@ -2899,11 +2898,11 @@ void main() {
 }
 ```
 
-_Code snippet 39: Redux store initialization._
+*Code snippet 39: Redux store initialization.*
 
 Let’s take a look at the weather widget:
 
-```dart
+``` dart
 ...
 @override
   Widget build(BuildContext context) {
@@ -2941,12 +2940,12 @@ Let’s take a look at the weather widget:
 ...
 ```
 
-_Code snippet 40: Weather widget._
+*Code snippet 40: Weather widget.*
 
 Due to redux strict separation of concerns the ProgressLoadingIndicator
 had to be moved from the method `_buildUI()` to the widgets `build()`
 method. The `converter` callback from `StoreConnector` looks for the
-_store_ from the nearest `StoreProvider` and returns the `isLoading`
+*store* from the nearest `StoreProvider` and returns the `isLoading`
 attribute. The value of `isLoading` is then used to build either a
 ProgressLoadingIndicator or the UI.
 
@@ -2956,17 +2955,17 @@ UI to the Redux store. The `converter` callback returns the
 
 Advantages:
 
-- clear separation of concerns
-- single source of truth
-- easy to test
-- immutability
+  - clear separation of concerns
+  - single source of truth
+  - easy to test
+  - immutability
 
 Disadvantages:
 
-- very complex
-- difficult to learn
-- a lot of boilerplate
-- simple functionalities require an overhead to be implemented
+  - very complex
+  - difficult to learn
+  - a lot of boilerplate
+  - simple functionalities require an overhead to be implemented
 
 ### MobX
 
@@ -2976,9 +2975,9 @@ tutorial.
 
 > MobX is a battle tested library that makes state management simple and
 > scalable by transparently applying functional reactive programming
-> (TFRP). The philosophy behind MobX is very simple: _Anything that can
+> (TFRP). The philosophy behind MobX is very simple: *Anything that can
 > be derived from the application state, should be derived.
-> Automatically._ This includes the UI, data serialization, server
+> Automatically.* This includes the UI, data serialization, server
 > communication, etc. [\[70\]](https://mobx.js.org//index.html)
 
 Similar to Redux or Bloc MobX has a unidirectional data flow.
@@ -2987,7 +2986,7 @@ actions. But in difference to Redux more than one store can be used.
 
 |           ![MobX data flow](https://i.imgur.com/jLbZ564.png)            |
 | :---------------------------------------------------------------------: |
-| _Figure 37: Data flow of MobX from the official mobx.js documentation._ |
+| *Figure 37: Data flow of MobX from the official mobx.js documentation.* |
 
 Actions are fired via Events which can be user interactions or
 reactions. Actions are the only way to change the State. If computed
@@ -3003,7 +3002,7 @@ MobX consists of three core concepts: (1) Observables, (2) Actions and
 
 | ![MobX concepts](https://i.imgur.com/Go2v3hq.png) |
 | :-----------------------------------------------: |
-|          _Figure 38: Concepts of MobX._           |
+|          *Figure 38: Concepts of MobX.*           |
 
 Observables are the representatives of the reactive application state.
 This means that when the data of the observable changes it sends a
@@ -3012,7 +3011,7 @@ notification to its listeners (Observers).
 Computed Observables are derived from observables. They are based on the
 philosophy of MobX. The application state is the combination of
 Observables and Computed Observables. To be more precise application
-state is the combination of *core-stat*e and _derived-state_ where
+state is the combination of *core-stat*e and *derived-state* where
 Observables mirror the core-state and Computed Observables the
 derived-state.
 
@@ -3038,34 +3037,34 @@ For the implementation of the MobX example three packages have to be
 downloaded:
 
 1.  mobx [\[72\]](https://pub.dev/packages/mobx)
-2.  flutter_mobx [\[73\]](https://pub.dev/packages/flutter_mobx)
-3.  mobx_codegen [\[74\]](https://pub.dev/packages/mobx_codegen)
+2.  flutter\_mobx [\[73\]](https://pub.dev/packages/flutter_mobx)
+3.  mobx\_codegen [\[74\]](https://pub.dev/packages/mobx_codegen)
 
 The package mobx provides the concepts, logic and interaction of MobX to
 the the project.
 
-The package flutter_mobx provides access to the Observable widget. This
+The package flutter\_mobx provides access to the Observable widget. This
 widget can be used to listen to Observables and rebuild automatically
 after the observables has been mutated.
 
-The package mobx_codegen provides annotations which can be added to the
+The package mobx\_codegen provides annotations which can be added to the
 mobx code to reduce the amount of boilerplate needed. The added
 annotations are:
 
-- **???**
-- **???**
-- **???**
+  - **???**
+  - **???**
+  - **???**
 
 As usual the code implementation will be separated into application
 layer and presentation layer for the weather function.
 
 ##### Application layer
 
-To be able to use mobx_codegen the WeatherStore class needs to me mixed
+To be able to use mobx\_codegen the WeatherStore class needs to me mixed
 with the Store class. With the help of the store mixin the weather store
 is treated like a store and the annotations can be used.
 
-```dart
+``` dart
 ...
 part 'weather_store.g.dart';
 
@@ -3171,7 +3170,7 @@ abstract class _WeatherStore with Store {
 ...
 ```
 
-_Code snippet 41: MobX WeatherStore class_
+*Code snippet 41: MobX WeatherStore class*
 
 As most mutable state management solutions MobX does not implement a way
 to handle initial state and the developer has to decide how to handle
@@ -3184,7 +3183,7 @@ To access the weather store in the application it has to be injected
 into the widget tree. The injection is done with the help of the
 provider package inside the weather app widget.
 
-```dart
+``` dart
 ...
 class MobxApp extends StatelessWidget {
   @override
@@ -3213,15 +3212,15 @@ class MobxApp extends StatelessWidget {
 }
 ```
 
-_Code snippet 42: MobxApp widget_
+*Code snippet 42: MobxApp widget*
 
 After the weather store has been injected it can be accessed in any
 descendant in the tree.
 
 In the method `_buildUI()` the Observable widget provided by
-flutter_mobx comes into action.
+flutter\_mobx comes into action.
 
-```dart
+``` dart
 ...
  WeatherStore _weatherStore;
 
@@ -3252,7 +3251,7 @@ flutter_mobx comes into action.
 ...
 ```
 
-_Code snippet 43: MobX Weather widget_
+*Code snippet 43: MobX Weather widget*
 
 The `builder` function of the Observable widget will be monitored by
 MobX. It tracks all observables and computed observables inside it which
@@ -3261,18 +3260,18 @@ observable or computed observable changes the widget gets rebuild.
 
 Advantages:
 
-- no unnecessary boilerplates \_ focus on the key features \_ more
-  “magic”
-- easy to learn
-- easy to use
+  - no unnecessary boilerplates \_ focus on the key features \_ more
+    “magic”
+  - easy to learn
+  - easy to use
 
 Disadvantages:
 
-- no mutation history for undo/redo
-- more “magic” \_ a lot of logic happens in MobX internally \_
-  difficult to debug
+  - no mutation history for undo/redo
+  - more “magic” \_ a lot of logic happens in MobX internally \_
+    difficult to debug
 
-### States_rebuilder
+### States\_rebuilder
 
 The example has been build following the written tutorial “States
 Rebuilder - ZERO Boilerplate Flutter State Management” by Reso Coder.
@@ -3318,9 +3317,9 @@ without the provided getters and methods of the ReactiveModel.
 Is one out of four Observer Widgets which can be used to connect the UI
 to a ReactiveModel. The other three Observer Widgets are:
 
-- WhenRebuilder
-- WhenRebuilderOr
-- OnSetStateListener
+  - WhenRebuilder
+  - WhenRebuilderOr
+  - OnSetStateListener
 
 WhenRebuilder enforces the implementation of UI response for each of the
 four state states, e.g. `isIdle`.
@@ -3343,7 +3342,7 @@ access a registered instance in any descendant in the widget tree.
 
 #### Implementation
 
-For the examples the package states_rebuilder
+For the examples the package states\_rebuilder
 [\[76\]](https://pub.dev/packages/states_rebuilder) has to be added to
 the pubspec.yaml file.
 
@@ -3359,7 +3358,7 @@ example the model for weather related functionality is called
 Inside the `WeatherStore` class no extension or mixin has to be
 implemented since it will be wrapped by a ReactiveModel.
 
-```dart
+``` dart
 ...
 /// Used by the reative model in by states_provider.
 class WeatherStore {
@@ -3409,7 +3408,7 @@ class WeatherStore {
 }
 ```
 
-_Code snippet 44: States Rebuilder WeatherStore class_
+*Code snippet 44: States Rebuilder WeatherStore class*
 
 In the method `_weatherChanged()` the method `setState` provided by the
 `ReactiveModel` class is used to mutate the state of the store and imply
@@ -3421,7 +3420,7 @@ To access the WeatherStore in the application it needs to be injected
 into the widget tree. This injection takes place inside the
 StatesRebuilderApp a.k.a. WeatherApp.
 
-```dart
+``` dart
 ...
 /// Injects the widget tree with a `ReactiveModel` to manage
 /// the `weather` state and `settings` state.
@@ -3446,12 +3445,12 @@ class StatesRebuilderApp extends StatelessWidget {
 ...
 ```
 
-_Code snippet 45: StatesRebuilderApp widget_
+*Code snippet 45: StatesRebuilderApp widget*
 
 To access the weather store inside the weather widget we used the
 Injector widget to get the instance of weather store as ReactiveModel.
 
-```dart
+``` dart
 ...
 class _WeatherState extends State<Weather> {
   Completer<void> _refreshCompleter;
@@ -3506,7 +3505,7 @@ class _WeatherState extends State<Weather> {
 ...
 ```
 
-_Code snippet 46: States Rebuilder Weather widget_
+*Code snippet 46: States Rebuilder Weather widget*
 
 The Observer widget `StateBuilder` is implemented inside the method
 `_buildUI()`. The ReactiveModel `_reactiveWeatherStoreModel` is
@@ -3519,21 +3518,21 @@ states, e.g. `isIdle`, and build the corresponding UI.
 
 Advantages:
 
-- all-in-one package
-- easy to use
-- easy to learn
-- no unnecessary boilerplate
+  - all-in-one package
+  - easy to use
+  - easy to learn
+  - no unnecessary boilerplate
 
 Disadvantages:
 
-- strongly coupled to its own Dependency Injection \* all-or-nothing
-  solution
-- hard to master
+  - strongly coupled to its own Dependency Injection \* all-or-nothing
+    solution
+  - hard to master
 
 # Evaluation (depends on part 3: Results)
 
 The first thing I want to do is remove the state management solutions
-InheritedWidget and bloc_vanilla from the following evaluation. The
+InheritedWidget and bloc\_vanilla from the following evaluation. The
 reason for this decision is that with Provider a solution has been
 developed which wraps the Inherited Widget and provides a simplified
 API. The same advantages come with flutter bloc which provides the bloc
@@ -3542,12 +3541,12 @@ pattern with a simplified API and less overhead to worry about.
 The state management solutions will be rated from a scale from 1-3. The
 rating value is defined as follows:
 
-- 1 represents a rating where the criteria is somehow matched or not
-  matched at all
-- 2 represents a rating where the criteria is matched but does not
-  “feel” good
-- 3 represents a rating where the criteria is matched better than
-  normal
+  - 1 represents a rating where the criteria is somehow matched or not
+    matched at all
+  - 2 represents a rating where the criteria is matched but does not
+    “feel” good
+  - 3 represents a rating where the criteria is matched better than
+    normal
 
 Furthermore I will add a comment to ratings of 1 and 3 to add more
 information to the result.
@@ -3562,20 +3561,20 @@ The quality attributes are taken from “Characterizing Architecturally
 Significant Requirements” by Chen et
 al.:[\[78\]](http://ieeexplore.ieee.org/document/6365165/)
 
-- Maintainability
-- Extendability
-- Modularity
-- Reusability
-- Testability
+  - Maintainability
+  - Extendability
+  - Modularity
+  - Reusability
+  - Testability
 
 The personally chosen criteria are:
 
-- Synergy
-- Time to learn
-- Ressources
-- Amount of Boilerplate
-- Side-effect handling
-- Debugging
+  - Synergy
+  - Time to learn
+  - Ressources
+  - Amount of Boilerplate
+  - Side-effect handling
+  - Debugging
 
 ### Maintainability
 
@@ -3620,7 +3619,7 @@ tests to determine whether those criteria have been met.”
 [\[79\]](https://ieeexplore.ieee.org/document/159342) This criteria will
 be evaluated based on the simplicity to write unit tests.
 
----
+-----
 
 ### Synergy
 
@@ -3671,10 +3670,10 @@ track the bug inside the implementation of the SMS.
 | --------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Maintainability | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-- Stateful Widget: State and methods to manipulate the state have to
-  be passed down the tree through widgets without the need to access
-  it. Therefore the maintainability suffers the larger the application
-  grows.
+  - Stateful Widget: State and methods to manipulate the state have to
+    be passed down the tree through widgets without the need to access
+    it. Therefore the maintainability suffers the larger the application
+    grows.
 
 #### Extendability
 
@@ -3682,10 +3681,10 @@ track the bug inside the implementation of the SMS.
 | ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Extendability | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-- Stateful Widget: The extendability of the application with this SMS
-  is provided but for the same reason as in maintainability the need
-  the pass down the state through all widgets in between makes it
-  worse.
+  - Stateful Widget: The extendability of the application with this SMS
+    is provided but for the same reason as in maintainability the need
+    the pass down the state through all widgets in between makes it
+    worse.
 
 #### Modularity
 
@@ -3693,10 +3692,10 @@ track the bug inside the implementation of the SMS.
 | ---------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Modularity | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-- Stateful Widget: State and methods to manipulate the state have to
-  be passed down the tree through widgets without the need to access
-  it. Therefore the maintainability suffers the larger the application
-  grows.
+  - Stateful Widget: State and methods to manipulate the state have to
+    be passed down the tree through widgets without the need to access
+    it. Therefore the maintainability suffers the larger the application
+    grows.
 
 #### Reusability
 
@@ -3704,9 +3703,9 @@ track the bug inside the implementation of the SMS.
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Reusability | 1               | 1                      | 2    | 2    | 1                | 2     |
 
-- Stateful Widget: Flutter specific.
-- ChangeNotifierProvider: Flutter specific.
-- States Rebuilder: Flutter specific.
+  - Stateful Widget: Flutter specific.
+  - ChangeNotifierProvider: Flutter specific.
+  - States Rebuilder: Flutter specific.
 
 #### Testability
 
@@ -3714,11 +3713,11 @@ track the bug inside the implementation of the SMS.
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Testability | 2               | 2                      | 3    | 2    | 2                | 3     |
 
-- Bloc: Has the package bloc_test
-  [\[80\]](https://pub.dev/packages/bloc_test) which makes it easier
-  to write tests for blocs.
-- Redux: Since most of the components in Redux are pure functions,
-  they are easy to test without mocking.
+  - Bloc: Has the package bloc\_test
+    [\[80\]](https://pub.dev/packages/bloc_test) which makes it easier
+    to write tests for blocs.
+  - Redux: Since most of the components in Redux are pure functions,
+    they are easy to test without mocking.
 
 ### The personally chosen criteria
 
@@ -3728,14 +3727,14 @@ track the bug inside the implementation of the SMS.
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Synergy  | 1               | 2                      | 2    | 2    | 1                | 2     |
 
-- Stateful Widget: Breaks the principle of decoupling by having logic
-  in the UI.
-- States Rebuilder: States Rebuilder is an all-in-one package where a
-  solution for state management via Observer pattern and dependency
-  injection via Injector is provided. In our architecture the package
-  combination of getIt and injector has been chosen to handle D.I. and
-  State Rebuilder’s own dependency injection does not play well with
-  the architecture’s D.I. solution.
+  - Stateful Widget: Breaks the principle of decoupling by having logic
+    in the UI.
+  - States Rebuilder: States Rebuilder is an all-in-one package where a
+    solution for state management via Observer pattern and dependency
+    injection via Injector is provided. In our architecture the package
+    combination of getIt and injector has been chosen to handle D.I. and
+    State Rebuilder’s own dependency injection does not play well with
+    the architecture’s D.I. solution.
 
 #### Time to learn
 
@@ -3743,27 +3742,27 @@ track the bug inside the implementation of the SMS.
 | ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Time to learn | 3               | 3                      | 1    | 3    | 2                | 1     |
 
-- Stateful Widget: One of Flutters three types of widgets which
-  everyone using Flutter had to learn.
-- ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to
-  learn because of it’s popularity and tutorials
-- Bloc: Even though the concept of Bloc is well documented it took me
-  one day to understand the concepts and implemented it in my first
-  application.
-- MobX: Easy to learn since MobX encapsulates most logic and handles
-  the updates of the UI and notifications about state manipulations
-  internally. The developer only has to implement the three mentioned
-  packages in the MobX example and add decorators to the business
-  logic.
-- Redux: Without previous knowledge about Redux and it not being a
-  popular solution for state management in Flutter it took me between
-  2 and 3 days to implement it in the example application.
-  Furthermore, I stopped the implementation of the example without
-  fully following the concepts of Redux. As you may have noticed in
-  the middleware to handle asynchronous calls the reducers are
-  dispatching more than one action. At that time I knew that Redux is
-  powerful and to understand how to implement the notification to
-  display a ProgressLoadingIndicator it would take me even more time.
+  - Stateful Widget: One of Flutters three types of widgets which
+    everyone using Flutter had to learn.
+  - ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to
+    learn because of it’s popularity and tutorials
+  - Bloc: Even though the concept of Bloc is well documented it took me
+    one day to understand the concepts and implemented it in my first
+    application.
+  - MobX: Easy to learn since MobX encapsulates most logic and handles
+    the updates of the UI and notifications about state manipulations
+    internally. The developer only has to implement the three mentioned
+    packages in the MobX example and add decorators to the business
+    logic.
+  - Redux: Without previous knowledge about Redux and it not being a
+    popular solution for state management in Flutter it took me between
+    2 and 3 days to implement it in the example application.
+    Furthermore, I stopped the implementation of the example without
+    fully following the concepts of Redux. As you may have noticed in
+    the middleware to handle asynchronous calls the reducers are
+    dispatching more than one action. At that time I knew that Redux is
+    powerful and to understand how to implement the notification to
+    display a ProgressLoadingIndicator it would take me even more time.
 
 #### Sources
 
@@ -3771,18 +3770,18 @@ track the bug inside the implementation of the SMS.
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Sources  | 3               | 3                      | 3    | 2    | 2                | 2     |
 
-- Stateful Widget: Everyone comparing state management solutions
-  includes an explanation about state management with a stateful
-  widget. Furthermore, it is one of Flutters three widget types and
-  the simplest state management solution.
-- ChangeNotifierProvider: Provider is a very popular package in
-  Flutter and therefore there are a lot of examples of how to use its
-  ChangeNotifierProvider in an application.
-- Bloc: Bloclibrary [\[29\]](https://bloclibrary.dev/#/) is one of the
-  best documentations I have seen so far. It contains multiple
-  examples of how to implement the bloc pattern in different scenarios
-  and much more. Furthermore there are tons of examples and tutorials
-  of how to implement the bloc pattern.
+  - Stateful Widget: Everyone comparing state management solutions
+    includes an explanation about state management with a stateful
+    widget. Furthermore, it is one of Flutters three widget types and
+    the simplest state management solution.
+  - ChangeNotifierProvider: Provider is a very popular package in
+    Flutter and therefore there are a lot of examples of how to use its
+    ChangeNotifierProvider in an application.
+  - Bloc: Bloclibrary [\[29\]](https://bloclibrary.dev/#/) is one of the
+    best documentations I have seen so far. It contains multiple
+    examples of how to implement the bloc pattern in different scenarios
+    and much more. Furthermore there are tons of examples and tutorials
+    of how to implement the bloc pattern.
 
 #### Boilerplate
 
@@ -3790,13 +3789,13 @@ track the bug inside the implementation of the SMS.
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Boilerplate | 2               | 2                      | 1    | 2    | 3                | 1     |
 
-- Bloc: To add a feature at least one event, one state and the bloc
-  itself has to be added.
-- States Rebuilder: ReactiveModel provides a lot of access to getters
-  that are common when it comes to state management, e.g. idle state
-  handling.
-- Redux: The strict combination of concepts includes at least one
-  action, one reducer and one state to add a feature.
+  - Bloc: To add a feature at least one event, one state and the bloc
+    itself has to be added.
+  - States Rebuilder: ReactiveModel provides a lot of access to getters
+    that are common when it comes to state management, e.g. idle state
+    handling.
+  - Redux: The strict combination of concepts includes at least one
+    action, one reducer and one state to add a feature.
 
 #### Side-effect handling
 
@@ -3804,18 +3803,18 @@ track the bug inside the implementation of the SMS.
 | -------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Side-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
 
-- Stateful Widget: No recommendation about how to handle side-effects.
-- ChangeNotifierProvider: No recommendation about how to handle
-  side-effects.
-- Bloc: Emphasises a specific widget (BlocListener) to handle
-  side-effects.
-- MobX: I have to make an exception to add a comment for MobX for this
-  criteria. Even though MobX uses reactions to handle side-effects I
-  was not able to add the completion of the RefreshIndicator or the
-  notification of the ThemeStore that the weather has changed as
-  reactions and make it work.
-- States Rebuilder: Emphasises a specific Observer Widget to handle
-  side-effects.
+  - Stateful Widget: No recommendation about how to handle side-effects.
+  - ChangeNotifierProvider: No recommendation about how to handle
+    side-effects.
+  - Bloc: Emphasises a specific widget (BlocListener) to handle
+    side-effects.
+  - MobX: I have to make an exception to add a comment for MobX for this
+    criteria. Even though MobX uses reactions to handle side-effects I
+    was not able to add the completion of the RefreshIndicator or the
+    notification of the ThemeStore that the weather has changed as
+    reactions and make it work.
+  - States Rebuilder: Emphasises a specific Observer Widget to handle
+    side-effects.
 
 #### Debugging
 
@@ -3823,12 +3822,12 @@ track the bug inside the implementation of the SMS.
 | --------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Debugging | 2               | 2                      | 3    | 1    | 2                | 2     |
 
-- Bloc: The immutability allows to track state changes via a history
-  and enables redo/undo functionalities that come in handy when
-  debugging. The tracking history is supported by a specific class in
-  the bloc package.
-- MobX: Since MobX is handling a lot of logic internally it is
-  difficult to track down a bug.
+  - Bloc: The immutability allows to track state changes via a history
+    and enables redo/undo functionalities that come in handy when
+    debugging. The tracking history is supported by a specific class in
+    the bloc package.
+  - MobX: Since MobX is handling a lot of logic internally it is
+    difficult to track down a bug.
 
 ## Overall
 
@@ -3888,7 +3887,7 @@ Bristol, GBR, 1995.
 
 <div id="ref-HowCreateStateless">
 
-\[5\] _How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1_..
+\[5\] *How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1*..
 
 </div>
 
@@ -3911,13 +3910,13 @@ Dart API.”
 
 <div id="ref-HowStatefulWidgets">
 
-\[8\] _How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2_..
+\[8\] *How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2*..
 
 </div>
 
 <div id="ref-InheritedWidgetsExplained">
 
-\[9\] _Inherited Widgets Explained - Flutter Widgets 101 Ep. 3_..
+\[9\] *Inherited Widgets Explained - Flutter Widgets 101 Ep. 3*..
 
 </div>
 
@@ -3939,7 +3938,7 @@ Dart API.”
 
 <div id="ref-HowFlutterRenders">
 
-\[12\] _How Flutter renders Widgets_..
+\[12\] *How Flutter renders Widgets*..
 
 </div>
 
@@ -3978,21 +3977,21 @@ library - Dart API.”
 
 <div id="ref-hunt2000pragmatic">
 
-\[17\] A. Hunt and D. Thomas, _The Pragmatic programmer : From
-journeyman to master_. Boston \[etc.\]: Addison-Wesley, 2000.
+\[17\] A. Hunt and D. Thomas, *The Pragmatic programmer : From
+journeyman to master*. Boston \[etc.\]: Addison-Wesley, 2000.
 
 </div>
 
 <div id="ref-Martin17">
 
-\[18\] R. C. Martin, _Clean architecture: A craftsman’s guide to
-software structure and design_. Boston, MA: Prentice Hall, 2017.
+\[18\] R. C. Martin, *Clean architecture: A craftsman’s guide to
+software structure and design*. Boston, MA: Prentice Hall, 2017.
 
 </div>
 
 <div id="ref-SeparationConcernsSoftware2020">
 
-\[19\] “Separation of Concerns in Software Design,” _Alexey Naumov_,
+\[19\] “Separation of Concerns in Software Design,” *Alexey Naumov*,
 Jan. 16, 2020. <http://nalexn.github.io/separation-of-concerns/>
 (accessed May 17, 2020).
 
@@ -4000,7 +3999,7 @@ Jan. 16, 2020. <http://nalexn.github.io/separation-of-concerns/>
 
 <div id="ref-10.5555/3055897">
 
-\[20\] V. Vernon, _Domain-driven design distilled_, 1st ed.
+\[20\] V. Vernon, *Domain-driven design distilled*, 1st ed.
 Addison-Wesley Professional, 2016.
 
 </div>
@@ -4016,15 +4015,15 @@ architecture - Majid Hajian | Flutter Europe - YouTube.”
 
 <div id="ref-evans2004domaindriven">
 
-\[22\] E. Evans, _Domain-driven design : Tackling complexity in the
-heart of software_. Boston: Addison-Wesley, 2004.
+\[22\] E. Evans, *Domain-driven design : Tackling complexity in the
+heart of software*. Boston: Addison-Wesley, 2004.
 
 </div>
 
 <div id="ref-FlutterFirebaseDDD2020">
 
 \[23\] “Flutter Firebase & DDD Course \[1\] – Domain-Driven Design
-Principles,” _Reso Coder_, Mar. 09, 2020.
+Principles,” *Reso Coder*, Mar. 09, 2020.
 <https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/>
 (accessed May 17, 2020).
 
@@ -4032,7 +4031,7 @@ Principles,” _Reso Coder_, Mar. 09, 2020.
 
 <div id="ref-BrianeganFlutterArchitecture">
 
-\[24\] “Brianegan/flutter_architecture_samples,” _GitHub_.
+\[24\] “Brianegan/flutter\_architecture\_samples,” *GitHub*.
 <https://github.com/brianegan/flutter_architecture_samples> (accessed
 May 12, 2020).
 
@@ -4041,7 +4040,7 @@ May 12, 2020).
 <div id="ref-hgracaArchitecturalStylesVs2017">
 
 \[25\] hgraca, “Architectural Styles vs. Architectural Patterns vs.
-Design Patterns,” _@hgraca_, Jul. 28, 2017.
+Design Patterns,” *@hgraca*, Jul. 28, 2017.
 <https://herbertograca.com/2017/07/28/architectural-styles-vs-architectural-patterns-vs-design-patterns/>
 (accessed May 06, 2020).
 
@@ -4049,7 +4048,7 @@ Design Patterns,” _@hgraca_, Jul. 28, 2017.
 
 <div id="ref-BlikiLocalDTO">
 
-\[26\] “Bliki: LocalDTO,” _martinfowler.com_.
+\[26\] “Bliki: LocalDTO,” *martinfowler.com*.
 <https://martinfowler.com/bliki/LocalDTO.html> (accessed May 17, 2020).
 
 </div>
@@ -4064,7 +4063,7 @@ Design Patterns,” _@hgraca_, Jul. 28, 2017.
 
 <div id="ref-FlutterBlocFlutter">
 
-\[28\] “Flutter_bloc | Flutter Package.”
+\[28\] “Flutter\_bloc | Flutter Package.”
 <https://pub.dev/packages/flutter_bloc> (accessed May 06, 2020).
 
 </div>
@@ -4077,8 +4076,8 @@ Design Patterns,” _@hgraca_, Jul. 28, 2017.
 
 <div id="ref-ProgrammingLanguagesWhat">
 
-\[30\] “Programming languages - What is a "side effect?",” _Software
-Engineering Stack Exchange_.
+\[30\] “Programming languages - What is a "side effect?",” *Software
+Engineering Stack Exchange*.
 <https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect>
 (accessed May 06, 2020).
 
@@ -4093,42 +4092,42 @@ Engineering Stack Exchange_.
 
 <div id="ref-InjectableDartPackage">
 
-\[32\] “Injectable | Dart Package,” _Dart packages_.
+\[32\] “Injectable | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/injectable> (accessed May 17, 2020).
 
 </div>
 
 <div id="ref-GetItDart">
 
-\[33\] “Get_it | Dart Package,” _Dart packages_.
+\[33\] “Get\_it | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/get_it> (accessed May 17, 2020).
 
 </div>
 
 <div id="ref-DartzDartPackage">
 
-\[34\] “Dartz | Dart Package,” _Dart packages_.
+\[34\] “Dartz | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/dartz> (accessed May 17, 2020).
 
 </div>
 
 <div id="ref-BuildRunnerDart">
 
-\[35\] “Build_runner | Dart Package,” _Dart packages_.
+\[35\] “Build\_runner | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/build_runner> (accessed May 17, 2020).
 
 </div>
 
 <div id="ref-InjectableGeneratorDart">
 
-\[36\] “Injectable_generator | Dart Package,” _Dart packages_.
+\[36\] “Injectable\_generator | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/injectable_generator> (accessed May 17, 2020).
 
 </div>
 
 <div id="ref-Mutable">
 
-\[37\] “Mutable,” _MDN Web Docs_.
+\[37\] “Mutable,” *MDN Web Docs*.
 <https://developer.mozilla.org/en-US/docs/Glossary/Mutable> (accessed
 May 08, 2020).
 
@@ -4137,7 +4136,8 @@ May 08, 2020).
 <div id="ref-JavaConcurrencyInPractice">
 
 \[38\] T. Peierls, B. Goetz, J. Bloch, J. Bowbeer, D. Lea, and D.
-Holmes, _Java concurrency in practice_. Addison-Wesley Professional, 2005.
+Holmes, *Java concurrency in practice*. Addison-Wesley Professional,
+2005.
 
 </div>
 
@@ -4152,7 +4152,7 @@ Holmes, _Java concurrency in practice_. Addison-Wesley Professional, 2005.
 <div id="ref-FlutterTutorialPros2019">
 
 \[40\] “Flutter Tutorial: Pros and Cons of popular State Management
-Approaches custom,” _Codemagic blog_, Nov. 11, 2019.
+Approaches custom,” *Codemagic blog*, Nov. 11, 2019.
 <https://blog.codemagic.io/flutter-tutorial-pros-and-cons-of-state-management-approaches/>
 (accessed May 10, 2020).
 
@@ -4177,7 +4177,7 @@ library - Dart API.”
 
 <div id="ref-PragmaticStateManagement">
 
-\[43\] _Pragmatic State Management in Flutter (Google I/O’19)_..
+\[43\] *Pragmatic State Management in Flutter (Google I/O’19)*..
 
 </div>
 
@@ -4191,7 +4191,7 @@ library - Dart API.”
 
 <div id="ref-ProviderFlutterPackage">
 
-\[45\] “Provider | Flutter Package,” _Dart packages_.
+\[45\] “Provider | Flutter Package,” *Dart packages*.
 <https://pub.dev/packages/provider> (accessed May 12, 2020).
 
 </div>
@@ -4223,7 +4223,7 @@ library - Dart API.”
 <div id="ref-mackierFlutterArchitectureProvider2019">
 
 \[49\] D. Mackier, “Flutter Architecture — Provider Implementation
-Guide,” _Medium_.
+Guide,” *Medium*.
 <https://medium.com/flutter-community/flutter-architecture-provider-implementation-guide-d33133a9a4e8>
 (accessed May 12, 2020).
 
@@ -4231,7 +4231,7 @@ Guide,” _Medium_.
 
 <div id="ref-BuildReactiveMobile">
 
-\[50\] _Build reactive mobile apps with Flutter (Google I/O ’18)_..
+\[50\] *Build reactive mobile apps with Flutter (Google I/O ’18)*..
 
 </div>
 
@@ -4269,7 +4269,7 @@ Guide,” _Medium_.
 <div id="ref-boelensFlutterReactiveProgramming">
 
 \[55\] D. Boelens, “Flutter - Reactive Programming - Streams - BLoC,”
-_Didier Boelens_.
+*Didier Boelens*.
 <https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/>
 (accessed May 12, 2020).
 
@@ -4277,7 +4277,7 @@ _Didier Boelens_.
 
 <div id="ref-GettingStartedBLoC">
 
-\[56\] “Getting Started with the BLoC Pattern,” _raywenderlich.com_.
+\[56\] “Getting Started with the BLoC Pattern,” *raywenderlich.com*.
 <https://www.raywenderlich.com/4074597-getting-started-with-the-bloc-pattern>
 (accessed May 12, 2020).
 
@@ -4286,7 +4286,7 @@ _Didier Boelens_.
 <div id="ref-DartFlutterBad">
 
 \[57\] “Dart - Flutter : Bad state: Stream has already been listened
-to,” _Stack Overflow_.
+to,” *Stack Overflow*.
 <https://stackoverflow.com/questions/51396769/flutter-bad-state-stream-has-already-been-listened-to>
 (accessed May 12, 2020).
 
@@ -4302,7 +4302,7 @@ to,” _Stack Overflow_.
 
 <div id="ref-RxdartDartPackage">
 
-\[59\] “Rxdart | Dart Package,” _Dart packages_.
+\[59\] “Rxdart | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/rxdart> (accessed May 12, 2020).
 
 </div>
@@ -4325,7 +4325,7 @@ to,” _Stack Overflow_.
 
 <div id="ref-BlocDartPackage">
 
-\[62\] “Bloc | Dart Package,” _Dart packages_.
+\[62\] “Bloc | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/bloc> (accessed May 16, 2020).
 
 </div>
@@ -4346,7 +4346,7 @@ May 12, 2020).
 
 <div id="ref-FlutterBlocBloc">
 
-\[65\] “Flutter_bloc - Bloc.”
+\[65\] “Flutter\_bloc - Bloc.”
 <https://bloclibrary.dev/#/flutterbloccoreconcepts> (accessed May 12,
 2020).
 
@@ -4354,14 +4354,14 @@ May 12, 2020).
 
 <div id="ref-ReduxDartPackage">
 
-\[66\] “Redux | Dart Package,” _Dart packages_.
+\[66\] “Redux | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/redux> (accessed May 12, 2020).
 
 </div>
 
 <div id="ref-FlutterReduxFlutter">
 
-\[67\] “Flutter_redux | Flutter Package,” _Dart packages_.
+\[67\] “Flutter\_redux | Flutter Package,” *Dart packages*.
 <https://pub.dev/packages/flutter_redux> (accessed May 12, 2020).
 
 </div>
@@ -4376,7 +4376,7 @@ May 12, 2020).
 <div id="ref-FlutterMobXTutorial2019">
 
 \[69\] “Flutter MobX Tutorial – Transparent & Reactive State
-Management?” _Reso Coder_, Dec. 26, 2019.
+Management?” *Reso Coder*, Dec. 26, 2019.
 <https://resocoder.com/2019/12/26/flutter-mobx-tutorial-transparent-reactive-state-management/>
 (accessed May 14, 2020).
 
@@ -4398,21 +4398,21 @@ May 14, 2020).
 
 <div id="ref-MobxDartPackage">
 
-\[72\] “Mobx | Dart Package,” _Dart packages_.
+\[72\] “Mobx | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/mobx> (accessed May 14, 2020).
 
 </div>
 
 <div id="ref-FlutterMobxFlutter">
 
-\[73\] “Flutter_mobx | Flutter Package,” _Dart packages_.
+\[73\] “Flutter\_mobx | Flutter Package,” *Dart packages*.
 <https://pub.dev/packages/flutter_mobx> (accessed May 14, 2020).
 
 </div>
 
 <div id="ref-MobxCodegenDart">
 
-\[74\] “Mobx_codegen | Dart Package,” _Dart packages_.
+\[74\] “Mobx\_codegen | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/mobx_codegen> (accessed May 14, 2020).
 
 </div>
@@ -4420,7 +4420,7 @@ May 14, 2020).
 <div id="ref-StatesRebuilderZERO2019">
 
 \[75\] “States Rebuilder – ZERO Boilerplate Flutter State Management,”
-_Reso Coder_, Dec. 30, 2019.
+*Reso Coder*, Dec. 30, 2019.
 <https://resocoder.com/2019/12/30/states-rebuilder-zero-boilerplate-flutter-state-management/>
 (accessed May 15, 2020).
 
@@ -4428,15 +4428,15 @@ _Reso Coder_, Dec. 30, 2019.
 
 <div id="ref-StatesRebuilderFlutter">
 
-\[76\] “States_rebuilder | Flutter Package,” _Dart packages_.
+\[76\] “States\_rebuilder | Flutter Package,” *Dart packages*.
 <https://pub.dev/packages/states_rebuilder> (accessed May 15, 2020).
 
 </div>
 
 <div id="ref-gamma1994design">
 
-\[77\] E. Gamma, R. Helm, R. Johnson, and J. M. Vlissides, _Design
-patterns: Elements of reusable object-oriented software_, 1st ed.
+\[77\] E. Gamma, R. Helm, R. Johnson, and J. M. Vlissides, *Design
+patterns: Elements of reusable object-oriented software*, 1st ed.
 Addison-Wesley Professional, 1994.
 
 </div>
@@ -4444,7 +4444,7 @@ Addison-Wesley Professional, 1994.
 <div id="ref-chenCharacterizingArchitecturallySignificant2013">
 
 \[78\] L. Chen, M. Ali Babar, and B. Nuseibeh, “Characterizing
-Architecturally Significant Requirements,” _IEEE Softw._, vol. 30, no.
+Architecturally Significant Requirements,” *IEEE Softw.*, vol. 30, no.
 2, pp. 38–45, Mar. 2013, doi:
 [10.1109/MS.2012.174](https://doi.org/10.1109/MS.2012.174).
 
@@ -4453,14 +4453,14 @@ Architecturally Significant Requirements,” _IEEE Softw._, vol. 30, no.
 <div id="ref-159342">
 
 \[79\] “IEEE standard glossary of software engineering terminology,”
-_IEEE Std 610.12-1990_, pp. 1–84, 1990, \[Online\]. Available:
+*IEEE Std 610.12-1990*, pp. 1–84, 1990, \[Online\]. Available:
 <https://ieeexplore.ieee.org/document/159342>.
 
 </div>
 
 <div id="ref-BlocTestDart">
 
-\[80\] “Bloc_test | Dart Package,” _Dart packages_.
+\[80\] “Bloc\_test | Dart Package,” *Dart packages*.
 <https://pub.dev/packages/bloc_test> (accessed May 16, 2020).
 
 </div>
