@@ -108,7 +108,7 @@ specific state. [\[5\]](https://www.youtube.com/watch?v=wE7khGHVkYY)
 
 Let’s take a look at how Flutter defines widgets:
 
-| :closed\_book: | Widget | A widget is an immutable description of part of a user interface.[\[6\](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
+| :closed\_book: | Widget | A widget is an immutable description of part of a user interface.[\[6\]](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
 | -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 
 Typically a UI is mutable to reflect changes via for example user
