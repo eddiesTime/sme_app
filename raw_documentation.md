@@ -2716,11 +2716,11 @@ Synergy in the context of the evaluation is defined as how well the state manage
 #### Time to learn
 Time to learn in the context of the evaluation is defined as the time it takes the developer to learn the concepts of the state management solution and implement them successfully in an example application. This criteria is based on my own time it took me to learn enough about the state management solution to implement it.
  
-#### Resources
-Resources in the context of the evaluation is defined as the amount of resources you will find when you search the Internet for an examples and tutorials for the state management solution. Furthermore if the SMS has a documentation and how well the documentation is written.
+#### Sources
+Sources in the context of the evaluation is defined as the amount of sources you will find when you search the Internet for examples and tutorials for the state management solution. Furthermore if the SMS has a documentation and how well the documentation is written.
 
 #### Boilerplate
-Amount of Boilerplate in the context of the evaluation is defined as how much boilerplate is being used by the SMS.
+Boilerplate in the context of the evaluation is defined as how much boilerplate is being used by the SMS.
 
 #### Side-effect handling
 Side-effect-handling in the context of the evaluation is defined as how well the SMS handles side-effects. To be more precise does the SMS provide a recommendation or guideline how to handle side-effects, how easy can it be implemented and how well it works.
@@ -2731,118 +2731,131 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 
 ### Results
 
-Quality Attributes:
-* Maintainability
-	* Stateful Widget: 1
-		* State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
-	* ChangeNotifierProvider: 2
-	* Bloc: 2
-	* MobX: 2
-	* States Rebuilder: 2
-	* Redux: 2
-* Extendability
-	* Stateful Widget: 1
-		* The extendability of the application with this SMS is provided but for the same reason as in maintainability the need the pass down the state through all widgets in between makes it worse.
-	* ChangeNotifierProvider: 2
-	* Bloc: 2
-	* MobX: 2
-	* States Rebuilder: 2
-	* Redux: 2
-* Modularity
-	* Stateful Widget: 1
-		* State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
-	* ChangeNotifierProvider: 2
-	* Bloc: 2
-	* MobX: 2
-	* States Rebuilder: 2
-	* Redux: 2
-* Reusability
-	* Stateful Widget: 1
-		* Flutter specific.
-	* ChangeNotifierProvider: 1
-		* Flutter specific.
-	* Bloc: 2
-	* MobX: 2
-	* States Rebuilder: 1
-		* Flutter specific.
-	* Redux: 2
-* Testability
-	* Stateful Widget: 2
-	* ChangeNotifierProvider: 2
-	* Bloc: 3
-		* Has the package bloc_test [@BlocTestDart] which makes it easier to write tests for blocs.
-	* MobX: 2
-	* States Rebuilder: 2
-	* Redux: 3
-		* Since most of the components in Redux are pure functions, they are easy to test without mocking.
+#### Quality Attributes
 
+##### Maintainability
 
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Maintainability       | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-The personally chosen criteria are:
-* Synergy
-	* Stateful Widget: 1
-		* Breaks the principle of decoupling by having logic in the UI.
-	* ChangeNotifierProvider: 2
-	* Bloc: 2
-	* MobX: 2
-	* States Rebuilder: 1
-		* States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via Injector is provided. In our architecture the package combination of getIt and injector has been chosen to handle D.I. and State Rebuilder’s own dependency injection does not play well with the architecture’s D.I. solution.
-	* Redux: 2
-* Time to learn
-	* Stateful Widget: 3
-		* One of Flutters three types of widgets which everyone using Flutter had to learn.
-	* ChangeNotifierProvider: 3
-		* Endorsed by the Flutter Team and is easy to learn because of it’s popularity and tutorials
-	* Bloc: 1
-		* Even though the concept of Bloc is well documented it took me one day to understand the concepts and implemented it in my first application.
-	* MobX: 3
-		* Easy to learn since MobX encapsulates most logic and handles the updates of the UI and notifications about state manipulations internally. The developer only has to implement the three mentioned packages in the MobX example and add decorators to the business logic.
-	* States Rebuilder: 2
-	* Redux: 1
-		* Without previous knowledge about Redux and it not being a popular solution for state management in Flutter it took me between 2 and 3 days to implement it in the example application. Furthermore, I stopped the implementation of the example without fully following the concepts of Redux. As you may have noticed in the middleware to handle asynchronous calls the reducers are dispatching more than one action. At that time I knew that Redux is powerful and to understand how to implement the notification to display a ProgressLoadingIndicator it would take me even more time.
-* Ressources
-	* Stateful Widget: 3
-		* Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutters three widget types and the simplest state management solution.
-	* ChangeNotifierProvider: 3
-		* Provider is a very popular package in Flutter and therefore there are a lot of examples of how to use its ChangeNotifierProvider in an application.
-	* Bloc: 3
-		* Bloclibrary [@Bloc] is one of the best documentations I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore there are tons of examples and tutorials of how to implement the bloc pattern.
-	* MobX: 2
-	* States Rebuilder: 2
-	* Redux: 2
-* Amount of Boilerplate
-	* Stateful Widget: 2
-	* ChangeNotifierProvider: 2
-	* Bloc: 1
-		* To add a feature at least one event, one state and the bloc itself has to be added.
-	* MobX: 2
-	* States Rebuilder: 3
-		* ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g. idle state handling.
-	* Redux: 1
-		* The strict combination of concepts includes at least one action, one reducer and one state to add a feature.
-* Side-effect handling
-	* Stateful Widget: 1
-		* No recommendation about how to handle side-effects.
-	* ChangeNotifierProvider: 1
-		* No recommendation about how to handle side-effects.
-	* Bloc: 3
-		* Emphasises a specific widget (BlocListener) to handle side-effects.
-	* MobX: 2
-		* I have to make an exception to add a comment for MobX for this criteria. Even though MobX uses reactions to handle side-effects I was not able to add the completion of the RefreshIndicator or the notification of the ThemeStore that the weather has changed as reactions and make it work.
-	* States Rebuilder: 3
-		* Emphasises a specific Observer Widget to handle side-effects.
-	* Redux: 2
-* Debugging
-	* Stateful Widget: 2
-	* ChangeNotifierProvider: 2
-	* Bloc: 3
-		* The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific  class in the bloc package.
-	* MobX: 1
-		* Since MobX is handling a lot of logic internally it is difficult to track down a bug.
-	* States Rebuilder: 2
-	* Redux: 2
+* Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
+	
+##### Extendability
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Extendability         | 1               | 2                      | 2    | 2    | 2                | 2     |
+
+* Stateful Widget: The extendability of the application with this SMS is provided but for the same reason as in maintainability the need the pass down the state through all widgets in between makes it worse.
+
+##### Modularity
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Modularity            | 1               | 2                      | 2    | 2    | 2                | 2     |
+	
+* Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
+
+##### Reusability
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Reusability           | 1               | 1                      | 2    | 2    | 1                | 2     |
+	
+* Stateful Widget: Flutter specific.
+* ChangeNotifierProvider: Flutter specific.
+* States Rebuilder: Flutter specific.
+
+##### Testability
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Testability           | 2               | 2                      | 3    | 2    | 2                | 3     |
+
+* Bloc: Has the package bloc_test [@BlocTestDart] which makes it easier to write tests for blocs.
+* Redux: Since most of the components in Redux are pure functions, they are easy to test without mocking.
+
+#### The personally chosen criteria
+
+##### Synergy
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Synergy               | 1               | 2                      | 2    | 2    | 1                | 2     |
+
+* Stateful Widget: Breaks the principle of decoupling by having logic in the UI.
+* States Rebuilder: States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via Injector is provided. In our architecture the package combination of getIt and injector has been chosen to handle D.I. and State Rebuilder’s own dependency injection does not play well with the architecture’s D.I. solution.
+
+##### Time to learn
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Time to learn         | 3               | 3                      | 1    | 3    | 2                | 1     |
+	
+* Stateful Widget: One of Flutters three types of widgets which everyone using Flutter had to learn.
+* ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to learn because of it’s popularity and tutorials
+* Bloc: Even though the concept of Bloc is well documented it took me one day to understand the concepts and implemented it in my first application.
+* MobX: Easy to learn since MobX encapsulates most logic and handles the updates of the UI and notifications about state manipulations internally. The developer only has to implement the three mentioned packages in the MobX example and add decorators to the business logic.
+* Redux: Without previous knowledge about Redux and it not being a popular solution for state management in Flutter it took me between 2 and 3 days to implement it in the example application. Furthermore, I stopped the implementation of the example without fully following the concepts of Redux. As you may have noticed in the middleware to handle asynchronous calls the reducers are dispatching more than one action. At that time I knew that Redux is powerful and to understand how to implement the notification to display a ProgressLoadingIndicator it would take me even more time.
+
+##### Sources
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Sources               | 3               | 3                      | 3    | 2    | 2                | 2     |
+
+* Stateful Widget: Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutters three widget types and the simplest state management solution.
+* ChangeNotifierProvider: Provider is a very popular package in Flutter and therefore there are a lot of examples of how to use its ChangeNotifierProvider in an application.
+* Bloc: Bloclibrary [@Bloc] is one of the best documentations I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore there are tons of examples and tutorials of how to implement the bloc pattern.
+
+##### Boilerplate
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Boilerplate           | 2               | 2                      | 1    | 2    | 3                | 1     |
+
+* Bloc: To add a feature at least one event, one state and the bloc itself has to be added.
+* States Rebuilder: ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g. idle state handling.
+* Redux: The strict combination of concepts includes at least one action, one reducer and one state to add a feature.
+
+##### Side-effect handling
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Side\-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
+	
+* Stateful Widget: No recommendation about how to handle side-effects.
+* ChangeNotifierProvider: No recommendation about how to handle side-effects.
+* Bloc: Emphasises a specific widget (BlocListener) to handle side-effects.
+* MobX: I have to make an exception to add a comment for MobX for this criteria. Even though MobX uses reactions to handle side-effects I was not able to add the completion of the RefreshIndicator or the notification of the ThemeStore that the weather has changed as reactions and make it work.
+* States Rebuilder: Emphasises a specific Observer Widget to handle side-effects.
+
+##### Debugging
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Debugging             | 2               | 2                      | 3    | 1    | 2                | 2     |
+
+* Bloc: The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific  class in the bloc package.
+* MobX: Since MobX is handling a lot of logic internally it is difficult to track down a bug.
 
 ### Overall
+
+| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+|-----------------------|-----------------|------------------------|------|------|------------------|-------|
+| Maintainability       | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Extendability         | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Modularity            | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Reusability           | 1               | 1                      | 2    | 2    | 1                | 2     |
+| Testability           | 2               | 2                      | 3    | 2    | 2                | 3     |
+| Synergy               | 1               | 2                      | 2    | 2    | 1                | 2     |
+| Time to learn         | 3               | 3                      | 1    | 3    | 2                | 1     |
+| Resources             | 3               | 3                      | 3    | 2    | 2                | 2     |
+| Amount of Boilerplate | 2               | 2                      | 1    | 2    | 3                | 1     |
+| Side\-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
+| Debugging             | 2               | 2                      | 3    | 1    | 2                | 2     |
+| Total                 | 18              | 22                     | 24   | 22   | 22               | 21    |
 
 ### Recommendations
 
