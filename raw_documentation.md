@@ -2872,6 +2872,6 @@ Large: Bloc, Redux, States Rebuilder
 * which solution is suited to help with state management in example, small-scale, middle-scale, large-scale applications
 
 
-## 6. References
+## References
 
 
