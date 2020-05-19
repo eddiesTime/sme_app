@@ -40,32 +40,23 @@ This chapter will cover the fundamental knowledge you will need as prerequisites
 ## Contents of the Chapter
 
 - [Flutter under the Hood](#flutter-under-the-hood)
-  - [It's all Widgets](#its-all-widgets)
-  - [Types of Widgets](#types-of-widgets)
-    - [Stateless Widget](#stateless-widget)
-    - [Stateful Widget](#stateful-widget)
-    - [Inherited Widget](#inherited-widget)
 - [What is State?](#what-is-state)
-  - [Definition](#state)
-  - [Ephemeral State](#ephemeral-state)
-  - [Application State](#application-state)
-  - [Decision Help](#decision-help)
 - [How does Flutter React to State Changes?](#flutter-react)
 - [State Management](#state-management)
-  - [Principle of Lifting State Up](#lifting-state)
 
-## Flutter under the Hood {#flutter-under-the-hood}
+## Flutter under the Hood
 
-Table of Content
+Contents of the Section
 
 - [Introduction](#flutter-under-the-hood-introduction)
+- [Definitions](#flutter-under-the-hood-definitions)
 - [It's all Widgets](#its-all-widgets)
 - [Types of Widgets](#types-of-widgets)
   - [Stateless Widget](#stateless-widget)
   - [Stateful Widget](#stateful-widget)
   - [Inherited Widget](#inherited-widget)
 
-### Introduction {#flutter-under-the-hood-introduction}
+### Introduction
 
 Before we take a look at Flutter under the hood, we should get acquainted with some definitions.
 
@@ -91,7 +82,7 @@ Code snippet 1 shows an example of Flutter declarative nature. As you can see, a
 
 I have mentioned Widgets a couple of times in the previous paragraph. So let's take a look at what widgets are in the next section.
 
-### It's all Widgets {#its-all-widgets}
+### It's all Widgets
 
 To explain what widgets are and their role in Flutter I will reference the official Flutter documentation. [[@TechnicalOverview]](https://flutter.dev/docs/resources/technical-overview)
 
@@ -115,11 +106,11 @@ Let's take a look at how Flutter defines widgets:
 
 Typically a UI is mutable to reflect changes via for example user interaction. But how can Flutter reflecht changes in the user interface, when a widget is by definition immutable? The answer is simple. Flutter uses different types of widgets with different behaviour. Let's take a look at the different types of widgets.
 
-### Types of Widgets {#types-of-widgets}
+### Types of Widgets
 
 This section will cover the three different types of widget in Flutter. I will start with the Stateless Widget, then move on to the Stateful Widget and finish the section with the Inherited Widget.
 
-#### Stateless Widgets {#stateless-widget}
+#### Stateless Widget
 
 To explain what a Stateless Widget is and how it works I will summarise the youtube video "How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1". [[@HowCreateStateless]](https://www.youtube.com/watch?v=wE7khGHVkYY) It is the first video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
 
@@ -205,7 +196,7 @@ Figure 05 shows the final widget and element tree for the example.
 
 With Figure 05 this part about the widget type Stateless Widget is finished. But what if we want to tell Flutter to display a different text than "Hello World"? This question will be answered in the next part which introduces the next widget type - Stateful Widget.
 
-#### Stateful Widget {#stateful-widget}
+#### Stateful Widget
 
 To explain what a Statelful Widget is and how it works I will summarise the youtube video "How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2". [[@HowStatefulWidgets]](https://www.youtube.com/watch?v=AqCMFXEmf3w&t=0s) It is the second video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
 
@@ -339,7 +330,7 @@ This sums up how the widget and element tree react to the ItemCounter Widget get
 
 In this part I have explained what a Stateful Widget is and how it is used to update the UI. The next part is about Inherited Widgets the last type of widgets used in Flutter and the last part of this section.
 
-#### Inherited Widget {#inherited-widget}
+#### Inherited Widget
 
 The Inherited Widget is the third and last type of Widgets I will talk about.
 
@@ -381,13 +372,21 @@ _Code snippet 07: Example how Theme can be accessed._
 
 With this part the section about types of widgets in Flutter is finished. The next section will cover what state in Flutter is.
 
-## What is State? {#what-is-state}
+## What is State?
+
+Contents of the Section
+
+- [Introduction](#what-is-state-introduction)
+- [Definition](#state)
+- [Ephemeral State](#ephemeral-state)
+- [Application State](#application-state)
+- [Decision Help](#decision-help)
 
 This section will cover what state in Flutter is. All the information in this section is taken from the official Flutter documenation.
 
 So, to start this section let's take a look at the official definition of state in Flutter.
 
-### Definition {#state}
+### Definition
 
 | :closed_book: | State | Whatever data you need in order to rebuild your UI at any moment in time. [@DifferentiateEphemeralState] |
 | ------------- | ----- | -------------------------------------------------------------------------------------------------------- |
@@ -401,15 +400,15 @@ To remind you about its impact on Flutter I want to remind you about how Flutter
 
 Now let's dive deeper into state in Flutter. It can be divided into ephemeral state and application state.
 
-### Ephemeral State {#ephemeral-state}
+### Ephemeral State
 
 Ephemeral state is specified as mutable data which is only relevant to the widget holding this configuration. It is also called local state and can be implemented using a state object of a Stateful Widget as seen in Section 1.1 It's all widgets.
 
-### Application State {#application-state}
+### Application State
 
 Application state in constrast to ephemeral state is data that is shared by mutliple widgets, e.g. user data.
 
-### Decision Help {#decision-help}
+### Decision Help
 
 When working with state in Flutter there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to decide which type of state you should use which is shown in Figure 19:
 
@@ -421,7 +420,7 @@ Don't worry to much about what kind of state to use since it most definitely wil
 
 This part is the finish of the section about state in Flutter. The next section will cover how Flutter reacts to state changes internally.
 
-## How does Flutter React to State Changes? {#flutter-react}
+## How does Flutter React to State Changes?
 
 In the previous section about widgets I have covered the widget types Stateless widget and Stateful widgets and how Flutter handles them with the use of the widget tree and the element tree. This has been the way Flutter has been working internally in 2018, when the youtube video series "Widget 101" has been uploaded by the Flutter team. Since then Flutter has evolved and so has the way Flutter handles widgets internally. In 2019 during the Google Developer Days China the Flutter team gave a talk about how Flutter renders widgets and uploaded the talk to youtube.
 
@@ -503,7 +502,13 @@ This example covered the process of a single widget handled by Flutter with the 
 
 This covers the section about "How Flutter renders Widgets" and you should hopefully have an understanding of how Flutter works under the hood. To finish up the next and last section of this chapter will cover what state management is and talk about the basic principle that is used in Flutter to manage state.
 
-## State Management {#state-management}
+## State Management
+
+Contents of the Section
+
+- [Introduction](#state-management-introduction)
+- [Definition](state-management-definition)
+- [Principle of Lifting State Up](#lifting-state)
 
 This section will cover what state management is and introduce the basic principle that is used to manage state in Flutter.
 
@@ -515,7 +520,7 @@ So how do we access application state from inside our widgets?
 
 To access the app state it can be accessed through handing it down the widget tree. But the problem is, how do we pass data the other way around to an ancestor? And furthermore, how do different widgets from different subtrees access the same data? This is where the principle of lifting state up comes into play.
 
-### Principle of Lifting State Up {#lifting-state}
+### Principle of Lifting State Up
 
 This principle of lifting state up describes that we have to find the lowest common ancestor of two widgets that need access to the state and pass the state down from this ancestor.
 
