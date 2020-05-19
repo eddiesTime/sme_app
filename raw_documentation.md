@@ -71,8 +71,8 @@ They are blueprints for parts of the UI that hold a configuration for a specific
 
 Let's take a look at how Flutter defines widgets:
 
-| :closed_book: | Widget | A widget is an immutable description of part of a user interface. [[@WidgetClassWidgets](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :closed_book: | Widget | A widget is an immutable description of part of a user interface. [[@WidgetClassWidgets]](https://api.flutter.dev/flutter/widgets/Widget-class.html) |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 
 Typically a UI is mutable to reflect changes via for example user interaction. But how can Flutter reflecht changes in the user interface, when a widget is by definition immutable? The answer is simple. Flutter uses different types of widgets with different behaviour. Let's take a look at the different types of widgets.
@@ -2805,6 +2805,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | --------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Maintainability | 1               | 2                      | 2    | 2    | 2                | 2     |
 
+_Table 01: Maintainability scores_
+
 - Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
 
 #### Extendability
@@ -2812,6 +2814,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria      | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Extendability | 1               | 2                      | 2    | 2    | 2                | 2     |
+
+_Table 02: Extendability scores_
 
 - Stateful Widget: The extendability of the application with this SMS is provided but for the same reason as in maintainability the need the pass down the state through all widgets in between makes it worse.
 
@@ -2821,6 +2825,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | ---------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Modularity | 1               | 2                      | 2    | 2    | 2                | 2     |
 
+_Table 03: Modularity scores_
+
 - Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
 
 #### Reusability
@@ -2828,6 +2834,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria    | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Reusability | 1               | 1                      | 2    | 2    | 1                | 2     |
+
+_Table 04: Reusability scores_
 
 - Stateful Widget: Flutter specific.
 - ChangeNotifierProvider: Flutter specific.
@@ -2838,6 +2846,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria    | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Testability | 2               | 2                      | 3    | 2    | 2                | 3     |
+
+_Table 05: Testability scores_
 
 - Bloc: Has the package bloc_test [[@BlocTestDart]](https://pub.dev/packages/bloc_test) which makes it easier to write tests for blocs.
 - Redux: Since most of the components in Redux are pure functions, they are easy to test without mocking.
@@ -2850,6 +2860,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Synergy  | 1               | 2                      | 2    | 2    | 1                | 2     |
 
+_Table 06: Synergy scores_
+
 - Stateful Widget: Breaks the principle of decoupling by having logic in the UI.
 - States Rebuilder: States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via Injector is provided. In our architecture the package combination of getIt and injector has been chosen to handle D.I. and State Rebuilder’s own dependency injection does not play well with the architecture’s D.I. solution.
 
@@ -2858,6 +2870,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria      | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Time to learn | 3               | 3                      | 1    | 3    | 2                | 1     |
+
+_Table 07: Time to learn scores_
 
 - Stateful Widget: One of Flutters three types of widgets which everyone using Flutter had to learn.
 - ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to learn because of it’s popularity and tutorials
@@ -2871,6 +2885,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Sources  | 3               | 3                      | 3    | 2    | 2                | 2     |
 
+_Table 08: Sources scores_
+
 - Stateful Widget: Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutters three widget types and the simplest state management solution.
 - ChangeNotifierProvider: Provider is a very popular package in Flutter and therefore there are a lot of examples of how to use its ChangeNotifierProvider in an application.
 - Bloc: Bloclibrary [[@Bloc]](https://bloclibrary.dev/#/) is one of the best documentations I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore there are tons of examples and tutorials of how to implement the bloc pattern.
@@ -2881,6 +2897,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Boilerplate | 2               | 2                      | 1    | 2    | 3                | 1     |
 
+_Table 09: Time to learn scores_
+
 - Bloc: To add a feature at least one event, one state and the bloc itself has to be added.
 - States Rebuilder: ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g. idle state handling.
 - Redux: The strict combination of concepts includes at least one action, one reducer and one state to add a feature.
@@ -2890,6 +2908,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | --------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Side\-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
+
+_Table 10: Side-effect handling scores_
 
 - Stateful Widget: No recommendation about how to handle side-effects.
 - ChangeNotifierProvider: No recommendation about how to handle side-effects.
@@ -2902,6 +2922,8 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Criteria  | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | --------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Debugging | 2               | 2                      | 3    | 1    | 2                | 2     |
+
+_Table 11: Debugging scores_
 
 - Bloc: The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific class in the bloc package.
 - MobX: Since MobX is handling a lot of logic internally it is difficult to track down a bug.
@@ -2923,11 +2945,58 @@ Debugging in the context of the evaluation is defined as how easy can bugs be de
 | Debugging             | 2               | 2                      | 3    | 1    | 2                | 2     |
 | Total                 | 18              | 22                     | 24   | 22   | 22               | 21    |
 
+_Table 12: Overall scores_
+
 ## Recommendations
 
-Example: Stateful widget
-Small: ChangeNotifierProvider, MobX
-Medium: Bloc, MobX, States Rebuilder, Redux
-Large: Bloc, Redux, States Rebuilder
+### Introduction
+
+I want to use this section to give you a personal recommendation on which state management solutions in my opinion are suited to be _the right tool for the jop._ This principle is something that you most likely have heard multiple times on different ocasions. In the context of this guide the right tool for the job applies on the variation in priorities when it comes to applications from examples to large-scale applications and their coverage. I am going to start the section by pointing out the variation of priorities and finish it with my personal recommendation for example, small-scale, medium-scale and large-scale applications.
+
+### Variation in priorities
+
+As I have shown in [chapter 3]() state management solutions have different advantages and disadvantages based on the core pinciples of mutable and immutable state. Therefore these solutions vary in some criteria because of the distinct nature and therefore received different scores as shown in [chapter 4]().
+
+The top score in an evaluation does not imply that it is automatically the silver bullet for your applications state management concerns. Furthermore it changes from situation to situation.
+
+Depending on whether you want to build an example, a small-scale application, a medium-sized application, or a large-scale application you have different requirements and a shifted prioritization on criterias the application has to match. For example, when it comes to showcasing examples, you want to build your example as quick as possible and focus on the problem it solves at hand rather than using a SMS that makes it easy to handle side-effects or allow maintainability in the long run. On the other hand, when it comes to large-scale application development your focus shifts from a quick execution of your logic to the focus on the bigger picture, e.g. that the application is easy to maintain, easy to extend and robust. You rather focus on quality attributes.
+
+### Recommendations
+
+#### Example
+
+When you want to create a small example to showcase how a problem can be fixed or how something works, you usually priorities quick execution and simplicity over maintainability and other quality criteria. I mean what is an example worth if not everyone can understand it without having to know how for example a Redux store works. Therefore my personal recommendation for state management solutions when it comes to create examples has to be something each and every Flutter developer knows.
+
+My personal recommendation for examples is: **Stateful Widget**
+
+#### Small-scale application
+
+When your goal is to build a small-scale application you priorities a state management solution that is easy to learn and minimimes the amount of boilerplate, thus, your focus can be on the problem at hand. Furthermore it should provide the opportunity to scale-up the application at a later point which means that it also has to provide some level of extendibility.
+
+My personal recommendations for small-scale applications are: **ChangeNotifierProvider & MobX**
+
+#### Medium-scale application
+
+When your goal is to build a medium-scale application you will find yourself in a dilemma where you have to decide between state management solutions that are easy to learn and SMS that bring long-term advantages. Therefore you will not be surprised to see a mix between my small-scale and large-scale recommendations.
+
+My personal recommendations for medium-scale applications are: **Bloc, MobX, States Rebuilder, Redux**
+
+#### Large-scale application
+
+When your goal is to build a large-scale application your priorities shift from criteria like easy to learn and minimal amount of boilerplate to long-term impacting criteria like maintainability and other quality attributes as well as synergy with the application architecture and ease of debugging.
+
+My personal recommendations for large-scale applications are: **Bloc, Redux (and States Rebuilder)**
+
+To explain my optional recommendation of states rebuilder: The drawback with this state management solution is that because of its nature of state management and dependecy injection in one package you have to choose your other packages around states rebuilder rather than the other way around. Nonetheless, when you want to build a large-scale Flutter application and are not fixed on specifics it is a valied SMS.
+
+You have reached the end of this chapter. The next chapter [_Conclusion_]() is going to contain my personal evaluation of this guide and what I intend to do in the future.
+
+# Conclusion
+
+## Introduction
+
+## Evaluation of the guide
+
+## What is planned for the future
 
 # References
