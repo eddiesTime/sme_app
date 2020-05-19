@@ -1,59 +1,97 @@
-# Meta information
+# Introduction
 
-## What is the purpose of this guide?
+## Foreword
+
+I want to use this foreword to give credits to Sebastian Faust [[@FasustOverview]](https://github.com/Fasust) and DevonFw [[@Devonfw]](https://devonfw.com/index.html) for their great Flutter guide [[@DevonfwforgeDevonfw4flutter]](https://github.com/devonfw-forge/devonfw4flutter). The guide is well written, and its structure has been a huge inspiration for my work.
+
+## What is the Purpose of this Guide?
 
 The goal of this guide is to set an entry point for state management in Flutter.
 
-This guide helps Flutter developers and Flutter development teams that have to decide which state management solution (SMS) to choose for their app to determine which SMS is most likely the right tool for the job.
+The goal is to help Flutter developers and Flutter development teams that have to decide which state management solution (SMS) to choose for their app to determine which SMS is most likely _the right tool for the job_.
 
 It should provide a reference about which state management solution is likely the right one to choose to build an example, small-scale, middle-scale, or large-scale application.
 Or at least show the advantages and disadvantages of each solution so that you can make an educated decision yourself.
 
-## Who is this guide for?
+## Who is this Guide For?
 
 This guide is for Flutter developers and Flutter development teams that are planning their next Flutter project.
 
 It is for people who are overwhelmed by the amount of state management solutions provided by the community. For people who are searching for information about which SMS is in line with their requirements and why they should think about choosing it.
 
-## How is this guide written?
+## Topics that will be Covered
 
-This guide has been written for developers. So I want to keep it informal - from developer to developers. Throughout the guide, I will use the pronoun "we" and "you" to keep it that way.
+## Creation Context
 
-## What resources were used to create this guide?
+## How was this Guide Written?
 
-For the creation of this guide a collection of books, blog posts, journal article, official documentations and youtube videos has been used.
+This guide has been written for developers. So I want to keep it informal - from developer to developers. Throughout the guide, I will use the pronoun "you" to keep it that way.
 
-# 1. Basic knowledge
+## What Sources were used to create this Guide?
 
-This chapter will cover the fundamental knowledge we will need to understand how Flutter works internally. It will include what state is in Flutter and how Flutter manages state in general.
+For the creation of this guide, a collection of books, blog posts, journal articles, official documentation, and youtube videos has been used. In chapter X References, a list of all sources used in this guide can be found.
 
-## Flutter under the hood
+# Prerequisites
+
+## Introduction
+
+This chapter will cover the fundamental knowledge you will need as prerequisites to follow the guide and fully understand how Flutter works internally. The first section of this chapter will cover the concepts of Flutter and show how it works _under the hood_. The second section will cover what state in Flutter is. The third section will include how state changes in Flutter are handled internally. The fourth and last section will cover state management in Flutter.
+
+## Contents of the Chapter
+
+- [Flutter under the Hood](#flutter-under-the-hood)
+  - [It's all Widgets](#its-all-widgets)
+  - [Types of Widgets](#types-of-widgets)
+    - [Stateless Widget](#stateless-widget)
+    - [Stateful Widget](#stateful-widget)
+    - [Inherited Widget](#inherited-widget)
+- [What is State?](#what-is-state)
+  - [Definition](#state)
+  - [Ephemeral State](#ephemeral-state)
+  - [Application State](#application-state)
+  - [Decision Help](#decision-help)
+- [How does Flutter React to State Changes?](#flutter-react)
+- [State Management](#state-management)
+  - [Principle of Lifting State Up](#lifting-state)
+
+## Flutter under the Hood {#flutter-under-the-hood}
+
+Table of Content
+
+- [Introduction](#flutter-under-the-hood-introduction)
+- [It's all Widgets](#its-all-widgets)
+- [Types of Widgets](#types-of-widgets)
+  - [Stateless Widget](#stateless-widget)
+  - [Stateful Widget](#stateful-widget)
+  - [Inherited Widget](#inherited-widget)
+
+### Introduction {#flutter-under-the-hood-introduction}
 
 Before we take a look at Flutter under the hood, we should get acquainted with some definitions.
 
 So, what is Flutter?
 
-| :closed_book: | Flutter | Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.[[@FlutterBeautifulNative]](https://flutter.dev/) |
-| ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :closed_book: | Flutter | Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase [[@FlutterBeautifulNative]](https://flutter.dev/) |
+| :-----------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 
 From the official Flutter documentation we learn that Flutter is declarative.
 
-> Flutter builds its user interface to reflect the current state of your app. [[@StartThinkingDeclaratively]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative)
+> Flutter builds its user interface to reflect the current state of your app [[@StartThinkingDeclaratively]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative)
 
-Therefore we can assume that Flutter follows the declarative programming paradigm. Declarative programming focuses on specifying the result of an operation rather than the computational processes it has to do to achieve the desired result. [@10.5555/895948] Let's take a look at the theory of declarative programming in practice.
+Therefore we can assume that Flutter follows the declarative programming paradigm. Declarative programming focuses on specifying the result of an operation rather than the computational processes it has to do to achieve the desired result [@10.5555/895948]. Let's take a look at the theory of declarative programming in practice.
 
 ```dart
 void main() => Center(child: Text('Hello World'));
 ```
 
-_Code snippet 01: declarative programming example_
+_Code snippet 01: Declarative programming example_
 
 Code snippet 1 shows an example of Flutter declarative nature. As you can see, a `main()` method is declared, which returns a `Center` Widget, which holds a `Text` Widget. These declarations are all we need to tell Flutter to build a text in the center of the screen. No specification of what it needs to do to get the text to the screen had to be written.
 
 I have mentioned Widgets a couple of times in the previous paragraph. So let's take a look at what widgets are in the next section.
 
-### It's all widgets
+### It's all Widgets {#its-all-widgets}
 
 To explain what widgets are and their role in Flutter I will reference the official Flutter documentation. [[@TechnicalOverview]](https://flutter.dev/docs/resources/technical-overview)
 
@@ -77,11 +115,11 @@ Let's take a look at how Flutter defines widgets:
 
 Typically a UI is mutable to reflect changes via for example user interaction. But how can Flutter reflecht changes in the user interface, when a widget is by definition immutable? The answer is simple. Flutter uses different types of widgets with different behaviour. Let's take a look at the different types of widgets.
 
-### Types of Widgets
+### Types of Widgets {#types-of-widgets}
 
 This section will cover the three different types of widget in Flutter. I will start with the Stateless Widget, then move on to the Stateful Widget and finish the section with the Inherited Widget.
 
-#### Stateless widgets
+#### Stateless Widgets {#stateless-widget}
 
 To explain what a Stateless Widget is and how it works I will summarise the youtube video "How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1". [[@HowCreateStateless]](https://www.youtube.com/watch?v=wE7khGHVkYY) It is the first video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
 
@@ -167,7 +205,7 @@ Figure 05 shows the final widget and element tree for the example.
 
 With Figure 05 this part about the widget type Stateless Widget is finished. But what if we want to tell Flutter to display a different text than "Hello World"? This question will be answered in the next part which introduces the next widget type - Stateful Widget.
 
-#### Stateful Widget
+#### Stateful Widget {#stateful-widget}
 
 To explain what a Statelful Widget is and how it works I will summarise the youtube video "How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2". [[@HowStatefulWidgets]](https://www.youtube.com/watch?v=AqCMFXEmf3w&t=0s) It is the second video of a great series by the Flutter team where they explain the different types of widgets used by Flutter.
 
@@ -301,7 +339,7 @@ This sums up how the widget and element tree react to the ItemCounter Widget get
 
 In this part I have explained what a Stateful Widget is and how it is used to update the UI. The next part is about Inherited Widgets the last type of widgets used in Flutter and the last part of this section.
 
-#### Inherited Widget
+#### Inherited Widget {#inherited-widget}
 
 The Inherited Widget is the third and last type of Widgets I will talk about.
 
@@ -343,13 +381,13 @@ _Code snippet 07: Example how Theme can be accessed._
 
 With this part the section about types of widgets in Flutter is finished. The next section will cover what state in Flutter is.
 
-## What is state?
+## What is State? {#what-is-state}
 
 This section will cover what state in Flutter is. All the information in this section is taken from the official Flutter documenation.
 
 So, to start this section let's take a look at the official definition of state in Flutter.
 
-### Definition
+### Definition {#state}
 
 | :closed_book: | State | Whatever data you need in order to rebuild your UI at any moment in time. [@DifferentiateEphemeralState] |
 | ------------- | ----- | -------------------------------------------------------------------------------------------------------- |
@@ -363,15 +401,15 @@ To remind you about its impact on Flutter I want to remind you about how Flutter
 
 Now let's dive deeper into state in Flutter. It can be divided into ephemeral state and application state.
 
-### Ephemeral state
+### Ephemeral State {#ephemeral-state}
 
 Ephemeral state is specified as mutable data which is only relevant to the widget holding this configuration. It is also called local state and can be implemented using a state object of a Stateful Widget as seen in Section 1.1 It's all widgets.
 
-### Application State
+### Application State {#application-state}
 
 Application state in constrast to ephemeral state is data that is shared by mutliple widgets, e.g. user data.
 
-### Decision help
+### Decision Help {#decision-help}
 
 When working with state in Flutter there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to decide which type of state you should use which is shown in Figure 19:
 
@@ -383,7 +421,7 @@ Don't worry to much about what kind of state to use since it most definitely wil
 
 This part is the finish of the section about state in Flutter. The next section will cover how Flutter reacts to state changes internally.
 
-## How does flutter react to state changes?
+## How does Flutter React to State Changes? {#flutter-react}
 
 In the previous section about widgets I have covered the widget types Stateless widget and Stateful widgets and how Flutter handles them with the use of the widget tree and the element tree. This has been the way Flutter has been working internally in 2018, when the youtube video series "Widget 101" has been uploaded by the Flutter team. Since then Flutter has evolved and so has the way Flutter handles widgets internally. In 2019 during the Google Developer Days China the Flutter team gave a talk about how Flutter renders widgets and uploaded the talk to youtube.
 
@@ -465,7 +503,7 @@ This example covered the process of a single widget handled by Flutter with the 
 
 This covers the section about "How Flutter renders Widgets" and you should hopefully have an understanding of how Flutter works under the hood. To finish up the next and last section of this chapter will cover what state management is and talk about the basic principle that is used in Flutter to manage state.
 
-## state management
+## State Management {#state-management}
 
 This section will cover what state management is and introduce the basic principle that is used to manage state in Flutter.
 
@@ -477,13 +515,13 @@ So how do we access application state from inside our widgets?
 
 To access the app state it can be accessed through handing it down the widget tree. But the problem is, how do we pass data the other way around to an ancestor? And furthermore, how do different widgets from different subtrees access the same data? This is where the principle of lifting state up comes into play.
 
-### principle of lifting state up
+### Principle of Lifting State Up {#lifting-state}
 
 This principle of lifting state up describes that we have to find the lowest common ancestor of two widgets that need access to the state and pass the state down from this ancestor.
 
 And this principle is being used in any state management solution you will find.
 
-# Methodology (sets boundaries for part 3: Results)
+# Methodology
 
 In this chapter I walk you through the steps I made to be able to make an educated evaluation about state manamgement solutions.
 
