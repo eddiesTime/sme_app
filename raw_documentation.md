@@ -1,5 +1,7 @@
 # Introduction
 
+Contents of the Chapter
+
 ## Foreword
 
 I want to use this foreword to give credits to Sebastian Faust [[@FasustOverview]](https://github.com/Fasust) and DevonFw [[@Devonfw]](https://devonfw.com/index.html) for their great Flutter guide [[@DevonfwforgeDevonfw4flutter]](https://github.com/devonfw-forge/devonfw4flutter). The guide is well written, and its structure has been a huge inspiration for my work.
@@ -25,24 +27,25 @@ It is for people who are overwhelmed by the amount of state management solutions
 
 ## How was this Guide Written?
 
-This guide has been written for developers. So I want to keep it informal - from developer to developers. Throughout the guide, I will use the pronoun "you" to keep it that way.
+This guide has been written for developers. So I want to keep it informal - _from developer to developers_. Throughout the guide, I will use the pronoun "you" to keep it that way.
 
 ## What Sources were used to create this Guide?
 
-For the creation of this guide, a collection of books, blog posts, journal articles, official documentation, and youtube videos has been used. In chapter X References, a list of all sources used in this guide can be found.
+For the creation of this guide, a collection of books, blog posts, journal articles, official documentation, and YouTube videos has been used. In chapter X References, a list of all sources used in this guide can be found.
 
 # Prerequisites
 
-## Introduction
-
-This chapter will cover the fundamental knowledge you will need as prerequisites to follow the guide and fully understand how Flutter works internally. The first section of this chapter will cover the concepts of Flutter and show how it works _under the hood_. The second section will cover what state in Flutter is. The third section will include how state changes in Flutter are handled internally. The fourth and last section will cover state management in Flutter.
-
 ## Contents of the Chapter
 
+- [Introduction](#introduction-1)
 - [Flutter under the Hood](#flutter-under-the-hood)
 - [What is State?](#what-is-state)
 - [How does Flutter React to State Changes?](#flutter-does-flutter-react-to-state-changes)
 - [State Management](#state-management)
+
+## Introduction
+
+This chapter will cover the fundamental knowledge you will need as prerequisites to follow the guide and fully understand how Flutter works internally. The first section of this chapter will cover the concepts of Flutter and show how it works _under the hood_. The second section will cover what state in Flutter is. The third section will include how state changes in Flutter are handled internally. The fourth and last section will cover state management in Flutter.
 
 ## Flutter under the Hood
 
@@ -118,7 +121,7 @@ Internally, Flutter uses three different types of widgets: _(1) Stateless Widget
 
 #### Stateless Widget
 
-To explain what a Stateless Widget is and how it works, I will summarise the youtube video "_How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1_" [[@HowCreateStateless]](https://www.youtube.com/watch?v=wE7khGHVkYY). It is the first video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
+To explain what a Stateless Widget is and how it works, I will summarise the YouTube video "_How to Create Stateless Widgets - Flutter Widgets 101 Ep. 1_" [[@HowCreateStateless]](https://www.youtube.com/watch?v=wE7khGHVkYY). It is the first video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
 
 A Stateless Widget is specified by two concepts: _(1) it has no mutable state it needs to keep track of and (2) it is composed of children_.
 
@@ -152,7 +155,7 @@ If you want Flutter to use this widget, you have to either declare it as the roo
 
 _Code snippet 03: MyStatelessWidget as part of a composition_
 
-When Flutter executes code snippet 03, it mounts the `Center` widget to the widget tree. Then it call its `createElement()` method [[@CreateElementMethodStatelessWidget]](https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html).
+When Flutter executes code snippet 03, it mounts the `Center` widget to the Widget Tree. Then it call its `createElement()` method [[@CreateElementMethodStatelessWidget]](https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html).
 
 ```dart
 ...
@@ -163,38 +166,38 @@ When Flutter executes code snippet 03, it mounts the `Center` widget to the widg
 
 _Code snippet 04: createElement method [[@CreateElementMethodStatelessWidget]](https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html)_
 
-In reaction to the `createElement()` method Flutter mounts the `StatelessElement` onto the _Element Tree_. I will explain what the element tree is later in [section 130: _How does Flutter react to state changes?_](#flutter-does-flutter-react-to-state-changes). For now, please bear with me.
+In reaction to the `createElement()` method Flutter mounts the `StatelessElement` onto the _Element Tree_. I will explain what the Element Tree is later in [section 130: _How does Flutter react to state changes?_](#flutter-does-flutter-react-to-state-changes). For now, please bear with me.
 
 After the `StatelessElement` has been mounted, it asks its referenced `Stateless Widget`, in this case, the `Center` widget, to execute its `build()` method to build its children. The children, in this case, are only one child - `MyStatelessWidget`.
 
 So to summarise these steps:
 
-1. Flutter creates the `Stateless Widget` and mounts it to the widget tree.
+1. Flutter creates the `Stateless Widget` and mounts it to the Widget Tree.
 2. The widget calls its `createElement()` method.
-3. Flutter mounts the created element onto the element tree.
+3. Flutter mounts the created element onto the Element Tree.
 4. The created element asks its referenced widget to build its children via its `build()` method.
 
 Let's take a look at how this visualizes for the example in _code snippet 03_:
 
-First, the Stateless widget `Center` gets build and therefore mounted to the widget tree (_Figure 02_).
+First, the Stateless widget `Center` gets build and therefore mounted to the Widget Tree (_Figure 02_).
 
 | ![Stateless Widget Example](https://i.imgur.com/TtDS96i.jpg) |
 | :----------------------------------------------------------: |
 |      _Figure 02: Stateless widget Center gets mounted_       |
 
-Then the `createElement()` method of `Center` is called and a `StatelessElement` is created, and mounted to the element tree (_Figure 03_).
+Then the `createElement()` method of `Center` is called and a `StatelessElement` is created, and mounted to the Element Tree (_Figure 03_).
 
 | ![Stateless Widget Example](https://i.imgur.com/PjUWwuq.jpg) |
 | :----------------------------------------------------------: |
 |          _Figure 03: StatelessElement gets mounted_          |
 
-Then `StatelessElement` asks `Center` to build its children. In this case, `MyStatelessWidget`, which then gets created and mounted to the widget tree, and every step gets repeated.
+Then `StatelessElement` asks `Center` to build its children. In this case, `MyStatelessWidget`, which then gets created and mounted to the Widget Tree, and every step gets repeated.
 
 | ![Stateless Widget Example](https://i.imgur.com/H1zNKQ2.jpg) |
 | :----------------------------------------------------------: |
 | _Figure 04: Stateless widget MyStatelessWidget gets mounted_ |
 
-_Figure 05_ shows the final widget and element tree for the example.
+_Figure 05_ shows the final Widget and Element Tree for the example.
 
 | ![Stateless Widget Example](https://i.imgur.com/EkS1VuT.jpg) |
 | :----------------------------------------------------------: |
@@ -204,7 +207,7 @@ _With Figure 05_ this part about the widget type `Stateless Widget` is finished.
 
 #### Stateful Widget
 
-To explain what a `Stateful Widget` is and how it works, I will summarise the youtube video _How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2_ [[@HowStatefulWidgets]](https://www.youtube.com/watch?v=AqCMFXEmf3w&t=0s). It is the second video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
+To explain what a `Stateful Widget` is and how it works, I will summarise the YouTube video _How Stateful Widgets Are Used Best - Flutter Widgets 101 Ep. 2_ [[@HowStatefulWidgets]](https://www.youtube.com/watch?v=AqCMFXEmf3w&t=0s). It is the second video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
 
 A `Stateful Widget` by itself is, as all widgets are, _immutable_. It holds `immutable configurations` and a `createState()` method.
 The `createState()` method creates a `State Object`, which contains mutable configurations and a `build()` method to build the children of the `Stateful Widget`. The state object is held by the `StatefulElement`. It is responsible for mutating its state and notifying Flutter to update the UI to reflect changes whenever the state of the state object changes. The element holding the state object marks itself as `dirty` which triggers Flutter to update the UI rebuilding its children.
@@ -242,7 +245,7 @@ class _ItemCounterState extends State<ItemCounter> {
 
 _Code snippet 05: Stateful Widget ItemCounter_
 
-The `ItemCounter` is a stateful widget which contains the immutable state `name` and a `createState()` method. `_ItemCounterState` is the state object created by ItemCounter which contains the mutable state `count` and a `build()` method.
+The `ItemCounter` is a Stateful Widget which contains the immutable state `name` and a `createState()` method. `_ItemCounterState` is the state object created by `ItemCounter` which contains the mutable state `count` and a `build()` method.
 
 Now let's walk through what happens when Flutter creates `ItemCounter`:
 
@@ -252,69 +255,69 @@ Now let's walk through what happens when Flutter creates `ItemCounter`:
 
 _Code snippet 06: ItemCounter with String "Tom" is set as parameter name gets build_
 
-The first thing Flutter does after it builds the widget `ItemCounter` is to mount it onto the widget tree.
+The first thing Flutter does after it builds the widget `ItemCounter` is to mount it onto the Widget Tree.
 
-| ![Statelful Widget example](https://i.imgur.com/eqGJ23O.png) |
+| ![Statelful Widget Example](https://i.imgur.com/eqGJ23O.png) |
 | :----------------------------------------------------------: |
 |   _Figure 06: ItemCounter gets mounted to the widget tree_   |
 
-Then the widgets `createElement()` method is being called, which creates a `StatefulElement` that Flutter mounts onto the element tree.
+Then the widgets `createElement()` method is being called, which creates a `StatefulElement` that Flutter mounts onto the Element Tree.
 
-| ![Statelful Widget example](https://i.imgur.com/sohHp40.png) |
+| ![Statelful Widget Example](https://i.imgur.com/sohHp40.png) |
 | :----------------------------------------------------------: |
 |  _Figure 07: StatefulElement gets mounted to element tree_   |
 
 Then the created element asks the `Stateful Widget` to create a `State Object` it.
 
-| ![Statelful Widget example](https://i.imgur.com/VGSe2EJ.png) |
+| ![Statelful Widget Example](https://i.imgur.com/VGSe2EJ.png) |
 | :----------------------------------------------------------: |
 |    _Figure 08: State Object created for Stateful Element_    |
 
 Finally, the element uses the state object to build the children of the widget.
 
-| ![Statelful Widget example](https://i.imgur.com/Rs3S2lw.png) |
+| ![Statelful Widget Example](https://i.imgur.com/Rs3S2lw.png) |
 | :----------------------------------------------------------: |
-|        _Figure 08: Finished widget and element tree_         |
+|        _Figure 08: Finished Widget and Element tree_         |
 
-As you have noticed, the steps to add a widget to the widget & element tree are the same as for a `Stateless Widget`. Only the state object is an additional step.
+As you have noticed, the steps to add a widget to the Widget & Element tree are the same as for a `Stateless Widget`. Only the state object is an additional step.
 
-Now let's take a look at how the widget and element tree reacts to the screen being tapped, which calls the `setState()` method as seen in _code snippet 05_.
+Now let's take a look at how the Widget and Element tree reacts to the screen being tapped, which calls the `setState()` method as seen in _code snippet 05_.
 
 When the `setState()` method is called, the callback inside the method increases the value of `count` from 0 to 1.
 
-| ![Statelful Widget example](https://i.imgur.com/2QpvHsW.png) |
+| ![Statelful Widget Example](https://i.imgur.com/2QpvHsW.png) |
 | :----------------------------------------------------------: |
 |              _Figure 09: Count value increased_              |
 
 The call of the `setState()` method triggers the `Stateful Widget` to mark itself as dirty. When an element is marked as dirty, it signals Flutter to rebuild the widget it is referencing. Since the widget itself (`ItemCounter`) has not changed, Flutter can reuse this widget to increase performance. Then Flutter continues the rebuild with the widget's children. A new text widget is being created with a count value of 1.
 
-| ![Statelful Widget example](https://i.imgur.com/1ge3XR2.png) |
+| ![Statelful Widget Example](https://i.imgur.com/1ge3XR2.png) |
 | :----------------------------------------------------------: |
 |           _Figure 10: New child widget gets build_           |
 
 Now since the newly created text widget and the old widget are not the same, Flutter removes the old text widget and mounts the new text widget in its place.
 
-| ![Statelful Widget example](https://i.imgur.com/v1NV0V1.png) |
+| ![Statelful Widget Example](https://i.imgur.com/v1NV0V1.png) |
 | :----------------------------------------------------------: |
 |           _Figure 11: Child widget gets exchanged_           |
 
 Since the new child widget is of the same `runtimeType` as the old child widget (widget type Text), the `Stateless Element` of the old widget can be reused.
 
-| ![Statelful Widget example](https://i.imgur.com/LkfidRC.png) |
+| ![Statelful Widget Example](https://i.imgur.com/LkfidRC.png) |
 | :----------------------------------------------------------: |
 |     _Figure 12: Widget & element tree have been rebuild_     |
 
-That sums up what happens with the widget and element tree when the element is marked as dirty via the state object's `setState()` method. Now let us take a look at what happens with the trees when the `ItemCounter` widget gets exchanged.
+That sums up what happens with the Widget and Element Tree when the element is marked as dirty via the state object's `setState()` method. Now let us take a look at what happens with the trees when the `ItemCounter` widget gets exchanged.
 
 In this example, the old `ItemCounter` widget gets removed, and a new `ItemCounter` widget with the `name` attribute _Dan_ has been created to take its place.
 
-| ![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png) |
+| ![Statelful Widget Example](https://i.imgur.com/RvZ5BMB.png) |
 | :----------------------------------------------------------: |
 |       _Figure 13: Old ItemCounter Widget gets removed_       |
 
 After the new `ItemCounter` has been mounted to the widget tree, Flutter walks through the same steps as before. First, it checks the widget type to decide if it can reuse parts of its element tree. Since it is also of `runtimeType` `ItemCounter`, the `Stateful Element` can be reused.
 
-|             ![Statelful Widget example](https://i.imgur.com/RvZ5BMB.png)              |
+|             ![Statelful Widget Example](https://i.imgur.com/RvZ5BMB.png)              |
 | :-----------------------------------------------------------------------------------: |
 | _Figure 14: New ItemCounter Widget has been mounted and Stateful Element gets reused_ |
 
@@ -322,17 +325,17 @@ _**Note that the state object is also being reused!**_
 
 Then the children are being rebuilt.
 
-| ![Statelful Widget example](https://i.imgur.com/LV0Kul8.png) |
+| ![Statelful Widget Example](https://i.imgur.com/LV0Kul8.png) |
 | :----------------------------------------------------------: |
 |   _Figure 15: New ItemCounter Widget children gets build_    |
 
-The newly built child takes the old child's place in the widget tree, and since they are of the same widget type, the `Stateless Element` can be reused.
+The newly built child takes the old child's place in the Widget Tree, and since they are of the same widget type, the `Stateless Element` can be reused.
 
-|          ![Statelful Widget example](https://i.imgur.com/y15vpxH.png)           |
+|          ![Statelful Widget Example](https://i.imgur.com/y15vpxH.png)           |
 | :-----------------------------------------------------------------------------: |
 | _Figure 16: Widget & element tree has been updated with new ItemCounter Widget_ |
 
-This sums up how the widget and element tree reacts to the `ItemCounter` widget getting exchanged.
+This sums up how the Widget and Element Tree reacts to the `ItemCounter` widget getting exchanged.
 
 In this part, I have covered what a `Stateful Widget` is and how it is used to update the UI. The next part is about `Inherited Widgets`, the last type of widgets used in Flutter.
 
@@ -340,19 +343,19 @@ In this part, I have covered what a `Stateful Widget` is and how it is used to u
 
 The `Inherited Widget` is the third and last type of widgets I will cover in this section.
 
-To explain what an Inherited Widget is and how it works, I will summarise the youtube video _Inherited Widgets Explained - Flutter Widgets 101 Ep. 3_ [[@InheritedWidgetsExplained]](https://www.youtube.com/watch?v=Zbm3hjPjQMk&list=PLOU2XLYxmsIJyiwUPCou_OVTpRIn_8UMd&index=4). It is the third video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
+To explain what an Inherited Widget is and how it works, I will summarise the YouTube video _Inherited Widgets Explained - Flutter Widgets 101 Ep. 3_ [[@InheritedWidgetsExplained]](https://www.youtube.com/watch?v=Zbm3hjPjQMk&list=PLOU2XLYxmsIJyiwUPCou_OVTpRIn_8UMd&index=4). It is the third video of a great series by the Flutter team explaining the different types of widgets used by Flutter.
 
 When working with widgets in Flutter, it can get cumbersome pretty quickly when a deeply nested child widget needs to access data from an ancestor. The more widgets are in between the ancestor with the data and the child that needs to access the data, the more cumbersome it gets as seen in _Figure 17_.
 
-|                ![Inherited Widget example](https://i.imgur.com/wFAt9A7.png)                 |
+|                ![Inherited Widget Example](https://i.imgur.com/wFAt9A7.png)                 |
 | :-----------------------------------------------------------------------------------------: |
 | _Figure 17: Widget tree where child that needs data from ancestor and data are highlighted_ |
 
 To provide the highlighted child widget with the data of an ancestor, the data must be passed down through the widgets in between, even though they may not need access to the data.
 
-That is where `Inherited Widgets` can help. They are widgets that can be accessed from any descendant in the widget tree, as highlighted in _Figure 18_.
+That is where `Inherited Widgets` can help. They are widgets that can be accessed from any descendant in the Widget Tree, as highlighted in _Figure 18_.
 
-| ![Inherited Widget example](https://i.imgur.com/GaoNGIW.png) |
+| ![Inherited Widget Example](https://i.imgur.com/GaoNGIW.png) |
 | :----------------------------------------------------------: |
 |        _Figure 18: Widget tree with Inherited Widget_        |
 
@@ -380,95 +383,109 @@ _Code snippet 07: Example how Theme can be accessed_
 
 Contents of the Section
 
-- [Introduction](#what-is-state-introduction)
-- [Definition](#state)
+- [Introduction](#introduction-3)
+- [Definition](#definition)
 - [Ephemeral State](#ephemeral-state)
 - [Application State](#application-state)
 - [Decision Help](#decision-help)
 
-This section will cover what state in Flutter is. All the information in this section is taken from the official Flutter documenation.
+### Introduction
 
-So, to start this section let's take a look at the official definition of state in Flutter.
+This section will cover what state in Flutter is. All the information in this section is taken from the official Flutter documentation.
+
+To start this section, let's take a look at the official definition of state in Flutter.
 
 ### Definition
 
-| :closed_book: | State | Whatever data you need in order to rebuild your UI at any moment in time. [@DifferentiateEphemeralState] |
-| ------------- | ----- | -------------------------------------------------------------------------------------------------------- |
+| :closed_book: | State | Whatever data you need in order to rebuild your UI at any moment in time [@DifferentiateEphemeralState] |
+| :-----------: | :---: | :------------------------------------------------------------------------------------------------------ |
 
 
-To remind you about its impact on Flutter I want to remind you about how Flutter builds its UI with Figure 01:
+To emphasize its relevance in Flutter, I want to remind you about how Flutter builds its UI with _Figure 01_:
 
-|                                                     ![equation](https://i.imgur.com/DoY8u5y.png)                                                     |
+|                                                     ![Equation](https://i.imgur.com/DoY8u5y.png)                                                     |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | _Figure 01: How Flutter builds its UI_ [[@StartThinkingDeclaratively]](https://flutter.dev/docs/development/data-and-backend/state-mgmt/declarative) |
 
-Now let's dive deeper into state in Flutter. It can be divided into ephemeral state and application state.
+Now let's dive deeper into state in Flutter. State in Flutter is divided into ephemeral state and application state.
 
 ### Ephemeral State
 
-Ephemeral state is specified as mutable data which is only relevant to the widget holding this configuration. It is also called local state and can be implemented using a state object of a Stateful Widget as seen in Section 1.1 It's all widgets.
+Ephemeral state is specified as mutable data which is only relevant to the widget holding this configuration. It is also called local state and can be implemented using a state object of a Stateful Widget as seen in [_It's all widgets_](#its-all-widgets).
 
 ### Application State
 
-Application state in constrast to ephemeral state is data that is shared by mutliple widgets, e.g. user data.
+Application state, in contrast to ephemeral state, is data that is shared by multiple widgets, e.g., user data.
 
 ### Decision Help
 
-When working with state in Flutter there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to decide which type of state you should use which is shown in Figure 19:
+When working with state in Flutter, there is no clear-cut rule about which type of state you should use. The documentation contains a decision help when it comes to deciding which type of state you should use, as shown in _Figure 19_:
 
-| ![decision help](https://i.imgur.com/5ifKgCM.png) |
+| ![Decision Help](https://i.imgur.com/5ifKgCM.png) |
 | :-----------------------------------------------: |
 |            _Figure 19: Decision help_             |
 
-Don't worry to much about what kind of state to use since it most definitely will change over time and you can simply change it afterwards.
+Don't worry too much about what kind of state to use, since it most definitely will change over time and you can change it afterward.
 
-This part is the finish of the section about state in Flutter. The next section will cover how Flutter reacts to state changes internally.
+That part covers the part about state in Flutter. The next part will include how Flutter reacts to state changes internally.
 
 ## How does Flutter React to State Changes?
 
-In the previous section about widgets I have covered the widget types Stateless widget and Stateful widgets and how Flutter handles them with the use of the widget tree and the element tree. This has been the way Flutter has been working internally in 2018, when the youtube video series "Widget 101" has been uploaded by the Flutter team. Since then Flutter has evolved and so has the way Flutter handles widgets internally. In 2019 during the Google Developer Days China the Flutter team gave a talk about how Flutter renders widgets and uploaded the talk to youtube.
+Contents of the Section
 
-So to answer the question "How does Flutter react to state changes" I will use the content provided by the video "How Flutter renders Widgets" from the talk by the Flutter team. [[@HowFlutterRenders]](https://www.youtube.com/watch?v=996ZgFRENMs)
+- [Introduction](#introduction-4)
+- [The Three Core Concepts of Flutter](#the-three-core-concepts-of-flutter)
+- [The Three Core Concepts in Action](#the-three-core-concepts-in-action)
 
-Since 2018 the way Flutter works internally has evolved. Additionally to the widget and element tree Flutter now uses a tree of RenderObjects. These trees are the three core concepts of Flutter.
+### Introduction
 
-They are deeply connected and all have different responsibilities as seen in Figure 20:
+In the previous part about widgets, I have covered the widget types `Stateless Widgets` and `Stateful Widgets`, and how Flutter handles them with the use of the Widget Tree and the Element Tree. That has been the way Flutter has been working internally in 2018, when the Flutter team has uploaded the YouTube video series _Widget 101_. Since then, Flutter has evolved, and so has the way Flutter handles widgets internally. In 2019 during the Google Developer Days China, the Flutter team gave a talk about how Flutter renders widgets and uploaded it to YouTube.
 
-| ![the three trees](https://i.imgur.com/gzZ6cVw.png) |
+So to answer the question, "_How does Flutter react to state changes?_", I will use the content provided by the video _How Flutter renders Widgets_ from the talk by the Flutter team [[@HowFlutterRenders]](https://www.youtube.com/watch?v=996ZgFRENMs).
+
+### The Three Core Concepts of Flutter
+
+Since 2018 the way Flutter works internally has evolved. Additionally, to the Widget and Element tree, Flutter now uses a tree of **RenderObjects**. These trees are the three core concepts of Flutter.
+
+They are deeply connected, and all have different responsibilities as seen in _Figure 20_:
+
+| ![The Three Trees](https://i.imgur.com/gzZ6cVw.png) |
 | :-------------------------------------------------: |
 | _Figure 20: The three concept of trees in Flutter_  |
 
-You will notice a clear separation of concerns where each tree has its own job in Flutter.
+You will notice a clear separation of concerns [[@SeparationConcernsSoftware2020]](http://nalexn.github.io/separation-of-concerns/), where each tree has its job in Flutter.
 
-The Widget tree contains widgets that as mentioned earlier hold the configuration for a piece of the UI. Furthermore, a widget "describes the configuration for an Element." [[@WidgetClassWidgets]](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+The `Widget tree` contains widgets that, as mentioned earlier, hold the configuration for a piece of the UI. Furthermore, a widget "describes the configuration for an Element" [[@WidgetClassWidgets]](https://api.flutter.dev/flutter/widgets/Widget-class.html).
 
-The Element tree contains elements that represent an actual piece of the UI. In Flutter widgets are the blueprint for an element, thus,“an instantiation of a Widget at a particular location in the tree.”[[@ElementClassWidgets]](https://api.flutter.dev/flutter/widgets/Element-class.html) and what the user actually can see on the UI. Furthermore, the element is the manager of the UI by holding a reference to its widget in the widget tree and render object in the element tree and managing the communication with Flutter to rebuild the UI if needed.
+The `Element tree` contains elements that represent an actual piece of the UI. In Flutter, widgets are the blueprint for an element. Elements are “an instantiation of a Widget at a particular location in the tree” [[@ElementClassWidgets]](https://api.flutter.dev/flutter/widgets/Element-class.html). They are what the user can see on the UI. Furthermore, the element is the manager of the UI. It manages the UI by holding a reference to its widget in the Widget Tree and render-object in the RenderObject Tree. Whenever the UI has to be rebuilt, the element handles the communication with Flutter.
 
-The RenderObject tree contains Render Objects which handle sizes, layout and painting [[@RenderObjectElementClassWidgets]](https://api.flutter.dev/flutter/widgets/RenderObjectElement-class.html) of the element on the UI.
+The `RenderObject tree` contains render-objects that handle sizes, layout, and painting [[@RenderObjectElementClassWidgets]](https://api.flutter.dev/flutter/widgets/RenderObjectElement-class.html) of the element on the UI.
 
-If you remember the section about Stateful widget, I have covered how the widget and element tree react to changes. Now lets take the example Widget `Foo` from Figure 21 and extend our knowledge to include the RenderObject tree.
+I have covered how the Widget and Element tree react to changes in the part about [`Stateful Widgets`](#stateful-widget). Now, let's take the example widget `Foo` from _Figure 21_ and extend our knowledge to include the RenderObject Tree.
 
-|   ![Foo example](https://i.imgur.com/LfP2EBW.png)    |
+### The Three Core Concepts in Action
+
+|   ![Foo Example](https://i.imgur.com/LfP2EBW.png)    |
 | :--------------------------------------------------: |
-| _Figure 21: The three trees with example Widget Foo_ |
+| _Figure 21: The Three Trees with example Widget Foo_ |
 
-The first action Flutter takes when the `Foo` widget gets called is the same. It creates an element, to be more precise a RenderObjectElement [[@RenderObjectElementClassWidgets]](https://api.flutter.dev/flutter/widgets/RenderObjectElement-class.html), in this case the FooElement which the Framework mounts to the element tree. When an element is mounted to the element tree the element asks the widget to create a Render Object, in this case RenderFoo. After RenderFoo has been created the Render Object gets mounted by the framework onto the RenderObject tree.
+The first action Flutter takes when the `Foo` widget gets called stays the same. It creates an element, to be more precise a `RenderObjectElement` [[@RenderObjectElementClassWidgets]](https://api.flutter.dev/flutter/widgets/RenderObjectElement-class.html), in this case, the `FooElement` which the framework mounts to the Element Tree. When an element is mounted to the Element Tree, it asks the widget to create a render-object, in this case, `RenderFoo`. After `RenderFoo` has been created, the render-object gets mounted by the framework onto the RenderObject Tree.
 
-Now we have covered how Flutter reacts when it is told to build a part of the UI with a widget. Let's take a look at how the three trees react to changes with the next example:
+I have covered how Flutter reacts when it builds a part of the UI. Let's take a look at how the three trees respond to changes with the next example:
 
-In this example we have a RichText widget which has been mounted to the widget tree by the Framework and the corresponding element and Render Object as seen in Figure 22.
+In this example, I have a `RichText` widget that has been mounted to the widget tree by the Flutter, and the corresponding element and render-object as, seen in _Figure 22_.
 
-| ![text example](https://i.imgur.com/iG7r4El.png) |
-| :----------------------------------------------: |
-| _Figure 22: The three trees when state changes._ |
+| ![RichText Example](https://i.imgur.com/iG7r4El.png) |
+| :--------------------------------------------------: |
+|   _Figure 22: The three trees when state changes_    |
 
-The first action that takes place is that a new RichText widget gets created which is supposed to replace the old RichText widget.
+The first action that takes place is that a new RichText widget gets created, which is supposed to replace the old RichText widget.
 
-| ![text example](https://i.imgur.com/JaVvq9w.png) |
-| :----------------------------------------------: |
-|  _Figure 23: New RichText widget gets created._  |
+| ![RichText Example](https://i.imgur.com/JaVvq9w.png) |
+| :--------------------------------------------------: |
+|    _Figure 23: New RichText widget gets created_     |
 
-At this point Flutter asks itself if it can reuse parts of the element and RenderObject tree. Therefore it uses the widgets `canUpdate()` method to check if it can reuse these parts.
+At this point, Flutter asks itself if it can reuse parts of the Element and RenderObject Tree. Therefore it uses the widgets `canUpdate()` method to check if it can reuse these parts.
 
 ```dart
 static bool canUpdate(Widget oldWidget, Widget newWidget) {
@@ -477,15 +494,15 @@ static bool canUpdate(Widget oldWidget, Widget newWidget) {
 }
 ```
 
-_Code snippet 08: canUpdate() method. [[@CanUpdateMethodWidget]](https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html)_
+_Code snippet 08: canUpdate() method [[@CanUpdateMethodWidget]](https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html)_
 
-Since the old widgets and new widgets `runtimeType` are the same, the framework can reuse the element and Render Object and replaces the old widget with the new one.
+Since the old widgets and new widgets `runtimeType` are the same, the framework can reuse the element and render-object and replaces the old widget with the new one.
 
-|     ![text example](https://i.imgur.com/HyvRcIJ.png)      |
+|   ![RichText Example](https://i.imgur.com/HyvRcIJ.png)    |
 | :-------------------------------------------------------: |
 | _Figure 24: New RichText widget replaces the old widget._ |
 
-As you've learned in the section about Stateful Widget the element now marks itself as dirty because the widget it references has been exchanged.
+As you've learned in [Stateful Widget](#stateful-widget), the element now marks itself as dirty because the widget it references has been exchanged.
 
 In response to the change the element calls the widgets `updateRenderObject()` method.
 
@@ -494,134 +511,202 @@ In response to the change the element calls the widgets `updateRenderObject()` m
 void updateRenderObject(BuildContext context, covariant RenderObject renderObject) { }
 ```
 
-_Code snippet 09: updateRenderObject method. [[@UpdateRenderObjectMethodRenderObjectWidget]](https://api.flutter.dev/flutter/widgets/RenderObjectWidget/updateRenderObject.html)_
+_Code snippet 09: updateRenderObject method [[@UpdateRenderObjectMethodRenderObjectWidget]](https://api.flutter.dev/flutter/widgets/RenderObjectWidget/updateRenderObject.html)_
 
-The Render Object gets updated and the result can be seen in Figure 25:
+The render-object gets updated, and the result can be seen in _Figure 25_:
 
-| ![text example](https://i.imgur.com/VmTyHT6.png) |
-| :----------------------------------------------: |
-|     _Figure 25: RenderObject gets updated._      |
+| ![RichText Example](https://i.imgur.com/VmTyHT6.png) |
+| :--------------------------------------------------: |
+|       _Figure 25: RenderObject gets updated._        |
 
-This example covered the process of a single widget handled by Flutter with the widget, element and RenderObject tree. But don't worry, child widgets it is the same principle.
+This example covered the process of a single widget handled by Flutter with the Widget, Element, and RenderObject Tree. But don't worry, it is the same principle for child widgets.
 
-This covers the section about "How Flutter renders Widgets" and you should hopefully have an understanding of how Flutter works under the hood. To finish up the next and last section of this chapter will cover what state management is and talk about the basic principle that is used in Flutter to manage state.
+That covers the part about "_How Flutter renders Widgets_", and you should hopefully understand how Flutter works _under the hood_. To finish up the next and last part of this section will cover what _state management_ is and talk about the basic principle that is used in Flutter to manage state.
 
 ## State Management
 
 Contents of the Section
 
-- [Introduction](#state-management-introduction)
-- [Definition](state-management-definition)
-- [Principle of Lifting State Up](#lifting-state)
+- [Introduction](#introduction-5)
+- [Definition](#definition-2)
+- [Principle of Lifting State Up](#principle-of-lifting-state-up)
 
-This section will cover what state management is and introduce the basic principle that is used to manage state in Flutter.
+### Introduction
 
-What is state management
+This part will cover state management and introduce the fundamental principle that is used to manage state in Flutter.
 
-State management in Flutter is the management of application state changes and making it accessable. This state is used by multiple widgets and has to be consistent throughout the application so that no error as a result of deferred state can occur. Furthermore, since Flutter has an unidirectional data flow from the root of the widget tree down to its children, how does the ancestor widget holding the application state get notified about state changes inside a child widget?
+### Definition
 
-So how do we access application state from inside our widgets?
+State management in Flutter is the management of application state changes and making it accessible. This state is used by multiple widgets and has to be consistent throughout the application so that no error as a result of deferred state can occur. Furthermore, since Flutter has a unidirectional data flow from the root of the Widget Tree down to its children, how does the ancestor widget holding the application state can be notified about state changes inside a child widget?\_
 
-To access the app state it can be accessed through handing it down the widget tree. But the problem is, how do we pass data the other way around to an ancestor? And furthermore, how do different widgets from different subtrees access the same data? This is where the principle of lifting state up comes into play.
+_So how do you access application state from inside our widgets?_
+
+The application state can be accessed by handing it down the Widget Tree. But the problem is, _how do you pass data the other way around to an ancestor?_ Furthermore, _how do different widgets from different subtrees get access to the same data?_ That is where the principle of `Lifting-State-Up` comes into play.
 
 ### Principle of Lifting State Up
 
-This principle of lifting state up describes that we have to find the lowest common ancestor of two widgets that need access to the state and pass the state down from this ancestor.
+The principle of lifting-state-up describes that we have to find the lowest common ancestor of two widgets that need access to the state and pass the state down from this ancestor.
 
-And this principle is being used in any state management solution you will find.
+Furthermore, this principle is being used in any state management solution you will find.
+
+That finishes [Chapter 1 - Prerequisites](#prerequisites). The next chapter will cover my [methodology](#methodology)
 
 # Methodology
 
-In this chapter I walk you through the steps I made to be able to make an educated evaluation about state manamgement solutions.
+## Introduction
 
-## Challenge How can we manage to compare state management solutions to evaluate them?
+In this chapter, I will walk you through the steps I made to be able to make an educated evaluation of state management solutions in Flutter. The first section of this chapter will cover how different SMS can be compared. The second section will cover the architectural decision process I undertook that led me to my architecture. The third section will include Domain-Driven-Design. The fourth section consists of the architecture I have decided on. The fifth and last section of the chapter will show the application that has been build for this guide.
 
-To be able to compare the different state management solutions, we have to find a scenario in which they can be compared. For this purpose I’ve decided to implement each pattern in the same example application.
-But this leads us to another problem: We don’t want to write the application every time from scratch or to be more precise rewrite big chunks of the application only to fit in a different SMS.
+Contents of the Chapter
 
-This is where the principle of orthogonality [@hunt2000pragmatic] is useful. This principle emphasises on the benefits of ~independence or decoupling~ of components. One of the benefits is that changes in one component do not affect any of the other. So in our case, if we change the state management solution it does not affect the other parts of our application.
+- [How can you Compare State Management Solutions to Evaluate Them?](#how-can-you-compare-state-management-solutions-to-evaluate-them)
+- [Architectural Decision Process](#architectural-decision-process)
+- [Domain-Driven-Design](#domain-driven-design-2)
+- [Architecture](#architecture)
+- [The State Management Evaluation App](#the-state-management-evaluation-app)
 
-Now I have shown how the amount of refactoring can be reduced with the principle of orthogonality. The next challenge is to find an architecture which follows this principle.
+## How can you Compare State Management Solutions to Evaluate Them?
 
-## Architectural Decision process
+Contents of the Section
 
-The first architecture I looked at is Clean Architecture by Uncle Bob.[@Martin17]
+- [Introduction](#introduction-6)
+- [Principle of Orthogonality](#principle-of-orthogonality)
 
-In Uncle Bob’s clean architecture he shows the benefits of a clean architecture where the focus is on use cases, the central business goals of the application.
+### Introduction
 
-He applied the principle of decoupling with two concepts: (1) the dependency rule and (2) the principle of dependency inversion.
-The first concept states that source code dependencies are only allowed from outer layers to inner layers. The concept of dependency inversion introduces the use of interfaces on each layer to allow cross layer communication with the principle of contracts. [@hunt2000pragmatic]
+To compare different state management solutions, I had to find a scenario in which they can be compared. For this purpose, I have decided to implement each pattern in the same example application.
 
-A contract in programming is a definition of methods and attributes that everyone who wants to use mentioned methods and attributes has to follow. A contract does not more or less than what is written in it. In software development an example for a contract is an interface.
+But this led to another problem: You don’t want to write the application every time from scratch, or to be more precise, rewrite big chunks of the app only to fit in a different SMS.
 
-An image Uncle Bob's Clean architecture can be seen in Figure 26:
+That is where the _principle of orthogonality_ [@hunt2000pragmatic] is useful.
 
-| ![clean architecture](https://i.imgur.com/moPHCbt.png) |
+### Principle of Orthogonality
+
+This principle emphasizes the benefits of _independence or decoupling_ of components. One of the advantages is that changes in one component do not affect any of the other. So, in this case, if you change the state management solution, it does not affect the other parts of our application.
+
+I have shown how the amount of refactoring can be reduced with the principle of orthogonality.
+
+The next challenge is to find an architecture that follows this principle.
+
+## Architectural Decision Process
+
+Contents of the Section
+
+- [Introduction](#introduction-7)
+- [Clean Architecture](#clean-architecture)
+- [Domain-Driven-Design](#domain-driven-design)
+
+### Introduction
+
+### Clean Architecture
+
+The first architecture I looked at is _Clean Architecture_ by Uncle Bob. [@Martin17]
+
+In Uncle Bob's clean architecture, he shows the benefits of a clean architecture where the focus is on use cases, the central business goals of the application.
+
+He applied the principle of decoupling (orthogonality) with two concepts: _(1) the dependency rule, and (2) the principle of dependency inversion._
+
+The first concept states that source code dependencies are only allowed from outer layers to inner layers. The concept of dependency inversion introduces the use of interfaces on each layer to enable cross-layer communication with the principle of contracts. [@hunt2000pragmatic]
+
+Uncle Bob's clean architecture can be seen in _Figure 26_:
+
+| :closed_book: | Contract | A contract in programming is a definition of methods and attributes that everyone who wants to use mentioned methods and attributes has to follow. A contract does not more or less than what is written in it. |
+| :-----------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+
+In software development, an example of a contract is an _interface_.
+
+| ![Clean Architecture](https://i.imgur.com/moPHCbt.png) |
 | :----------------------------------------------------: |
-|            _Figure 26: Clean architecture._            |
+|      _Figure 26: Clean Architecture by Uncle Bob_      |
 
-With this onion architecture he highlights the importance of the separation of concerns. [[@SeparationConcernsSoftware2020]](http://nalexn.github.io/separation-of-concerns/)
+With this onion architecture, he highlights the importance of the _separation of concerns_ [[@SeparationConcernsSoftware2020]](http://nalexn.github.io/separation-of-concerns/).
 
-The business logic represents the core of the onion and the outer layer represents details. Following the separation of the business logic in your system allows you to be flexible when it comes to adding details. He describes IO-Devices, databases, etc. as details which are not relevant for the business rules. Furthermore, Frameworks are tools that can help you with the development of your application and are therefore also details.
+The business logic represents the core of the onion, and the outer layer represents details. Following the separation of the business logic in your system allows you to be flexible when it comes to adding details. Uncle Bob describes IO-Devices, databases, etc. as details which are not relevant for the business rules. Furthermore, frameworks are tools that can help you with the development of your application and are, therefore, details.
 
-Uncle Bob points out a problem in the creational context of a software application. The problem is that when it comes to developing an application the tools we use, like Ruby, take away the focus of the most important thing in software development, the business rules and therefore how we architect our software.
+Uncle Bob points out a problem in the creational context of a software application. The problem is that when it comes to developing an app, the tools we use, like Ruby, take away the focus of the most crucial thing in software development, the business rules. Furthermore, they take away how we architect our software.
 
-If we take a look at state management in Flutter, we can assume that state management solutions, e.g. Redux, are only details added on top of the core business logic.
+If we take a look at state management in Flutter, we can assume that state management solutions, e.g., Redux, are only details added on top of the core business logic.
 
-This problem is also addressed by Domain-Driven-Design (DDD). “The developers are too wrapped up with technology and trying to solve problems using technology rather than careful though and design. This leads developers to constantly chase after new ‘shiny objects’, which are the latest fads in technology”. [@10.5555/3055897]
+This problem is also addressed by _Domain-Driven-Design_ (DDD). "The developers are too wrapped up with technology and trying to solve problems using technology rather than careful thought and design. This leads developers to constantly chase after new 'shiny objects,' which are the latest fads in technology" [@10.5555/3055897].
 
-Recognizing the same problem when it comes to state management in Flutter I’ve decided to take a look into DDD.
+I've decided to take a look into DDD when recognizing the same problem when it comes to state management in Flutter.
 
-DDD is the second approach I took to plan my software example. It led me to the Flutter Europe 2020 conference talk about Strategic Domain-Driven-Design by Majid Hajian.[[@StrategicDomainDrivenDesign]](https://www.youtube.com/watch?v=lGv6KV5u75k&t=2260s) He proposes an architecture based on the principles of DDD. In his talk he emphasises on the advantages of Domain-Driven-Design and how it can be used to build scalable and maintainable software. During the presentation of his architecture he pointed out that at the layer where BLoC was used as a state management solution any other state can be used instead and how easily refactoring the aftermath will be.
-This ease of changability is exaclty what I was looking for.
+### Domain-Driven-Design
+
+DDD is the second approach I took to plan my software example. It led me to the Flutter Europe 2020 conference talk about _Strategic Domain-Driven-Design_ by Majid Hajian[[@StrategicDomainDrivenDesign]](https://www.youtube.com/watch?v=lGv6KV5u75k&t=2260s). He proposes an architecture based on the principles of DDD. In his talk, he emphasizes the advantages of Domain-Driven-Design and how it can be used to build scalable and maintainable software. During his architecture presentation, he pointed out that at the layer where BLoC (Business Logic Component) was used as a state management solution, any other SMS can be used instead and how easily refactoring the aftermath will be.
+
+This ease of changeability is what I was looking for.
 
 ## Domain-Driven-Design
 
-Domain-Driven-Design (DDD) is a software development approach introduced by Eric Evans in his book "Domain-Driven-Design: Tackling Complexity in the Heart of Software".[@evans2004domaindriven] DDD is based on the idea that to solve a problem defining the core domain is from utmost importance. The users of the software are the people who are familiar with the domain and the software is developed to solve a problem they face.
+Contents of the section
+
+- [Introduction](#introduction-8)
+- [Why DDD?](#why-ddd)
+- [Domain-Driven-Design Principles](#domain-driven-design-principles)
+  - [Domain](#domain)
+  - [Layered Architecture](#layered-architecture)
+  - [Ubiquitous Language](#ubiquitous-language)
+  - [Entities](#entities)
+  - [Factories](#factories)
+
+### Introduction
+
+Domain-Driven-Design (DDD) is a software development approach introduced by Eric Evans in his book "_Domain-Driven-Design: Tackling Complexity in the Heart of Software_" [@evans2004domaindriven]. DDD is based on the idea that to solve a problem defining the core domain is of utmost importance. The users of the software are the people who are familiar with the domain, and the software is developed to solve a problem they face.
 
 ### Why DDD?
 
-Evans answers this question as follows:
+Evans answers the question as follows:
 
 > Every software program relates to some activity or interest of its user. The heart of software is its ability to solve domain-related problems for its user. All other features, vital though they may be, support this basic purpose. When the domain is complex, this is a difficult task, calling for the concentrated effort of talented and skilled people.Developers have to steep themselves in the domain to build up knowledge of the business.
 
-He recommends that the best way to do this is to make software a reflection of the domain which creates an ubiquitous language that the domain experts and developers can use.
+He recommends that the best way to do this is to make the software a reflection of the domain, which creates a ubiquitous language that the domain experts and developers can use.
 
-### Domain-Driven-Design principles
+### Domain-Driven-Design Principles
 
-In this part I will reduce the DDD principles to the ones used in our application.
+In this part, I will reduce the DDD principles to the ones used in the app.
 
 #### Domain
 
-A domain is an abstract area that defines a problem that needs to be solved. It can be compose of smaller subdomain.
+A `domain` is an abstract area that defines a problem that needs to be solved. It can be composed of smaller subdomains.
 
 #### Layered Architecture
 
-DDD recommends to use a four-layered architecture where the domain logic is focused on one layer and not dependent on another layer. The other layers are the infrastructure layer, the application layer and the presentation layer.
+DDD recommends using a _four-layered architecture_ where the domain logic is focused on one layer, the domain layer, and not dependent on another. The other layers are the `infrastructure layer`, the `application layer`, and the `presentation layer`.
 
 #### Ubiquitous Language
 
-DDD refers to the Ubiquitous language as a must. The idea is that the developer and the user need to speak the same language, and the developers use this language when coming up with class names, modules, variables etc. This way, the code reads as if a user is speaking.
+DDD refers to the `Ubiquitous language` as a must. The idea is that the developer and the user need to speak the same language, and the developers use it when coming up with class names, modules, variables, etc. This way, the code reads as if a user is speaking.
 
 #### Entities
 
-Entities are domain objects that are uniquely defined by a unique identifier, and not by their attributes. They are commonly described as identities and the building blocks of the domain modelling. To put it in simpler words: Entities emphasise on the who or they are rather than the what they are.
+`Entities` are domain objects that are uniquely defined by a unique identifier, and not by their attributes. They are commonly described as identities and the building blocks of the domain modeling. To put it in simpler words: Entities emphasize who they are rather than what they are.
 
 #### Factories
 
-They are used to create complex objects and ensure that the client has no knowledge of the internal details and functionality of that object manipulation. As advised by Evans, factories provide encapsulation.They also ensure standardisation of object instantiation and ensure the objects do not care about the creation themselves. This helps at keeping the domain clean and ensures boundaries are kept.
+They are used to create complex objects and ensure that the client has no knowledge of the internal details and functionality of that object manipulation. As advised by Evans, factories provide encapsulation. They also ensure the standardization of object instantiation and ensure the objects do not care about the creation themselves. This helps at keeping the domain clean and ensures boundaries are kept.
 
 ## Architecture
 
-When looking into how to use the principles of DDD to plan my example application's architecture I’ve found the DDD series by Matt Rešetár a.k.a. Reso Coder.[[@FlutterFirebaseDDD2020]](https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/) His series has been a big influence to me and how I've planned my architecture. In the next section I will present my adaptation of his architecture proposal for my domain.
+Contents of the Section
 
-But before getting into more detail about my architecture I want to emphasise on a common mistake made by the community when it comes to architecture.
+- [Introduction](#introduction-9)
+- [Architecture vs. State Management vs. Folder Structure](#architecture-vs-state-management-vs-folder-structure)
+- [My Architecture](#my-architecture)
 
-### Architecture vs. state management vs. folder structure
+### Introduction
 
-A common mistake made by the community is the use of architecture, state management and folder structure interchangeably. Most Flutter developers should be familiar with the Flutter Architecture Samples repository [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples) by Brian Egan and contributors. As the name suggests this repository is supposed to contain different architecture samples of a Todo App. Unfortunately, this is not the case. It contains samples of how different patterns, e.g. Redux, can be implemented. The same misunderstanding comes with the folder structure of the project where it is mistaken for architecture. Folder structure helps to separate your files but not automatically includes an architecture.
+When looking into how to use the principles of DDD to plan my example application's architecture, I have found the DDD series by Matt Rešetár, a.k.a. Reso Coder [[@FlutterFirebaseDDD2020]](https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/). His series has been a significant influence on me and how I've planned my architecture. In the next part, I will present my adaptation of his architecture proposal for my domain.
 
-Architecture is the topic of a top-level decision when it comes to the planning of the system. It specifies how the system will be implemented, what type of modules it has and how their relationship is. [[@hgracaArchitecturalStylesVs2017]](https://herbertograca.com/2017/07/28/architectural-styles-vs-architectural-patterns-vs-design-patterns/)
+But before getting into more detail about my architecture, I want to emphasize on a common mistake made by the community when it comes to architecture.
+
+### Architecture vs. State Management vs. Folder Structure
+
+A common mistake made by the community is the use of `architecture`, `state management`, and `folder structure` interchangeably. Most Flutter developers should be familiar with the _Flutter Architecture Samples_ repository [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples) by Brian Egan and contributors. As the name suggests, this repository is supposed to contain different architecture samples of a _Todo App_. Unfortunately, this is not the case. It includes examples of how different patterns, e.g., Redux, can be implemented. The same misunderstanding comes with the folder structure of the project, where it is mistaken for architecture. Folder structure helps to separate your files but not automatically includes an architecture.
+
+Architecture is the topic of a top-level decision when it comes to the planning of the system. It specifies how the system will be implemented, what type of modules it has, and how their relationship is [[@hgracaArchitecturalStylesVs2017]](https://herbertograca.com/2017/07/28/architectural-styles-vs-architectural-patterns-vs-design-patterns/).
+
 Examples for architecture are:
 
 - layered
@@ -629,61 +714,71 @@ Examples for architecture are:
 - client-server
 - etc.
 
-To summarise, an architecture should set the outer boundaries of your application.
+To summarise it, an architecture should _set the outer boundaries of your application_.
 
-### My architecture
+### My Architecture
 
-As you can see in Figure 27 the architecture is closely related to Reso Coders architecture proposal.
+As you can see in _Figure 27_, the architecture is closely related to Reso Coders architecture proposal.
 
-| ![application architecture](https://i.imgur.com/JeebkGs.jpg) |
+| ![Application Architecture](https://i.imgur.com/JeebkGs.jpg) |
 | :----------------------------------------------------------: |
-|            _Figure 27: Application architecture._            |
+|            _Figure 27: Application architecture_             |
 
 The main difference is my lack of a value object and the focus on the entities.
 
-The presentation layer represents the dumb UI which is used to interact with the user. Depending on the state management solution some sort of ViewModel is used in the layer, e.g. events and states in flutter_bloc.
+The `presentation layer` represents the dumb UI, which is used to interact with the user. Depending on the state management solution, some sort of `ViewModel` is used in the layer, e.g., events and states in flutter_bloc.
 
-The application layer contains the state management solution. It is the only layer communicating with the presentation layer. It depends on entities to represent the domain's relevant data models and interfaces which are a common contract to communicate with the infrastructure layer.
+The `application layer` contains the state management solution. It is the only layer communicating with the presentation layer. It depends on entities to represent the domain's relevant data models and interfaces, which are a typical contract to communicate with the infrastructure layer.
 
-The domain layer contains the core logic of the business. It is intended to be a standalone layer. Due to the simplicity of this example and the focus on the state management part in the application layer, I’ve decided to leave out ValueObjects.
+The `domain layer` contains the core logic of the business. It is intended to be a standalone layer. Due to the simplicity of this example and the focus on the state management part in the application layer, I’ve decided to leave out `ValueObjects`.
 
-The infrastructure layer contains repositories. It is the layer that communicates with APIs and other services, e.g. databases. To specify how to manage API calls, the repositories implement the provided interface of the domain layer and thereby fulfills its contract. The dependency to the models is used to specify data transfer objects [[@BlikiLocalDTO]](https://martinfowler.com/bliki/LocalDTO.html) which are used to transfer the raw data from the API/database into objects.
+The `infrastructure layer` contains repositories. It is the layer that communicates with APIs and other services, e.g., databases. The repositories implement the provided interface of the domain layer to specify how to manage API calls, and thereby fulfills its contract. The dependency on the models is used to define data transfer objects [[@BlikiLocalDTO]](https://martinfowler.com/bliki/LocalDTO.html) which are used to transfer the raw data from the API/database into objects.
 
-### Weather App Example
+## The State Management Evaluation App
 
-In order to evaluate multiple state management solutions I had to find a way to compare them. For this purpose I choose to build an app with predefined functionalities. This sets a goal to achieve and requirements which the SMSs had to fulfill. By having an app with predefined functionalities/requirements the state management solutions can directly be compared in a specified scenario.
+Contents of the Section
 
-Since I want to focus on the SMS part I don’t want to spend a lot of time in planning an application. So I have chosen to use the Weather App build in the tutorial by Felix Angelov as my foundation. [[@WeatherBloc]](https://bloclibrary.dev/#/flutterweathertutorial)
-The reason for this example app is that I have started the project with previous knowledge about the flutter_bloc [[@FlutterBlocFlutter]](https://pub.dev/packages/flutter_bloc) package which was also created by Felix. And furthermore, because I like the app’s UI.
+- [Introduction](#introduction-10)
+- [Weather App]()
 
-Take a look at the .gif of the weather app at bloclibrary [[@Bloc]](https://bloclibrary.dev/#/) to get a first glimps at what will be build:
+### Introduction
 
-| ![weather app](https://i.imgur.com/cgB1wse.gif) |
+To evaluate multiple state management solutions, I had to find a way to compare them. For this purpose, I choose to build an app with _predefined functionalities_. That sets a goal to achieve and requirements that SMSs had to fulfill. By having an app with predefined functionalities/requirements, the state management solutions can be directly compared in a specified scenario.
+
+### Weather App
+
+Since I want to focus on the SMS part, I don’t want to spend a lot of time planning an app. So I have chosen to use the Weather App, build in the tutorial by Felix Angelov, as my foundation [[@WeatherBloc]](https://bloclibrary.dev/#/flutterweathertutorial).
+
+The reason for this example app is that I have started the project with previous knowledge about the flutter_bloc [[@FlutterBlocFlutter]](https://pub.dev/packages/flutter_bloc) package, which was also created by Felix. And furthermore, because I like the app’s UI.
+
+Take a look at the .gif of the weather app at bloclibrary [[@Bloc]](https://bloclibrary.dev/#/) to get a first glimpse at what will be built:
+
+| ![Weather App](https://i.imgur.com/cgB1wse.gif) |
 | :---------------------------------------------: |
-|         _Figure 28: Weather app .gif._          |
+|          _Figure 28: Weather app .gif_          |
 
-From the .gif we can take the four key features our application offers:
+From the .gif, you can take the four key features our application offers:
 
 1. Fetch weather from an API on the search page
 2. Update the app theme to match the weather condition
-3. Toggle the temperature measurement unit on settings page
-4. Refresh the weather by using a pull down gesture on the weather page
+3. Toggle the temperature measurement unit on the settings page
+4. Refresh the weather by using a pull-down gesture on the weather page
 
-These four features have to be implemented by each state management solution including their side effects [[@ProgrammingLanguagesWhat]](https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect) like the loading indicator when weather data is being fetched.
+These four features have to be implemented by each state management solution, including their side effects [[@ProgrammingLanguagesWhat]](https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect) like the loading indicator when weather data is being fetched.
 
-Since I already knew how to implement the BLoC pattern with the help of flutter_bloc I’ve decided to start the evaluation process by rewriting the example app to use Flutter’s own state management solution - stateful widgets. From that point forward the rewritten example app, in this context vanilla app, has been used as a foundation to rewrite the application using a different state management solution.
+Since I already knew how to implement the BLoC pattern with the help of flutter_bloc, I’ve decided to start the evaluation process by rewriting the example app to use Flutter’s own state management solution - stateful widgets. From that point forward, the rewritten example app, in this context vanilla app, has been used as a foundation to rewrite the application using a different state management solution.
 
-A simplified version of our example apps widget tree can be seen in Figure 29:
+A simplified version of our example apps widget tree can be seen in _Figure 29_:
 
-| ![weather app widget tree](https://i.imgur.com/uM2ab31.jpg) |
+| ![Weather App Widget Tree](https://i.imgur.com/uM2ab31.jpg) |
 | :---------------------------------------------------------: |
-|            _Figure 29: Weather app widget tree._            |
+|            _Figure 29: Weather App Widget Tree._            |
 
-The application consists of three screens: (1) WeatherPage, (2) LocationSearchPage and (3) SettingsPage.
+The application consists of three screens: _(1) WeatherPage, (2) LocationSearchPage, and (3) SettingsPage_.
 
 ### Additional packages that will be used
 
-Before I finish this chapter I want to mention some additional packages that were used to create the examples. These packages are:
+Before I finish this chapter, I want to mention some additional packages used to create the examples. These packages are:
 
 - Freezed [[@FreezedDartPackage]](https://pub.dev/packages/freezed)
   - Generates code to help to deal with immutable classes and provides a simple API to use.
@@ -692,17 +787,33 @@ Before I finish this chapter I want to mention some additional packages that wer
 - GetIt [[@GetItDart]](https://pub.dev/packages/get_it)
   - "Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App"
 - Dartz [[@DartzDartPackage]](https://pub.dev/packages/dartz)
-  - adds functinonal programming principles to dart
+  - adds functional programming principles to dart
 - build_runner [[@BuildRunnerDart]](https://pub.dev/packages/build_runner)
   - a build system to generate dart files
 - injectable_generator [[@InjectableGeneratorDart]](https://pub.dev/packages/injectable_generator)
   - a generator to create code for injectable related annotations
 
-The use of these packages is influence by Reso Coder's DDD example and provide our application with a criteria to evaluate with: "How does the state management solution work with the other packages used by the application".
+Reso Coder's DDD example motivated me to use of these packages. It provides our application with the criteria: _How does the state management solution work with the other packages used by the application_.
 
-This covers the methodology chapter. The next chapter covers the results of the implementation.
+This covers the methodology chapter. The next chapter - [Results](#results) covers the results of the implementation.
 
 # Results
+
+## Contents of the Chapter
+
+- [Introduction](#introduction-11)
+- [Patterns in State Management Solutions](#pattern-in-state-management-solutions)
+- [Implemented Examples](#implemented-examples)
+  - [Stateful Widget](#stateful-widget-1)
+  - [Inherited Widget](#inherited-widget-1)
+  - [ChangeNotifierProvider](#changenotifierprovider)
+  - [Vanilla BLoC](#vanilla-bloc)
+  - [BLoC with Flutter_bloc](#bloc-with-flutter_bloc)
+  - [Redux](#redux)
+  - [MobX](#mobx)
+  - [States Rebuilder](#states-rebuilder)
+
+## Introduction
 
 This chapter will show the results I have collected after the implementation of each state management solution in the example app. The chapter is structure as follows:
 
@@ -710,7 +821,18 @@ This chapter will show the results I have collected after the implementation of 
 - The second section contains the implemented state management solutions and how they are implemented in the architecture
 - The third and last section will cover the evaluation of the SMS. This section will cover the criteria that we chosen to evaluate the SMS, the result of the SMS and my personal recommendation on which state management solution is useful when it comes to developing large-scale applications, etc.
 
-## Patterns in state management solutions (mutable/immutable)
+## Patterns in State Management Solutions
+
+Contents of the Section
+
+- [Introduction]()
+- [Why DDD?]()
+- [Domain-Driven-Design Principles]()
+  - [Domain()]
+  - [Layered Architecture]()
+  - [Ubiquitous Language]()
+  - [Entities]()
+  - [Factories]()
 
 As you’ve noticed by now state management is a hot topic in the Flutter community. Therefore it is not surprising that a lot of people try to provide valid information about state management.
 In his article “State Management Explained” Reso Coder did a great job in explaining the core principles of state management approaches.
@@ -830,6 +952,17 @@ Each example consist of 5 paragraphs:
 - (5) benefits/challenges/outcomes
 
 ## Examples
+
+Contents of the Section
+
+- [Introduction]()
+- [Why DDD?]()
+- [Domain-Driven-Design Principles]()
+  - [Domain()]
+  - [Layered Architecture]()
+  - [Ubiquitous Language]()
+  - [Entities]()
+  - [Factories]()
 
 ### Stateful Widget
 
@@ -2758,7 +2891,16 @@ Disadvantages:
 - strongly coupled to its own Dependency Injection \* all-or-nothing solution
 - hard to master
 
-# Evaluation (depends on part 3: Results)
+# Evaluation
+
+## Contents of the Chapter
+
+- [Introduction]()
+- [Evaluation Criteria]()
+- [Evaluation Results]()
+- [Recommendations]()
+
+## Introduction
 
 The first thing I want to do is remove the state management solutions InheritedWidget and bloc_vanilla from the following evaluation. The reason for this decision is that with Provider a solution has been developed which wraps the Inherited Widget and provides a simplified API. The same advantages come with flutter bloc which provides the bloc pattern with a simplified API and less overhead to worry about.
 
@@ -2770,11 +2912,22 @@ The state management solutions will be rated from a scale from 1-3. The rating v
 
 Furthermore I will add a comment to ratings of 1 and 3 to add more information to the result.
 
-## Criteria
+## Evaluation Criteria
+
+Contents of the Section
+
+- [Introduction]()
+- [Why DDD?]()
+- [Domain-Driven-Design Principles]()
+  - [Domain()]
+  - [Layered Architecture]()
+  - [Ubiquitous Language]()
+  - [Entities]()
+  - [Factories]()
 
 The criteria that were chosen to evaluate the different state management solutions are a mixture of quality attributes and personally chosen criteria which I will further explain in the upcoming section.
 
-The quality attributes are taken from “Characterizing Architecturally Significant Requirements” by Chen et al.:[[@chenCharacterizingArchitecturallySignificant2013]](http://ieeexplore.ieee.org/document/6365165/)
+The quality attributes are taken from “_Characterizing Architecturally Significant Requirements_” by Chen et al. [[@chenCharacterizingArchitecturallySignificant2013]](http://ieeexplore.ieee.org/document/6365165/):
 
 - Maintainability
 - Extendability
@@ -2843,6 +2996,17 @@ Side-effect-handling in the context of the evaluation is defined as how well the
 Debugging in the context of the evaluation is defined as how easy can bugs be debug with the SMS. To be more precise how difficult is it to track the bug inside the implementation of the SMS.
 
 ## Results
+
+Contents of the Section
+
+- [Introduction]()
+- [Why DDD?]()
+- [Domain-Driven-Design Principles]()
+  - [Domain()]
+  - [Layered Architecture]()
+  - [Ubiquitous Language]()
+  - [Entities]()
+  - [Factories]()
 
 ### Quality Attributes
 
@@ -2975,7 +3139,7 @@ _Table 11: Debugging scores_
 - Bloc: The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific class in the bloc package.
 - MobX: Since MobX is handling a lot of logic internally it is difficult to track down a bug.
 
-## Overall
+### Overall
 
 | Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
 | --------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
@@ -2995,6 +3159,17 @@ _Table 11: Debugging scores_
 _Table 12: Overall scores_
 
 ## Recommendations
+
+Contents of the Section
+
+- [Introduction]()
+- [Why DDD?]()
+- [Domain-Driven-Design Principles]()
+  - [Domain()]
+  - [Layered Architecture]()
+  - [Ubiquitous Language]()
+  - [Entities]()
+  - [Factories]()
 
 ### Introduction
 
@@ -3039,6 +3214,8 @@ To explain my optional recommendation of states rebuilder: The drawback with thi
 You have reached the end of this chapter. The next chapter [_Conclusion_]() is going to contain my personal evaluation of this guide and what I intend to do in the future.
 
 # Conclusion
+
+Contents of the Chapter
 
 ## Introduction
 
