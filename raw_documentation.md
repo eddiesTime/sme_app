@@ -2501,62 +2501,67 @@ In the method `_buildUI()`, a `StoreConnector` is used to connect the UI to the 
 
 #### Introduction
 
-This examples has been build with the help of Reso Coder’s written MobX tutorial. [[@FlutterMobXTutorial2019]](https://resocoder.com/2019/12/26/flutter-mobx-tutorial-transparent-reactive-state-management/)
+This example has been build with the help of Reso Coder’s written MobX tutorial [[@FlutterMobXTutorial2019]](https://resocoder.com/2019/12/26/flutter-mobx-tutorial-transparent-reactive-state-management/).
 
 > MobX is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming (TFRP). The philosophy behind MobX is very simple: _Anything that can be derived from the application state, should be derived. Automatically._ This includes the UI, data serialization, server communication, etc. [[@IntroductionMobX]](https://mobx.js.org//index.html)
 
-Similar to Redux or Bloc MobX has a unidirectional data flow. Furthermore, MobX also uses the concept of a store for its state and actions. But in difference to Redux more than one store can be used.
+Similar to Redux or Bloc, MobX has a unidirectional data flow. Furthermore, MobX also uses the concept of a `Store` for its state and `Actions`. But different from Redux, more than one store can be used.
 
-|           ![MobX data flow](https://i.imgur.com/jLbZ564.png)            |
-| :---------------------------------------------------------------------: |
-| _Figure 37: Data flow of MobX from the official mobx.js documentation._ |
+|           ![MobX Data Flow](https://i.imgur.com/jLbZ564.png)           |
+| :--------------------------------------------------------------------: |
+| _Figure 37: Data Flow of MobX from the Official Mobx.js Documentation_ |
 
-Actions are fired via Events which can be user interactions or reactions. Actions are the only way to change the State. If computed values are derived from the State they are updated. The State modification automatically triggers reactions if specified.
+`Actions` are fired via `Events`, which can be user interactions or reactions. Actions are the only way to change the `State`. If `Computed Values` are derived from the `State` they are updated. The `State` modification automatically triggers `Reactions` if specified.
 
-MobX is a mutable state management solution.
+MobX follows the mutable state principle.
 
 #### Concepts
 
-MobX consists of three core concepts: (1) Observables, (2) Actions and (3) Reactions. [[@CoreConcepts]](https://mobx.netlify.app/concepts)
+MobX consists of three core concepts: _(1) Observables, (2) Actions and (3) Reactions_ [[@CoreConcepts]](https://mobx.netlify.app/concepts).
 
 | ![MobX concepts](https://i.imgur.com/Go2v3hq.png) |
 | :-----------------------------------------------: |
 |           _Figure 38: Concepts of MobX_           |
 
-Observables are the representatives of the reactive application state. This means that when the data of the observable changes it sends a notification to its listeners (Observers).
+`Observables` are the representatives of the reactive application state. This means that when the data of the `Observable` changes, it sends a notification to its _listeners_ (Observers).
 
-Computed Observables are derived from observables. They are based on the philosophy of MobX. The application state is the combination of Observables and Computed Observables. To be more precise application state is the combination of _core-state_ and _derived-state_ where Observables mirror the core-state and Computed Observables the derived-state.
+`Computed Observables` are derived from `Observables`. They are based on the philosophy of MobX.
 
-To change the data of an Observable an Action has to be used. Therefore similar to Redux MobX uses the principle of a single source of truth.
+The `Application State` is the combination of `Observables` and `Computed Observables`. To be more precise, the application state is the combination of _core-state_ and _derived-state_, where `Observables` mirror the core-state and `Computed Observables` the derived-state.
 
-Actions can be triggered by events from the user via user interaction or fired by a Reaction. An example for a user triggered Action is the tap of a button.
+An `Action` has to be used to change the data of an `Observable`. Therefore, similar to Redux, MobX uses the principle of a single source of truth.
 
-Reactions have a special place in the MobX implementation. They are not necessarily needed in an application when the application has no requirements to handle side effects. Side effects are modifications of the state. [[@ProgrammingLanguagesWhat]](https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect) In Flutter an example for a side effect is the automatic navigation to the home page after a successful login.
-Reactions can also be used to fire Actions to start a specified process.
+`Actions` can be triggered by `events` from the user via user interaction or fired by a `Reaction`. An example, for a user-triggered action, is the tap of a button.
+
+`Reactions` have a special place in the MobX implementation. They are not necessarily needed in an application when the application has no requirements to handle side effects.
+
+Side effects are modifications of the state [[@ProgrammingLanguagesWhat]](https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect). In Flutter, an example for a side effect, is the automatic navigation to a `Home` page after a successful login.
+
+`Reactions` can also be used to fire `Actions` to start a specified process.
 
 #### Implementation
 
-For the implementation of the MobX example three packages have to be downloaded:
+For the implementation of the MobX example, three packages have to be downloaded:
 
 1. mobx [[@MobxDartPackage]](https://pub.dev/packages/mobx)
 2. flutter_mobx [[@FlutterMobxFlutter]](https://pub.dev/packages/flutter_mobx)
 3. mobx_codegen [[@MobxCodegenDart]](https://pub.dev/packages/mobx_codegen)
 
-The package mobx provides the concepts, logic and interaction of MobX to the the project.
+The package `mobx` provides the concepts, logic, and interaction of MobX to the project.
 
-The package flutter_mobx provides access to the Observable widget. This widget can be used to listen to Observables and rebuild automatically after the observables has been mutated.
+The package `flutter_mobx` provides access to the Observable widget. This widget can be used to listen to Observables and rebuild automatically after the observables have been mutated.
 
-The package mobx_codegen provides annotations which can be added to the mobx code to reduce the amount of boilerplate needed. The added annotations are:
+The package `mobx_codegen` provides annotations that can be added to the MobX code to reduce the amount of boilerplate needed. The added annotations are:
 
 - @observable
 - @computed
 - @action
 
-As usual the code implementation will be separated into application layer and presentation layer for the weather function.
+As usual, the code implementation will be separated into the application layer and presentation layer for the weather function.
 
 ##### Application Layer
 
-To be able to use mobx_codegen the WeatherStore class needs to me mixed with the Store class. With the help of the store mixin the weather store is treated like a store and the annotations can be used.
+To be able to use `mobx_codegen`, the `WeatherStore` class needs to be mixed with the `Store` class. With the help of the `Store Mixin`, the `WeatherStore` is treated as a store, and the annotations can be used.
 
 ```dart
 ...
@@ -2666,11 +2671,11 @@ abstract class _WeatherStore with Store {
 
 _Code snippet 42: MobX WeatherStore Class_
 
-As most mutable state management solutions MobX does not implement a way to handle initial state and the developer has to decide how to handle it. In this example an enum has been created to represent the state of the store.
+As most mutable state management solutions, MobX does not implement a way to handle _initial state_, and the developer has to decide how to handle it himself. In this example, an `enum` has been created to represent the state of the store.
 
 ##### Presentation Layer
 
-To access the weather store in the application it has to be injected into the widget tree. The injection is done with the help of the provider package inside the weather app widget.
+The `WeatherStore` has to be injected into the Widget Tree to access it in the application. The injection is done with the help of the `provider` package inside the `WeatherApp` widget.
 
 ```dart
 ...
@@ -2703,9 +2708,9 @@ class MobxApp extends StatelessWidget {
 
 _Code snippet 43: MobxApp Widget_
 
-After the weather store has been injected it can be accessed in any descendant in the tree.
+After the `WeatherStore` has been injected, it can be accessed in any descendant in the tree.
 
-In the method `_buildUI()` the Observable widget provided by flutter_mobx comes into action.
+In the method `_buildUI()` the `Observable` widget, provided by `flutter_mobx,` comes into action.
 
 ```dart
 ...
@@ -2740,13 +2745,13 @@ In the method `_buildUI()` the Observable widget provided by flutter_mobx comes 
 
 _Code snippet 44: MobX Weather Widget_
 
-The `builder` function of the Observable widget will be monitored by MobX. It tracks all observables and computed observables inside it which in this example is the computed observable `state`. Whenever a tracked observable or computed observable changes the widget gets rebuild.
+The `builder()` function of the `Observable` widget will be monitored by MobX. It tracks all observables and computed observables inside it, which, in this example, is the computed observable `state`. Whenever a tracked observable or computed observable changes, the widget gets rebuilt.
 
 #### Advantages
 
 - no unnecessary boilerplates
-  _ focus on the key features
-  _ more “magic”
+  - focus on the key features
+  - more “magic”
 - easy to learn
 - easy to use
 
@@ -2754,8 +2759,8 @@ The `builder` function of the Observable widget will be monitored by MobX. It tr
 
 - no mutation history for undo/redo
 - more “magic”
-  _ a lot of logic happens in MobX internally
-  _ difficult to debug
+  - a lot of logic happens in MobX internally
+  - difficult to debug
 
 ### States_rebuilder
 
