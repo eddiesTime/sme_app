@@ -2762,58 +2762,63 @@ The `builder()` function of the `Observable` widget will be monitored by MobX. I
   - a lot of logic happens in MobX internally
   - difficult to debug
 
-### States_rebuilder
+### States Rebuilder
 
 #### Introduction
 
-The example has been build following the written tutorial “States Rebuilder - ZERO Boilerplate Flutter State Management” by Reso Coder. [[@StatesRebuilderZERO2019]](https://resocoder.com/2019/12/30/states-rebuilder-zero-boilerplate-flutter-state-management/) States Rebuilder is a state management solution that is purely written in Dart and comes with an integrated Dependency Injection approach.
+The example has been build following the written tutorial _States Rebuilder - ZERO Boilerplate Flutter State Management_ by Reso Coder [[@StatesRebuilderZERO2019]](https://resocoder.com/2019/12/30/states-rebuilder-zero-boilerplate-flutter-state-management/).
 
-States Rebuilder can be used as mutable and immutable state management solution. In this example it is used as mutable state management solution.
+`States Rebuilder` is a state management solution, that is purely written in Dart and comes with an integrated `Dependency Injection` approach.
+
+States Rebuilder can be used as a mutable or immutable state management solution. Therefore, it follows both principles. In this example, it is used as a mutable state management solution.
 
 #### Concept
 
-The concepts of States Rebuilder are taken out of the README.md of the official dart package. [[@StatesRebuilderFlutter]](https://pub.dev/packages/states_rebuilder)
+The concepts of States Rebuilder are taken out of the _README.md_ of the official dart package [[@StatesRebuilderFlutter]](https://pub.dev/packages/states_rebuilder).
 
-States Rebuilder implements the Observer-Observable-pattern.
+States Rebuilder implements the **Observer-Observable-Pattern**.
 
-The Observer-Observable-pattern is a design pattern in object-oriented software which specifies a distinct behaviour. The behaviour is a one-to-many relationship where the change of the the one (Observable) notifies the many (Observers) which triggers an automatic update. [[@gamma1994design]](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=ntt_at_ep_dpi_1)
-ReactiveModel is the representation of the observable which multiple Observers can listen to.
+The Observer-Observable-Pattern is a design pattern in object-oriented software that specifies a distinct behavior. The behavior is a one-to-many relationship, where the change of the _one (Observable)_ notifies the _many (Observers)_, which triggers an automatic update [[@gamma1994design]](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=ntt_at_ep_dpi_1).
+
+`ReactiveModel` is the representation of the `Observable`, which multiple `Observers` can listen to.
 
 ##### ReactiveModel
 
-ReactiveModel is an abstract class which wrapped around a singleton. A singleton “ensure a class only has one instance, and provide a global point of access to it”. [[@gamma1994design]](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=ntt_at_ep_dpi_1)
-The ReactiveModel exposes specified getters to obtain the last state of the singleton (`state`, `value`) and getters to track the state of the singleton (`isIdle`, `isWaiting`, `hasError` and `hasData`). Furthermore it exposes two methods to mutate the state of the singleton (`setState`, `setValue`).
+`ReactiveModel` is an abstract class, which id wrapped around a `singleton`. A singleton “ensure a class only has one instance, and provide a global point of access to it” [[@gamma1994design]](http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=ntt_at_ep_dpi_1).
+
+The `ReactiveModel` exposes specified getters to obtain the **last state** of the singleton (`state`, `value`) and getters to track **the state** of the singleton (`isIdle`, `isWaiting`, `hasError` and `hasData`). Furthermore, it exposes two methods to **mutate the state** of the singleton (`setState`, `setValue`).
+
 The singleton can also be accessed as a simple model without the provided getters and methods of the ReactiveModel.
 
 ##### StateBuilder
 
-Is one out of four Observer Widgets which can be used to connect the UI to a ReactiveModel. The other three Observer Widgets are:
+_Is one out of four Observer Widgets_, which can be used to connect the UI to a `ReactiveModel`. The other three Observer Widgets are:
 
 - WhenRebuilder
 - WhenRebuilderOr
 - OnSetStateListener
 
-WhenRebuilder enforces the implementation of UI response for each of the four state states, e.g. `isIdle`.
+`WhenRebuilder` enforces the implementation of UI-response for each of the four state states, e.g., `isIdle`.
 
-WhenRebuilderOr in contrast to WhenRebuilder enforces the implementation of a `builder` function and optional parameters for `isIdle` etc.
+`WhenRebuilderOr`, in contrast to `WhenRebuilder`, enforces the implementation of a `builder()` function and optional parameters for `isIdle` etc.
 
-OnSetStateListener is used to react to side-effects. It reacts to notifications from its defined Observables as any other Observer in States Rebuilder. It differs from the others by having a `child` parameter instead of a `builder` parameter. The difference in these parameters is that `child` will not be rebuild when the Observer receives notifications from its Observables.
+`OnSetStateListener` is used to react to _side-effects_. It reacts to notifications from its defined `Observables` like any other `Observer` in States Rebuilder. It differs from the others by having a `child` parameter instead of a `builder` parameter. The difference in these parameters is that `child` will not be rebuilt when the `Observer` receives notifications from its `Observables`.
 
 ##### Injector
 
-Injector is a StatefulWidget that is used to register and unregister Models/ReactiveModels, interfaces and flavors. It provides getters to access a registered instance in any descendant in the widget tree.
+`Injector` is a `Stateful Widget` that is used to register and unregister `Models/ReactiveModels`, interfaces and flavors. It provides getters to access a registered instance in any descendant in the Widget Tree.
 
 #### Implementation
 
-For the examples the package states_rebuilder [[@StatesRebuilderFlutter]](https://pub.dev/packages/states_rebuilder) has to be added to the pubspec.yaml file.
+For the example the package `states_rebuilder` [[@StatesRebuilderFlutter]](https://pub.dev/packages/states_rebuilder) has to be added to the pubspec.yaml file.
 
-As usual the code implementation will be separated into application layer and presentation layer for the weather function.
+As usual, the code implementation will be separated into the application layer and presentation layer for the weather function.
 
 ##### Application Layer
 
-In States Rebuilder the model is usually named store. Therefore in the example the model for weather related functionality is called `WeatherStore`.
+In States Rebuilder, the model is usually named `store`. Therefore, in the example, the model for weather-related functionality is called `WeatherStore`.
 
-Inside the `WeatherStore` class no extension or mixin has to be implemented since it will be wrapped by a ReactiveModel.
+Inside the `WeatherStore` class, no extension or mixin has to be implemented since a `ReactiveModel will wrap it`.
 
 ```dart
 ...
@@ -2867,11 +2872,13 @@ class WeatherStore {
 
 _Code snippet 45: States Rebuilder WeatherStore Class_
 
-In the method `_weatherChanged()` the method `setState` provided by the `ReactiveModel` class is used to mutate the state of the store and imply a notification to its Observers.
+In the method `_weatherChanged()`, the method `setState()` provided by the `ReactiveModel` class is used to mutate the state of the store and imply a notification to its `Obse
 
 ##### Presentation Layer
 
-To access the WeatherStore in the application it needs to be injected into the widget tree. This injection takes place inside the StatesRebuilderApp a.k.a. WeatherApp.
+To access the `WeatherStore` inside the application, it needs to be injected into the Widget Tree.
+
+This injection takes place inside the `StatesRebuilderApp` widget a.k.a. `WeatherApp` widget.
 
 ```dart
 ...
@@ -2900,7 +2907,7 @@ class StatesRebuilderApp extends StatelessWidget {
 
 _Code snippet 46: StatesRebuilderApp Widget_
 
-To access the weather store inside the weather widget we used the Injector widget to get the instance of weather store as ReactiveModel.
+The `Injector` widget is used to get the instance of `WeatherStore` as `ReactiveModel`, to access the `WeatherStore` inside the `Weather` widget.
 
 ```dart
 ...
@@ -2959,7 +2966,11 @@ class _WeatherState extends State<Weather> {
 
 _Code snippet 47: States Rebuilder Weather Widget_
 
-The Observer widget `StateBuilder` is implemented inside the method `_buildUI()`. The ReactiveModel `_reactiveWeatherStoreModel` is registered as the only observable with the parameter `models`. Therefore the UI gets rebuild whenever StateBuilder receives a notification from WeatherStore. Inside the `builder` parameter the attribute `whenConnectionState` of `reactiveModel` (in this case the Reactive Model registered in `models`) is used to handle different connections states, e.g. `isIdle`, and build the corresponding UI.
+The `Observer` widget `StateBuilder` is implemented inside the method `_buildUI()`.
+
+The `ReactiveModel` `_reactiveWeatherStoreModel` is registered as the only `Observable` with the parameter `models`. Therefore the UI gets rebuilt whenever `StateBuilder` receives a notification from `WeatherStore`.
+
+Inside the `builder` parameter, the attribute `whenConnectionState` of `reactiveModel` (in this case, the `ReactiveModel` registered in `models`) is used to handle different connections states, e.g., `isIdle`, and build the corresponding UI.
 
 #### Advantages
 
@@ -2970,14 +2981,15 @@ The Observer widget `StateBuilder` is implemented inside the method `_buildUI()`
 
 #### Disadvantages
 
-- strongly coupled to its own Dependency Injection \* all-or-nothing solution
+- strongly coupled to its own `Dependency Injection`
+  - all-or-nothing solution
 - hard to master
 
 # Evaluation
 
 ## Contents of the Chapter
 
-- [Introduction]()
+- [Introduction](#introduction-23)
 - [Evaluation Criteria](#evaluation-criteria)
 - [Evaluation Results](#evaluation-results)
 - [Recommendations](#recommendations)
