@@ -1510,7 +1510,7 @@ class WeatherNotifier extends ChangeNotifier {
 }
 ```
 
-_Code snippet 21: WeatherNofitifer inside Application Layer._
+_Code snippet 21: WeatherNofitifer inside Application Layer_
 
 Whenever `WeatherEntity` changes, due to the methods `fetchWeatherForLocation()` or `refreshWeatherForLocation()`, the method `notifyListeners()` is called, which signals the `ChangeNotifierProvider` to update the UI by telling its descendants to run their builder callback.
 
@@ -1546,7 +1546,7 @@ class ChangeNotifierProviderApp extends StatelessWidget {
 }
 ```
 
-_Code snippet 22: ChangeNotifierProviderApp Widget in Presentation Layer._
+_Code snippet 22: ChangeNotifierProviderApp Widget in Presentation Layer_
 
 After `WeatherNotifier` has been injected into the Widget Tree inside `ChangeNotifierProvider`, it can be accessed inside the `Weather` widget.
 
@@ -1584,7 +1584,7 @@ After `WeatherNotifier` has been injected into the Widget Tree inside `ChangeNot
 ...
 ```
 
-_Code snippet 23: Weather Widget in Presentation Layer._
+_Code snippet 23: Weather Widget in Presentation Layer_
 
 It is essential to set the `listen` parameter inside `Provider.of<WeatherNotifier>` to false. Otherwise, it tries to reassign `WeatherNotifier` whenever `notifyListeners()` is being emitted.
 
@@ -1601,58 +1601,59 @@ It is essential to set the `listen` parameter inside `Provider.of<WeatherNotifie
   - an enum has to be created and maintained
 - you need to keep track when not to listen for `notifyListeners()`
 
-### Vanilla Bloc
+### Vanilla BLoC
 
 #### Introduction
 
-The Bloc (**B**usiness **Lo**gic **C**omponent) pattern was first introduced at the Google I/O 2018.[[@BuildReactiveMobile]](https://www.youtube.com/watch?v=RS36gBEp8OI) So to explain this pattern I am going to keep it close to the information provided in the talk.
-The Bloc pattern provides a reactive approach to handle state changes in Flutter. It is based on Streams [[@StreamClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html) which are a core concept of asynchronous programming in Dart.[[@AsynchronousProgrammingStreams]](https://dart.dev/tutorials/language/streams) The Bloc takes in events, runs the needed business logic if necessary and outputs the resulting data.
+The BLoC (**B**usiness **Lo**gic **C**omponent) pattern was first introduced at the Google I/O 2018 [[@BuildReactiveMobile]](https://www.youtube.com/watch?v=RS36gBEp8OI). So to explain this pattern, I am going to keep it close to the information provided in the talk.
 
-The Bloc pattern can be used as a mutable or immutable state management solution. You can either add mutated data to the stream or a new data object. In this example the immutable approach is implemented.
+The BLoC pattern provides a reactive approach to handle state changes in Flutter. It is based on `Streams` [[@StreamClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html), which are a core concept of _asynchronous programming_ in Dart.[[@AsynchronousProgrammingStreams]](https://dart.dev/tutorials/language/streams) The BLoC takes in events, runs the needed business logic if necessary, and outputs the resulting data.
+
+The BLoC pattern can be used as a _mutable or immutable_ state management solution. You can either add mutated data to the stream or a new data object. In this example, the immutable approach has been implemented.
 
 #### Concept
 
-To understand the concept of Bloc you’ll have to get familiar with the concept of streams in Dart.
+To understand the concept of BLoC, you will have to get familiar with the concept of streams in Dart.
 
 | ![Stream Concept](https://i.imgur.com/J4ohiiR.jpg) |
 | :------------------------------------------------: |
 |           _Figure 32: Concept of Stream_           |
 
-Think about water running through a rain pipe which you want to use to flush down toy soldiers from the roof. On your roof the at the on side of the pipe you have your _sink_. The sink is the location where your comrade puts in the little soldiers. At the other end of your rain pipe you want to _react_ to the toy soldiers that are being flushed down the pipe. To be able to react to the toy soldiers being flushed down, you use a strainer. But without clear communication you don’t know when a toy soldier is being flushed down the pipe. And you don’t want to stand there all day and waste your time. So you start to _listen_ to your comrade and start to place the strain as soon as he gives you a signal.
+Think about water running through a rain gutter, which you want to use to flush down toy soldiers from the roof of your house. On your roof, at one side of the pipe, you have your **sink**. The sink is the location where your comrade puts in the little soldiers. At the other end of your pipe, you want to **react** to toy soldiers being flushed down the gutter. To be able to react to the toy soldiers being flushed down, you use a strainer. But without clear communication, you don't know when a toy soldier is being flushed down the pipe. And you don't want to stand there all day and waste your time waiting. So you start to **listen** for your comrade's signal to prepare yourself.
 
 This example includes all the core principles of streams in Dart.
 
-- StreamSink [[@StreamSinkClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/StreamSink-class.html) which is for event input
-- Stream [[@StreamClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html) which is used for the data output
+- `StreamSink` [[@StreamSinkClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/StreamSink-class.html) which is for event input
+- `Stream` [[@StreamClassDart]](https://api.dart.dev/stable/2.8.2/dart-async/Stream-class.html) which is used for the data output
 
-To put these concepts together you’ll need one more thing - the StreamController [[@StreamControllerClassDart]](https://api.dart.dev/stable/2.8.1/dart-async/StreamController-class.html) - which handles the input, output and more. The StreamController in our example is the rain pipe itself.
+To put these concepts together, you will need one more thing - the `StreamController` [[@StreamControllerClassDart]](https://api.dart.dev/stable/2.8.1/dart-async/StreamController-class.html) - which handles the input, output, and more. The `StreamController` in our example is the rain gutter itself.
 
-By default the StreamController only supports a single-subscription stream. To allow multiple listeners to subscribe you can use the StreamController.broadcast constructor.
+By default, the `StreamController` only supports a _single-subscription stream_. To allow multiple listeners to subscribe, you can use the `StreamController.broadcast()` constructor.
 
-| ![StreamController concept](https://i.imgur.com/w6cYnYQ.jpg) |
+| ![StreamController Concept](https://i.imgur.com/w6cYnYQ.jpg) |
 | :----------------------------------------------------------: |
-|            _Figure 33: StreamController concept._            |
+|            _Figure 33: StreamController Concept_             |
 
-When the concepts of reactive programming are combined the result is the Bloc. Figure shows a widget tree and how a bloc works:
+When the concepts of reactive programming are combined, the result is the BLoC. _Figure 34_ shows a Widget Tree and how a BLoC works:
 
-|                                     ![Bloc concept](https://i.imgur.com/Uter9X7.png)                                     |
-| :----------------------------------------------------------------------------------------------------------------------: |
-| _Figure 34: Image taken from the Google I/O 2018 [[@BuildReactiveMobile]](https://www.youtube.com/watch?v=RS36gBEp8OI)._ |
+|                                    ![Bloc concept](https://i.imgur.com/Uter9X7.png)                                     |
+| :---------------------------------------------------------------------------------------------------------------------: |
+| _Figure 34: Image taken from the Google I/O 2018 [[@BuildReactiveMobile]](https://www.youtube.com/watch?v=RS36gBEp8OI)_ |
 
-The light blue arrows indicate events that have been added by a widget to the StreamSink. These events are handled inside the bloc. The output is then emitted via a Stream. The widgets with the speaker icons are listening to a stream inside the bloc. As you can see by the purple arrow the orange widget is receiving data through a stream and can react to it.
+The light blue arrows indicate events that have been added by a widget to the `StreamSink`. These **events** are handled inside the BLoC. The output is then emitted via `Stream`. The widgets with the speaker-icon are listening to a stream inside the BLoC. As you can see by the purple arrow, the orange widget is receiving data through a stream and can react to it.
 
 #### Implementation
 
-For the implementation of the bloc pattern I’ve adapted two tutorials: (1) Reactive Programming - Streams - BLoC [[@boelensFlutterReactiveProgramming]](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/) and (2) Getting Started with the BLoC Pattern. [[@GettingStartedBLoC]](https://www.raywenderlich.com/4074597-getting-started-with-the-bloc-pattern)
+For the implementation of the BLoC pattern. I have adapted two tutorials: _(1) Reactive Programming - Streams - BLoC_ [[@boelensFlutterReactiveProgramming]](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/) _and (2) Getting Started with the BLoC Pattern_ [[@GettingStartedBLoC]](https://www.raywenderlich.com/4074597-getting-started-with-the-bloc-pattern).
 
-When working with StreamControllers in Flutter we can run into a problem: Broadcast streams do not buffer events when there is no listener. [[@DartFlutterBad]](https://stackoverflow.com/questions/51396769/flutter-bad-state-stream-has-already-been-listened-to) Adding an initial value to the sink inside the bloc’s constructor won’t be possible anymore. And each bloc implementation is adding an initial value inside its constructor.
+When working with StreamControllers in Flutter, you can run into a problem: _Broadcast streams_ do not buffer events when there is no listener [[@DartFlutterBad]](https://stackoverflow.com/questions/51396769/flutter-bad-state-stream-has-already-been-listened-to). Adding an initial value to the sink inside the BLoC's constructor won't be possible anymore. And each BLoC implementation, in the example, is adding an initial value inside its constructor.
 
-As a workaround for the problem I am recommending BehaviourSubject [[@BehaviorSubjectClassRx]](https://pub.dev/documentation/rxdart/latest/rx/BehaviorSubject-class.html) provided by rxdart. [[@RxdartDartPackage]](https://pub.dev/packages/rxdart)
-A BehaviourSubject is a special StreamController which is by default a broadcast stream and sends the latest item added to the sink to new listeners. Therefore it also works without listeners which in our constructor case is from advantage.
+As a workaround for the problem, I am recommending `BehaviourSubject` [[@BehaviorSubjectClassRx]](https://pub.dev/documentation/rxdart/latest/rx/BehaviorSubject-class.html) provided by `rxdart` [[@RxdartDartPackage]](https://pub.dev/packages/rxdart).
+A `BehaviourSubject` is a special `StreamController`, which is by default a **broadcast stream** and sends the latest item, added to the sink, to new listeners. Therefore it also works without listeners, which in the constructor case is from an advantage.
 
-Let’s take a look at how the weather data logic is implemented with the WeatherBloc.
+Let's take a look at how the weather data logic is implemented with the `WeatherBloc`.
 
-To specify the types of events that can be added to the weather bloc sink, an interface - weather_event.dart - has been created. We specified `WeatherEvent.fetchWeatherForLocation` and `WeatherEvent.refreshWeatherForLocation` as events.
+To specify the types of events that can be added to the weather bloc sink, an interface - _weather_event.dart_ - has been created. We specified `WeatherEvent.fetchWeatherForLocation` and `WeatherEvent.refreshWeatherForLocation` as events.
 
 ```dart
 part of 'weather_bloc.dart';
@@ -1670,10 +1671,11 @@ abstract class WeatherEvent with _$WeatherEvent {
 }
 ```
 
-_Code snippet 24: WeatherEvent Class._
+_Code snippet 24: WeatherEvent Class_
 
-Inside the WeatherBloc class the interface Bloc has been implemented.
-This interface specifies that the method `dispose()` has to be added for each bloc. This has to be done to prevent memory leaks in the future.
+Inside the `WeatherBloc` class, the interface `Bloc` has been implemented.
+
+This interface specifies that the method `dispose()` has to be added for each BLoC. This has to be done to prevent memory leaks in the future.
 
 ```dart
 /// An interface to implement a dispose contract for blocs to prevent memory leaks.
@@ -1682,18 +1684,18 @@ abstract class Bloc {
 }
 ```
 
-_Code snippet 25: Bloc Interface._
+_Code snippet 25: Bloc Interface_
 
 The WeatherBloc can be separated into two part:
 
 1. StreamController, Streams, Sinks
 2. Logic related methods
 
-In the first part the _BehaviourSubject_ `_weatherEntityStateController` of type WeatherEntity is declared as well as getters for its _sink_ `_inWeatherEntity` and _stream_ `weatherEntity`. Additionally a the StreamController `_weatherEventController` for WeatherEvents is declared. As soon as the Bloc is created it starts to _listen_ to the stream inside `_weatherEventController`.
+In the first part, the _BehaviourSubject_ `_weatherEntityStateController` of type `WeatherEntity` is declared, as well as getters for its **_sink_** `_inWeatherEntity` and **_stream_** `weatherEntity`. Additionally a **_StreamController_** `_weatherEventController` for `WeatherEvents` is declared. As soon as the BLoC is created, it starts to **_listen_** to the stream inside `_weatherEventController`.
 
 The second part contains the method `mapEventToState()`, which is used as a callback whenever a new weather event is emitted by the `_weatherEventController.stream`. Depending on the event we either call the method `fetchWeatherForLocation(location: event.location)` or `refreshWeather(location: event.location)` with the location inside the event as parameter.
 
-The method `dispose()` has been overwritten and closes the StreamController inside weather bloc whenever the bloc is disposed of.
+The method `dispose()` has been overwritten, and closes the `StreamController` inside `WeatherBloc` whenever the BLoC is disposed of.
 
 ##### Application Layer
 
@@ -1747,9 +1749,13 @@ class WeatherBloc implements Bloc {
 }
 ```
 
-_Code snippet 26: WeatherBloc Class._
+_Code snippet 26: WeatherBloc Class_
 
-In the UI the weather bloc is implemented inside the weather widget. We get a reference to the Bloc by using getIt. For the representation of the UI depending on the weather bloc state a StreamBuilder [[@StreamBuilderClassWidgets]](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html) is used. StreamBuilder is a widget that takes in a Stream, in this case `_weatherBloc.weatherEntity` and builds the UI whenever a value is emitted by the stream. The new value is represented by an AsyncSnapshot.[[@AsyncSnapshotClassWidgets]](https://api.flutter.dev/flutter/widgets/AsyncSnapshot-class.html) An AsyncSnapshot is a representation of the current state of the asynchronous data. Depending on the asynchronous data the UI is build.
+In the UI, the `WeatherBloc` is implemented inside the `Weather` widget. You get a reference to the BLoC by using `getIt`. For the representation of the UI depending on the `WeatherBloc state`, a `StreamBuilder` [[@StreamBuilderClassWidgets]](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html) is used.
+
+`StreamBuilder` is a widget that takes in a Stream, in this case, `_weatherBloc.weatherEntity` and builds the UI whenever a value is emitted by the stream. The new value is represented by an `AsyncSnapshot`[[@AsyncSnapshotClassWidgets]](https://api.flutter.dev/flutter/widgets/AsyncSnapshot-class.html).
+
+An `AsyncSnapshot` is a representation of the current state of the asynchronous data. Depending on the asynchronous data, the UI is built.
 
 ##### Presentation Layer
 
@@ -1786,22 +1792,23 @@ In the UI the weather bloc is implemented inside the weather widget. We get a re
 ...
 ```
 
-_Code snippet 27: Weather Widget in Presentation Layer._
+_Code snippet 27: Weather Widget in Presentation Layer_
 
 #### Advantages
 
 - clear separation of concerns
-  _ no business logic inside UI
+  _ no business logic inside the UI
   _ easier to test
 - can be accessed from anywhere in the tree
-- plays well with Flutters reactivity
-- reduces the amount of builds compared to setState()
+- plays well with Flutter's reactivity
+- reduces the number of builds compared to `setState()`
 
 #### Disadvantages
 
-- reactive programming is not straightforward \* people have it difficult to understand reactive programming
+- reactive programming is not straightforward
+  - people have it difficult to understand reactive programming
 - a lot of boilerplate
-- the concepts take some time to get the head around
+- the concepts take some time to get your head around
 
 ### Bloc with flutter_bloc
 
