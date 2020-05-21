@@ -1814,9 +1814,9 @@ _Code snippet 27: Weather Widget in Presentation Layer_
 
 #### Introduction
 
-Bloc [[@BlocDartPackage]](https://pub.dev/packages/bloc) is a package developed by Felix Angelov. It extends the core principles of bloc and provides a simple API which reduces the amount of boilerplate code to work with Streams.
+Bloc [[@BlocDartPackage]](https://pub.dev/packages/bloc) is a package developed by Felix Angelov. It extends the core principles of BLoC and provides a simple API, which reduces the amount of boilerplate code to work with Streams.
 
-Additionally the package flutter_bloc [[@FlutterBlocFlutter]](https://pub.dev/packages/flutter_bloc) is used which provides a collection of widgets for Flutter to handle blocs.
+Additionally, the package flutter_bloc [[@FlutterBlocFlutter]](https://pub.dev/packages/flutter_bloc) is used, which provides a collection of widgets for Flutter to handle Blocs.
 
 It has been developed with three core values in mind: [[@WhyBlocBloc]](https://bloclibrary.dev/#/whybloc)
 
@@ -1827,43 +1827,51 @@ It has been developed with three core values in mind: [[@WhyBlocBloc]](https://b
 3. Testable
    - easily test every aspect of an application so that we can iterate with confidence
 
-Bloc is an immutable state management solution.
+Bloc follows the immutable state principle.
 
 #### Concepts
 
-To understand how Bloc differentiates from the vanilla bloc example we have to take a look at the two principles in this package.
+To understand how Bloc differentiates from the Vanilla BLoC example, you have to take a look at the two principles in this example's implementation.
 
 ##### Concept of Bloc [[@BlocBloc]](https://bloclibrary.dev/#/coreconcepts)
 
-| ![Concept of bloc](https://i.imgur.com/cOtE6aE.jpg) |
+| ![Concept of Bloc](https://i.imgur.com/cOtE6aE.jpg) |
 | :-------------------------------------------------: |
-|            _Figure 35: Concept of BLoC_             |
+|            _Figure 35: Concept of Bloc_             |
 
-- Events \* Events are the input to a Bloc provided via interaction with the user interface.
-- States \* States are the output of a bloc and represent a part of the application’s state. They are used inside the UI to build the representative UI state and redraw it when the state changes.
-- Streams \* As previously explained in the vanilla bloc example, streams are a continuous flow of asynchronous data.
-- Blocs \* Are the essential part of the pattern. They convert a stream of incoming event into a stream of outgoing states.
+- Events
+  - Events are the input to a Bloc, provided via interaction with the user interface.
+- States
+  - States are the output of a Bloc and represent a part of the application’s state. They are used inside the UI to build the representative UI state and redraw it when the state changes.
+- Streams
+  - As previously explained in the Vanilla BLoC example, streams are a continuous flow of asynchronous data.
+- Blocs
+  - Are the essential part of the pattern. They convert a stream of incoming events into a stream of outgoing states.
 
-For more concepts likeTransitions and BlocDelegate visit bloclibrary.
+For more concepts like _Transitions_ and _BlocDelegate_ visit bloclibrary.
 
 ##### Concepts of flutter_bloc [[@FlutterBlocBloc]](https://bloclibrary.dev/#/flutterbloccoreconcepts)
 
-- BlocBuilder \* Is a widget which requires a bloc and a builder function. It is very similar to a StreamBuilder but with a simpler API and less amount of boilerplate needed. The builder functions needs to return a widget in response to the state. The builder function can be called multiple times.
-- BlocProvider \* Is a widget that yses the provider [[@ProviderFlutterPackage]](https://pub.dev/packages/provider) package by Rémi Rousselet for its dependency injection to inject a bloc inside the widget tree and provide it to descendants.
-- BlocListener \* Is a widget that is used to handle logic that should only happen once when the state changes. Such logic can be navigation. Its listener method is only called once for each state change in comparison to the BlocBuilder’s builder method which is called multiple times.
-- BlocConsumer \* Is a widget which combines a BlocListener and a BlocBuilder with less amount of boilerplate.
+- BlocBuilder
+  - A widget, which requires a `Bloc` and a `builder()` function. It is very similar to a StreamBuilder but with a _more straightforward API_ and _less amount of boilerplate_ needed. The builder function **_needs to return a widget in response to the state_**. The builder function can be called multiple times.
+- BlocProvider
+  - A widget that uses the provider [[@ProviderFlutterPackage]](https://pub.dev/packages/provider) package by Rémi Rousselet for its dependency injection to inject a Bloc inside the Widget Tree and provide it to descendants.
+- BlocListener
+  - A widget that is used to handle logic that **should only happen once** when the state changes. Such logic can be navigation. Its listener method is only called once for each state change in comparison to the BlocBuilder’s builder method, which is called multiple times.
+- BlocConsumer
+  - A widget that combines a `BlocListener` and a `BlocBuilder` with less amount of boilerplate.
 
-For more concepts like MultiBlocProvider, MultiBlocListener, RepositoryProvider and MultiRepositoryProvider visit bloclibrary.
+For more concepts like _MultiBlocProvider_, _MultiBlocListener_, _RepositoryProvider_ and _MultiRepositoryProvider_ visit bloclibrary.
 
 #### Implementation
 
-Let’s walk through the implementation of the weather bloc inside the application layer and how it can be accessed in the presentation layer.
+Let’s walk through the implementation of the WeatherBloc inside the application layer and how it can be accessed in the presentation layer.
 
 ##### Application Layer
 
-Inside the application layer the weather bloc is specified with its three essential concepts: (1) events, (2) states and (3) bloc.
+Inside the application layer, the `WeatherBloc` is specified with its three essential concepts: _(1) events, (2) states, and (3) Bloc_.
 
-Weather Event is an interface to specify two events:
+`Weather Event` is an interface to specify two events:
 
 1. fetchWeatherForLocation
 2. refreshWeatherForLocation
@@ -1883,12 +1891,12 @@ abstract class WeatherEvent with _$WeatherEvent {
 
 _Code snippet 28: WeatherEvent Class_
 
-Weather State is an interface to specify the states our bloc can output which our UI can use to represent its state. It contains four states:
+`Weather State` is an interface to specify the states the Bloc can output, which the UI uses to represent its state. It contains four states:
 
 1. Initial
 2. Loading
-3. loadingFailure
-4. Loaded (which contains a WeatherEntity)
+3. LoadingFailure
+4. Loaded (contains a `WeatherEntity`)
 
 ```dart
 ...
@@ -1909,8 +1917,11 @@ abstract class WeatherState with _$WeatherState {
 
 _Code snippet 29: WeatherState Class_
 
-Inside our weather bloc class resides the logic of our weather functionality.
-Each bloc contains a getter for the initial state which in our case returns `WeatherState.initial()`. Furthermore each bloc contains the method `mapEventToState(WeatherEvent event)` which is responsible to output a stream of `WeatherState` for the corresponding `WeatherEvent`. To keep the method `mapEventToState()` as lean as possible we delegate the logic when a `FetchWeather` event is emitted to the method `_mapFetchWeatherToState()`. Inside this method an asynchronous call is made and depending on the result either `WeatherState.loaded()` with a WeatherEntity or `WeatherState.loadingFailure()` is yielded. During the asynchronous call the WeatherState `WeatherState.loading()` is yielded to indicate that an asynchronous call is taking place.
+Inside the WeatherBloc class resides the logic of the weather functionality.
+
+Each Bloc contains a getter for the `initial state` which, in this case, returns `WeatherState.initial()`. Furthermore, each Bloc contains the method `mapEventToState(WeatherEvent event)`, which is responsible to output a stream of `WeatherState` for the corresponding `WeatherEvent`.
+
+To keep the method `mapEventToState()` as lean as possible, you have to delegate the logic, when a `FetchWeather` event is emitted, to the method `_mapFetchWeatherToState()`. Inside this method, an asynchronous call is made, and depending on the result, either `WeatherState.loaded()` with a WeatherEntity or `WeatherState.loadingFailure()` is yielded. During the asynchronous call, the WeatherState `WeatherState.loading()` is yielded to indicate that an asynchronous call is taking place.
 
 ```dart
 ...
@@ -1955,11 +1966,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
 _Code snippet 30: WeatherBloc Class_
 
-Not let’s take a look at how the bloc can be accessed in the UI.
+Now, let’s take a look at how the Bloc can be accessed in the UI.
 
 ##### Presentation Layer
 
-The first step to access the bloc is to use BlocProvider to inject an instance of the bloc to the widget tree. Since multiple blocs need to be injected at this level of the widget tree a MultiBlocProvider has to be used. The injection happens inside the weather app widget which in this example is named FlutterBlocApp.
+The first step to access the Bloc is to use `BlocProvider` to inject an instance of the Bloc to the Widget Tree. Since multiple Blocs need to be injected at this level of the Widget Tree, a `MultiBlocProvider` is used. The injection happens inside the `WeatherApp` widget, which in this example, is named `FlutterBlocApp`.
 
 ```dart
 ...
@@ -1991,8 +2002,11 @@ class FlutterBlocApp extends StatelessWidget {
 
 _Code snippet 31: FlutterBlocApp Widget_
 
-Inside the weather widget the bloc is accessed by using the widget `BlocConsumer`. BlocConsumer is a simplified version of a BlocListener with nested BlocBuilder. In the listener callback the side effect to adapt the theme when the weather changes is being handled. When the weather changes which is represented by the WeatherState `Loaded` an event is added to the `ThemeBloc` which is accessed via `context.bloc<ThemeBloc>()`.
-Inside the builder callback the corresponding UI representation for the states `LoadingFailure, Loading, Loaded` is specified.
+Inside the `Weather` widget, the Bloc is accessed using the widget `BlocConsumer`. `BlocConsumer` is a simplified version of a `BlocListener` with nested `BlocBuilder`.
+
+In the listener callback, the side-effect of adapting the theme, when the weather changes, is being handled. When the weather changes, which is represented by the WeatherState `Loaded`, an event is added to the `ThemeBloc`, which is accessed via `context.bloc<ThemeBloc>()`.
+
+Inside the builder callback, the corresponding UI representation for the states `LoadingFailure, Loading, Loaded` is specified.
 
 ```dart
 ...
@@ -2042,20 +2056,22 @@ _Code snippet 32: Weather Widget in Presentation Layer_
 - simple API
 - separation of concerns
 - reusable
-- implementation of initial state
-- side effects handled by listeners
+- implementation of the initial state
+- side-effects handled in listeners
 
 #### Disadvantages:
 
 - still a lot of boilerplate
 - too much overhead for small examples
-- takes time to understand
+- it takes time to understand
 
 ### Redux
 
 #### Introduction
 
-For this example I’ve used the redux example of Brian Egan at flutter samples as a reference. [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples) The example uses the packages redux [[@ReduxDartPackage]](https://pub.dev/packages/redux) and flutter_redux.[[@FlutterReduxFlutter]](https://pub.dev/packages/flutter_redux) Redux is based upon three principles [[@Redux]](https://redux.js.org/introduction/three-principles):
+For this example, I have used the Redux example by Brian Egan at Flutter Samples [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples) as a reference. The example uses the packages _redux_ [[@ReduxDartPackage]](https://pub.dev/packages/redux) and _flutter_redux_ [[@FlutterReduxFlutter]](https://pub.dev/packages/flutter_redux).
+
+Redux is based upon three principles [[@Redux]](https://redux.js.org/introduction/three-principles):
 
 1. Single source of truth
    - The global state of the application is stored in an object tree within a single store.
@@ -2064,29 +2080,29 @@ For this example I’ve used the redux example of Brian Egan at flutter samples 
 3. Changes are made with pure functions
    - To specify how the state is transformed by actions, you write pure reducers.
 
-Redux is one of the immutable state management solutions. The state object is read-only and can only be changed by returning a new state object inside a reducer
+Redux follows the immutable state principle. The state object is read-only and can only be changed by returning a new state object inside a reducer.
 
 #### Concept
 
 ##### Concepts of Redux
 
-The explanation of the following context is taken from the redux example from flutter architecture samples by Brian Egan. [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples)
+The explanation of the following concepts is taken from the Redux example from Flutter Architecture Samples by Brian Egan [[@BrianeganFlutterArchitecture]](https://github.com/brianegan/flutter_architecture_samples):
 
 ###### State
 
-Is an immutable Object that lives at the top of your Widget hierarchy within a `Store`. To create a new `State` an `Action` must be dispatched.
+The state is an immutable Object that lives at the top of your Widget hierarchy within a `Store`. To create a new `State` an `Action` must be dispatched.
 
 ###### Store
 
-Is passed down to all descendants via an `InheritedWidget` the `StoreProvider`.
+The store is passed down to all descendants via an `InheritedWidget`, the `StoreProvider`.
 
 ###### Action
 
-`Actions` will be picked up by a `Reducer`, which is a function that build and returns a new `State` based on the previous `State` and the `Action` that was dispatched.
+`Actions` will be picked up by a `Reducer`, which is a function that builds and returns a new `State` based on the previous `State` and the `Action` that was dispatched.
 
 ###### Reducer
 
-Are pure functions.
+Reducers are pure functions.
 
 ###### Middleware
 
@@ -2096,35 +2112,43 @@ Are pure functions.
 
 To read data from the `State` use `selector` functions.
 
-Let’s take a look at Figure to see Redux in action.
+Let’s take a look at _Figure 36_ to see Redux in action.
 
 | ![Concept of Redux](https://i.imgur.com/YWH4pOa.jpg) |
 | :--------------------------------------------------: |
 |            _Figure 36: Concept of Redux_             |
 
-The UI is a representation of the current state. The UI listens to events from the user and dispatches an action corresponding to the event. The action gets processed by a reducer. Since a reducer is a pure function it can not handle asynchronous calls. This is where the middleware comes into play. The middleware intercepts an action and can be used to process an asynchronous call. When the middleware is finished with the asynchronous call it dispatches a new Action which is being processed by a reducer. The reducer returns a new state object with the data provided by the action. With the new state object the UI rebuilds to represent that state.
+The UI is a representation of the current `State`. It listens to events from the user and dispatches an `Action` corresponding to the event.
+
+The `Action` gets processed by a `Reducer`. Since a reducer is a pure function, it can not handle asynchronous calls. This is where the `Middleware` comes into play.
+
+The `Middleware` intercepts an action and can be used to process an asynchronous call. When the middleware is finished with the asynchronous call, it dispatches a new `Action` which is being processed by a reducer.
+
+The `Reducer` returns a new state object with the data provided by the action. With the new state object, the UI rebuilds to represent that state.
 
 ##### Concepts of flutter_redux
 
 ###### StoreProvider
 
-Injects the store into the widget tree and provides it to all descendants in need.
+The `StoreProvider` injects the store into the Widget Tree and provides it to all descendants in need.
 
 ###### StoreConnector
 
-A descendant Widget which gets the store from the nearest `StoreProvider` ancestor and converts the store into a `ViewModel`. Whenever the store emits a change event the Widget will be rebuild.
+`StoreConnector` is a descendant widget that gets the store from the nearest `StoreProvider` ancestor and converts the store into a `ViewModel`. Whenever the store emits a change event, the widget will be rebuilt.
 
 ###### StoreBuilder
 
-Passes the store down to a Widget’s builder function.
+`StoreBuilder` passes down the store to a widget’s `builder()` function.
 
 #### Implementation
 
-Let’s walk through the implementation of Redux in the example. This walkthrough will cover the implementation inside the presentation layer as well as the implementation inside the application layer.
+Let’s walk through the implementation of the Redux example.
+
+This walkthrough will cover the implementation inside the presentation layer as well as the implementation inside the application layer.
 
 ##### Application Layer
 
-To keep it _lean_ only the weather relevant redux components are shown.
+To keep the implementation part _lean_, only the weather relevant Redux components are shown.
 
 ##### State
 
@@ -2157,7 +2181,7 @@ abstract class AppState with _$AppState {
 
 _Code snippet 33: AppState Class_
 
-To have a separation in concern inside the store, the app state consist multiple smaller state objects. For example WeatherState. This makes it easier to read.
+The app state consists of multiple smaller state objects to have a separation in concern inside the store. For example, `WeatherState`. This makes it easy to split the state visually into separate components.
 
 ###### Weather State
 
@@ -2182,7 +2206,7 @@ abstract class WeatherState with _$WeatherState {
 
 _Code snippet 34: WeatherState Class_
 
-WeatherState is an interface that consists of two attributes: (1) WeatherEntity and (2) isRefreshing. The WeatherEntity contains data related to the weather whereas isRefreshing is a flag to mark if the weather data is being fetched or refreshed.
+`WeatherState` is an interface that represents the states that the `WeatherState` can be: _(1) initial and (2) isRefreshing_. The `WeatherEntity` contains data related to the weather, whereas `isRefreshing` is a flag to mark if the weather data is being fetched or refreshed.
 
 ##### Actions
 
@@ -2211,7 +2235,7 @@ abstract class WeatherActions with _$WeatherActions {
 
 _Code snippet 35: WeatherActions Class_
 
-The interface WeatherActions specifies which types of actions can be dispatched to start a process to update the state. Since the state is read-only it can only be changed by an action and therefore all action need to be specified here.
+The interface `WeatherActions` specifies which types of actions can be dispatched to start a process to update the weather state. Since the state is read-only, it can only be changed by an action. Therefore, all actions need to be specified here.
 
 ##### Middleware
 
@@ -2285,7 +2309,11 @@ void Function(
 
 _Code snippet 36: Weather Middleware_
 
-Since the functionalities to fetch the weather and refresh the weather require an API call they are asynchronous. Due to Redux concept that reducers are pure functions the action to fetch/refresh the weather data needs to be intercepted by a middleware. The middleware intercepts the action and makes the asynchronous call. Depending on the result of the asynchronous call a new Action is being dispatched which then gets processed by its responding reducer.
+Since the functionalities to fetch the weather and refresh the weather require an API call, they are asynchronous.
+
+Due to the Redux concept, that reducers are pure functions, the action to fetch/refresh the weather data needs to be intercepted by a `Middleware`. The middleware intercepts the action and makes the asynchronous call.
+
+Depending on the result of the asynchronous call, a new `Action` is being dispatched. The Action then gets processed by its responding `Reducer`.
 
 ##### Reducers
 
@@ -2306,7 +2334,10 @@ AppState appReducer(AppState state, dynamic action) {
 
 _Code snippet 37: AppReducer Function_
 
-Reducers return a new state that represents the updated UI. Since we can have multiple app states the app state is represented by the result of a reducer. And since there are multiple reducers for different actions we have a collection of reducers, e.g. weatherReducer, which is assigned to weatherState.
+`Reducers` return a new state, that represents the updated UI.
+
+Since we can have multiple app states, the `AppState` is represented by the result of a `Reducer`.
+And since there are multiple reducers for different actions, a collection of reducers, e.g., `weatherReducer`, is assigned to `weatherState`.
 
 ###### Weather reducer
 
@@ -2351,7 +2382,7 @@ WeatherState _setNoWeatherState(
 
 _Code snippet 38: WeatherReducer function_
 
-`weatherReducer` is a collection of reducers related to weather.
+The `weatherReducer` is a collection of reducers related to `WeatherState`.
 
 ##### Selectors
 
@@ -2375,11 +2406,11 @@ WeatherState weatherStateSelector(AppState state) => state.weatherState;
 
 _Code snippet 38: Weather state related selectors._
 
-Sometimes it is necessary to access only single attributes from a state. This is where Selectors come into play. Selectors are pure functions that return the specified attribute.
+Sometimes it is necessary to access only single attributes from a state. This is where `Selectors` come into play. `Selectors` are pure functions, that return the specified attribute.
 
 ##### Presentation Layer
 
-To implement Redux to a Flutter application it needs to be initialised at the beginning of your application - the main. This is the result of its principle as single source of truth.
+To implement Redux to a Flutter application, it needs to be initialized at the beginning of the application - _the main_. This is the result of its principle as a single source of truth.
 
 ```dart
 ...
@@ -2406,7 +2437,7 @@ void main() {
 
 _Code snippet 40: Redux Store Initialization_
 
-Let’s take a look at the weather widget:
+Let’s take a look at the `Weather` widget:
 
 ```dart
 ...
@@ -2448,14 +2479,14 @@ Let’s take a look at the weather widget:
 
 _Code snippet 41: Weather Widget_
 
-Due to redux strict separation of concerns the ProgressLoadingIndicator had to be moved from the method `_buildUI()` to the widgets `build()` method. The `converter` callback from `StoreConnector` looks for the _store_ from the nearest `StoreProvider` and returns the `isLoading` attribute. The value of `isLoading` is then used to build either a ProgressLoadingIndicator or the UI.
+Due to Redux's strict separation of concerns, the `ProgressLoadingIndicator` had to be moved from the method `_buildUI()` to the widget's `build()` method. The `converter` callback from `StoreConnector` looks for the _store_ from the nearest `StoreProvider` and returns the `isLoading` attribute. The value of `isLoading` is then used to build either a `ProgressLoadingIndicator` or the weather UI.
 
-In the method `_buildUI` we also use a `StoreConnector` to connect the UI to the Redux store. The `converter` callback returns the `WeatherState` which is used to determine which UI to build.
+In the method `_buildUI()`, a `StoreConnector` is used to connect the UI to the Redux store. The `converter` callback returns the `WeatherState`, which is used to determine which UI to build.
 
 #### Advantages
 
-- clear separation of concerns
-- single source of truth
+- a clear separation of concerns
+- a single source of truth
 - easy to test
 - immutability
 
@@ -2464,7 +2495,7 @@ In the method `_buildUI` we also use a `StoreConnector` to connect the UI to the
 - very complex
 - difficult to learn
 - a lot of boilerplate
-- simple functionalities require an overhead to be implemented
+- simple functionalities require overhead to implement
 
 ### MobX
 
