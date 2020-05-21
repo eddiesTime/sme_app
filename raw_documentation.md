@@ -2996,27 +2996,31 @@ Inside the `builder` parameter, the attribute `whenConnectionState` of `reactive
 
 ## Introduction
 
-The first thing I want to do is remove the state management solutions InheritedWidget and bloc_vanilla from the following evaluation. The reason for this decision is that with Provider a solution has been developed which wraps the Inherited Widget and provides a simplified API. The same advantages come with flutter bloc which provides the bloc pattern with a simplified API and less overhead to worry about.
+I first want to remove the state management solutions `InheritedWidget` and `Vanilla BLoC` from the following evaluation.
+
+The reason for this decision is that with `Provider`, a solution has been developed, which wraps the `Inherited Widget` and provides a simplified API. The same advantages come with `flutter_bloc` which provides the BLoC pattern with a simplified API and less overhead to worry about.
 
 The state management solutions will be rated from a scale from 1-3. The rating value is defined as follows:
 
-- 1 represents a rating where the criteria is somehow matched or not matched at all
-- 2 represents a rating where the criteria is matched but does not “feel” good
-- 3 represents a rating where the criteria is matched better than normal
+- 1 represents a rating where the criterion is somehow matched or not matched at all
+- 2 represents a rating where the criterion is matched but does not “feel” good
+- 3 represents a rating where the criterion is matched better than "normal"
 
-Furthermore I will add a comment to ratings of 1 and 3 to add more information to the result.
+Furthermore, I will add a comment to ratings of 1 and 3 to add more information to the score.
+
+The chapter is separated into three sections: _(1) Evaluation Criteria, (2) Evaluation Results, and (3) Recommendations_.
 
 ## Evaluation Criteria
 
 Contents of the Section
 
-- [Introduction]()
-- [Quality Attribute Criteria]()
-- [Personal Chosen Criteria]()
+- [Introduction](#introduction-24)
+- [Quality Attribute Criteria](#quality-attribute-criteria)
+- [Personal Chosen Criteria](#personal-chosen-criteria)
 
 ### Introduction
 
-The criteria that were chosen to evaluate the different state management solutions are a mixture of quality attributes and personally chosen criteria which I will further explain in the upcoming section.
+The criteria that were chosen to evaluate the different state management solutions are a mixture of quality attributes and personally chosen criteria, which I will explain in the upcoming part.
 
 ### Quality Attribute Criteria
 
@@ -3030,28 +3034,33 @@ The quality attributes are taken from “_Characterizing Architecturally Signifi
 
 #### Maintainability
 
-Maintainability is defined as “the ease with which a software system or component can be modified to correct faults, improve performance or other attributes, or adapt to a changed environment.” [[@159342]](https://ieeexplore.ieee.org/document/159342)
-To put it in simpler terms: The state management solution implementation is evaluated based on changes to improve the application and their affect on other components.
+`Maintainability` is defined as “the ease with which a software system or component can be modified to correct faults, improve performance or other attributes, or adapt to a changed environment” [[@159342]](https://ieeexplore.ieee.org/document/159342).
+
+To put it in simpler terms: The state management solution implementation is evaluated based on changes to improve the application and their effect on other components.
 
 #### Extendibility
 
-Extendibility is defined as “the ease with which a system or component can be modified to increase its storage or functional capacity.” [[@159342]](https://ieeexplore.ieee.org/document/159342)
-For our evaluation the focus is on the functional capacity part. How easy is it to add more feature with the state management solution?
+`Extendibility` is defined as “the ease with which a system or component can be modified to increase its storage or functional capacity” [[@159342]](https://ieeexplore.ieee.org/document/159342).
+
+For the evaluation, the focus is on the functional capacity part. How easy is it to add more features with the state management solution?
 
 #### Modularity
 
-Modularity is defined as “the degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.” [[@159342]](https://ieeexplore.ieee.org/document/159342)
-This criteria will be similar rated as maintainability since they modularity impacts the other quality attribute criteria.
+`Modularity` is defined as “the degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components” [[@159342]](https://ieeexplore.ieee.org/document/159342).
+
+This criterion will be similarly rated as maintainability since they modularity impacts the other quality attribute criteria.
 
 #### Reusability
 
-Reusability is defined as “the degree to which a software module or other work product can be used in more than one computer program or software system” [[@159342]](https://ieeexplore.ieee.org/document/159342)
-For the evaluation reusability will be evaluated by the reusability of the state management solution in non-Flutter applications.
+`Reusability` is defined as “the degree to which a software module or other work product can be used in more than one computer program or software system” [[@159342]](https://ieeexplore.ieee.org/document/159342).
+
+For the evaluation, reusability will be evaluated by the reusability of the state management solution in non-Flutter applications.
 
 #### Testability
 
-Testability is defined as “the degree to which a system or component facilitates the establishment of test criteria and the performance of tests to determine whether those criteria have been met.” [[@159342]](https://ieeexplore.ieee.org/document/159342)
-This criteria will be evaluated based on the simplicity to write unit tests.
+`Testability` is defined as “the degree to which a system or component facilitates the establishment of test criteria and the performance of tests to determine whether those criteria have been met” [[@159342]](https://ieeexplore.ieee.org/document/159342).
+
+This criterion will be evaluated based on the simplicity of writing unit tests.
 
 ### Personal Chosen Criteria
 
@@ -3066,38 +3075,40 @@ The personally chosen criteria are:
 
 #### Synergy
 
-Synergy in the context of the evaluation is defined as how well the state management solution fits into the architecture and how well it interacts with the other packages used to develop the application.
+In the context of the evaluation, `Synergy` is defined as how well the state management solution fits into the architecture. Furthermore, how well it interacts with the other packages used to develop the application.
 
-#### Time to learn
+#### Time-To-Learn
 
-Time to learn in the context of the evaluation is defined as the time it takes the developer to learn the concepts of the state management solution and implement them successfully in an example application. This criteria is based on my own time it took me to learn enough about the state management solution to implement it.
+In the context of the evaluation, `Time-To-Learn` is defined as the time it takes the developer to learn the concepts of the state management solution and implement them successfully in an example application. This criterion is based on the time it took to learn enough about the state management solution to implement it myself.
 
 #### Sources
 
-Sources in the context of the evaluation is defined as the amount of sources you will find when you search the Internet for examples and tutorials for the state management solution. Furthermore if the SMS has a documentation and how well the documentation is written.
+`Sources` in the context of the evaluation is defined as the number of sources you will find when you search the Internet for examples and tutorials for the state management solution. Furthermore, if the SMS has documentation and how well the documentation is written.
 
 #### Boilerplate
 
-Boilerplate in the context of the evaluation is defined as how much boilerplate is being used by the SMS.
+`Boilerplate` in the context of the evaluation is defined as how much boilerplate is being used by the SMS.
 
-#### Side-effect handling
+#### Side-Effect-Handling
 
-Side-effect-handling in the context of the evaluation is defined as how well the SMS handles side-effects. To be more precise does the SMS provide a recommendation or guideline how to handle side-effects, how easy can it be implemented and how well it works.
+`Side-Effect-Handling` in the context of the evaluation is defined as how well the SMS handles side-effects. To be more precise, does the SMS provide a guideline on how to handle side-effects, how easily it can be implemented, and how well it works.
 
 #### Debugging
 
-Debugging in the context of the evaluation is defined as how easy can bugs be debug with the SMS. To be more precise how difficult is it to track the bug inside the implementation of the SMS.
+`Debugging` in the context of the evaluation is defined as how easy bugs can be debugged with the SMS. To be more precise, how difficult is it to track the bug inside the implementation of the SMS.
 
 ## Results
 
 Contents of the Section
 
-- [Introduction]()
-- [Quality Attribute Criteria Results]()
-- [Personal Chosen Criteria Results]()
-- [Overall Results]()
+- [Introduction](#introduction-25)
+- [Quality Attribute Criteria Results](#quality-attribute-criteria-results)
+- [Personal Chosen Criteria Results](#personal-chosen-criteria-results)
+- [Overall Results](#overall-results)
 
 ### Introduction
+
+This section contains the results of the evaluation of the SMS. First, the results for the quality attribute criteria will be presented. Then the personal chosen criteria results. And finally, finished with the overall results will be displayed.
 
 ### Quality Attribute Criteria Results
 
@@ -3107,7 +3118,7 @@ Contents of the Section
 | --------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Maintainability | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-_Table 01: Maintainability scores_
+_Table 01: Maintainability Scores_
 
 - Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
 
@@ -3117,9 +3128,9 @@ _Table 01: Maintainability scores_
 | ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Extendability | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-_Table 02: Extendability scores_
+_Table 02: Extendability Scores_
 
-- Stateful Widget: The extendability of the application with this SMS is provided but for the same reason as in maintainability the need the pass down the state through all widgets in between makes it worse.
+- Stateful Widget: The extendability of the application with this SMS is provided. In maintainability, the need to pass down the state through all widgets in between makes it worse, which is the same case here.
 
 #### Modularity
 
@@ -3127,7 +3138,7 @@ _Table 02: Extendability scores_
 | ---------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Modularity | 1               | 2                      | 2    | 2    | 2                | 2     |
 
-_Table 03: Modularity scores_
+_Table 03: Modularity Scores_
 
 - Stateful Widget: State and methods to manipulate the state have to be passed down the tree through widgets without the need to access it. Therefore the maintainability suffers the larger the application grows.
 
@@ -3137,7 +3148,7 @@ _Table 03: Modularity scores_
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Reusability | 1               | 1                      | 2    | 2    | 1                | 2     |
 
-_Table 04: Reusability scores_
+_Table 04: Reusability Scores_
 
 - Stateful Widget: Flutter specific.
 - ChangeNotifierProvider: Flutter specific.
@@ -3149,9 +3160,9 @@ _Table 04: Reusability scores_
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Testability | 2               | 2                      | 3    | 2    | 2                | 3     |
 
-_Table 05: Testability scores_
+_Table 05: Testability Scores_
 
-- Bloc: Has the package bloc_test [[@BlocTestDart]](https://pub.dev/packages/bloc_test) which makes it easier to write tests for blocs.
+- Bloc: Has the package `bloc_test` [[@BlocTestDart]](https://pub.dev/packages/bloc_test), which makes it easier to write tests for Blocs.
 - Redux: Since most of the components in Redux are pure functions, they are easy to test without mocking.
 
 ### Personal Chosen Criteria Results
@@ -3162,24 +3173,24 @@ _Table 05: Testability scores_
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Synergy  | 1               | 2                      | 2    | 2    | 1                | 2     |
 
-_Table 06: Synergy scores_
+_Table 06: Synergy Scores_
 
-- Stateful Widget: Breaks the principle of decoupling by having logic in the UI.
-- States Rebuilder: States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via Injector is provided. In our architecture the package combination of getIt and injector has been chosen to handle D.I. and State Rebuilder’s own dependency injection does not play well with the architecture’s D.I. solution.
+- Stateful Widget: Breaks the principle of decoupling by having logic in the U.I.
+- States Rebuilder: States Rebuilder is an all-in-one package where a solution for state management via Observer pattern and dependency injection via `Injector` is provided. In the architecture, the package combination of `getIt` and `injector` has been chosen to handle D.I., and State Rebuilder's dependency injection does not play well with the architecture's D.I. solution.
 
-#### Time to learn
+#### Time-To-Learn
 
-| Criteria      | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
-| ------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
-| Time to learn | 3               | 3                      | 1    | 3    | 2                | 1     |
+| Criteria        | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+| --------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
+| Time\-To\-Learn | 3               | 3                      | 1    | 3    | 2                | 1     |
 
-_Table 07: Time to learn scores_
+_Table 07: Time-To-Learn Scores_
 
-- Stateful Widget: One of Flutters three types of widgets which everyone using Flutter had to learn.
-- ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to learn because of it’s popularity and tutorials
-- Bloc: Even though the concept of Bloc is well documented it took me one day to understand the concepts and implemented it in my first application.
-- MobX: Easy to learn since MobX encapsulates most logic and handles the updates of the UI and notifications about state manipulations internally. The developer only has to implement the three mentioned packages in the MobX example and add decorators to the business logic.
-- Redux: Without previous knowledge about Redux and it not being a popular solution for state management in Flutter it took me between 2 and 3 days to implement it in the example application. Furthermore, I stopped the implementation of the example without fully following the concepts of Redux. As you may have noticed in the middleware to handle asynchronous calls the reducers are dispatching more than one action. At that time I knew that Redux is powerful and to understand how to implement the notification to display a ProgressLoadingIndicator it would take me even more time.
+- Stateful Widget: One of Flutter's three types of widgets, which everyone using Flutter had to learn.
+- ChangeNotifierProvider: Endorsed by the Flutter Team and is easy to learn because of its popularity and tutorials
+- Bloc: Even though Bloc's concept is well documented, it took me one day to understand the concepts and implement them in my first application.
+- MobX: Easy to learn since MobX encapsulates most logic and handles the U.I. updates and notifications about state manipulations internally. The developer only has to implement the three mentioned packages in the MobX example and add decorators to the business logic.
+- Redux: Without previous knowledge about Redux and it not being a popular solution for state management in Flutter, it took me between 2 and 3 days to implement it in the example application. Furthermore, I stopped the implementation of the example without fully following the concepts of Redux. As you may have noticed in the middleware to handle asynchronous calls, the reducers are dispatching more than one action. At that time, I knew that Redux is powerful, and to understand how to implement the notification to display a `ProgressLoadingIndicator`, it would take me even more time.
 
 #### Sources
 
@@ -3187,11 +3198,11 @@ _Table 07: Time to learn scores_
 | -------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Sources  | 3               | 3                      | 3    | 2    | 2                | 2     |
 
-_Table 08: Sources scores_
+_Table 08: Sources Scores_
 
-- Stateful Widget: Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutters three widget types and the simplest state management solution.
-- ChangeNotifierProvider: Provider is a very popular package in Flutter and therefore there are a lot of examples of how to use its ChangeNotifierProvider in an application.
-- Bloc: Bloclibrary [[@Bloc]](https://bloclibrary.dev/#/) is one of the best documentations I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore there are tons of examples and tutorials of how to implement the bloc pattern.
+- Stateful Widget: Everyone comparing state management solutions includes an explanation about state management with a stateful widget. Furthermore, it is one of Flutter's three widget types and the simplest state management solution.
+- ChangeNotifierProvider: Provider is a very popular package in Flutter, and there are many examples of how to use its ChangeNotifierProvider in an application.
+- Bloc: Bloclibrary [[@Bloc]](https://bloclibrary.dev/#/) is one of the best documentation I have seen so far. It contains multiple examples of how to implement the bloc pattern in different scenarios and much more. Furthermore, there are tons of examples and tutorials on how to implement the bloc pattern.
 
 #### Boilerplate
 
@@ -3199,24 +3210,24 @@ _Table 08: Sources scores_
 | ----------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Boilerplate | 2               | 2                      | 1    | 2    | 3                | 1     |
 
-_Table 09: Time to learn scores_
+_Table 09: Boilerplate Scores_
 
 - Bloc: To add a feature at least one event, one state and the bloc itself has to be added.
-- States Rebuilder: ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g. idle state handling.
-- Redux: The strict combination of concepts includes at least one action, one reducer and one state to add a feature.
+- States Rebuilder: ReactiveModel provides a lot of access to getters that are common when it comes to state management, e.g., idle state handling.
+- Redux: The strict combination of concepts includes at least one action, one reducer, and one state to add a feature.
 
-#### Side-effect handling
+#### Side-Effect-Handling
 
-| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
-| --------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
-| Side\-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
+| Criteria               | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+| ---------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
+| Side\-Effect\-Handling | 1               | 1                      | 3    | 2    | 3                | 2     |
 
-_Table 10: Side-effect handling scores_
+_Table 10: Side-Effect-Handling Scores_
 
 - Stateful Widget: No recommendation about how to handle side-effects.
 - ChangeNotifierProvider: No recommendation about how to handle side-effects.
 - Bloc: Emphasises a specific widget (BlocListener) to handle side-effects.
-- MobX: I have to make an exception to add a comment for MobX for this criteria. Even though MobX uses reactions to handle side-effects I was not able to add the completion of the RefreshIndicator or the notification of the ThemeStore that the weather has changed as reactions and make it work.
+- MobX: I have to make an exception to add a comment for MobX for this criteria. Even though MobX uses reactions to handle side-effects, I was not able to add the completion of the RefreshIndicator or the notification of the ThemeStore that the weather has changed as reactions and make it work.
 - States Rebuilder: Emphasises a specific Observer Widget to handle side-effects.
 
 #### Debugging
@@ -3225,77 +3236,83 @@ _Table 10: Side-effect handling scores_
 | --------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
 | Debugging | 2               | 2                      | 3    | 1    | 2                | 2     |
 
-_Table 11: Debugging scores_
+_Table 11: Debugging Scores_
 
-- Bloc: The immutability allows to track state changes via a history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific class in the bloc package.
-- MobX: Since MobX is handling a lot of logic internally it is difficult to track down a bug.
+- Bloc: The immutability allows for tracking state changes via history and enables redo/undo functionalities that come in handy when debugging. The tracking history is supported by a specific class in the bloc package.
+- MobX: Since MobX is handling a lot of logic internally, it is difficult to track down a bug.
 
 ### Overall Results
 
-| Criteria              | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
-| --------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
-| Maintainability       | 1               | 2                      | 2    | 2    | 2                | 2     |
-| Extendability         | 1               | 2                      | 2    | 2    | 2                | 2     |
-| Modularity            | 1               | 2                      | 2    | 2    | 2                | 2     |
-| Reusability           | 1               | 1                      | 2    | 2    | 1                | 2     |
-| Testability           | 2               | 2                      | 3    | 2    | 2                | 3     |
-| Synergy               | 1               | 2                      | 2    | 2    | 1                | 2     |
-| Time to learn         | 3               | 3                      | 1    | 3    | 2                | 1     |
-| Sources               | 3               | 3                      | 3    | 2    | 2                | 2     |
-| Boilerplate           | 2               | 2                      | 1    | 2    | 3                | 1     |
-| Side\-effect handling | 1               | 1                      | 3    | 2    | 3                | 2     |
-| Debugging             | 2               | 2                      | 3    | 1    | 2                | 2     |
-| Total                 | 18              | 22                     | 24   | 22   | 22               | 21    |
+| Criteria               | Stateful Widget | ChangeNotifierProvider | Bloc | MobX | States Rebuilder | Redux |
+| ---------------------- | --------------- | ---------------------- | ---- | ---- | ---------------- | ----- |
+| Maintainability        | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Extendability          | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Modularity             | 1               | 2                      | 2    | 2    | 2                | 2     |
+| Reusability            | 1               | 1                      | 2    | 2    | 1                | 2     |
+| Testability            | 2               | 2                      | 3    | 2    | 2                | 3     |
+| Synergy                | 1               | 2                      | 2    | 2    | 1                | 2     |
+| Time\-To\-Learn        | 3               | 3                      | 1    | 3    | 2                | 1     |
+| Sources                | 3               | 3                      | 3    | 2    | 2                | 2     |
+| Boilerplate            | 2               | 2                      | 1    | 2    | 3                | 1     |
+| Side\-Effect\-Handling | 1               | 1                      | 3    | 2    | 3                | 2     |
+| Debugging              | 2               | 2                      | 3    | 1    | 2                | 2     |
+| Total                  | 18              | 22                     | 24   | 22   | 22               | 21    |
 
-_Table 12: Overall scores_
+_Table 12: Overall Scores_
 
 ## Recommendations
 
 Contents of the Section
 
-- [Introduction]()
-- [Variation in Priorities]()
-- [Recommendations]()
+- [Introduction](#introduction-26)
+- [Variation in Priorities](#variation-of-priorities)
+- [Recommendations](#recommendations-1)
 
 ### Introduction
 
-I want to use this section to give you a personal recommendation on which state management solutions in my opinion are suited to be _the right tool for the jop._ This principle is something that you most likely have heard multiple times on different ocasions. In the context of this guide the right tool for the job applies on the variation in priorities when it comes to applications from examples to large-scale applications and their coverage. I am going to start the section by pointing out the variation of priorities and finish it with my personal recommendation for example, small-scale, medium-scale and large-scale applications.
+I want to use this section to give you a personal recommendation on which state management solutions, in my opinion, are suited to be _the right tool for the jop._ This principle is something that you most likely have heard multiple times on different occasions. In this guide, the right tool for the job applies to the variation in priorities when it comes to applications, from examples to large-scale applications and their coverage.
+
+I am going to start the section by pointing out the change of priorities and finish it with my recommendation, for example, small-scale, medium-scale, and large-scale applications.
 
 ### Variation in Priorities
 
-As I have shown in [chapter 3]() state management solutions have different advantages and disadvantages based on the core pinciples of mutable and immutable state. Therefore these solutions vary in some criteria because of the distinct nature and therefore received different scores as shown in [chapter 4]().
+As I have shown in [chapter 3](#results), state management solutions have different advantages and disadvantages based on the core principles of mutable and immutable state. Because of the distinct nature of these solutions, they vary in some criteria and therefore received different scores, as shown in [chapter 4](#evaluation).
 
-The top score in an evaluation does not imply that it is automatically the silver bullet for your applications state management concerns. Furthermore it changes from situation to situation.
+The top score in the evaluation does not imply that it is automatically the _silver bullet_ for your application state management concerns. Furthermore, it changes from situation to situation.
 
-Depending on whether you want to build an example, a small-scale application, a medium-sized application, or a large-scale application you have different requirements and a shifted prioritization on criterias the application has to match. For example, when it comes to showcasing examples, you want to build your example as quick as possible and focus on the problem it solves at hand rather than using a SMS that makes it easy to handle side-effects or allow maintainability in the long run. On the other hand, when it comes to large-scale application development your focus shifts from a quick execution of your logic to the focus on the bigger picture, e.g. that the application is easy to maintain, easy to extend and robust. You rather focus on quality attributes.
+Depending on whether you want to build an example, a small-scale application, a medium-sized application, or a large-scale application, you have different requirements and a shifted prioritization on criteria the application has to match.
+
+For example, when it comes to showcasing examples, you want to build your example as quickly as possible and focus on the problem it solves at hand rather than using a SMS that makes it easy to handle side-effects or allow maintainability in the long run.
+
+On the other hand, when it comes to large-scale application development, your focus shifts from a quick execution of your logic to the focus on the bigger picture, e.g., that the application is easy to maintain, easy to extend, and robust. You focus on quality attributes.
 
 ### Recommendations
 
 #### Example
 
-When you want to create a small example to showcase how a problem can be fixed or how something works, you usually priorities quick execution and simplicity over maintainability and other quality criteria. I mean what is an example worth if not everyone can understand it without having to know how for example a Redux store works. Therefore my personal recommendation for state management solutions when it comes to create examples has to be something each and every Flutter developer knows.
+When you want to create a small example to showcase how a problem can be fixed or how something works, you usually priorities quick execution and simplicity over maintainability and other quality criteria. I mean, what is an example worth if not everyone can understand it without having to know what a Redux store works. Therefore my recommendation for state management solutions when it comes to creating examples has to be something every Flutter developer knows.
 
-My personal recommendation for examples is: **Stateful Widget**
+My recommendation for examples is: **Stateful Widget**
 
 #### Small-scale application
 
-When your goal is to build a small-scale application you priorities a state management solution that is easy to learn and minimimes the amount of boilerplate, thus, your focus can be on the problem at hand. Furthermore it should provide the opportunity to scale-up the application at a later point which means that it also has to provide some level of extendibility.
+When your goal is to build a small-scale application, you priorities a state management solution that is easy to learn and minimizes the amount of boilerplate. Thus, your focus can be on the problem at hand. Furthermore, it should provide the opportunity to scale-up the application at a later point, which means that it also has to provide some level of extendibility.
 
-My personal recommendations for small-scale applications are: **ChangeNotifierProvider & MobX**
+My recommendations for small-scale applications are: **ChangeNotifierProvider & MobX**
 
 #### Medium-scale application
 
-When your goal is to build a medium-scale application you will find yourself in a dilemma where you have to decide between state management solutions that are easy to learn and SMS that bring long-term advantages. Therefore you will not be surprised to see a mix between my small-scale and large-scale recommendations.
+When your goal is to build a medium-scale application, you will find yourself in a dilemma where you have to decide between state management solutions that are easy to learn and SMS that bring long-term advantages. Therefore you will not be surprised to see a mix between my small-scale and large-scale recommendations.
 
-My personal recommendations for medium-scale applications are: **Bloc, MobX, States Rebuilder, Redux**
+My recommendations for medium-scale applications are: **Bloc, MobX, States Rebuilder, Redux**
 
 #### Large-scale application
 
-When your goal is to build a large-scale application your priorities shift from criteria like easy to learn and minimal amount of boilerplate to long-term impacting criteria like maintainability and other quality attributes as well as synergy with the application architecture and ease of debugging.
+When your goal is to build a large-scale application, your priorities shift from criteria like easy to learn and a minimal amount of boilerplate to long-term impacts like maintainability and other quality attributes as well as synergy with the application architecture and ease of debugging.
 
-My personal recommendations for large-scale applications are: **Bloc, Redux (and States Rebuilder)**
+My recommendations for large-scale applications are **Bloc, Redux (and States Rebuilder)**
 
-To explain my optional recommendation of states rebuilder: The drawback with this state management solution is that because of its nature of state management and dependecy injection in one package you have to choose your other packages around states rebuilder rather than the other way around. Nonetheless, when you want to build a large-scale Flutter application and are not fixed on specifics it is a valied SMS.
+To explain my optional recommendation of States Rebuilder: The drawback with this state management solution is that because of its nature of state management and dependency injection in one package, you have to choose your other packages around States Rebuilder rather than the other way around. Nonetheless, when you want to build a large-scale Flutter application and are not fixed on specifics, it is a valid SMS.
 
 You have reached the end of this chapter. The next chapter [_Conclusion_](#conclusion) is going to contain my personal evaluation of this guide and what I intend to do in the future.
 
@@ -3303,7 +3320,7 @@ You have reached the end of this chapter. The next chapter [_Conclusion_](#concl
 
 Contents of the Chapter
 
-- [Introduction](#introduction-)
+- [Introduction](#introduction-27)
 - [Evaluation of the Guide](#evaluation-of-the-guide)
 - [What is Planned for the Future?](#what-is-planned-for-the-future)
 
