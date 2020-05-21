@@ -1,12 +1,14 @@
 # Introduction
 
-Contents of the Chapter - [Foreword](#foreword) - [What is the Purpose
-of this Guide?](#what-is-the-purpose-of-this-guide) - [Who is this Guide
-For?](#who-is-this-guide-for) - [Topics that will be
-Covered](#topics-that-will-be-covered) - [Creation
-Context](#creation-context) - [How was this Guide
-Written?](#how-was-this-guide-written) - [What Sources were used to
-create this Guide?](#what-sources-were-used-to-create-this-guide)
+Contents of the Chapter 
+
+- [Foreword](#foreword) 
+- [What is the Purpose of this Guide?](#what-is-the-purpose-of-this-guide)
+- [Who is this Guide For?](#who-is-this-guide-for)
+- [Topics that will be Covered](#topics-that-will-be-covered)
+- [Creation Context](#creation-context)
+- [How was this Guide Written?](#how-was-this-guide-written)
+- [What Sources were used to create this Guide?](#what-sources-were-used-to-create-this-guide)
 
 ## Foreword
 
