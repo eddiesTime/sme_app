@@ -112,7 +112,7 @@ void main() => Center(child: Text('Hello World'));
 ```
 _Code snippet 01: Declarative programming example_
 
-_Code snippet 1_ shows an example of Flutters declarative nature. As you can see, a `main()` method is declared, which returns a `Center` widget, which holds a `Text` widget. These declarations are all you need to tell Flutter to build a text in the center of the screen. No specification of what it needs to do to get the text to the screen had to be written.
+_Code snippet 01_ shows an example of Flutters declarative nature. As you can see, a `main()` method is declared, which returns a `Center` widget, which holds a `Text` widget. These declarations are all you need to tell Flutter to build a text in the center of the screen. No specification of what it needs to do to get the text to the screen had to be written.
 
 I have mentioned Widgets a couple of times in the previous paragraph. So let's take a look at what widgets are in the next part.
 
@@ -236,7 +236,7 @@ To explain what a `Stateful Widget` is and how it works, I will summarise the Yo
 A `Stateful Widget` by itself is, as all widgets are, _immutable_. It holds `immutable configurations` and a `createState()` method.
 The `createState()` method creates a `State Object`, which contains mutable configurations and a `build()` method to build the children of the `Stateful Widget`. The state object is held by the `StatefulElement`. It is responsible for mutating its state and notifying Flutter to update the UI to reflect changes whenever the state of the state object changes. The element holding the state object marks itself as `dirty` which triggers Flutter to update the UI rebuilding its children.
 
-The `StatefulElement` marks itself as dirty in two cases: _(1) its method `setState()` has been called, or (2) the widget is has been referencing has been removed_.
+The `StatefulElement` marks itself as dirty in two cases: _(1) its method `setState()` has been called, or (2) the widget, it has been referencing, has been removed_.
 
 Let's take a look at the following used to explain Stateful Widgets in the video:
 
@@ -359,7 +359,7 @@ The newly built child takes the old child's place in the Widget Tree, and since 
 
 This sums up how the Widget and Element Tree reacts to the `ItemCounter` widget getting exchanged.
 
-In this part, I have covered what a `Stateful Widget` is and how it is used to update the UI. The next part is about `Inherited Widgets`, the last type of widgets used in Flutter.
+In this part, I have covered what a `Stateful Widget` is and how it is used to update the UI. The next part is about `Inherited Widgets`.
 
 #### Inherited Widget
 
@@ -558,7 +558,7 @@ This part will cover state management and introduce the fundamental principle th
 
 ### Definition
 
-State management in Flutter is the management of application state changes and making it accessible. This state is used by multiple widgets and has to be consistent throughout the application so that no error as a result of deferred state can occur. Furthermore, since Flutter has a unidirectional data flow from the root of the Widget Tree down to its children, how does the ancestor widget holding the application state can be notified about state changes inside a child widget?\_
+State management in Flutter is the management of application state changes and making it accessible. This state is used by multiple widgets and has to be consistent throughout the application so that no error as a result of deferred state can occur. Furthermore, since Flutter has a unidirectional data flow from the root of the Widget Tree down to its children, how does the ancestor widget holding the application state can be notified about state changes inside a child widget?
 
 _So how do you access application state from inside our widgets?_
 
@@ -680,7 +680,7 @@ Domain-Driven-Design (DDD) is a software development approach introduced by Eric
 
 Evans answers the question as follows:
 
-> Every software program relates to some activity or interest of its user. The heart of software is its ability to solve domain-related problems for its user. All other features, vital though they may be, support this basic purpose. When the domain is complex, this is a difficult task, calling for the concentrated effort of talented and skilled people.Developers have to steep themselves in the domain to build up knowledge of the business.
+> Every software program relates to some activity or interest of its user. The heart of software is its ability to solve domain-related problems for its user. All other features, vital though they may be, support this basic purpose. When the domain is complex, this is a difficult task, calling for the concentrated effort of talented and skilled people. Developers have to steep themselves in the domain to build up knowledge of the business.
 
 He recommends that the best way to do this is to make the software a reflection of the domain, which creates a ubiquitous language that the domain experts and developers can use.
 
@@ -806,7 +806,7 @@ Before I finish this chapter, I want to mention some additional packages used to
 - Injectable [[@InjectableDartPackage]](https://pub.dev/packages/injectable)
   - a convenient code generator for the get_it package
 - GetIt [[@GetItDart]](https://pub.dev/packages/get_it)
-  - "Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App"
+  - "Simple direct Service Locator that allows to decouple the interface from a concrete implementation and to access the concrete implementation from everywhere in your App". It is used for Dependecy Injection.
 - Dartz [[@DartzDartPackage]](https://pub.dev/packages/dartz)
   - adds functional programming principles to dart
 - build_runner [[@BuildRunnerDart]](https://pub.dev/packages/build_runner)
@@ -904,7 +904,6 @@ The following code snippets show how the immutable state management solution BLo
 
 ```dart
 ...
-@freezed
 abstract class SettingsEvent with _$SettingsEvent {
   const factory SettingsEvent.toggleTemperatureUnit(bool value) = ToggleTemperatureUnit;
 }
