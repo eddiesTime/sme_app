@@ -12,7 +12,7 @@ Contents of the Chapter
 
 ## Foreword
 
-I want to use this foreword to give credits to Sebastian Faust [@FasustOverview] and DevonFw [@Devonfw] for their excellent Flutter guide [@DevonfwforgeDevonfw4flutter]. The guide is well written, and its structure has been a massive inspiration for my guide.
+I want to use this foreword to give credits to Sebastian Faust [[@FasustOverview]](https://github.com/Fasust) and DevonFw [[@Devonfw]](https://devonfw.com/index.html) for their excellent Flutter guide [[@DevonfwforgeDevonfw4flutter]](https://github.com/devonfw-forge/devonfw4flutter). The guide is well written, and its structure has been a massive inspiration for my guide.
 
 ## What is the Purpose of this Guide?
 
@@ -38,6 +38,7 @@ The topics that will be covered are:
 - the [results](#results) of the methodology, represented by the implementation of each SMS
 - an [evaluation](#evaluation) of the implemented SMS based on specified criteria
 - a [recommendation](#recommendations) on which SMS is suited for example, small-scale, middle-scale, and large-scale applications
+- a [conclusion](#conclusion) of my personal retrospective view on the guide and its future as well as my future work
 
 ## Creation Context
 
@@ -3311,8 +3312,22 @@ Contents of the Chapter
 
 ## Introduction
 
+This chapter concludes the guide about the evaluation of state management solutions in Flutter. First, I will give my evaluation of the guide. What did I accomplish? Was it as expected, or did it differ? Then I will finish this chapter with a section about the future of this guide and my future work.
+
 ## Evaluation of the Guide
 
+The creation of this guide has been a voyage with its ups and downs. There were times when I thought that I would not finish it on time. Or times when I felt that I would finish too early and, therefore, had missed something. 
+
+Looking back at the result, I can proudly say that I have finished in time and most definitely did not miss an important part. With around 60 pages exported as pdf without images, I have to admit that I went overboard with the guide's quantity. Nonetheless, I believe that the quality did not suffer regarding the quantity. 
+
+All in all, I am pretty happy with the guide. I have accomplished my goal to provide recommendations for different application sizes and provided simple example implementations for each SMS in a DDD focused architecture.
+
 ## What is Planned for the Future?
+
+The second iteration of this guide will be coming in the future. It will include additional state management solutions, e.g., fish_redux [[@FishReduxFlutter]](https://pub.dev/packages/fish_redux), and compare it to the other results. 
+
+Furthermore, this guide will be the fundament for my upcoming bachelor thesis. The thesis will compare bloc and states rebuilder as solutions for large-scale application development. The bachelor thesis plan is to add additional features to the SME-app and "scale it up." The bachelor thesis code will be accessible on my GitHub, and a summary of the thesis results will be included. 
+
+The reason for the change from Git Wiki to a summary results in my wish to write the bachelor thesis as an academic paper. With the thesis, I hope to become a part of Flutter related literature to the academic community.
 
 # References
