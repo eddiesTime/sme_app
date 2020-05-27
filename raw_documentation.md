@@ -68,8 +68,8 @@ For the creation of this guide, a collection of books, blog posts, journal artic
 
 - [Introduction](#introduction-1)
 - [Flutter under the Hood](#flutter-under-the-hood)
-- [What is State?](#what-is-state)
-- [How does Flutter React to State Changes?](#flutter-does-flutter-react-to-state-changes)
+- [What Is State?](#what-is-state)
+- [How Does Flutter React to State Changes?](#flutter-does-flutter-react-to-state-changes)
 - [State Management](#state-management)
 
 ## Introduction
@@ -82,7 +82,7 @@ Contents of the Section
 
 - [Introduction](#introduction-2)
 - [Definitions](#definitions)
-- [It's all Widgets](#its-all-widgets)
+- [It's All Widgets](#its-all-widgets)
 - [Types of Widgets](#types-of-widgets)
   - [Stateless Widget](#stateless-widget)
   - [Stateful Widget](#stateful-widget)
@@ -1364,7 +1364,7 @@ _Code snippet 19: InheritedAppStateContainer_
 
 The code snippet above shows the implementation of the `InheritedAppStateContainer`. In this example, inherited widget provides access to the `ViewModel` with its static method `of(context)`. The method `updateShouldNotify()` notifies widgets, that inherit data from this widget, to rebuild [[@UpdateShouldNotifyMethodInheritedWidget]](https://api.flutter.dev/flutter/widgets/InheritedWidget/updateShouldNotify.html).
 
-The Inherited widget provides access to its data with its static `of(context)` method, as seen in _code snippet 20_.
+The inherited widget provides access to its data with its static `of(context)` method, as seen in _code snippet 20_.
 
 ```dart
 ...
@@ -3309,7 +3309,7 @@ Contents of the Chapter
 
 - [Introduction](#introduction-27)
 - [Evaluation of the Guide](#evaluation-of-the-guide)
-- [What is Planned for the Future?](#what-is-planned-for-the-future)
+- [What Is Planned for the Future?](#what-is-planned-for-the-future)
 
 ## Introduction
 
