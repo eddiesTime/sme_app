@@ -3312,7 +3312,7 @@ Contents of the Chapter
 
 ## Introduction
 
-This chapter concludes the guide about the evaluation of state management solutions in Flutter. First, I will give my evaluation of the guide. What did I accomplish? Was it as expected, or did it differ? Then I will finish this chapter with a section about the future of this guide and my future work.
+This chapter concludes the guide about the evaluation of state management solutions in Flutter. First, I will give my evaluation of the guide. _What did I accomplish? Was it as expected, or did it differ?_ Then I will finish this chapter with a section about the future of this guide and my future work.
 
 ## Evaluation of the Guide
 
