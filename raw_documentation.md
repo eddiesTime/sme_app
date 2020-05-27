@@ -14,7 +14,7 @@ Contents of the Chapter
 
 I want to use this foreword to give credits to Sebastian Faust [[@FasustOverview]](https://github.com/Fasust) and DevonFw [[@Devonfw]](https://devonfw.com/index.html) for their excellent Flutter guide [[@DevonfwforgeDevonfw4flutter]](https://github.com/devonfw-forge/devonfw4flutter). The guide is well written, and its structure has been a massive inspiration for my guide.
 
-## What is the Purpose of this Guide?
+## What Is the Purpose of this Guide?
 
 The goal of this guide is to set an entry point for state management in Flutter.
 
@@ -23,13 +23,13 @@ The goal is to help Flutter developers and Flutter development teams that have t
 It should provide a reference about which state management solution is likely the right one to choose to build an example, small-scale, middle-scale, or large-scale application.
 Or at least show the advantages and disadvantages of each solution so that you can make an educated decision yourself.
 
-## Who is this Guide For?
+## Who Is this Guide For?
 
 This guide is for Flutter developers and Flutter development teams that are planning their next Flutter project.
 
 It is for people who are overwhelmed by the amount of state management solutions provided by the community. For people who are searching for information about which SMS is in line with their requirements and why they should think about choosing it.
 
-## Topics that will be Covered
+## Topics that Will Be Covered
 
 The topics that will be covered are:
 
@@ -44,7 +44,7 @@ The topics that will be covered are:
 
 For the Bachelor's degree in the Bachelor of Science Program, "Business Informatics" at Technical University Cologne [[@HomeTHKoln]](https://www.th-koeln.de/en/homepage_26.php) the students have to deliver a project which includes some of the practices taught in the study program. Furthermore, they have to write documentation along with the project. This guide is my version of the documentation.
 
-## How was this Guide Written?
+## How Was this Guide Written?
 
 This guide is written for developers. Therefore, I want to keep it informal - _from developer to developers_. Throughout the guide, I will use the pronoun "you" to keep it that way.
 
@@ -57,7 +57,7 @@ To highlight definitions, you will find the following approach throughout the gu
 | :closed_book: | Term | Definition |
 | :-----------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-## What Sources were used to create this Guide?
+## What Sources Were Used to Create this Guide?
 
 For the creation of this guide, a collection of books, blog posts, journal articles, official documentation, and YouTube videos has been used. In chapter 6 - [References](#references), a list of all sources used in this guide can be found.
 
@@ -116,7 +116,7 @@ _Code snippet 1_ shows an example of Flutters declarative nature. As you can see
 
 I have mentioned Widgets a couple of times in the previous paragraph. So let's take a look at what widgets are in the next part.
 
-### It's all Widgets
+### It's All Widgets
 
 To explain what widgets are and their role in Flutter, I will reference the official Flutter documentation [[@TechnicalOverview]](https://flutter.dev/docs/resources/technical-overview).
 
@@ -400,7 +400,7 @@ An example of an `Inherited Widget` you should be familiar with is `Theme`. Them
 ```
 _Code snippet 07: Example how Theme can be Accessed_
 
-## What is State?
+## What Is State?
 
 Contents of the Section
 
@@ -450,7 +450,7 @@ Don't worry too much about what kind of state to use, since it most definitely w
 
 That part covers the part about state in Flutter. The next part will include how Flutter reacts to state changes internally.
 
-## How does Flutter React to State Changes?
+## How Does Flutter React to State Changes?
 
 Contents of the Section
 
@@ -586,7 +586,7 @@ Contents of the Chapter
 - [Architecture](#architecture)
 - [The State Management Evaluation App](#the-state-management-evaluation-app)
 
-## How can you Compare State Management Solutions to Evaluate Them?
+## How Can you Compare State Management Solutions to Evaluate Them?
 
 Contents of the Section
 
@@ -797,7 +797,7 @@ A simplified version of our example apps widget tree can be seen in _Figure 29_:
 
 The application consists of three screens: _(1) WeatherPage, (2) LocationSearchPage, and (3) SettingsPage_.
 
-### Additional packages that will be used
+### Additional Packages that Will Be Used
 
 Before I finish this chapter, I want to mention some additional packages used to create the examples. These packages are:
 
@@ -1816,7 +1816,7 @@ _Code snippet 27: Weather Widget in Presentation Layer_
 - a lot of boilerplate
 - the concepts take some time to get your head around
 
-### Bloc with flutter_bloc
+### Bloc with Flutter_bloc
 
 #### Introduction
 
@@ -1856,7 +1856,7 @@ To understand how Bloc differentiates from the Vanilla BLoC example, you have to
 
 For more concepts like _Transitions_ and _BlocDelegate_ visit bloclibrary.
 
-##### Concepts of flutter_bloc [[@FlutterBlocBloc]](https://bloclibrary.dev/#/flutterbloccoreconcepts)
+##### Concepts of Flutter_bloc [[@FlutterBlocBloc]](https://bloclibrary.dev/#/flutterbloccoreconcepts)
 
 - BlocBuilder
   - A widget, which requires a `Bloc` and a `builder()` function. It is very similar to a StreamBuilder but with a _more straightforward API_ and _less amount of boilerplate_ needed. The builder function **_needs to return a widget in response to the state_**. The builder function can be called multiple times.
@@ -2060,7 +2060,7 @@ _Code snippet 32: Weather Widget in Presentation Layer_
 - implementation of the initial state
 - side-effects handled in listeners
 
-#### Disadvantages:
+#### Disadvantages
 
 - still a lot of boilerplate
 - too much overhead for small examples
@@ -2335,7 +2335,7 @@ _Code snippet 37: AppReducer Function_
 Since we can have multiple app states, the `AppState` is represented by the result of a `Reducer`.
 And since there are multiple reducers for different actions, a collection of reducers, e.g., `weatherReducer`, is assigned to `weatherState`.
 
-###### Weather reducer
+###### WeatherReducer
 
 ```dart
 ...
@@ -3322,7 +3322,7 @@ Looking back at the result, I can proudly say that I have finished in time and m
 
 All in all, I am pretty happy with the guide. I have accomplished my goal to provide recommendations for different application sizes and provided simple example implementations for each SMS in a DDD focused architecture.
 
-## What is Planned for the Future?
+## What Is Planned for the Future?
 
 The second iteration of this guide will be coming in the future. It will include additional state management solutions, e.g., fish_redux [[@FishReduxFlutter]](https://pub.dev/packages/fish_redux), and compare it to the other results. 
 
