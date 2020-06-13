@@ -2,17 +2,18 @@ name: weather_repository_core
 description: A new Flutter package project.
 version: 0.0.1
 author:
-homepage:
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.12.0+4
   weather_app_example_data_models_core:
-    path: ../weather_app_example_data_models_core
+    git:
+      url: https://github.com/eddiesTime/sme_app.git
+      path: ./weather_app_example_data_models_core
 
 dev_dependencies:
   flutter_test:
